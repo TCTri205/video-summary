@@ -2,13 +2,40 @@
 
 ## Dinh dang output
 
-`final_summary.json`:
+`summary_script.json`:
 
 ```json
 {
+  "title": "...",
   "plot_summary": "...",
   "moral_lesson": "...",
-  "full_combined_context_used": "..."
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:06.000",
+      "source_end": "00:00:13.200",
+      "script_text": "..."
+    }
+  ]
+}
+```
+
+`summary_video_manifest.json`:
+
+```json
+{
+  "source_video_path": "raw_video.mp4",
+  "output_video_path": "summary_video.mp4",
+  "keep_original_audio": true,
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:06.000",
+      "source_end": "00:00:13.200",
+      "script_ref": 1,
+      "transition": "cut"
+    }
+  ]
 }
 ```
 
@@ -16,10 +43,11 @@
 
 - `plot_summary`: dung trinh tu su kien, ngan gon, co lien ket.
 - `moral_lesson`: ro rang, lien quan truc tiep den noi dung.
-- `full_combined_context_used`: luu nguyen van context merge de debug va fine-tune.
+- `segments`: duoc sap theo timeline, map duoc vao video goc.
+- `summary_video.mp4`: duoc cat/ghep tu video goc va giu audio goc.
 
 ## Rule ky thuat
 
 - File parse JSON hop le.
-- Co du 3 key bat buoc.
+- Co du key bat buoc theo schema `summary_script` va `summary_video_manifest`.
 - Gia tri khong rong sau khi trim.

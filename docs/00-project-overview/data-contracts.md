@@ -75,16 +75,51 @@ Bat buoc:
 - Moi phan tu co `timestamp` va `caption`.
 - `caption` khong rong sau khi trim.
 
-## final_summary.json
+## summary_script.json
 
 ```json
 {
+  "title": "Bai hoc ve gia tri ben trong",
   "plot_summary": "Video ke ve mot cau be khao khat chiec dien thoai dat tien nhung sau chuyen di cung cha...",
   "moral_lesson": "Hanh phuc khong nam o vat chat phu phiem ben ngoai ma o gia tri ben trong.",
-  "full_combined_context_used": "[Image @00:00:15.240] ... [Dialogue] ..."
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:06.000",
+      "source_end": "00:00:13.200",
+      "script_text": "Cau be khao khat mot chiec dien thoai dat tien."
+    }
+  ]
 }
 ```
 
 Bat buoc:
-- Co du 3 khoa tren.
-- Gia tri la chuoi khong rong.
+- Co du 4 khoa: `title`, `plot_summary`, `moral_lesson`, `segments`.
+- `segments` khong rong va moi segment co timestamp hop le.
+
+## summary_video_manifest.json
+
+```json
+{
+  "source_video_path": "raw_video.mp4",
+  "output_video_path": "summary_video.mp4",
+  "keep_original_audio": true,
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:06.000",
+      "source_end": "00:00:13.200",
+      "script_ref": 1,
+      "transition": "cut"
+    }
+  ]
+}
+```
+
+Bat buoc:
+- `keep_original_audio` phai la `true`.
+- `segments` phai map duoc toi `summary_script.json` qua `script_ref`.
+
+## final_summary.json (internal, optional)
+
+File nay chi dung cho debug/fine-tune noi bo, khong phai deliverable cuoi.

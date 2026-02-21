@@ -1,0 +1,13 @@
+{
+  "source_video_path": "raw_video.mp4",
+  "output_video_path": "summary_video.mp4",
+  "keep_original_audio": false,
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:06",
+      "source_end": "00:00:13",
+      "script_ref": 1
+    }
+  ]
+}

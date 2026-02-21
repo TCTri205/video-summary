@@ -5,10 +5,12 @@
 Xay dung he thong tom tat video theo 3 module doc lap:
 - Module 1: Data extraction (audio + keyframes + scene metadata).
 - Module 2: Perception AI (speech-to-text + visual captioning).
-- Module 3: Fusion and reasoning (alignment + summary + moral lesson).
+- Module 3: Fusion, reasoning, va video assembly.
 
 Dau vao toan he thong: `raw_video.mp4`.
-Dau ra cuoi: `final_summary.json`.
+Dau ra cuoi:
+- `summary_script.json`
+- `summary_video.mp4`
 
 ## Nguyen tac tich hop
 
@@ -23,10 +25,13 @@ Dau ra cuoi: `final_summary.json`.
   - `audio_transcripts.json`
   - `visual_captions.json`
 - Thanh vien 2: Module 3, nhan 2 file tren va giao ra:
-  - `final_summary.json`
+  - `summary_script.json`
+  - `summary_video_manifest.json` (de dung `summary_video.mp4`)
+  - `summary_video.mp4`
 
 ## Muc tieu MVP
 
 - Chay thong luong end-to-end voi 1 video mau.
 - 100% output dung schema v1 trong `contracts/v1/`.
 - Co the thay mock data bang data that ma khong sua logic merge.
+- Video tom tat duoc cat/ghep tu video goc va giu audio goc.

@@ -14,15 +14,17 @@ Muc tieu: xac nhan kien truc chay thong tu input JSON den output tom tat ma khon
 - Nhap 2 file mock.
 - Merge theo timeline.
 - Tao context hop nhat.
-- Sinh `final_summary.json`.
+- Sinh `summary_script.json`.
+- Sinh `summary_video_manifest.json`.
+- Render `summary_video.mp4` (cat/ghep tu video goc, giu audio goc).
 
 ## Buoc 3 - Validate truoc khi ket luan
 
-- Validate schema cho 3 file dau vao/dau ra.
-- Kiem tra output co du khoa:
-  - `plot_summary`
-  - `moral_lesson`
-  - `full_combined_context_used`
+- Validate schema cho output:
+  - `summary_script.json`
+  - `summary_video_manifest.json`
+- Kiem tra `keep_original_audio = true`.
+- Kiem tra `summary_video.mp4` phat duoc, co audio.
 
 ## Buoc 4 - Chuyen sang data that
 

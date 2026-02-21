@@ -13,7 +13,9 @@ Thu muc nay la nguon chuan de rang buoc Input/Output giua cac module.
 - `scene_metadata.schema.json`
 - `audio_transcripts.schema.json`
 - `visual_captions.schema.json`
-- `final_summary.schema.json`
+- `summary_script.schema.json`
+- `summary_video_manifest.schema.json`
+- `final_summary.schema.json` (internal artifact, optional)
 
 ## Examples
 

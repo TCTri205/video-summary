@@ -5,7 +5,8 @@
 - [ ] `scene_metadata.json` pass `contracts/v1/scene_metadata.schema.json`.
 - [ ] `audio_transcripts.json` pass `contracts/v1/audio_transcripts.schema.json`.
 - [ ] `visual_captions.json` pass `contracts/v1/visual_captions.schema.json`.
-- [ ] `final_summary.json` pass `contracts/v1/final_summary.schema.json`.
+- [ ] `summary_script.json` pass `contracts/v1/summary_script.schema.json`.
+- [ ] `summary_video_manifest.json` pass `contracts/v1/summary_video_manifest.schema.json`.
 
 ## B. Timestamp quality
 
@@ -22,6 +23,6 @@
 
 ## D. Output quality
 
-- [ ] `final_summary.json` co du 3 truong bat buoc.
-- [ ] Plot summary dung trinh tu su kien.
-- [ ] Moral lesson ro rang va lien quan noi dung.
+- [ ] `summary_script.json` co du title, plot_summary, moral_lesson, segments.
+- [ ] `summary_video.mp4` phat duoc va co audio goc.
+- [ ] Noi dung video tom tat khop voi script segments.

@@ -9,7 +9,9 @@ Ban phu trach Module 3 va chien luoc QLoRA.
 
 ## Output ban giao
 
-- `final_summary.json`
+- `summary_script.json`
+- `summary_video_manifest.json`
+- `summary_video.mp4`
 - (Giai doan fine-tune) LoRA adapter weights
 
 ## Rule tich hop
@@ -17,3 +19,4 @@ Ban phu trach Module 3 va chien luoc QLoRA.
 - Input phai pass schema v1.
 - Timestamp su dung `HH:MM:SS.mmm`.
 - Neu input fail schema, dung pipeline va bao loi ro nguyen nhan.
+- Video summary phai duoc cat/ghep tu video goc va giu audio goc.

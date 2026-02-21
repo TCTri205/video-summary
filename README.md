@@ -6,13 +6,21 @@ Du an tom tat video theo pipeline 3 module, phan tach ro trach nhiem de 2 thanh 
 
 - Module 1: Data extraction (`raw_video.mp4` -> `audio_16k.wav`, `keyframes/`, `scene_metadata.json`)
 - Module 2: Perception AI (`audio_16k.wav` + keyframes -> `audio_transcripts.json`, `visual_captions.json`)
-- Module 3: Fusion and reasoning (2 JSON tren -> `final_summary.json`)
+- Module 3: Fusion, reasoning, and assembly (`audio_transcripts.json` + `visual_captions.json` -> `summary_script.json` + `summary_video_manifest.json` -> `summary_video.mp4`)
+
+## Final deliverables
+
+- `summary_script.json` (script tom tat chuan may doc)
+- `summary_video.mp4` (cat + ghep tu video goc, giu audio goc)
+
+Ghi chu: `final_summary.json` chi la artifact noi bo (optional) de debug/fine-tune, khong phai deliverable cuoi.
 
 ## Contract-first integration
 
 - Data contracts nam tai `contracts/v1/`.
 - Timestamp standard bat buoc: `HH:MM:SS.mmm`.
 - Moi module chi can dung Input/Output schema de ghep noi chinh xac.
+- Video assembly theo manifest, giu audio goc cua doan cat (`keep_original_audio: true`).
 
 ## Project docs
 

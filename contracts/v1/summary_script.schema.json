@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "contracts/v1/summary_script.schema.json",
+  "title": "summary_script",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "title",
+    "plot_summary",
+    "moral_lesson",
+    "segments"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plot_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "moral_lesson": {
+      "type": "string",
+      "minLength": 1
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "segment_id",
+          "source_start",
+          "source_end",
+          "script_text"
+        ],
+        "properties": {
+          "segment_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source_start": {
+            "type": "string",
+            "pattern": "^\\d{2}:[0-5]\\d:[0-5]\\d\\.\\d{3}$"
+          },
+          "source_end": {
+            "type": "string",
+            "pattern": "^\\d{2}:[0-5]\\d:[0-5]\\d\\.\\d{3}$"
+          },
+          "script_text": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

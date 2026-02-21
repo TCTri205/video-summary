@@ -1,0 +1,19 @@
+{
+  "title": "Bai hoc ve gia tri ben trong",
+  "plot_summary": "Mot cau be khao khat dien thoai moi. Qua bai hoc cua nguoi cha ve cay tam gui, cau hieu ra gia tri ben trong moi la dieu ben vung.",
+  "moral_lesson": "Gia tri ben vung den tu nang luc va pham chat cua chinh minh, khong phai ve ngoai.",
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:06.000",
+      "source_end": "00:00:13.200",
+      "script_text": "Cau be dung truoc cua hang va khao khat mot chiec dien thoai dat tien."
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:00:44.050",
+      "source_end": "00:00:52.500",
+      "script_text": "Nguoi cha chi vao cay tam gui de giai thich ve su phu thuoc va tan heo."
+    }
+  ]
+}

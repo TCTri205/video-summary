@@ -1,0 +1,13 @@
+{
+  "title": "Sai dinh dang",
+  "plot_summary": "Co noi dung",
+  "moral_lesson": "Co noi dung",
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:06",
+      "source_end": "00:00:13",
+      "script_text": "Sai vi thieu milliseconds"
+    }
+  ]
+}

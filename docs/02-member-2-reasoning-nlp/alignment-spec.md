@@ -25,6 +25,13 @@ Moi block theo timestamp:
 
 Noi cac block theo thu tu tang dan theo thoi gian.
 
+## Chuyen tu alignment sang script/video
+
+- Sau khi merge context, tao `summary_script.json` voi `segments`.
+- Moi segment phai co `source_start`, `source_end`, `script_text`.
+- Tao `summary_video_manifest.json` tu cung danh sach segment.
+- Render `summary_video.mp4` bang cach cat/ghep tu `raw_video.mp4`, giu audio goc (`keep_original_audio: true`).
+
 ## Edge cases
 
 - Nhieu transcripts cung phu hop 1 caption: noi ngan gon theo thu tu bat dau.

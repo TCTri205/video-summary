@@ -12,6 +12,8 @@
 - Khong doi key name trong JSON neu chua bump version contract.
 - Mọi output phai pass schema trong `contracts/v1/` truoc khi ban giao.
 - Timestamp phai dung `HH:MM:SS.mmm`.
+- Deliverable cuoi bat buoc: `summary_script.json` + `summary_video.mp4`.
+- `summary_video.mp4` phai duoc cat/ghep tu video goc va giu audio goc theo manifest.
 
 ## Commit messages
 
@@ -24,3 +26,4 @@
 - [ ] Khong pha vo contract v1.
 - [ ] Cap nhat docs neu thay doi behavior.
 - [ ] Co test/validation voi sample data.
+- [ ] `summary_script.json` va `summary_video_manifest.json` pass schema.
