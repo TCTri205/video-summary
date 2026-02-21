@@ -1,5 +1,8 @@
 # Project Overview
 
+Tai lieu tong hop nhanh:
+- `docs/00-project-overview/pipeline-spec-1page.md` (ban chot scope 1 trang)
+
 ## Muc tieu
 
 Xay dung he thong tom tat video theo 3 module doc lap:
