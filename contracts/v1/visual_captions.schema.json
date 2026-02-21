@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "contracts/v1/visual_captions.schema.json",
+  "title": "visual_captions",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "timestamp",
+      "caption"
+    ],
+    "properties": {
+      "timestamp": {
+        "type": "string",
+        "pattern": "^\\d{2}:[0-5]\\d:[0-5]\\d\\.\\d{3}$"
+      },
+      "caption": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

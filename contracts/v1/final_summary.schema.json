@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "contracts/v1/final_summary.schema.json",
+  "title": "final_summary",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "plot_summary",
+    "moral_lesson",
+    "full_combined_context_used"
+  ],
+  "properties": {
+    "plot_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "moral_lesson": {
+      "type": "string",
+      "minLength": 1
+    },
+    "full_combined_context_used": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

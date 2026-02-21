@@ -1,0 +1,14 @@
+yt-dlp>=2025.1.0
+opencv-python>=4.10.0
+scenedetect[opencv]>=0.6.4
+Pillow>=10.4.0
+numpy>=1.26.0
+
+# Speech-to-text
+faster-whisper>=1.1.0
+
+# Vision captioning
+torch>=2.4.0
+transformers>=4.45.0
+accelerate>=0.34.0
+sentencepiece>=0.2.0

@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Media and generated outputs
+*.mp4
+*.mkv
+*.mov
+*.wav
+*.mp3
+keyframes/
+outputs/
+
+# Model artifacts
+*.bin
+*.pt
+*.pth
+*.safetensors
+checkpoints/
+huggingface_cache/
+
+# Logs
+*.log

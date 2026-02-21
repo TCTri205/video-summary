@@ -1,0 +1,15 @@
+{
+  "total_keyframes": 2,
+  "frames": [
+    {
+      "frame_id": 1,
+      "timestamp": "00:00:08.150",
+      "file_path": "keyframes/frame_00_00_08_150.jpg"
+    },
+    {
+      "frame_id": 2,
+      "timestamp": "00:00:27.000",
+      "file_path": "keyframes/frame_00_00_27_000.jpg"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+torch>=2.4.0
+transformers>=4.45.0
+accelerate>=0.34.0
+sentencepiece>=0.2.0
+
+# Optional high-throughput inference backend
+vllm>=0.6.0
+
+# Fine-tuning stack
+unsloth>=2025.2.0
+datasets>=2.21.0
+peft>=0.13.0
+trl>=0.10.1
