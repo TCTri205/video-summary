@@ -1,0 +1,28 @@
+{
+  "source_video_path": "raw_video.mp4",
+  "output_video_path": "summary_video.mp4",
+  "keep_original_audio": true,
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:04.500",
+      "source_end": "00:00:10.500",
+      "script_ref": 1,
+      "transition": "cut"
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:00:11.000",
+      "source_end": "00:00:20.000",
+      "script_ref": 2,
+      "transition": "cut"
+    },
+    {
+      "segment_id": 3,
+      "source_start": "00:00:24.000",
+      "source_end": "00:00:31.000",
+      "script_ref": 3,
+      "transition": "cut"
+    }
+  ]
+}

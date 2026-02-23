@@ -26,3 +26,9 @@
 - [ ] `summary_script.json` co du title, plot_summary, moral_lesson, segments.
 - [ ] `summary_video.mp4` phat duoc va co audio goc.
 - [ ] Noi dung video tom tat khop voi script segments.
+
+## E. Member 2 deep checklist
+
+- [ ] Da chay checklist chi tiet cua Module 3 tai `docs/02-member-2-reasoning-nlp/qa-acceptance-checklist.md`.
+- [ ] Deliverable I/O (`summary_script.json`, `summary_video_manifest.json`) duoc validate bang `contracts/v1/*.schema.json`.
+- [ ] Artifact noi bo (neu co) duoc tach rieng, khong chen vao deliverable I/O.

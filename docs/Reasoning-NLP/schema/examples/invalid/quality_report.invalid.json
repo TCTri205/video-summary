@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.1",
+  "run_id": "",
+  "overall_status": "pass",
+  "stage_results": [
+    {
+      "stage": "validate",
+      "status": "pass",
+      "duration_ms": 50
+    },
+    {
+      "stage": "align",
+      "status": "fail",
+      "duration_ms": 40,
+      "error_code": "ALIGN_BAD_MATCH"
+    }
+  ],
+  "metrics": {
+    "parse_validity_rate": 0.7,
+    "timeline_consistency_score": 0.2,
+    "grounding_score": 0.1,
+    "compression_ratio": -1,
+    "manifest_consistency_pass": false,
+    "render_success": false,
+    "audio_present": false,
+    "duration_match_score": 0.3,
+    "black_frame_ratio": 0.4,
+    "decode_error_count": 3
+  },
+  "warnings": [
+    ""
+  ],
+  "errors": [
+    {
+      "stage": "align",
+      "error_code": "",
+      "message": ""
+    }
+  ]
+}
