@@ -7,6 +7,11 @@
 3. Resize anh ve `448x448` hoac `336x336`.
 4. Tao `scene_metadata.json` theo schema v1.
 
+## Output
+- `audio_16k.wav`
+- `keyframes/`
+- `scene_metadata.json`
+
 ## Quy uoc timestamp va ten file
 
 - Timestamp: `HH:MM:SS.mmm`.
