@@ -30,11 +30,11 @@ Ghi chu: `final_summary.json` chi la artifact noi bo (optional) de debug/fine-tu
 
 ## Environment split
 
-- Thanh vien 1: `requirements-member-1.txt`
-- Thanh vien 2: `requirements-member-2.txt`
+- Thanh vien 1: `requirements-1.txt`
+- Thanh vien 2: `requirements-2.txt`
 
 ## Day 0 quick start
 
-1. Thanh vien 2 dung mock data trong `docs/00-project-overview/mock-data/`.
+1. Thanh vien 2 dung mock data trong `docs/Overview-Project/mock-data/`.
 2. Thanh vien 1 chay pipeline that de tao 2 JSON that.
 3. Thay mock bang JSON that, chay lai Module 3 khong doi logic.
