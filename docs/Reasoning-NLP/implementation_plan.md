@@ -410,47 +410,47 @@ Runtime/ops baseline:
 
 ### P0 - Correctness hardening (uu tien cao nhat)
 
-- Thay G4 heuristic bang LLM that + retry/repair/grounding.
-- Auto probe `source_duration_ms`.
-- Thay metric placeholder o G8 bang compute that.
+- [x] Thay G4 heuristic bang LLM that + retry/repair/grounding.
+- [x] Auto probe `source_duration_ms`.
+- [x] Thay metric placeholder o G8 bang compute that.
 
 Output can dat:
 
-- Khong con metric placeholder.
-- Test moi cho G4/G8 pass.
+- [x] Khong con metric placeholder.
+- [x] Test moi cho G4/G8 pass.
 
 ### P1 - Replay + refactor maintainability
 
-- Stage dependency hash + replay invalidation matrix.
-- Tach CLI sang `reasoning_nlp/cli.py`.
-- Chuan hoa error catalog.
+- [x] Stage dependency hash + replay invalidation matrix.
+- [x] Tach CLI sang `reasoning_nlp/cli.py`.
+- [ ] Chuan hoa error catalog.
 
 Output can dat:
 
-- Replay mismatch tests pass.
-- Pipeline runner gon hon, typed ro hon.
+- [x] Replay mismatch tests pass.
+- [x] Pipeline runner gon hon, typed ro hon.
 
 ### P2 - CI + cross-module integration
 
-- Them workflow CI bat buoc.
-- Them smoke E2E + schema validation gate.
-- Them fixtures chung lien module.
+- [x] Them workflow CI bat buoc.
+- [x] Them smoke E2E + schema validation gate.
+- [ ] Them fixtures chung lien module.
 
 Output can dat:
 
-- PR gate day du xanh.
-- Contract handoff duoc khoa bang test.
+- [x] PR gate day du xanh.
+- [ ] Contract handoff duoc khoa bang test.
 
 ### P3 - KPI + release readiness
 
-- Batch evaluate KPI tren dataset.
-- Hoan thien runbook, troubleshooting, deployment checklist, rollback checklist.
-- Chot alerting + retention policy.
+- [x] Batch evaluate KPI tren dataset.
+- [x] Hoan thien runbook, troubleshooting, deployment checklist, rollback checklist.
+- [ ] Chot alerting + retention policy.
 
 Output can dat:
 
-- Co bao cao KPI that.
-- San sang release theo checklist.
+- [x] Co bao cao KPI that.
+- [x] San sang release theo checklist.
 
 ## 18) Dinh nghia hoan tat (Definition of Done)
 

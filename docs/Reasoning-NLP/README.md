@@ -124,14 +124,26 @@ Yeu cau toi thieu:
 ### 1) Chay full G1 -> G8
 
 ```bash
-python -m reasoning_nlp.pipeline_runner \
+python -m reasoning_nlp.cli \
   --audio-transcripts Data/processed/video1/extraction/audio_transcripts.json \
   --visual-captions Data/processed/video1/extraction/visual_captions.json \
   --raw-video Data/raw/video1.mp4 \
   --stage g8 \
-  --source-duration-ms 1900000 \
   --run-id run_demo_001
 ```
+
+`source_duration_ms` duoc auto-probe tu `raw_video.mp4` o G1. `--source-duration-ms` chi dung khi can override debug.
+
+Dual-mode LLM:
+
+- `--summarize-backend {api,local}` chon backend chinh.
+- `--summarize-fallback-backend {api,local}` cho phep fallback neu backend chinh fail.
+- Env cho API mode: `OPENAI_BASE_URL`, `OPENAI_API_KEY`, `OPENAI_MODEL`.
+
+QC threshold enforcement:
+
+- Bat strict gate runtime bang `--qc-enforce-thresholds`.
+- Co the dieu chinh threshold qua cac flag `--qc-min-*` / `--qc-max-*`.
 
 Artifacts se duoc ghi vao:
 
@@ -152,12 +164,11 @@ Artifacts se duoc ghi vao:
 ### 3) Replay mode (skip stage da co artifact hop le)
 
 ```bash
-python -m reasoning_nlp.pipeline_runner \
+python -m reasoning_nlp.cli \
   --audio-transcripts Data/processed/video1/extraction/audio_transcripts.json \
   --visual-captions Data/processed/video1/extraction/visual_captions.json \
   --raw-video Data/raw/video1.mp4 \
   --stage g8 \
-  --source-duration-ms 1900000 \
   --run-id run_demo_001 \
   --replay
 ```
@@ -165,8 +176,7 @@ python -m reasoning_nlp.pipeline_runner \
 Luu y replay:
 
 - Bat buoc co `--run-id` trung voi run cu.
-- Replay chi skip khi `run_meta.json` hop le va checksum input + config khop.
-- Neu khong khop, pipeline tu dong tat replay va chay lai full.
+- Replay skip theo stage dependency hash (khong chi hash tong): stage mismatch se invalidate stage do va downstream.
 
 ### 4) Validate artifacts sau khi chay
 
