@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import re
 import statistics
+import subprocess
+from pathlib import Path
+from typing import Any
 
 from reasoning_nlp.common.timecode import to_ms
 
@@ -53,3 +57,104 @@ def compute_compression_ratio(script_payload: dict, source_duration_ms: int | No
         except Exception:
             continue
     return max(0.0, float(total) / float(source_duration_ms))
+
+
+def compute_grounding_score(summary_payload: dict[str, Any], context_payload: list[dict[str, Any]]) -> float:
+    evidence = summary_payload.get("evidence", [])
+    if not isinstance(evidence, list):
+        return 0.0
+    if not evidence:
+        return 0.0
+
+    context_timestamps = {str(x.get("timestamp", "")) for x in context_payload if str(x.get("timestamp", ""))}
+    if not context_timestamps:
+        return 0.0
+
+    item_scores: list[float] = []
+    for item in evidence:
+        if not isinstance(item, dict):
+            item_scores.append(0.0)
+            continue
+        timestamps = item.get("timestamps", [])
+        if not isinstance(timestamps, list) or not timestamps:
+            item_scores.append(0.0)
+            continue
+        valid = sum(1 for ts in timestamps if str(ts) in context_timestamps)
+        item_scores.append(valid / len(timestamps))
+
+    if not item_scores:
+        return 0.0
+    return max(0.0, min(1.0, float(statistics.mean(item_scores))))
+
+
+def compute_parse_validity_rate(summary_payload: dict[str, Any]) -> float:
+    required_keys = {"title", "plot_summary", "moral_lesson", "evidence", "quality_flags", "generation_meta", "segments"}
+    if not all(key in summary_payload for key in required_keys):
+        return 0.0
+
+    if not str(summary_payload.get("plot_summary", "")).strip():
+        return 0.0
+    if not str(summary_payload.get("moral_lesson", "")).strip():
+        return 0.0
+
+    return 1.0
+
+
+def compute_black_frame_ratio(video_path: str, duration_ms: int | None = None) -> float:
+    path = Path(video_path)
+    if not path.exists() or not path.is_file() or path.stat().st_size <= 0:
+        return 1.0
+
+    duration_seconds = max(0.0, float(duration_ms or 0) / 1000.0)
+    if duration_seconds <= 0:
+        duration_seconds = _probe_duration_seconds(path)
+    if duration_seconds <= 0:
+        return 1.0
+
+    cmd = [
+        "ffmpeg",
+        "-hide_banner",
+        "-i",
+        str(path),
+        "-vf",
+        "blackdetect=d=0.05:pix_th=0.10",
+        "-an",
+        "-f",
+        "null",
+        "-",
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    text = f"{proc.stdout}\n{proc.stderr}"
+    black_seconds = _sum_black_duration(text)
+    ratio = black_seconds / duration_seconds if duration_seconds > 0 else 1.0
+    return max(0.0, min(1.0, ratio))
+
+
+def _probe_duration_seconds(path: Path) -> float:
+    cmd = [
+        "ffprobe",
+        "-v",
+        "error",
+        "-show_entries",
+        "format=duration",
+        "-of",
+        "default=noprint_wrappers=1:nokey=1",
+        str(path),
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    if proc.returncode != 0:
+        return 0.0
+    try:
+        return float((proc.stdout or "").strip())
+    except Exception:
+        return 0.0
+
+
+def _sum_black_duration(log_text: str) -> float:
+    total = 0.0
+    for match in re.findall(r"black_duration:([0-9]+(?:\.[0-9]+)?)", log_text):
+        try:
+            total += float(match)
+        except Exception:
+            continue
+    return max(0.0, total)

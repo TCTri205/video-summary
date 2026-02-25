@@ -70,7 +70,11 @@
       "required": [
         "model",
         "seed",
-        "temperature"
+        "temperature",
+        "backend",
+        "retry_count",
+        "latency_ms",
+        "token_count"
       ],
       "properties": {
         "model": {
@@ -85,6 +89,22 @@
           "type": "number",
           "minimum": 0,
           "maximum": 2
+        },
+        "backend": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retry_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "latency_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "token_count": {
+          "type": "integer",
+          "minimum": 0
         }
       }
     },
