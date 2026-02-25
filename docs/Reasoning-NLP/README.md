@@ -31,6 +31,7 @@ Deliverable lien module (global contract):
 
 Internal artifacts (khong phai deliverable lien module):
 
+- `context_blocks.json`
 - `alignment_result.json`
 - `quality_report.json`
 - `summary_script.internal.json` (khuyen nghi dung de luu `evidence`, `quality_flags`, `generation_meta`)
@@ -112,6 +113,72 @@ KPI hieu nang (nen theo doi them):
 - Moi stage phai ghi log: `run_id`, `stage`, `status`, `error_code` (neu co), `duration_ms`.
 - Khong cho phep output parse duoc nhung rong/noi dung vo nghia.
 - Khong chen voice-over moi trong MVP.
+
+## Huong dan chay pipeline
+
+Yeu cau toi thieu:
+
+- Co `ffmpeg` va `ffprobe` trong `PATH`.
+- Co 3 input files: `audio_transcripts.json`, `visual_captions.json`, `raw_video.mp4`.
+
+### 1) Chay full G1 -> G8
+
+```bash
+python -m reasoning_nlp.pipeline_runner \
+  --audio-transcripts Data/processed/video1/extraction/audio_transcripts.json \
+  --visual-captions Data/processed/video1/extraction/visual_captions.json \
+  --raw-video Data/raw/video1.mp4 \
+  --stage g8 \
+  --source-duration-ms 1900000 \
+  --run-id run_demo_001
+```
+
+Artifacts se duoc ghi vao:
+
+- `artifacts/<run_id>/g2_align/alignment_result.json`
+- `artifacts/<run_id>/g3_context/context_blocks.json`
+- `artifacts/<run_id>/g4_summarize/summary_script.internal.json`
+- `artifacts/<run_id>/g5_segment/summary_script.json`
+- `artifacts/<run_id>/g5_segment/summary_video_manifest.json`
+- `artifacts/<run_id>/g7_assemble/summary_video.mp4`
+- `artifacts/<run_id>/g8_qc/quality_report.json`
+
+### 2) Chay den stage cu the
+
+- Den G3: `--stage g3`
+- Den G5: `--stage g5`
+- Full G8: `--stage g8`
+
+### 3) Replay mode (skip stage da co artifact hop le)
+
+```bash
+python -m reasoning_nlp.pipeline_runner \
+  --audio-transcripts Data/processed/video1/extraction/audio_transcripts.json \
+  --visual-captions Data/processed/video1/extraction/visual_captions.json \
+  --raw-video Data/raw/video1.mp4 \
+  --stage g8 \
+  --source-duration-ms 1900000 \
+  --run-id run_demo_001 \
+  --replay
+```
+
+Luu y replay:
+
+- Bat buoc co `--run-id` trung voi run cu.
+- Replay chi skip khi `run_meta.json` hop le va checksum input + config khop.
+- Neu khong khop, pipeline tu dong tat replay va chay lai full.
+
+### 4) Validate artifacts sau khi chay
+
+```bash
+python docs/Reasoning-NLP/schema/validate_artifacts.py \
+  --alignment artifacts/run_demo_001/g2_align/alignment_result.json \
+  --script artifacts/run_demo_001/g5_segment/summary_script.json \
+  --manifest artifacts/run_demo_001/g5_segment/summary_video_manifest.json \
+  --report artifacts/run_demo_001/g8_qc/quality_report.json \
+  --contracts-dir contracts/v1/template \
+  --source-duration-ms 1900000
+```
 
 ## Tai lieu bo sung
 
