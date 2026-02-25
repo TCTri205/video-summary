@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.1",
+  "run_id": "run_2026_02_23_0001",
+  "input_profile": "strict_contract_v1",
+  "overall_status": "pass",
+  "stage_results": [
+    {
+      "stage": "validate",
+      "status": "pass",
+      "duration_ms": 102
+    },
+    {
+      "stage": "align",
+      "status": "pass",
+      "duration_ms": 244
+    },
+    {
+      "stage": "context_build",
+      "status": "pass",
+      "duration_ms": 133
+    },
+    {
+      "stage": "summarize",
+      "status": "pass",
+      "duration_ms": 1593
+    },
+    {
+      "stage": "segment_plan",
+      "status": "pass",
+      "duration_ms": 88
+    },
+    {
+      "stage": "manifest",
+      "status": "pass",
+      "duration_ms": 71
+    },
+    {
+      "stage": "assemble",
+      "status": "pass",
+      "duration_ms": 2104
+    },
+    {
+      "stage": "qc",
+      "status": "pass",
+      "duration_ms": 514
+    }
+  ],
+  "metrics": {
+    "parse_validity_rate": 1,
+    "timeline_consistency_score": 0.96,
+    "grounding_score": 0.9,
+    "compression_ratio": 0.16,
+    "manifest_consistency_pass": true,
+    "render_success": true,
+    "audio_present": true,
+    "duration_match_score": 0.98,
+    "black_frame_ratio": 0.01,
+    "decode_error_count": 0,
+    "no_match_rate": 0.0,
+    "median_confidence": 0.89,
+    "high_confidence_ratio": 1.0
+  },
+  "warnings": [],
+  "errors": []
+}

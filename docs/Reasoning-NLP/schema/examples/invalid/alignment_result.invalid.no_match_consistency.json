@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.1",
+  "delta_ms": 3200,
+  "blocks": [
+    {
+      "caption_id": "c_001",
+      "timestamp": "00:00:06.000",
+      "image_text": "A boy helps an old man cross the street.",
+      "dialogue_text": "Let me help you.",
+      "matched_transcript_ids": [
+        "t_001"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.92
+    },
+    {
+      "caption_id": "c_002",
+      "timestamp": "00:00:18.000",
+      "image_text": "The old man smiles and thanks him.",
+      "dialogue_text": "Thank you very much.",
+      "matched_transcript_ids": [
+        "t_004"
+      ],
+      "fallback_type": "no_match",
+      "confidence": 0.78
+    },
+    {
+      "caption_id": "c_003",
+      "timestamp": "00:00:30.000",
+      "image_text": "The boy reflects on kindness.",
+      "dialogue_text": "Small kindness can change a day.",
+      "matched_transcript_ids": [
+        "t_007"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.89
+    }
+  ]
+}

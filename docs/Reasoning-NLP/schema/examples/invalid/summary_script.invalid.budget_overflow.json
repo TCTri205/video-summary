@@ -1,0 +1,25 @@
+{
+  "title": "Long Montage",
+  "plot_summary": "A sequence of scenes is summarized but exceeds configured budget.",
+  "moral_lesson": "Focus on key moments rather than too much detail.",
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:00.000",
+      "source_end": "00:00:14.500",
+      "script_text": "Opening context and initial conflict are introduced."
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:00:20.000",
+      "source_end": "00:00:34.500",
+      "script_text": "Development scenes continue with additional details."
+    },
+    {
+      "segment_id": 3,
+      "source_start": "00:00:40.000",
+      "source_end": "00:00:54.500",
+      "script_text": "Resolution arrives after an extended sequence."
+    }
+  ]
+}
