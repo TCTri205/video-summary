@@ -1,0 +1,770 @@
+{
+    "total_keyframes": 153,
+    "frames": [
+        {
+            "frame_id": 1,
+            "timestamp": "00:00:02.560",
+            "file_path": "keyframes/frame_00_00_02_560.jpg"
+        },
+        {
+            "frame_id": 2,
+            "timestamp": "00:00:16.480",
+            "file_path": "keyframes/frame_00_00_16_480.jpg"
+        },
+        {
+            "frame_id": 3,
+            "timestamp": "00:00:29.359",
+            "file_path": "keyframes/frame_00_00_29_359.jpg"
+        },
+        {
+            "frame_id": 4,
+            "timestamp": "00:00:31.519",
+            "file_path": "keyframes/frame_00_00_31_519.jpg"
+        },
+        {
+            "frame_id": 5,
+            "timestamp": "00:00:34.640",
+            "file_path": "keyframes/frame_00_00_34_640.jpg"
+        },
+        {
+            "frame_id": 6,
+            "timestamp": "00:00:37.899",
+            "file_path": "keyframes/frame_00_00_37_899.jpg"
+        },
+        {
+            "frame_id": 7,
+            "timestamp": "00:00:40.600",
+            "file_path": "keyframes/frame_00_00_40_600.jpg"
+        },
+        {
+            "frame_id": 8,
+            "timestamp": "00:00:43.640",
+            "file_path": "keyframes/frame_00_00_43_640.jpg"
+        },
+        {
+            "frame_id": 9,
+            "timestamp": "00:00:46.179",
+            "file_path": "keyframes/frame_00_00_46_179.jpg"
+        },
+        {
+            "frame_id": 10,
+            "timestamp": "00:00:49.859",
+            "file_path": "keyframes/frame_00_00_49_859.jpg"
+        },
+        {
+            "frame_id": 11,
+            "timestamp": "00:00:54.079",
+            "file_path": "keyframes/frame_00_00_54_079.jpg"
+        },
+        {
+            "frame_id": 12,
+            "timestamp": "00:01:03.079",
+            "file_path": "keyframes/frame_00_01_03_079.jpg"
+        },
+        {
+            "frame_id": 13,
+            "timestamp": "00:01:17.200",
+            "file_path": "keyframes/frame_00_01_17_200.jpg"
+        },
+        {
+            "frame_id": 14,
+            "timestamp": "00:01:33.539",
+            "file_path": "keyframes/frame_00_01_33_539.jpg"
+        },
+        {
+            "frame_id": 15,
+            "timestamp": "00:01:45.219",
+            "file_path": "keyframes/frame_00_01_45_219.jpg"
+        },
+        {
+            "frame_id": 16,
+            "timestamp": "00:01:50.640",
+            "file_path": "keyframes/frame_00_01_50_640.jpg"
+        },
+        {
+            "frame_id": 17,
+            "timestamp": "00:01:58.280",
+            "file_path": "keyframes/frame_00_01_58_280.jpg"
+        },
+        {
+            "frame_id": 18,
+            "timestamp": "00:02:03.800",
+            "file_path": "keyframes/frame_00_02_03_800.jpg"
+        },
+        {
+            "frame_id": 19,
+            "timestamp": "00:02:05.740",
+            "file_path": "keyframes/frame_00_02_05_740.jpg"
+        },
+        {
+            "frame_id": 20,
+            "timestamp": "00:02:07.340",
+            "file_path": "keyframes/frame_00_02_07_340.jpg"
+        },
+        {
+            "frame_id": 21,
+            "timestamp": "00:02:09.240",
+            "file_path": "keyframes/frame_00_02_09_240.jpg"
+        },
+        {
+            "frame_id": 22,
+            "timestamp": "00:02:13.759",
+            "file_path": "keyframes/frame_00_02_13_759.jpg"
+        },
+        {
+            "frame_id": 23,
+            "timestamp": "00:02:17.259",
+            "file_path": "keyframes/frame_00_02_17_259.jpg"
+        },
+        {
+            "frame_id": 24,
+            "timestamp": "00:02:22.480",
+            "file_path": "keyframes/frame_00_02_22_480.jpg"
+        },
+        {
+            "frame_id": 25,
+            "timestamp": "00:02:34.180",
+            "file_path": "keyframes/frame_00_02_34_180.jpg"
+        },
+        {
+            "frame_id": 26,
+            "timestamp": "00:02:42.759",
+            "file_path": "keyframes/frame_00_02_42_759.jpg"
+        },
+        {
+            "frame_id": 27,
+            "timestamp": "00:02:46.740",
+            "file_path": "keyframes/frame_00_02_46_740.jpg"
+        },
+        {
+            "frame_id": 28,
+            "timestamp": "00:02:50.680",
+            "file_path": "keyframes/frame_00_02_50_680.jpg"
+        },
+        {
+            "frame_id": 29,
+            "timestamp": "00:02:54.219",
+            "file_path": "keyframes/frame_00_02_54_219.jpg"
+        },
+        {
+            "frame_id": 30,
+            "timestamp": "00:02:59.800",
+            "file_path": "keyframes/frame_00_02_59_800.jpg"
+        },
+        {
+            "frame_id": 31,
+            "timestamp": "00:03:07.599",
+            "file_path": "keyframes/frame_00_03_07_599.jpg"
+        },
+        {
+            "frame_id": 32,
+            "timestamp": "00:03:12.639",
+            "file_path": "keyframes/frame_00_03_12_639.jpg"
+        },
+        {
+            "frame_id": 33,
+            "timestamp": "00:03:16.500",
+            "file_path": "keyframes/frame_00_03_16_500.jpg"
+        },
+        {
+            "frame_id": 34,
+            "timestamp": "00:03:21.620",
+            "file_path": "keyframes/frame_00_03_21_620.jpg"
+        },
+        {
+            "frame_id": 35,
+            "timestamp": "00:03:25.840",
+            "file_path": "keyframes/frame_00_03_25_840.jpg"
+        },
+        {
+            "frame_id": 36,
+            "timestamp": "00:03:30.100",
+            "file_path": "keyframes/frame_00_03_30_100.jpg"
+        },
+        {
+            "frame_id": 37,
+            "timestamp": "00:03:35.480",
+            "file_path": "keyframes/frame_00_03_35_480.jpg"
+        },
+        {
+            "frame_id": 38,
+            "timestamp": "00:03:47.420",
+            "file_path": "keyframes/frame_00_03_47_420.jpg"
+        },
+        {
+            "frame_id": 39,
+            "timestamp": "00:03:59.699",
+            "file_path": "keyframes/frame_00_03_59_699.jpg"
+        },
+        {
+            "frame_id": 40,
+            "timestamp": "00:04:06.159",
+            "file_path": "keyframes/frame_00_04_06_159.jpg"
+        },
+        {
+            "frame_id": 41,
+            "timestamp": "00:04:13.079",
+            "file_path": "keyframes/frame_00_04_13_079.jpg"
+        },
+        {
+            "frame_id": 42,
+            "timestamp": "00:04:20.759",
+            "file_path": "keyframes/frame_00_04_20_759.jpg"
+        },
+        {
+            "frame_id": 43,
+            "timestamp": "00:04:25.860",
+            "file_path": "keyframes/frame_00_04_25_860.jpg"
+        },
+        {
+            "frame_id": 44,
+            "timestamp": "00:04:30.340",
+            "file_path": "keyframes/frame_00_04_30_340.jpg"
+        },
+        {
+            "frame_id": 45,
+            "timestamp": "00:04:38.240",
+            "file_path": "keyframes/frame_00_04_38_240.jpg"
+        },
+        {
+            "frame_id": 46,
+            "timestamp": "00:04:46.399",
+            "file_path": "keyframes/frame_00_04_46_399.jpg"
+        },
+        {
+            "frame_id": 47,
+            "timestamp": "00:04:53.079",
+            "file_path": "keyframes/frame_00_04_53_079.jpg"
+        },
+        {
+            "frame_id": 48,
+            "timestamp": "00:05:07.399",
+            "file_path": "keyframes/frame_00_05_07_399.jpg"
+        },
+        {
+            "frame_id": 49,
+            "timestamp": "00:05:23.879",
+            "file_path": "keyframes/frame_00_05_23_879.jpg"
+        },
+        {
+            "frame_id": 50,
+            "timestamp": "00:05:33.100",
+            "file_path": "keyframes/frame_00_05_33_100.jpg"
+        },
+        {
+            "frame_id": 51,
+            "timestamp": "00:05:41.659",
+            "file_path": "keyframes/frame_00_05_41_659.jpg"
+        },
+        {
+            "frame_id": 52,
+            "timestamp": "00:05:49.319",
+            "file_path": "keyframes/frame_00_05_49_319.jpg"
+        },
+        {
+            "frame_id": 53,
+            "timestamp": "00:05:59.740",
+            "file_path": "keyframes/frame_00_05_59_740.jpg"
+        },
+        {
+            "frame_id": 54,
+            "timestamp": "00:06:19.960",
+            "file_path": "keyframes/frame_00_06_19_960.jpg"
+        },
+        {
+            "frame_id": 55,
+            "timestamp": "00:06:37.159",
+            "file_path": "keyframes/frame_00_06_37_159.jpg"
+        },
+        {
+            "frame_id": 56,
+            "timestamp": "00:06:47.819",
+            "file_path": "keyframes/frame_00_06_47_819.jpg"
+        },
+        {
+            "frame_id": 57,
+            "timestamp": "00:06:58.259",
+            "file_path": "keyframes/frame_00_06_58_259.jpg"
+        },
+        {
+            "frame_id": 58,
+            "timestamp": "00:07:06.659",
+            "file_path": "keyframes/frame_00_07_06_659.jpg"
+        },
+        {
+            "frame_id": 59,
+            "timestamp": "00:07:19.039",
+            "file_path": "keyframes/frame_00_07_19_039.jpg"
+        },
+        {
+            "frame_id": 60,
+            "timestamp": "00:07:34.199",
+            "file_path": "keyframes/frame_00_07_34_199.jpg"
+        },
+        {
+            "frame_id": 61,
+            "timestamp": "00:07:41.460",
+            "file_path": "keyframes/frame_00_07_41_460.jpg"
+        },
+        {
+            "frame_id": 62,
+            "timestamp": "00:07:48.279",
+            "file_path": "keyframes/frame_00_07_48_279.jpg"
+        },
+        {
+            "frame_id": 63,
+            "timestamp": "00:07:59.000",
+            "file_path": "keyframes/frame_00_07_59_000.jpg"
+        },
+        {
+            "frame_id": 64,
+            "timestamp": "00:08:06.139",
+            "file_path": "keyframes/frame_00_08_06_139.jpg"
+        },
+        {
+            "frame_id": 65,
+            "timestamp": "00:08:09.360",
+            "file_path": "keyframes/frame_00_08_09_360.jpg"
+        },
+        {
+            "frame_id": 66,
+            "timestamp": "00:08:13.420",
+            "file_path": "keyframes/frame_00_08_13_420.jpg"
+        },
+        {
+            "frame_id": 67,
+            "timestamp": "00:08:17.820",
+            "file_path": "keyframes/frame_00_08_17_820.jpg"
+        },
+        {
+            "frame_id": 68,
+            "timestamp": "00:08:31.660",
+            "file_path": "keyframes/frame_00_08_31_660.jpg"
+        },
+        {
+            "frame_id": 69,
+            "timestamp": "00:08:47.480",
+            "file_path": "keyframes/frame_00_08_47_480.jpg"
+        },
+        {
+            "frame_id": 70,
+            "timestamp": "00:08:52.360",
+            "file_path": "keyframes/frame_00_08_52_360.jpg"
+        },
+        {
+            "frame_id": 71,
+            "timestamp": "00:08:58.059",
+            "file_path": "keyframes/frame_00_08_58_059.jpg"
+        },
+        {
+            "frame_id": 72,
+            "timestamp": "00:09:05.480",
+            "file_path": "keyframes/frame_00_09_05_480.jpg"
+        },
+        {
+            "frame_id": 73,
+            "timestamp": "00:09:11.860",
+            "file_path": "keyframes/frame_00_09_11_860.jpg"
+        },
+        {
+            "frame_id": 74,
+            "timestamp": "00:09:22.039",
+            "file_path": "keyframes/frame_00_09_22_039.jpg"
+        },
+        {
+            "frame_id": 75,
+            "timestamp": "00:09:31.659",
+            "file_path": "keyframes/frame_00_09_31_659.jpg"
+        },
+        {
+            "frame_id": 76,
+            "timestamp": "00:09:38.960",
+            "file_path": "keyframes/frame_00_09_38_960.jpg"
+        },
+        {
+            "frame_id": 77,
+            "timestamp": "00:09:51.960",
+            "file_path": "keyframes/frame_00_09_51_960.jpg"
+        },
+        {
+            "frame_id": 78,
+            "timestamp": "00:10:09.799",
+            "file_path": "keyframes/frame_00_10_09_799.jpg"
+        },
+        {
+            "frame_id": 79,
+            "timestamp": "00:10:30.940",
+            "file_path": "keyframes/frame_00_10_30_940.jpg"
+        },
+        {
+            "frame_id": 80,
+            "timestamp": "00:10:44.159",
+            "file_path": "keyframes/frame_00_10_44_159.jpg"
+        },
+        {
+            "frame_id": 81,
+            "timestamp": "00:10:49.659",
+            "file_path": "keyframes/frame_00_10_49_659.jpg"
+        },
+        {
+            "frame_id": 82,
+            "timestamp": "00:10:54.519",
+            "file_path": "keyframes/frame_00_10_54_519.jpg"
+        },
+        {
+            "frame_id": 83,
+            "timestamp": "00:11:03.600",
+            "file_path": "keyframes/frame_00_11_03_600.jpg"
+        },
+        {
+            "frame_id": 84,
+            "timestamp": "00:11:28.379",
+            "file_path": "keyframes/frame_00_11_28_379.jpg"
+        },
+        {
+            "frame_id": 85,
+            "timestamp": "00:11:46.759",
+            "file_path": "keyframes/frame_00_11_46_759.jpg"
+        },
+        {
+            "frame_id": 86,
+            "timestamp": "00:11:48.620",
+            "file_path": "keyframes/frame_00_11_48_620.jpg"
+        },
+        {
+            "frame_id": 87,
+            "timestamp": "00:11:52.240",
+            "file_path": "keyframes/frame_00_11_52_240.jpg"
+        },
+        {
+            "frame_id": 88,
+            "timestamp": "00:12:05.059",
+            "file_path": "keyframes/frame_00_12_05_059.jpg"
+        },
+        {
+            "frame_id": 89,
+            "timestamp": "00:12:17.579",
+            "file_path": "keyframes/frame_00_12_17_579.jpg"
+        },
+        {
+            "frame_id": 90,
+            "timestamp": "00:12:22.139",
+            "file_path": "keyframes/frame_00_12_22_139.jpg"
+        },
+        {
+            "frame_id": 91,
+            "timestamp": "00:12:31.120",
+            "file_path": "keyframes/frame_00_12_31_120.jpg"
+        },
+        {
+            "frame_id": 92,
+            "timestamp": "00:12:41.700",
+            "file_path": "keyframes/frame_00_12_41_700.jpg"
+        },
+        {
+            "frame_id": 93,
+            "timestamp": "00:12:54.400",
+            "file_path": "keyframes/frame_00_12_54_400.jpg"
+        },
+        {
+            "frame_id": 94,
+            "timestamp": "00:13:05.340",
+            "file_path": "keyframes/frame_00_13_05_340.jpg"
+        },
+        {
+            "frame_id": 95,
+            "timestamp": "00:13:09.799",
+            "file_path": "keyframes/frame_00_13_09_799.jpg"
+        },
+        {
+            "frame_id": 96,
+            "timestamp": "00:13:21.680",
+            "file_path": "keyframes/frame_00_13_21_680.jpg"
+        },
+        {
+            "frame_id": 97,
+            "timestamp": "00:13:32.220",
+            "file_path": "keyframes/frame_00_13_32_220.jpg"
+        },
+        {
+            "frame_id": 98,
+            "timestamp": "00:13:41.120",
+            "file_path": "keyframes/frame_00_13_41_120.jpg"
+        },
+        {
+            "frame_id": 99,
+            "timestamp": "00:13:56.759",
+            "file_path": "keyframes/frame_00_13_56_759.jpg"
+        },
+        {
+            "frame_id": 100,
+            "timestamp": "00:14:13.220",
+            "file_path": "keyframes/frame_00_14_13_220.jpg"
+        },
+        {
+            "frame_id": 101,
+            "timestamp": "00:14:29.359",
+            "file_path": "keyframes/frame_00_14_29_359.jpg"
+        },
+        {
+            "frame_id": 102,
+            "timestamp": "00:14:38.200",
+            "file_path": "keyframes/frame_00_14_38_200.jpg"
+        },
+        {
+            "frame_id": 103,
+            "timestamp": "00:14:45.360",
+            "file_path": "keyframes/frame_00_14_45_360.jpg"
+        },
+        {
+            "frame_id": 104,
+            "timestamp": "00:14:59.899",
+            "file_path": "keyframes/frame_00_14_59_899.jpg"
+        },
+        {
+            "frame_id": 105,
+            "timestamp": "00:15:14.740",
+            "file_path": "keyframes/frame_00_15_14_740.jpg"
+        },
+        {
+            "frame_id": 106,
+            "timestamp": "00:15:24.000",
+            "file_path": "keyframes/frame_00_15_24_000.jpg"
+        },
+        {
+            "frame_id": 107,
+            "timestamp": "00:15:38.680",
+            "file_path": "keyframes/frame_00_15_38_680.jpg"
+        },
+        {
+            "frame_id": 108,
+            "timestamp": "00:15:51.819",
+            "file_path": "keyframes/frame_00_15_51_819.jpg"
+        },
+        {
+            "frame_id": 109,
+            "timestamp": "00:15:54.440",
+            "file_path": "keyframes/frame_00_15_54_440.jpg"
+        },
+        {
+            "frame_id": 110,
+            "timestamp": "00:16:01.940",
+            "file_path": "keyframes/frame_00_16_01_940.jpg"
+        },
+        {
+            "frame_id": 111,
+            "timestamp": "00:16:10.299",
+            "file_path": "keyframes/frame_00_16_10_299.jpg"
+        },
+        {
+            "frame_id": 112,
+            "timestamp": "00:16:17.879",
+            "file_path": "keyframes/frame_00_16_17_879.jpg"
+        },
+        {
+            "frame_id": 113,
+            "timestamp": "00:16:25.700",
+            "file_path": "keyframes/frame_00_16_25_700.jpg"
+        },
+        {
+            "frame_id": 114,
+            "timestamp": "00:16:31.360",
+            "file_path": "keyframes/frame_00_16_31_360.jpg"
+        },
+        {
+            "frame_id": 115,
+            "timestamp": "00:16:37.379",
+            "file_path": "keyframes/frame_00_16_37_379.jpg"
+        },
+        {
+            "frame_id": 116,
+            "timestamp": "00:16:49.399",
+            "file_path": "keyframes/frame_00_16_49_399.jpg"
+        },
+        {
+            "frame_id": 117,
+            "timestamp": "00:17:03.140",
+            "file_path": "keyframes/frame_00_17_03_140.jpg"
+        },
+        {
+            "frame_id": 118,
+            "timestamp": "00:17:11.700",
+            "file_path": "keyframes/frame_00_17_11_700.jpg"
+        },
+        {
+            "frame_id": 119,
+            "timestamp": "00:17:21.159",
+            "file_path": "keyframes/frame_00_17_21_159.jpg"
+        },
+        {
+            "frame_id": 120,
+            "timestamp": "00:17:32.819",
+            "file_path": "keyframes/frame_00_17_32_819.jpg"
+        },
+        {
+            "frame_id": 121,
+            "timestamp": "00:17:44.659",
+            "file_path": "keyframes/frame_00_17_44_659.jpg"
+        },
+        {
+            "frame_id": 122,
+            "timestamp": "00:18:16.539",
+            "file_path": "keyframes/frame_00_18_16_539.jpg"
+        },
+        {
+            "frame_id": 123,
+            "timestamp": "00:18:45.400",
+            "file_path": "keyframes/frame_00_18_45_400.jpg"
+        },
+        {
+            "frame_id": 124,
+            "timestamp": "00:18:59.119",
+            "file_path": "keyframes/frame_00_18_59_119.jpg"
+        },
+        {
+            "frame_id": 125,
+            "timestamp": "00:19:12.880",
+            "file_path": "keyframes/frame_00_19_12_880.jpg"
+        },
+        {
+            "frame_id": 126,
+            "timestamp": "00:19:17.659",
+            "file_path": "keyframes/frame_00_19_17_659.jpg"
+        },
+        {
+            "frame_id": 127,
+            "timestamp": "00:19:25.559",
+            "file_path": "keyframes/frame_00_19_25_559.jpg"
+        },
+        {
+            "frame_id": 128,
+            "timestamp": "00:19:33.619",
+            "file_path": "keyframes/frame_00_19_33_619.jpg"
+        },
+        {
+            "frame_id": 129,
+            "timestamp": "00:19:36.559",
+            "file_path": "keyframes/frame_00_19_36_559.jpg"
+        },
+        {
+            "frame_id": 130,
+            "timestamp": "00:19:41.119",
+            "file_path": "keyframes/frame_00_19_41_119.jpg"
+        },
+        {
+            "frame_id": 131,
+            "timestamp": "00:19:47.779",
+            "file_path": "keyframes/frame_00_19_47_779.jpg"
+        },
+        {
+            "frame_id": 132,
+            "timestamp": "00:19:57.820",
+            "file_path": "keyframes/frame_00_19_57_820.jpg"
+        },
+        {
+            "frame_id": 133,
+            "timestamp": "00:20:09.800",
+            "file_path": "keyframes/frame_00_20_09_800.jpg"
+        },
+        {
+            "frame_id": 134,
+            "timestamp": "00:20:16.460",
+            "file_path": "keyframes/frame_00_20_16_460.jpg"
+        },
+        {
+            "frame_id": 135,
+            "timestamp": "00:20:37.119",
+            "file_path": "keyframes/frame_00_20_37_119.jpg"
+        },
+        {
+            "frame_id": 136,
+            "timestamp": "00:21:13.259",
+            "file_path": "keyframes/frame_00_21_13_259.jpg"
+        },
+        {
+            "frame_id": 137,
+            "timestamp": "00:21:31.500",
+            "file_path": "keyframes/frame_00_21_31_500.jpg"
+        },
+        {
+            "frame_id": 138,
+            "timestamp": "00:21:39.240",
+            "file_path": "keyframes/frame_00_21_39_240.jpg"
+        },
+        {
+            "frame_id": 139,
+            "timestamp": "00:21:49.579",
+            "file_path": "keyframes/frame_00_21_49_579.jpg"
+        },
+        {
+            "frame_id": 140,
+            "timestamp": "00:21:56.820",
+            "file_path": "keyframes/frame_00_21_56_820.jpg"
+        },
+        {
+            "frame_id": 141,
+            "timestamp": "00:22:03.380",
+            "file_path": "keyframes/frame_00_22_03_380.jpg"
+        },
+        {
+            "frame_id": 142,
+            "timestamp": "00:22:07.960",
+            "file_path": "keyframes/frame_00_22_07_960.jpg"
+        },
+        {
+            "frame_id": 143,
+            "timestamp": "00:22:13.299",
+            "file_path": "keyframes/frame_00_22_13_299.jpg"
+        },
+        {
+            "frame_id": 144,
+            "timestamp": "00:22:17.480",
+            "file_path": "keyframes/frame_00_22_17_480.jpg"
+        },
+        {
+            "frame_id": 145,
+            "timestamp": "00:22:21.180",
+            "file_path": "keyframes/frame_00_22_21_180.jpg"
+        },
+        {
+            "frame_id": 146,
+            "timestamp": "00:22:26.860",
+            "file_path": "keyframes/frame_00_22_26_860.jpg"
+        },
+        {
+            "frame_id": 147,
+            "timestamp": "00:22:33.980",
+            "file_path": "keyframes/frame_00_22_33_980.jpg"
+        },
+        {
+            "frame_id": 148,
+            "timestamp": "00:22:38.480",
+            "file_path": "keyframes/frame_00_22_38_480.jpg"
+        },
+        {
+            "frame_id": 149,
+            "timestamp": "00:22:50.139",
+            "file_path": "keyframes/frame_00_22_50_139.jpg"
+        },
+        {
+            "frame_id": 150,
+            "timestamp": "00:23:09.059",
+            "file_path": "keyframes/frame_00_23_09_059.jpg"
+        },
+        {
+            "frame_id": 151,
+            "timestamp": "00:23:26.700",
+            "file_path": "keyframes/frame_00_23_26_700.jpg"
+        },
+        {
+            "frame_id": 152,
+            "timestamp": "00:23:37.039",
+            "file_path": "keyframes/frame_00_23_37_039.jpg"
+        },
+        {
+            "frame_id": 153,
+            "timestamp": "00:23:44.880",
+            "file_path": "keyframes/frame_00_23_44_880.jpg"
+        }
+    ]
+}

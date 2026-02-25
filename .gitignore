@@ -38,3 +38,6 @@ huggingface_cache/
 
 # Logs
 *.log
+
+Data/raw/
+Data/processed/video1/

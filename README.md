@@ -2,6 +2,14 @@
 
 Du an tom tat video theo pipeline 3 module, phan tach ro trach nhiem de 2 thanh vien lam viec doc lap.
 
+## Requirements
+- Python 3.8+
+- FFmpeg:
+  + https://www.gyan.dev/ffmpeg/builds/
+  + Chọn bản ffmpeg-release-essentials.zip
+  + Giải nén, thêm thư mục `bin/` vào PATH của hệ thống.
+
+
 ## Architecture
 
 - Module 1: Data extraction (`raw_video.mp4` -> `audio_16k.wav`, `keyframes/`, `scene_metadata.json`)
