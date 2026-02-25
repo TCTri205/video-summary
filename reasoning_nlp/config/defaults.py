@@ -17,6 +17,12 @@ DEFAULT_SUMMARIZATION = {
     "temperature": 0.1,
     "model_version": "Qwen2.5-3B-Instruct",
     "tokenizer_version": "default",
+    "backend": "api",
+    "fallback_backend": "local",
+    "timeout_ms": 30000,
+    "max_retries": 2,
+    "max_new_tokens": 512,
+    "do_sample": False,
 }
 
 DEFAULT_SEGMENT_BUDGET = {
@@ -26,4 +32,15 @@ DEFAULT_SEGMENT_BUDGET = {
     "max_total_duration_ms": 45000,
     "target_ratio": None,
     "target_ratio_tolerance": 0.20,
+}
+
+DEFAULT_QC = {
+    "enforce_thresholds": False,
+    "min_parse_validity_rate": 0.995,
+    "min_timeline_consistency_score": 0.90,
+    "min_grounding_score": 0.85,
+    "max_black_frame_ratio": 0.02,
+    "max_no_match_rate": 0.30,
+    "min_median_confidence": 0.60,
+    "min_high_confidence_ratio": 0.50,
 }

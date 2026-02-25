@@ -55,8 +55,9 @@ class PipelineDeterminismTests(unittest.TestCase):
                     raw_video_path=str(source_video),
                     artifacts_root=str(root / "artifacts"),
                     run_id="det_run_1",
-                    source_duration_ms=8000,
                     summarize_seed=42,
+                    summarize_backend="api",
+                    summarize_fallback_backend="api",
                 )
             )
             result_2 = run_pipeline_g1_g8(
@@ -66,8 +67,9 @@ class PipelineDeterminismTests(unittest.TestCase):
                     raw_video_path=str(source_video),
                     artifacts_root=str(root / "artifacts"),
                     run_id="det_run_2",
-                    source_duration_ms=8000,
                     summarize_seed=42,
+                    summarize_backend="api",
+                    summarize_fallback_backend="api",
                 )
             )
 
