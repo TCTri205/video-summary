@@ -5,8 +5,8 @@ Muc tieu: xac nhan kien truc chay thong tu input JSON den output tom tat ma khon
 ## Buoc 1 - Chuan bi
 
 - Mock data da co san:
-  - `docs/00-project-overview/mock-data/audio_transcripts.json`
-  - `docs/00-project-overview/mock-data/visual_captions.json`
+  - `docs/Overview-Project/mock-data/audio_transcripts.json`
+  - `docs/Overview-Project/mock-data/visual_captions.json`
 - Xac nhan timestamp dang `HH:MM:SS.mmm`.
 
 ## Buoc 2 - Chay Module 3 voi mock

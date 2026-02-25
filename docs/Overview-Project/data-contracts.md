@@ -1,7 +1,7 @@
 # Data Contracts
 
 Tai lieu nay dinh nghia format giao tiep giua cac module.
-Nguon chuan machine-checkable nam tai `contracts/v1/*.schema.json`.
+Nguon chuan machine-checkable nam tai `contracts/v1/template/*.schema.json`.
 
 ## Quy tac timestamp (bat buoc)
 

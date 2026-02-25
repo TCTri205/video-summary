@@ -10,6 +10,8 @@
 
 - `start`, `end`, `timestamp` deu theo `HH:MM:SS.mmm`.
 - Transcript duoc sap xep tang dan theo `start`.
+- Visual captions bat buoc sap xep tang dan theo `timestamp` (stable sort).
+- Neu nhieu caption co cung `timestamp`, giu thu tu keyframe dau vao (stable).
 
 ## VRAM strategy (bat buoc)
 
@@ -28,3 +30,4 @@
 - `audio_transcripts.json` pass schema.
 - `visual_captions.json` pass schema.
 - Du lieu khong rong, doc duoc, timestamp hop le.
+- `visual_captions.json` co thu tu `timestamp` khong giam (non-decreasing).

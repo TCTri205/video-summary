@@ -68,7 +68,7 @@ Xay dung he thong tom tat video theo pipeline 3 module, tach biet trach nhiem, g
 
 ## 4) Data contract va nguyen tac tich hop
 
-- Tat ca JSON phai pass schema trong `contracts/v1/*.schema.json`.
+- Tat ca JSON phai pass schema trong `contracts/v1/template/*.schema.json`.
 - Timestamp chuan bat buoc: `HH:MM:SS.mmm`.
 - Relative path trong JSON dung theo workspace root.
 - Key name theo schema, khong doi tuy y.

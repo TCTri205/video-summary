@@ -1,7 +1,7 @@
 # Project Overview
 
 Tai lieu tong hop nhanh:
-- `docs/00-project-overview/pipeline-spec-1page.md` (ban chot scope 1 trang)
+- `docs/Overview-Project/pipeline-spec-1page.md` (ban chot scope 1 trang)
 
 ## Muc tieu
 

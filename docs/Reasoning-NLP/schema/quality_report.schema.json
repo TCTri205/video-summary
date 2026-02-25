@@ -7,6 +7,7 @@
   "required": [
     "schema_version",
     "run_id",
+    "input_profile",
     "overall_status",
     "stage_results",
     "metrics",
@@ -21,6 +22,13 @@
     "run_id": {
       "type": "string",
       "minLength": 1
+    },
+    "input_profile": {
+      "type": "string",
+      "enum": [
+        "strict_contract_v1",
+        "legacy_member1"
+      ]
     },
     "overall_status": {
       "type": "string",
@@ -46,6 +54,7 @@
             "enum": [
               "validate",
               "align",
+              "context_build",
               "summarize",
               "segment_plan",
               "manifest",
@@ -88,7 +97,10 @@
         "audio_present",
         "duration_match_score",
         "black_frame_ratio",
-        "decode_error_count"
+        "decode_error_count",
+        "no_match_rate",
+        "median_confidence",
+        "high_confidence_ratio"
       ],
       "properties": {
         "parse_validity_rate": {
@@ -132,6 +144,21 @@
         "decode_error_count": {
           "type": "integer",
           "minimum": 0
+        },
+        "no_match_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "median_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "high_confidence_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
         }
       }
     },

@@ -1,0 +1,25 @@
+{
+  "title": "Kindness on the Street",
+  "plot_summary": "A boy helps an old man and reflects on kindness.",
+  "moral_lesson": "Small acts of kindness can make a difference.",
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:04.500",
+      "source_end": "00:00:12.000",
+      "script_text": "The boy notices the old man and offers help."
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:00:11.500",
+      "source_end": "00:00:20.000",
+      "script_text": "They cross safely while people look on."
+    },
+    {
+      "segment_id": 3,
+      "source_start": "00:00:24.000",
+      "source_end": "00:00:31.000",
+      "script_text": "The boy reflects that kindness matters."
+    }
+  ]
+}

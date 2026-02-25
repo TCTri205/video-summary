@@ -12,12 +12,26 @@ Ghep transcript (`start`, `end`) voi visual captions (`timestamp`) tren cung tru
 - Text transcript/caption sau khi trim khong rong; neu rong thi gan co `is_empty_text=true` de xu ly fallback.
 - Payload fail bat ky invariant nao thi dung stage voi `TIME_*`/`SCHEMA_*`.
 
+## Input profile (de tich hop voi du lieu hien tai)
+
+- `strict_contract_v1`:
+  - `audio_transcripts.json` theo `contracts/v1/template/audio_transcripts.schema.json`.
+  - `visual_captions.json` theo `contracts/v1/template/visual_captions.schema.json`.
+- `legacy_member1`:
+  - Transcript dang object `{language, duration, segments[]}`.
+  - `segments[].start/end` co the la float giay.
+- Ca 2 profile deu phai normalize ve canonical format noi bo truoc khi merge.
+
 ## Chuan hoa truoc khi merge
 
 - Parse tat ca timestamp thanh milliseconds.
+- Neu transcript dang float giay, chuyen thanh timestamp string `HH:MM:SS.mmm` roi parse ms.
 - Sap xep transcript theo `start` tang dan (stable sort).
 - Sap xep captions theo `timestamp` tang dan (stable sort).
 - Gan `transcript_id`, `caption_id` neu input chua co id.
+- Optional de giam token/noise:
+  - Gop transcript lien tiep rat ngan neu cung nguoi noi va khoang cach nho.
+  - Dedup caption gan nhau neu caption text trung nghia va timestamp sat nhau.
 
 ## Delta policy (adaptive, thay cho fixed delta)
 
@@ -37,16 +51,24 @@ Voi moi caption tai moc `t`:
 
 1. **Containment match**: tim transcript thoa `start <= t <= end`.
 2. Neu khong co containment, **nearest-time match** trong cua so `|t - boundary| <= delta`.
+   - `boundary`: khoang cach nho nhat den 2 bien transcript, `distance_ms = min(|t-start|, |t-end|)`.
 3. Neu van khong co, gan dialogue la `(khong co)` va `fallback_type = no_match`.
 
 ### Tie-break rule khi co nhieu transcript hop le
 
 Uu tien theo thu tu:
 
-1. Overlap hieu dung voi `t` cao nhat (containment uu tien hon nearest).
+1. Candidate co `match_type` manh hon (`containment` > `nearest`).
 2. Khoang cach thoi gian den `t` nho nhat.
 3. `start` som hon.
 4. Thu tu xuat hien trong file (stable).
+
+## Implementation note (hieu nang)
+
+- Khuyen nghi thuc thi bang two-pointer tren 2 mang da sort (`transcripts`, `captions`).
+- Muc tieu complexity:
+  - Typical: `O(N + M)`
+  - Worst-case co tie-break scan bo sung: van can gioi han cua so tim kiem theo `delta` de tranh `O(N*M)`.
 
 ## Confidence scoring
 
@@ -54,8 +76,10 @@ Moi ket qua match can co `confidence` trong [0,1]:
 
 - `containment_bonus`: +0.45 neu containment.
 - `distance_score`: `max(0, 1 - (distance_ms / delta)) * 0.45`.
-- `lexical_bonus` (tuy chon): +0.10 neu caption/dialogue co overlap keyword co nghia.
+- `lexical_bonus` (mac dinh tat): +0.10 neu caption/dialogue co overlap keyword co nghia.
 - Chuan hoa score ve [0,1].
+
+De giu deterministic giua cac run, MVP de xuat `lexical_bonus = 0` tru khi bo keyword va tokenizer da duoc khoa version.
 
 Confidence buckets:
 
@@ -101,10 +125,16 @@ Tao `alignment_result.json` theo schema toi thieu:
 }
 ```
 
+## Quality triggers sau alignment
+
+- Neu `no_match_rate > 0.30`: gan warning `ALIGN_LOW_MATCH_COVERAGE`, kich hoat summarize mode bao thu (neutral style + confidence-aware context truncation).
+- Neu `median_confidence < 0.60`: gan warning `ALIGN_LOW_CONFIDENCE`.
+- Neu `high_confidence_ratio < 0.50`: gan warning `ALIGN_WEAK_GROUNDING_SIGNAL`.
+
 ## Chuyen tu alignment sang script/video
 
 - Sau khi merge context, truyen context + metadata sang summarization.
-- Segment planning phai dua tren thong tin timeline da align, khong chon segment ngoai input.
+- Segment planning phai dua tren timeline da align, khong chon segment ngoai input.
 - Tao `summary_script.json` va `summary_video_manifest.json` dong bo segment.
 - Render `summary_video.mp4` bang cach cat/ghep tu `raw_video.mp4`, giu audio goc (`keep_original_audio: true`).
 

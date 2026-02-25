@@ -6,16 +6,17 @@ Validate Module 3 artifacts with:
 3) QA gate threshold checks (optional)
 
 Usage example:
-python docs/02-member-2-reasoning-nlp/schema/validate_artifacts.py \
-  --alignment docs/02-member-2-reasoning-nlp/schema/examples/alignment_result.valid.json \
-  --script docs/02-member-2-reasoning-nlp/schema/examples/summary_script.valid.json \
-  --manifest docs/02-member-2-reasoning-nlp/schema/examples/summary_video_manifest.valid.json \
-  --report docs/02-member-2-reasoning-nlp/schema/examples/quality_report.valid.json \
+python docs/Reasoning-NLP/schema/validate_artifacts.py \
+  --alignment docs/Reasoning-NLP/schema/examples/alignment_result.valid.json \
+  --script docs/Reasoning-NLP/schema/examples/summary_script.valid.json \
+  --manifest docs/Reasoning-NLP/schema/examples/summary_video_manifest.valid.json \
+  --report docs/Reasoning-NLP/schema/examples/quality_report.valid.json \
+  --contracts-dir contracts/v1/template \
   --source-duration-ms 200000 \
   --enforce-thresholds
 
 By default:
-- summary_script + summary_video_manifest are validated against contracts/v1 (global contract).
+- summary_script + summary_video_manifest are validated against contracts/v1/template (global contract location in this repo).
 - alignment_result + quality_report are validated against local internal schemas.
 """
 
@@ -34,7 +35,7 @@ except Exception:
     jsonschema = None
 
 
-TIMESTAMP_RE = re.compile(r"^(?:[0-1]\d|2[0-3]):[0-5]\d:[0-5]\d\.\d{3}$")
+TIMESTAMP_RE = re.compile(r"^\d{2}:[0-5]\d:[0-5]\d\.\d{3}$")
 
 
 def load_json(path: Path) -> Dict[str, Any]:
@@ -178,7 +179,7 @@ def check_quality_report(report: Dict[str, Any], enforce_thresholds: bool) -> Li
     if (not any_fail) and overall != "pass":
         errors.append("[quality_report] overall_status must be pass when all stages pass/skipped")
 
-    required_stages = {"validate", "align", "summarize", "segment_plan", "manifest", "assemble", "qc"}
+    required_stages = {"validate", "align", "context_build", "summarize", "segment_plan", "manifest", "assemble", "qc"}
     present_stages = {x.get("stage") for x in stage_results}
     missing = required_stages - present_stages
     for m in sorted(missing):
@@ -194,6 +195,9 @@ def check_quality_report(report: Dict[str, Any], enforce_thresholds: bool) -> Li
             ("render_success", metrics.get("render_success") is True, "== true"),
             ("audio_present", metrics.get("audio_present") is True, "== true"),
             ("black_frame_ratio", metrics.get("black_frame_ratio", 1) <= 0.02, "<= 0.02"),
+            ("no_match_rate", metrics.get("no_match_rate", 1) <= 0.30, "<= 0.30"),
+            ("median_confidence", metrics.get("median_confidence", 0) >= 0.60, ">= 0.60"),
+            ("high_confidence_ratio", metrics.get("high_confidence_ratio", 0) >= 0.50, ">= 0.50"),
         ]
         for metric, ok, expect in threshold_checks:
             if not ok:
@@ -229,7 +233,7 @@ def main() -> int:
     else:
         if args.contracts_dir is None:
             repo_root = Path(__file__).resolve().parents[3]
-            contracts_dir = repo_root / "contracts" / "v1"
+            contracts_dir = repo_root / "contracts" / "v1" / "template"
         else:
             contracts_dir = args.contracts_dir
         schema_script = load_json(contracts_dir / "summary_script.schema.json")

@@ -21,7 +21,7 @@ Du an tom tat video theo pipeline 3 module, phan tach ro trach nhiem de 2 thanh 
 - `summary_script.json` (script tom tat chuan may doc)
 - `summary_video.mp4` (cat + ghep tu video goc, giu audio goc)
 
-Ghi chu: `final_summary.json` chi la artifact noi bo (optional) de debug/fine-tune, khong phai deliverable cuoi.
+Ghi chu: `final_summary.json` la artifact optional theo global contract (khong phai deliverable media chinh), co the dung cho debug/fine-tune va nghiem thu schema.
 
 ## Contract-first integration
 
@@ -32,9 +32,9 @@ Ghi chu: `final_summary.json` chi la artifact noi bo (optional) de debug/fine-tu
 
 ## Project docs
 
-- `docs/00-project-overview/`
-- `docs/01-member-1-perception-extraction/`
-- `docs/02-member-2-reasoning-nlp/`
+- `docs/Overview-Project/`
+- `docs/Perception-Extraction/`
+- `docs/Reasoning-NLP/`
 
 ## Environment split
 

@@ -12,19 +12,22 @@ Tao `summary_video.mp4` bang cach cat cac doan tu video goc va ghep lai theo thu
 
 ## Pre-assembly checks (bat buoc)
 
-- Manifest parse duoc va dung schema version.
+- Manifest parse duoc va pass schema deliverable trong `contracts/v1/template/summary_video_manifest.schema.json`.
+- Script parse duoc va pass `contracts/v1/template/summary_script.schema.json`.
 - Cross-file consistency script-manifest da pass.
 - Moi segment hop le: `source_end > source_start`, do dai trong nguong cho phep.
 - Tat ca timestamps trong range video nguon.
 
 Neu fail, dung stage voi `MANIFEST_*` hoac `RENDER_*`.
 
+Luu y: `schema_version` chi ap dung cho artifact noi bo, khong bat buoc trong deliverable manifest global v1.
+
 ## Rule lap rap
 
 - Cat theo tung segment `source_start` -> `source_end`.
 - Ghep dung thu tu segment tang dan theo `segment_id`.
 - Giu audio goc cua tung doan cat (`keep_original_audio = true`).
-- Khong chen voiceover moi o pha MVP.
+- Khong chen voice-over moi o pha MVP.
 - Transition mac dinh: `cut`.
 
 ## Audio policy
@@ -38,10 +41,17 @@ Neu fail, dung stage voi `MANIFEST_*` hoac `RENDER_*`.
 - Neu render loi profile chinh, retry 1 lan voi profile an toan (codec/container fallback da dinh nghia san).
 - Neu van loi, dung pipeline va tra `RENDER_FATAL`.
 
+Neu co merge segment do fallback:
+
+1. Bat buoc cap nhat dong bo ca `summary_script.json` va `summary_video_manifest.json`.
+2. Validate lai 2 file theo global contracts.
+3. Chay lai cross-file consistency.
+4. Chi render tiep khi cac check deu pass.
+
 ## Output
 
 - `summary_video.mp4`
-- metadata render trong `quality_report.json` (duration, codec, retry_count, warnings)
+- Metadata render trong `quality_report.json` (`duration`, `codec`, `retry_count`, `warnings`)
 
 ## Post-assembly QC (bat buoc)
 

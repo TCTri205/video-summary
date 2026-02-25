@@ -41,3 +41,5 @@ huggingface_cache/
 
 Data/raw/
 Data/processed/video1/
+# Local env files
+.env

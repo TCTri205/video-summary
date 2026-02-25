@@ -7,14 +7,14 @@ Sinh tom tat cot truyen va bai hoc tu context merge, khong them chi tiet ngoai d
 Luu y contract-first:
 
 - Output LLM o buoc nay la artifact noi bo cho reasoning.
-- Deliverable cuoi `summary_script.json` va `summary_video_manifest.json` phai map ve schema trong `contracts/v1/`.
+- Deliverable cuoi `summary_script.json`, `summary_video_manifest.json`, va `final_summary.json` (neu xuat) phai map ve schema trong `contracts/v1/template/`.
 
 ## Nguyen tac prompting
 
 - Grounded-only: chi duoc dung thong tin co trong context.
 - Neutral fallback: neu context thieu, phat bieu trung tinh, khong suy dien.
 - Deterministic style: van phong nhat quan, ngan gon, ro rang.
-- Structured output: output bat buoc dung schema, khong text ngoai JSON.
+- Structured output: output bat buoc dung schema noi bo, khong text ngoai JSON.
 
 ## System prompt de xuat
 
@@ -30,7 +30,7 @@ Input:
   - `[Dialogue]: ...`
 - Metadata bo tro (neu co): `confidence`, `fallback_type`.
 
-Output yeu cau (schema toi thieu):
+Output yeu cau (internal schema toi thieu):
 
 ```json
 {
@@ -50,35 +50,66 @@ Rang buoc:
 
 - `plot_summary` va `moral_lesson` khong duoc rong sau trim.
 - `quality_flags` co the rong, nhung neu co phai la danh sach string.
-- `evidence` phai tham chieu moc thoi gian ton tai trong context.
+- `evidence.timestamps` phai tham chieu moc thoi gian ton tai trong context.
 - Khong duoc chen key ngoai schema neu che do strict bat buoc.
 
-## Mapping sang deliverable contract v1
+## Canonical mapping toi artifacts
 
-- `plot_summary` -> `summary_script.plot_summary`
-- `moral_lesson` -> `summary_script.moral_lesson`
-- `evidence` va `quality_flags` luu trong artifact noi bo (`final_summary.json`/`quality_report.json`), khong chen vao `summary_script.json` deliverable.
+Internal artifacts (reasoning lane):
 
-## Long-context policy
+- `plot_summary`, `moral_lesson`, `evidence`, `quality_flags` -> `summary_script.internal.json`
+- `generation_meta` (model, seed, temperature, infer params) -> `summary_script.internal.json`
+
+Deliverables (contract lane):
+
+- `plot_summary` -> `summary_script.json.plot_summary`
+- `moral_lesson` -> `summary_script.json.moral_lesson`
+- Segment text -> `summary_script.json.segments[].script_text`
+- Video cut plan -> `summary_video_manifest.json`
+- Neu xuat `final_summary.json`: chi gom field theo `contracts/v1/template/final_summary.schema.json`
+
+Khong duoc dua cac field noi bo sau vao deliverable:
+
+- `evidence`
+- `quality_flags`
+- `generation_meta`
+- `confidence`
+- `role`
+
+## Long-context policy (toi uu token)
 
 - Neu context vuot token budget:
   1. Chia chunk theo timeline (co overlap nho).
-  2. Tom tat tung chunk theo cung schema.
+  2. Tom tat tung chunk theo cung internal schema.
   3. Tong hop global summary tu cac chunk summaries.
 - Uu tien block confidence cao khi can rut gon.
+- Khuyen nghi budget:
+  - `max_blocks_per_chunk`: 120
+  - `chunk_overlap_blocks`: 8
+  - `low_confidence_prune_threshold`: 0.25 (chi prune khi token pressure cao)
 
-## Retry va parse repair policy
+## Retry va parse-repair policy
 
-1. Lan 1: infer binh thuong (`temperature` thap).
+1. Lan 1: infer binh thuong (`temperature` thap hoac `do_sample=false`).
 2. Lan 2: neu parse fail, goi prompt "JSON repair" voi output loi.
-3. Lan 3: neu van fail, fallback output trung tinh hop schema va gan `quality_flags` canh bao.
+3. Lan 3: neu van fail, fallback output trung tinh hop internal schema va gan `quality_flags` canh bao.
 
-## Inference defaults de xuat
+## Inference defaults de xuat (MVP deterministic)
 
-- `temperature`: 0.1
-- `top_p`: 0.9
+- `do_sample=false`
+- `temperature=0.1` (neu backend yeu cau)
+- `top_p=0.9` (chi dung khi sampling bat)
 - `max_new_tokens`: theo budget he thong
-- `seed`: co dinh trong moi run de dam bao reproducibility
+- `seed`: co dinh trong moi run
+
+Bat buoc log infer params vao `generation_meta` de dam bao replay.
+
+## Gate check sau infer
+
+- Internal JSON parse-valid.
+- `evidence.timestamps` hop le voi context.
+- Khong hallucination ro rang trong spot-check.
+- Mapping sang deliverable khong vi pham global schemas.
 
 ## Luu y
 
