@@ -41,6 +41,36 @@ Ghi chu: `final_summary.json` la artifact optional theo global contract (khong p
 - Thanh vien 1: `requirements-1.txt`
 - Thanh vien 2: `requirements-2.txt`
 
+## Colab notebooks
+
+- Muc tieu: chay tung module hoac full pipeline tren Google Colab de tan dung CPU/GPU.
+- URL repo da duoc gan san trong notebook: `https://github.com/TCTri205/video-summary.git`.
+
+Open in Colab (branch `02-member-2-reasoning-nlp`):
+
+- [Module 1 Extraction](https://colab.research.google.com/github/TCTri205/video-summary/blob/02-member-2-reasoning-nlp/notebooks/module1_extraction_colab.ipynb)
+- [Module 2 Perception](https://colab.research.google.com/github/TCTri205/video-summary/blob/02-member-2-reasoning-nlp/notebooks/module2_perception_colab.ipynb)
+- [Module 3 Reasoning](https://colab.research.google.com/github/TCTri205/video-summary/blob/02-member-2-reasoning-nlp/notebooks/module3_reasoning_colab.ipynb)
+- [Full Pipeline M1->M2->M3](https://colab.research.google.com/github/TCTri205/video-summary/blob/02-member-2-reasoning-nlp/notebooks/full_pipeline_m1_m2_m3_colab.ipynb)
+
+Notebook san co:
+
+- `notebooks/module1_extraction_colab.ipynb`: chay Module 1 (extraction).
+- `notebooks/module2_perception_colab.ipynb`: chay Module 2 (ASR + visual caption).
+- `notebooks/module3_reasoning_colab.ipynb`: chay Module 3 (Reasoning-NLP G1->G8 + validate artifacts).
+- `notebooks/full_pipeline_m1_m2_m3_colab.ipynb`: chay full he thong 3 module.
+
+Input/Output mac dinh tren Drive:
+
+- Input video: `/content/drive/MyDrive/video-summary/input/raw_video.mp4`
+- Processed data: `/content/drive/MyDrive/video-summary/processed`
+- Artifacts: `/content/drive/MyDrive/video-summary/artifacts`
+
+Hardware behavior:
+
+- Notebook tu dong detect `torch.cuda.is_available()`.
+- Neu co GPU thi uu tien backend GPU; neu khong thi fallback CPU.
+
 ## Day 0 quick start
 
 1. Thanh vien 2 dung mock data trong `docs/Overview-Project/mock-data/`.
