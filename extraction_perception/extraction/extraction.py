@@ -61,7 +61,24 @@ class VideoPreprocessor:
             "-ac", "1",
             self.audio_path
         ]
-        subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        try:
+            result = subprocess.run(
+                command,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                check=False,
+            )
+        except FileNotFoundError as exc:
+            raise RuntimeError("EXTRACT_AUDIO_FFMPEG_NOT_FOUND: ffmpeg binary is not available in PATH") from exc
+
+        if result.returncode != 0:
+            err = (result.stderr or "").strip()
+            raise RuntimeError(f"EXTRACT_AUDIO_FFMPEG_FAILED: {err}")
+
+        if not os.path.exists(self.audio_path) or os.path.getsize(self.audio_path) == 0:
+            raise RuntimeError("EXTRACT_AUDIO_EMPTY_OUTPUT: ffmpeg completed but output audio is missing or empty")
 
         return self.audio_path
 
