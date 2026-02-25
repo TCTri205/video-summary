@@ -1,2166 +1,3017 @@
-{
-  "language": "vi",
-  "duration": 1432.42,
-  "segments": [
-    {
-      "start": 0.0,
-      "end": 3.0,
-      "text": "Bà họt đất giá."
-    },
-    {
-      "start": 13.0,
-      "end": 17.0,
-      "text": "Chà hợp bắp nhà mình năm nay mới tư tốt làm sao?"
-    },
-    {
-      "start": 17.0,
-      "end": 18.0,
-      "text": "Hơn hẳn nhà khác."
-    },
-    {
-      "start": 18.0,
-      "end": 20.0,
-      "text": "Năm nay được mù bối thu đi."
-    },
-    {
-      "start": 21.0,
-      "end": 24.0,
-      "text": "Phải màu chống vùng góc cho kịp mưa thôi."
-    },
-    {
-      "start": 31.0,
-      "end": 33.0,
-      "text": "Trời ơi."
-    },
-    {
-      "start": 33.0,
-      "end": 35.0,
-      "text": "Châu nhà ai mà thá trông thế kia?"
-    },
-    {
-      "start": 35.0,
-      "end": 37.0,
-      "text": "Phá hết bắp nhà người ta rồi."
-    },
-    {
-      "start": 39.0,
-      "end": 42.0,
-      "text": "Xin lỗi ông là châu nhà tôi."
-    },
-    {
-      "start": 43.0,
-      "end": 45.0,
-      "text": "Ông phải để mắt vào chứ?"
-    },
-    {
-      "start": 45.0,
-      "end": 47.0,
-      "text": "Tôi mãi vùng bắp không để ý một lúc thôi."
-    },
-    {
-      "start": 47.0,
-      "end": 50.0,
-      "text": "Mà nó đã chạy ra đây lúc nào thế không biết?"
-    },
-    {
-      "start": 50.0,
-      "end": 52.0,
-      "text": "Mòng ông bỏ quá cho."
-    },
-    {
-      "start": 52.0,
-      "end": 54.0,
-      "text": "Anh mất ngần kia bắp nhà tôi rồi."
-    },
-    {
-      "start": 54.0,
-      "end": 56.0,
-      "text": "Có chết không chứ?"
-    },
-    {
-      "start": 57.0,
-      "end": 59.0,
-      "text": "Ờ vâng, thật tình Xin lỗi ông."
-    },
-    {
-      "start": 59.0,
-      "end": 62.0,
-      "text": "Đến vụ tôi xin được đền bù lai cho ông phải."
-    },
-    {
-      "start": 63.0,
-      "end": 64.0,
-      "text": "Ha!"
-    },
-    {
-      "start": 64.0,
-      "end": 65.0,
-      "text": "Đền bù cái gì chứ?"
-    },
-    {
-      "start": 65.0,
-      "end": 67.0,
-      "text": "Thử hỏi được là bao nhiêu?"
-    },
-    {
-      "start": 85.0,
-      "end": 87.0,
-      "text": "Nhìn lại mà thấy điên."
-    },
-    {
-      "start": 87.0,
-      "end": 90.0,
-      "text": "Bắp nhà mình đang mơn mớn tươi tốt là thi."
-    },
-    {
-      "start": 90.0,
-      "end": 93.0,
-      "text": "Vậy mà cái nhà ông nhanh để châu ăn bắp một đám."
-    },
-    {
-      "start": 93.0,
-      "end": 94.0,
-      "text": "Bực quá."
-    },
-    {
-      "start": 99.0,
-      "end": 101.0,
-      "text": "Rụng của lao nhanh đây chứ gì?"
-    },
-    {
-      "start": 101.0,
-      "end": 103.0,
-      "text": "Ha! Cũng sành tốt đây."
-    },
-    {
-      "start": 103.0,
-      "end": 105.0,
-      "text": "Thưa lúc trừa nắng không có ai."
-    },
-    {
-      "start": 105.0,
-      "end": 110.0,
-      "text": "Mình lừa đang châu kia xuống rụng lao nhanh cho chúng ăn cho hết bắp của lao cho bỏ tức."
-    },
-    {
-      "start": 111.0,
-      "end": 112.0,
-      "text": "Ha!"
-    },
-    {
-      "start": 112.0,
-      "end": 115.0,
-      "text": "Anh đi! Chúng mày cứ ăn hết đi."
-    },
-    {
-      "start": 115.0,
-      "end": 122.0,
-      "text": "Cho lao nhanh biết cảm giác rụng bắp của mình bị châu nhà người khác ăn là như thế nào."
-    },
-    {
-      "start": 122.0,
-      "end": 123.0,
-      "text": "Ha!"
-    },
-    {
-      "start": 128.0,
-      "end": 130.0,
-      "text": "Thôi chứt, có người."
-    },
-    {
-      "start": 133.0,
-      "end": 136.0,
-      "text": "Châu nhà ai mà thái rông ăn bắp người ta thế này?"
-    },
-    {
-      "start": 141.0,
-      "end": 145.0,
-      "text": "Ủa nơi, cơm chân chưa đây?"
-    },
-    {
-      "start": 145.0,
-      "end": 147.0,
-      "text": "Làm đồng vầy đôi lắm rồi đây."
-    },
-    {
-      "start": 147.0,
-      "end": 149.0,
-      "text": "Chứt cho bắp nhà nha."
-    },
-    {
-      "start": 149.0,
-      "end": 152.0,
-      "text": "Ừu, châu, bố châu của nhà không?"
-    },
-    {
-      "start": 152.0,
-      "end": 153.0,
-      "text": "Cái gì?"
-    },
-    {
-      "start": 153.0,
-      "end": 155.0,
-      "text": "Láu nhanh đến nữa."
-    },
-    {
-      "start": 155.0,
-      "end": 158.0,
-      "text": "Hay láu ta biết mình sua đàn châu ăn bắp của nhà láu."
-    },
-    {
-      "start": 158.0,
-      "end": 161.0,
-      "text": "Thôi chứt, mình phải trốn đi mới được."
-    },
-    {
-      "start": 161.0,
-      "end": 164.0,
-      "text": "Ông bỉnh, ông đang làm gì thế?"
-    },
-    {
-      "start": 164.0,
-      "end": 168.0,
-      "text": "Ừu, ông nhanh, ông đang có việc gì thế?"
-    },
-    {
-      "start": 169.0,
-      "end": 170.0,
-      "text": "Ah ha!"
-    },
-    {
-      "start": 170.0,
-      "end": 172.0,
-      "text": "Tôi đến đây là muốn cảm ơn ông."
-    },
-    {
-      "start": 172.0,
-      "end": 173.0,
-      "text": "Ừu, cảm ơn tôi."
-    },
-    {
-      "start": 174.0,
-      "end": 176.0,
-      "text": "Vì, vì cái gì cơ?"
-    },
-    {
-      "start": 176.0,
-      "end": 179.0,
-      "text": "Có vãi trưa này, ông đuổi hậu đàn châu ăn bắp nhà tôi không?"
-    },
-    {
-      "start": 180.0,
-      "end": 183.0,
-      "text": "Ở, ạ, ạ. Tôi, tôi, tôi."
-    },
-    {
-      "start": 183.0,
-      "end": 188.0,
-      "text": "Tôi nghe chú hình nói, trưa này chú ai thấy châu nhà ăn bắp."
-    },
-    {
-      "start": 188.0,
-      "end": 191.0,
-      "text": "Chú ai đỉnh chạy ra đuổi, thì thấy ông đuổi hậu rồi."
-    },
-    {
-      "start": 191.0,
-      "end": 193.0,
-      "text": "Cái hổ rồi"
-    },
-    {
-      "start": 193.0,
-      "end": 195.0,
-      "text": "Thì..."
-    },
-    {
-      "start": 195.0,
-      "end": 197.0,
-      "text": "Nhà tôi hôm nay câu được không có chết"
-    },
-    {
-      "start": 197.0,
-      "end": 199.0,
-      "text": "Nên tôi mang sang đây sinh biểu ông và các cháo"
-    },
-    {
-      "start": 199.0,
-      "end": 201.0,
-      "text": "Không, không"
-    },
-    {
-      "start": 201.0,
-      "end": 202.0,
-      "text": "Ông cầm về đi"
-    },
-    {
-      "start": 202.0,
-      "end": 204.0,
-      "text": "Ở tôi không nhắm nhận đâu"
-    },
-    {
-      "start": 204.0,
-      "end": 206.0,
-      "text": "Cái ông này có cái gì đâu"
-    },
-    {
-      "start": 206.0,
-      "end": 208.0,
-      "text": "Nhẳng đi cho tôi được vui"
-    },
-    {
-      "start": 209.0,
-      "end": 211.0,
-      "text": "Trong mang xuống cho mẹ nó cần nhé"
-    },
-    {
-      "start": 211.0,
-      "end": 212.0,
-      "text": "Vâng á"
-    },
-    {
-      "start": 212.0,
-      "end": 214.0,
-      "text": "Thôi, tôi phải về đi"
-    },
-    {
-      "start": 214.0,
-      "end": 216.0,
-      "text": "Cả nhà đang đợi cơm"
-    },
-    {
-      "start": 216.0,
-      "end": 218.0,
-      "text": "Cảm ơn ông lần nữa nhé, ông bỉnh"
-    },
-    {
-      "start": 219.0,
-      "end": 221.0,
-      "text": "Trời ơi, thật tới quá"
-    },
-    {
-      "start": 221.0,
-      "end": 223.0,
-      "text": "Ông nhanh tốt là thế"
-    },
-    {
-      "start": 223.0,
-      "end": 226.0,
-      "text": "Vậy mà lòng giá của mình hẹp hồi nhỏ nhanh"
-    },
-    {
-      "start": 226.0,
-      "end": 228.0,
-      "text": "Thực chắn ra làm sao"
-    },
-    {
-      "start": 237.0,
-      "end": 239.0,
-      "text": "Ờ, đưa cơm nước đến nơi rồi"
-    },
-    {
-      "start": 239.0,
-      "end": 240.0,
-      "text": "Ông còn đi đâu thế"
-    },
-    {
-      "start": 243.0,
-      "end": 244.0,
-      "text": "Ừ, kì ông bỉnh"
-    },
-    {
-      "start": 244.0,
-      "end": 246.0,
-      "text": "Ông sang có việc gì không hả"
-    },
-    {
-      "start": 247.0,
-      "end": 249.0,
-      "text": "Ông vào đây ăn cơm cùng chung tôi luôn"
-    },
-    {
-      "start": 249.0,
-      "end": 250.0,
-      "text": "Ông mà"
-    },
-    {
-      "start": 250.0,
-      "end": 252.0,
-      "text": "Ông ra đây cho tôi được nói câu này"
-    },
-    {
-      "start": 252.0,
-      "end": 254.0,
-      "text": "Không thể tôi Ấn hẳng"
-    },
-    {
-      "start": 254.0,
-      "end": 256.0,
-      "text": "Dày vò mà ớm chết mất"
-    },
-    {
-      "start": 257.0,
-      "end": 260.0,
-      "text": "Gơm, có việc gì mà ông nói nghe nghiêm trọng thế"
-    },
-    {
-      "start": 261.0,
-      "end": 263.0,
-      "text": "Tôi phải tả tối với ông"
-    },
-    {
-      "start": 269.0,
-      "end": 271.0,
-      "text": "Ui dời, tưởng chuyện gì"
-    },
-    {
-      "start": 271.0,
-      "end": 273.0,
-      "text": "Đúng là không nên làm thế"
-    },
-    {
-      "start": 273.0,
-      "end": 275.0,
-      "text": "Nhưng việc ông sang đây nói ra tất cả"
-    },
-    {
-      "start": 275.0,
-      "end": 277.0,
-      "text": "Làm tôi nế phục lắm"
-    },
-    {
-      "start": 278.0,
-      "end": 280.0,
-      "text": "Lạng sớm chín bỏ làm người"
-    },
-    {
-      "start": 280.0,
-      "end": 283.0,
-      "text": "Tôi lưỡi tắc đèn có nhau mà bắt"
-    },
-    {
-      "start": 283.0,
-      "end": 285.0,
-      "text": "Ui, ông thể tất cho thế"
-    },
-    {
-      "start": 285.0,
-      "end": 288.0,
-      "text": "Tôi nhẹ cả người, cảm ơn ông"
-    },
-    {
-      "start": 291.0,
-      "end": 293.0,
-      "text": "Sự tích hoa xanh"
-    },
-    {
-      "start": 296.0,
-      "end": 298.0,
-      "text": "Ngày sửa ngày xưa"
-    },
-    {
-      "start": 298.0,
-      "end": 301.0,
-      "text": "Khi trần gian còn chưa có cả con người"
-    },
-    {
-      "start": 301.0,
-      "end": 303.0,
-      "text": "Cây cối hay chim muôn"
-    },
-    {
-      "start": 303.0,
-      "end": 307.0,
-      "text": "Mật đức chỉ là cỗi âm uu hoàn văn"
-    },
-    {
-      "start": 310.0,
-      "end": 312.0,
-      "text": "Đằng kia sau âm uu vậy nhé"
-    },
-    {
-      "start": 312.0,
-      "end": 314.0,
-      "text": "Chẳng phải dư đó là trần gian sau"
-    },
-    {
-      "start": 314.0,
-      "end": 316.0,
-      "text": "Nhìn cảnh âm u này"
-    },
-    {
-      "start": 316.0,
-      "end": 318.0,
-      "text": "Thật khiến ta phiền lòng"
-    },
-    {
-      "start": 319.0,
-      "end": 320.0,
-      "text": "Đúng rồi"
-    },
-    {
-      "start": 320.0,
-      "end": 322.0,
-      "text": "Ta sẽ ban cho trần gian su hạt giống trong khò"
-    },
-    {
-      "start": 322.0,
-      "end": 324.0,
-      "text": "Chẳng bao lâu nữa"
-    },
-    {
-      "start": 324.0,
-      "end": 327.0,
-      "text": "Dư đó sẽ là những sắc màu tươi tắng của sự sống"
-    },
-    {
-      "start": 327.0,
-      "end": 329.0,
-      "text": "Tuyệt quá, giờ mình đã là một cái kê cao lớn"
-    },
-    {
-      "start": 329.0,
-      "end": 331.0,
-      "text": "Chào các bạn, mình là hoa hông"
-    },
-    {
-      "start": 331.0,
-      "end": 333.0,
-      "text": "Còn mình là sương rộng"
-    },
-    {
-      "start": 333.0,
-      "end": 335.0,
-      "text": "Xem kì hợp, đã có sự sống rồi"
-    },
-    {
-      "start": 335.0,
-      "end": 337.0,
-      "text": "Công mới thật tươi đẹp làm sao"
-    },
-    {
-      "start": 338.0,
-      "end": 341.0,
-      "text": "Tôi hạt giống đã được đều hết đổi mà nhí"
-    },
-    {
-      "start": 341.0,
-      "end": 343.0,
-      "text": "Chá nhé còn sóc sao"
-    },
-    {
-      "start": 343.0,
-      "end": 345.0,
-      "text": "Đúng là còn sóc thật"
-    },
-    {
-      "start": 345.0,
-      "end": 347.0,
-      "text": "Mày hãy xuống như kìa"
-    },
-    {
-      "start": 347.0,
-      "end": 349.0,
-      "text": "Và bắt đầu của tươi sống"
-    },
-    {
-      "start": 349.0,
-      "end": 350.0,
-      "text": "Mày hãy xuống như kìa"
-    },
-    {
-      "start": 350.0,
-      "end": 352.0,
-      "text": "Mày hãy xuống như kìa"
-    },
-    {
-      "start": 352.0,
-      "end": 353.0,
-      "text": "Mày hãy xuống như kìa"
-    },
-    {
-      "start": 353.0,
-      "end": 355.0,
-      "text": "Mày hãy xuống như kìa"
-    },
-    {
-      "start": 355.0,
-      "end": 356.0,
-      "text": "Mày hãy xuống"
-    },
-    {
-      "start": 356.0,
-      "end": 358.0,
-      "text": "Và bắt đầu cuộc sống của mình nhé"
-    },
-    {
-      "start": 359.0,
-      "end": 361.0,
-      "text": "Này này, chỗ này là cụ tôi"
-    },
-    {
-      "start": 361.0,
-      "end": 362.0,
-      "text": "Cậu đi kiếm chỗ khác đi"
-    },
-    {
-      "start": 362.0,
-      "end": 364.0,
-      "text": "chỗ này là cụ chúng tôi rồi"
-    },
-    {
-      "start": 364.0,
-      "end": 367.0,
-      "text": "Cậu không thấy ở đây chật hết chỗ rồi sao"
-    },
-    {
-      "start": 367.0,
-      "end": 370.0,
-      "text": "Đúng đó, cậu đi chỗ khác đi"
-    },
-    {
-      "start": 372.0,
-      "end": 374.0,
-      "text": "Chậu này là cụ chúng tôi rồi"
-    },
-    {
-      "start": 374.0,
-      "end": 376.0,
-      "text": "Tôi cần nhiều chỗ để còn lớn lên nữa"
-    },
-    {
-      "start": 376.0,
-      "end": 378.0,
-      "text": "Cậu đi chỗ khác đi"
-    },
-    {
-      "start": 379.0,
-      "end": 380.0,
-      "text": "Chỉ bị sốt lại"
-    },
-    {
-      "start": 380.0,
-      "end": 384.0,
-      "text": "Mày giờ chẳng còn chỗ nạn cho mình nâng thân nữa rồi"
-    },
-    {
-      "start": 384.0,
-      "end": 386.0,
-      "text": "Mình biết đi đâu đây"
-    },
-    {
-      "start": 388.0,
-      "end": 391.0,
-      "text": "Tại sao thượng đứa bàn hạt giống cho mọi nơi"
-    },
-    {
-      "start": 391.0,
-      "end": 392.0,
-      "text": "Mày chỉ chưa lại mình"
-    },
-    {
-      "start": 393.0,
-      "end": 396.0,
-      "text": "Thôi, bản thang vãng trách móc gì thượng đứa chứ"
-    },
-    {
-      "start": 396.0,
-      "end": 398.0,
-      "text": "Là thượng đứa bàn hạt giống xuống"
-    },
-    {
-      "start": 398.0,
-      "end": 401.0,
-      "text": "Nhưng mà chúng tôi tự trọn nơi sinh so cho mình mà"
-    },
-    {
-      "start": 402.0,
-      "end": 405.0,
-      "text": "Đúng đó, có trách thì hãy tự trách mình ấy"
-    },
-    {
-      "start": 405.0,
-      "end": 406.0,
-      "text": "Chẳng phải vì cậu đen đúa"
-    },
-    {
-      "start": 406.0,
-      "end": 409.0,
-      "text": "Hồi hám, nên không ai dám lại gần để sao"
-    },
-    {
-      "start": 409.0,
-      "end": 411.0,
-      "text": "Tôi lỡ phải sống gần cậu thế này"
-    },
-    {
-      "start": 411.0,
-      "end": 413.0,
-      "text": "Thì giờ thật khói hậu quá"
-    },
-    {
-      "start": 416.0,
-      "end": 418.0,
-      "text": "Là tiến khóc của ai nhỉ"
-    },
-    {
-      "start": 418.0,
-      "end": 420.0,
-      "text": "Này, bản hạt giống ơi"
-    },
-    {
-      "start": 420.0,
-      "end": 422.0,
-      "text": "Có chuyện gì mà bản khóc thế"
-    },
-    {
-      "start": 422.0,
-      "end": 424.0,
-      "text": "Mình đá bà theo gió khắp nơi"
-    },
-    {
-      "start": 424.0,
-      "end": 427.0,
-      "text": "Nhưng đi đến đâu cũng bị so đủ"
-    },
-    {
-      "start": 427.0,
-      "end": 430.0,
-      "text": "Mình chẳng biết phải tiềm chỗ nào để sinh sống được"
-    },
-    {
-      "start": 431.0,
-      "end": 434.0,
-      "text": "Ủa, phải bản hãy xuống đây với tôi cho môi"
-    },
-    {
-      "start": 434.0,
-      "end": 436.0,
-      "text": "Cũng vì đen đúa, xấu xí"
-    },
-    {
-      "start": 436.0,
-      "end": 438.0,
-      "text": "Mà chẳng hạt giống nào chịu ở đây"
-    },
-    {
-      "start": 439.0,
-      "end": 443.0,
-      "text": "Nếu bạn đồng ý, tôi sẽ cố hết sức để giúp bạn này bầm"
-    },
-    {
-      "start": 443.0,
-      "end": 445.0,
-      "text": "Và dành cho bạn thật nhiều dân dựng"
-    },
-    {
-      "start": 445.0,
-      "end": 447.0,
-      "text": "Từ trong lớp buồn của tôi"
-    },
-    {
-      "start": 447.0,
-      "end": 449.0,
-      "text": "Được, mấy thịt đốt quá"
-    },
-    {
-      "start": 452.0,
-      "end": 454.0,
-      "text": "Ở đi, đúng là giải dụng"
-    },
-    {
-      "start": 454.0,
-      "end": 456.0,
-      "text": "Cái đậm ấy nước thì đen đục"
-    },
-    {
-      "start": 456.0,
-      "end": 457.0,
-      "text": "Buồn thì hơi"
-    },
-    {
-      "start": 457.0,
-      "end": 459.0,
-      "text": "Ai ở cho đường, giải quá"
-    },
-    {
-      "start": 460.0,
-      "end": 461.0,
-      "text": "Đây, đậm nước"
-    },
-    {
-      "start": 461.0,
-      "end": 463.0,
-      "text": "Bản hạt giống bé nhỏ của cậu đâu rồi"
-    },
-    {
-      "start": 463.0,
-      "end": 464.0,
-      "text": "Đã môi xuân rồi"
-    },
-    {
-      "start": 464.0,
-      "end": 466.0,
-      "text": "Mà sao chưa thấy bạn ấy nhỉ"
-    },
-    {
-      "start": 466.0,
-      "end": 469.0,
-      "text": "Đúng rồi, bạn ấy đi đâu mà không thấy"
-    },
-    {
-      "start": 469.0,
-      "end": 474.0,
-      "text": "Chẳng phải cậu bảo sẽ dành cho bạn ấy những dân dựng tốt nhất sau"
-    },
-    {
-      "start": 476.0,
-      "end": 479.0,
-      "text": "Liêu, có chuyện gì với bạn ấy nhỉ"
-    },
-    {
-      "start": 490.0,
-      "end": 494.0,
-      "text": "Ê, nắng mùa hẹn mới nắng gắc làm sao"
-    },
-    {
-      "start": 494.0,
-      "end": 496.0,
-      "text": "Mới sang kể ra màn nắng không"
-    },
-    {
-      "start": 496.0,
-      "end": 497.0,
-      "text": "Năm quán"
-    },
-    {
-      "start": 497.0,
-      "end": 498.0,
-      "text": "Ủa"
-    },
-    {
-      "start": 499.0,
-      "end": 504.0,
-      "text": "Chào bạn, chẳng phải bạn chính là hạt giống nhỏ hơn nào đây chứ"
-    },
-    {
-      "start": 504.0,
-      "end": 508.0,
-      "text": "Chào các bạn, mình chính là hạt giống nhỏ đó đây"
-    },
-    {
-      "start": 508.0,
-      "end": 511.0,
-      "text": "Tuyệt quá, vậy là bạn đã mọc lên rồi"
-    },
-    {
-      "start": 511.0,
-      "end": 513.0,
-      "text": "Mà nhìn nủ hoa của bạn kìa"
-    },
-    {
-      "start": 513.0,
-      "end": 515.0,
-      "text": "Trong thằng mạnh, nhìn giáng lắm"
-    },
-    {
-      "start": 515.0,
-      "end": 518.0,
-      "text": "Còn biết khi nửa sẽ thay nào nhỉ"
-    },
-    {
-      "start": 518.0,
-      "end": 520.0,
-      "text": "Tòa mò quá"
-    },
-    {
-      "start": 526.0,
-      "end": 528.0,
-      "text": "Ê trời, xem kìa"
-    },
-    {
-      "start": 528.0,
-      "end": 530.0,
-      "text": "Thật không tin vào mắt mắt nữa"
-    },
-    {
-      "start": 530.0,
-      "end": 532.0,
-      "text": "Trong bạn ấy thật lọng lấy"
-    },
-    {
-      "start": 532.0,
-      "end": 534.0,
-      "text": "Mùi hương cũng thơm nữa"
-    },
-    {
-      "start": 534.0,
-      "end": 536.0,
-      "text": "Bạn ấy thật đẹp"
-    },
-    {
-      "start": 536.0,
-      "end": 538.0,
-      "text": "Cũng nhờ bạn ấy"
-    },
-    {
-      "start": 538.0,
-      "end": 541.0,
-      "text": "Mà không ai còn để ý đến vệ sấu sĩ của mình nữa"
-    },
-    {
-      "start": 541.0,
-      "end": 545.0,
-      "text": "Ủa, lần đầu mình thấy một bông hoa đẹp như vậy đi"
-    },
-    {
-      "start": 545.0,
-      "end": 547.0,
-      "text": "Bản tin là gì vậy"
-    },
-    {
-      "start": 547.0,
-      "end": 549.0,
-      "text": "Mình... mình..."
-    },
-    {
-      "start": 549.0,
-      "end": 553.0,
-      "text": "Tuyên nữ ơi, tuyên nữ ơi"
-    },
-    {
-      "start": 553.0,
-      "end": 555.0,
-      "text": "Nàng sau thế"
-    },
-    {
-      "start": 555.0,
-      "end": 557.0,
-      "text": "Các bạn ơi, tôi phải làm sao đi"
-    },
-    {
-      "start": 557.0,
-      "end": 560.0,
-      "text": "Tôi phải làm một mạnh vãi thật đẹp để dân lên thượng đế"
-    },
-    {
-      "start": 560.0,
-      "end": 562.0,
-      "text": "Làm qua cho vương mẫu"
-    },
-    {
-      "start": 562.0,
-      "end": 564.0,
-      "text": "Thế mà, chỉ vì nhớ tay"
-    },
-    {
-      "start": 564.0,
-      "end": 567.0,
-      "text": "Tôi làm đổ hết màu thuốc đi rồi"
-    },
-    {
-      "start": 567.0,
-      "end": 570.0,
-      "text": "Chắc chắn thượng đế sẽ trường phạng tôi mất"
-    },
-    {
-      "start": 570.0,
-      "end": 571.0,
-      "text": "Tuyên nữ đừng buồn"
-    },
-    {
-      "start": 571.0,
-      "end": 574.0,
-      "text": "Hãy lấy màu sắc trên người tôi đi"
-    },
-    {
-      "start": 575.0,
-      "end": 577.0,
-      "text": "Lấy sắc màu của bạn ấy"
-    },
-    {
-      "start": 577.0,
-      "end": 579.0,
-      "text": "Ê, bản đẹp thật đi"
-    },
-    {
-      "start": 579.0,
-      "end": 582.0,
-      "text": "Nhưng nếu tôi lấy đi, thì bản phải làm sao"
-    },
-    {
-      "start": 582.0,
-      "end": 584.0,
-      "text": "Bản sẽ sấu lắm đó"
-    },
-    {
-      "start": 586.0,
-      "end": 587.0,
-      "text": "Công sao đâu?"
-    },
-    {
-      "start": 587.0,
-      "end": 588.0,
-      "text": "Tôi sẽ ổn thôi"
-    },
-    {
-      "start": 588.0,
-      "end": 589.0,
-      "text": "Bản biết không"
-    },
-    {
-      "start": 589.0,
-      "end": 591.0,
-      "text": "Khi bị thưởng đế bỏ quân"
-    },
-    {
-      "start": 591.0,
-      "end": 592.0,
-      "text": "Tôi đã đất buồn"
-    },
-    {
-      "start": 592.0,
-      "end": 596.0,
-      "text": "Về nghĩ mình sẽ không được có một cuộc sống như các bạn khác"
-    },
-    {
-      "start": 596.0,
-      "end": 599.0,
-      "text": "Thế nhưng rồi, ngày vẫn không quân tôi"
-    },
-    {
-      "start": 599.0,
-      "end": 601.0,
-      "text": "Đợi khi tôi bài đi gấp nơi"
-    },
-    {
-      "start": 601.0,
-      "end": 604.0,
-      "text": "Tưởng trừng như chẳng có chỗ nào để nương thân"
-    },
-    {
-      "start": 604.0,
-      "end": 606.0,
-      "text": "Thì cũng có bạn nằm nước đây"
-    },
-    {
-      "start": 606.0,
-      "end": 607.0,
-      "text": "Chào đó"
-    },
-    {
-      "start": 607.0,
-      "end": 609.0,
-      "text": "Và rồi tôi có ngày hôm nay"
-    },
-    {
-      "start": 609.0,
-      "end": 612.0,
-      "text": "Thế nên, dù không còn được rỡ"
-    },
-    {
-      "start": 612.0,
-      "end": 614.0,
-      "text": "Tôi cũng sẽ sống thật vui vẽ"
-    },
-    {
-      "start": 614.0,
-      "end": 617.0,
-      "text": "Còn bạn, nếu thưởng đế trường phạc"
-    },
-    {
-      "start": 617.0,
-      "end": 620.0,
-      "text": "Thì có thể bạn sẽ mất bản đấy"
-    },
-    {
-      "start": 620.0,
-      "end": 623.0,
-      "text": "Cảm ơn bạn tôi nhất định sáng nhận lỗi với thưởng đế"
-    },
-    {
-      "start": 623.0,
-      "end": 626.0,
-      "text": "Và nói với này về lòng túc của bạn"
-    },
-    {
-      "start": 626.0,
-      "end": 627.0,
-      "text": "Bà bản tên là gì vậy"
-    },
-    {
-      "start": 627.0,
-      "end": 630.0,
-      "text": "Thật ra hôm nay tôi mới đơm nữa"
-    },
-    {
-      "start": 630.0,
-      "end": 633.0,
-      "text": "Cũng chưa biết năn chọn cho mình tên gì"
-    },
-    {
-      "start": 633.0,
-      "end": 636.0,
-      "text": "Nếu thật bạn sẽ nói với thưởng đế"
-    },
-    {
-      "start": 636.0,
-      "end": 638.0,
-      "text": "Thì sinh hãy kể câu chuyện của tôi"
-    },
-    {
-      "start": 638.0,
-      "end": 641.0,
-      "text": "Và sinh ngày ban cho tôi một cái tên với nhé"
-    },
-    {
-      "start": 642.0,
-      "end": 645.0,
-      "text": "Cảm ơn bạn, nhất định tôi sẽ kể"
-    },
-    {
-      "start": 648.0,
-      "end": 651.0,
-      "text": "Khi tinh nữ dân lên mạnh vãi được rỡ"
-    },
-    {
-      "start": 651.0,
-      "end": 653.0,
-      "text": "Thưởng đế rất bất ngờ"
-    },
-    {
-      "start": 653.0,
-      "end": 654.0,
-      "text": "Vì nó quá đẹp"
-    },
-    {
-      "start": 654.0,
-      "end": 656.0,
-      "text": "Còn tinh nữ"
-    },
-    {
-      "start": 656.0,
-      "end": 658.0,
-      "text": "Nàng đáng ngay thẳng nhận lỗi"
-    },
-    {
-      "start": 658.0,
-      "end": 661.0,
-      "text": "Và kể về bông hoa ở đầm nước"
-    },
-    {
-      "start": 662.0,
-      "end": 664.0,
-      "text": "Nghe sông câu chuyện"
-    },
-    {
-      "start": 664.0,
-      "end": 666.0,
-      "text": "Thưởng đế rất hay lòng"
-    },
-    {
-      "start": 666.0,
-      "end": 668.0,
-      "text": "Vì hạc bầm nhỏ bé"
-    },
-    {
-      "start": 668.0,
-      "end": 670.0,
-      "text": "Dù chịu nhiều thiệt thoại"
-    },
-    {
-      "start": 670.0,
-      "end": 671.0,
-      "text": "Nhưng túc bụng"
-    },
-    {
-      "start": 671.0,
-      "end": 674.0,
-      "text": "Ngài quyết định sẽ tặng cho bông hoa đó"
-    },
-    {
-      "start": 674.0,
-      "end": 676.0,
-      "text": "Sắc trắng tinh khiết"
-    },
-    {
-      "start": 676.0,
-      "end": 679.0,
-      "text": "Cho dù phải mộng lên ở đầm nước xấu xí"
-    },
-    {
-      "start": 679.0,
-      "end": 681.0,
-      "text": "Và tiết một mộ hồng diệu dàn"
-    },
-    {
-      "start": 681.0,
-      "end": 683.0,
-      "text": "Không gì sẵn được"
-    },
-    {
-      "start": 683.0,
-      "end": 686.0,
-      "text": "Tiên nữ cửa lại đầm nước"
-    },
-    {
-      "start": 686.0,
-      "end": 688.0,
-      "text": "Màn khác rất mộng của sự nế"
-    },
-    {
-      "start": 688.0,
-      "end": 689.0,
-      "text": "Đừng có bông hoa"
-    },
-    {
-      "start": 689.0,
-      "end": 691.0,
-      "text": "Đàn cũng vui bừng không báo"
-    },
-    {
-      "start": 691.0,
-      "end": 693.0,
-      "text": "Thưởng đế tặng cho đoại"
-    },
-    {
-      "start": 693.0,
-      "end": 695.0,
-      "text": "Hoa thân cao, túc bụng"
-    },
-    {
-      "start": 695.0,
-      "end": 696.0,
-      "text": "Và trong sát đó"
-    },
-    {
-      "start": 696.0,
-      "end": 697.0,
-      "text": "Cái tên là"
-    },
-    {
-      "start": 697.0,
-      "end": 699.0,
-      "text": "Hoa xe"
-    },
-    {
-      "start": 699.0,
-      "end": 700.0,
-      "text": "Còn đầm nước"
-    },
-    {
-      "start": 700.0,
-      "end": 702.0,
-      "text": "Nhờ có những bông hoa tuyệt đẹp"
-    },
-    {
-      "start": 702.0,
-      "end": 703.0,
-      "text": "Và thơm nhắc"
-    },
-    {
-      "start": 703.0,
-      "end": 704.0,
-      "text": "Tì tư đó"
-    },
-    {
-      "start": 704.0,
-      "end": 706.0,
-      "text": "Không còn ai cười cửa"
-    },
-    {
-      "start": 706.0,
-      "end": 708.0,
-      "text": "Thầy sta lắng nữa"
-    },
-    {
-      "start": 711.0,
-      "end": 713.0,
-      "text": "Hông lũ hoa"
-    },
-    {
-      "start": 716.0,
-      "end": 718.0,
-      "text": "Ngày sử, ngày sưa"
-    },
-    {
-      "start": 718.0,
-      "end": 720.0,
-      "text": "Cô rừng bặt dương đó"
-    },
-    {
-      "start": 720.0,
-      "end": 722.0,
-      "text": "Có hai vợ chồng người thợi sang"
-    },
-    {
-      "start": 722.0,
-      "end": 724.0,
-      "text": "Sống rất yêu thương nhau"
-    },
-    {
-      "start": 724.0,
-      "end": 726.0,
-      "text": "Sau biết bao lâu mong mỏi"
-    },
-    {
-      "start": 726.0,
-      "end": 727.0,
-      "text": "Đợi chờ"
-    },
-    {
-      "start": 727.0,
-      "end": 728.0,
-      "text": "Cuối cùng"
-    },
-    {
-      "start": 728.0,
-      "end": 729.0,
-      "text": "Cũng chuẩn bị sắp đến ngày"
-    },
-    {
-      "start": 729.0,
-      "end": 731.0,
-      "text": "Người vợ hạn sinh"
-    },
-    {
-      "start": 733.0,
-      "end": 734.0,
-      "text": "Em yêu"
-    },
-    {
-      "start": 734.0,
-      "end": 735.0,
-      "text": "Mùa đông sắp đến rồi"
-    },
-    {
-      "start": 735.0,
-      "end": 737.0,
-      "text": "Em với nhà của cảnh ăn uống"
-    },
-    {
-      "start": 737.0,
-      "end": 739.0,
-      "text": "Anh vào rừng sáng bắn mấy hông"
-    },
-    {
-      "start": 739.0,
-      "end": 740.0,
-      "text": "Dự tử một chút tức ăn"
-    },
-    {
-      "start": 740.0,
-      "end": 741.0,
-      "text": "Phòng khi một thời gian nữa"
-    },
-    {
-      "start": 741.0,
-      "end": 742.0,
-      "text": "Em sinh con rồi"
-    },
-    {
-      "start": 742.0,
-      "end": 744.0,
-      "text": "Anh không thể đi sáng nữa"
-    },
-    {
-      "start": 746.0,
-      "end": 747.0,
-      "text": "Em nhớ rồi mà"
-    },
-    {
-      "start": 747.0,
-      "end": 748.0,
-      "text": "Rừng sâu nước độ"
-    },
-    {
-      "start": 748.0,
-      "end": 750.0,
-      "text": "Anh nhớ về sớm nha"
-    },
-    {
-      "start": 750.0,
-      "end": 752.0,
-      "text": "Em đã chuẩn bị một ít bắn"
-    },
-    {
-      "start": 752.0,
-      "end": 754.0,
-      "text": "Đói, anh lấy ra ăn nha"
-    },
-    {
-      "start": 754.0,
-      "end": 756.0,
-      "text": "Ừ, anh đi đi"
-    },
-    {
-      "start": 759.0,
-      "end": 761.0,
-      "text": "Trong khi người chồng chưa về"
-    },
-    {
-      "start": 761.0,
-      "end": 762.0,
-      "text": "Người vợ ở nhà"
-    },
-    {
-      "start": 762.0,
-      "end": 765.0,
-      "text": "Đã hạn sinh một cậu con trai"
-    },
-    {
-      "start": 766.0,
-      "end": 767.0,
-      "text": "Anh nè"
-    },
-    {
-      "start": 767.0,
-      "end": 770.0,
-      "text": "Anh mâu về mà xem con của chúng ta này"
-    },
-    {
-      "start": 770.0,
-      "end": 773.0,
-      "text": "Ôi, thành bé sầu giống bố như thế chưa"
-    },
-    {
-      "start": 774.0,
-      "end": 776.0,
-      "text": "Sầu bấy nhiều ngày rồi"
-    },
-    {
-      "start": 776.0,
-      "end": 778.0,
-      "text": "Mà anh ấy vẫn chưa về vậy"
-    },
-    {
-      "start": 778.0,
-      "end": 781.0,
-      "text": "Có bao giờ anh đi lâu như thế này đâu cơ chứ"
-    },
-    {
-      "start": 784.0,
-      "end": 786.0,
-      "text": "Nhiều năm sao"
-    },
-    {
-      "start": 788.0,
-      "end": 789.0,
-      "text": "Mẹ ơi"
-    },
-    {
-      "start": 789.0,
-      "end": 791.0,
-      "text": "Mẹ là đang nhớ cho sao"
-    },
-    {
-      "start": 793.0,
-      "end": 795.0,
-      "text": "Mẹ, mẹ được buồn rồi"
-    },
-    {
-      "start": 795.0,
-      "end": 796.0,
-      "text": "Mà hai sức khỏe của mình"
-    },
-    {
-      "start": 796.0,
-      "end": 798.0,
-      "text": "Còn đã chuẩn bị cùng tên cá rồi"
-    },
-    {
-      "start": 798.0,
-      "end": 801.0,
-      "text": "Cảy mai, con xin phép mẹ đi tìm ra"
-    },
-    {
-      "start": 807.0,
-      "end": 809.0,
-      "text": "Ủa, là tiếng của Kim gì"
-    },
-    {
-      "start": 809.0,
-      "end": 811.0,
-      "text": "Mà nghe thạm thiết thấy chưa"
-    },
-    {
-      "start": 815.0,
-      "end": 816.0,
-      "text": "Đói, anh anh"
-    },
-    {
-      "start": 816.0,
-      "end": 818.0,
-      "text": "Tôi có thể giúp được gì cho anh không"
-    },
-    {
-      "start": 819.0,
-      "end": 821.0,
-      "text": "Người không thể giúp được gì cho ta đâu"
-    },
-    {
-      "start": 821.0,
-      "end": 823.0,
-      "text": "Tao đi tìm cha của ta"
-    },
-    {
-      "start": 823.0,
-      "end": 825.0,
-      "text": "Bột người thở sáng đã mất thức hơn 20 năm"
-    },
-    {
-      "start": 825.0,
-      "end": 826.0,
-      "text": "Mẹ ta nói hết"
-    },
-    {
-      "start": 826.0,
-      "end": 829.0,
-      "text": "Chà có một phút sợ lớn trên chán"
-    },
-    {
-      "start": 830.0,
-      "end": 832.0,
-      "text": "Anh, thấy thì tôi lại giúp được cho anh đấy chứ"
-    },
-    {
-      "start": 832.0,
-      "end": 834.0,
-      "text": "Nếu nha cho anh là thở sáng"
-    },
-    {
-      "start": 834.0,
-      "end": 836.0,
-      "text": "Thì chắc chắn khi đi vào sau trong rừng này"
-    },
-    {
-      "start": 836.0,
-      "end": 839.0,
-      "text": "Chà anh đã bị bắt nên thùng lũng hòa có một phụ thủy rồi"
-    },
-    {
-      "start": 841.0,
-      "end": 842.0,
-      "text": "Hả?"
-    },
-    {
-      "start": 842.0,
-      "end": 843.0,
-      "text": "Thùng lũng hòa có một phụ thủy không"
-    },
-    {
-      "start": 845.0,
-      "end": 846.0,
-      "text": "Anh, nha cho rõ nè"
-    },
-    {
-      "start": 846.0,
-      "end": 848.0,
-      "text": "Ngày đó là một thùng lũng hòa chất rộng"
-    },
-    {
-      "start": 848.0,
-      "end": 850.0,
-      "text": "Được mỗi phụ thủy phụ phép"
-    },
-    {
-      "start": 850.0,
-      "end": 851.0,
-      "text": "Khi bước chần phải đó"
-    },
-    {
-      "start": 851.0,
-      "end": 855.0,
-      "text": "Thường hòa đưa lại sẽ khi anh lập tức kiềm vào cưng bồn lũ mê mệt"
-    },
-    {
-      "start": 855.0,
-      "end": 857.0,
-      "text": "Và mù ta sẽ hảm hai anh"
-    },
-    {
-      "start": 857.0,
-      "end": 859.0,
-      "text": "Bởi vậy, anh phải làm thế nào"
-    },
-    {
-      "start": 859.0,
-      "end": 861.0,
-      "text": "Này giữ mình luôn tỉnh tao"
-    },
-    {
-      "start": 862.0,
-      "end": 865.0,
-      "text": "Nếu vậy ta sẽ mang theo những phiên đá sách nhỏ này"
-    },
-    {
-      "start": 865.0,
-      "end": 867.0,
-      "text": "Mỗi khi cảm thấy bồn lũ"
-    },
-    {
-      "start": 867.0,
-      "end": 870.0,
-      "text": "Ta sẽ dùng trúng, năm vô ta của mình để tỉnh tao hơn"
-    },
-    {
-      "start": 871.0,
-      "end": 874.0,
-      "text": "Đều đó sẽ khiến anh này tổng thơ mất thôi"
-    },
-    {
-      "start": 884.0,
-      "end": 886.0,
-      "text": "Không nhé, và không nhìn"
-    },
-    {
-      "start": 886.0,
-      "end": 888.0,
-      "text": "Khi định không được nghe, và không được nhìn"
-    },
-    {
-      "start": 888.0,
-      "end": 891.0,
-      "text": "Cô sẽ chẳng thử quýến sủ được ta đâu"
-    },
-    {
-      "start": 892.0,
-      "end": 896.0,
-      "text": "Lần đầu tiên, có một người không xây mây sắc đẹp và tính đàn của ta"
-    },
-    {
-      "start": 896.0,
-      "end": 898.0,
-      "text": "Thật là đáng để phục"
-    },
-    {
-      "start": 898.0,
-      "end": 900.0,
-      "text": "Anh là ai đến đây để làm gì"
-    },
-    {
-      "start": 900.0,
-      "end": 902.0,
-      "text": "Ta là ai không quan trọng đâu"
-    },
-    {
-      "start": 902.0,
-      "end": 904.0,
-      "text": "Ta muốn tìm ra của mình"
-    },
-    {
-      "start": 904.0,
-      "end": 907.0,
-      "text": "Chắc thắng là cô có biết người đàn ông có một phút sợ lớn trên tráng"
-    },
-    {
-      "start": 907.0,
-      "end": 908.0,
-      "text": "Đúng vậy không"
-    },
-    {
-      "start": 909.0,
-      "end": 912.0,
-      "text": "Khi trời sáng, hương hòa sẽ khiến anh mù ngũ"
-    },
-    {
-      "start": 912.0,
-      "end": 915.0,
-      "text": "Và phụ thủy sẽ biến anh anh hoa hoặc mùn đất"
-    },
-    {
-      "start": 915.0,
-      "end": 918.0,
-      "text": "Những như những bông hoa và bông đất ở đây"
-    },
-    {
-      "start": 918.0,
-      "end": 920.0,
-      "text": "Chà anh đã biết thành hoa rồi đó"
-    },
-    {
-      "start": 922.0,
-      "end": 926.0,
-      "text": "Vậy thì làm thế nào để tôi có thể không chế được hết thuật của một phụ thủy chứ?"
-    },
-    {
-      "start": 927.0,
-      "end": 929.0,
-      "text": "Vùng đất mà thuật này"
-    },
-    {
-      "start": 929.0,
-      "end": 931.0,
-      "text": "Được trứng ếm bánh một giải lùa vàng"
-    },
-    {
-      "start": 932.0,
-      "end": 934.0,
-      "text": "Khi khi nào, anh không chế được giải lùa"
-    },
-    {
-      "start": 934.0,
-      "end": 937.0,
-      "text": "Thì phép thuật của bà phụ thủy sẽ mất tắc dụng"
-    },
-    {
-      "start": 937.0,
-      "end": 939.0,
-      "text": "Nhưng từ thuốc tới này"
-    },
-    {
-      "start": 939.0,
-      "end": 942.0,
-      "text": "Chứ ai biết làm thế nào để giải lùa vàng này biến mất cả"
-    },
-    {
-      "start": 943.0,
-      "end": 945.0,
-      "text": "Khe nào đất nóp màn cho ta"
-    },
-    {
-      "start": 949.0,
-      "end": 952.0,
-      "text": "Không đừng củ, phải củ cho ta"
-    },
-    {
-      "start": 952.0,
-      "end": 965.0,
-      "text": "Chà, hãy trời cô, còn sẽ củ cho"
-    },
-    {
-      "start": 965.0,
-      "end": 968.0,
-      "text": "Xin hà cho cô không sự tỉnh táo đi"
-    },
-    {
-      "start": 973.0,
-      "end": 975.0,
-      "text": "Trời ơi, chuyện gì vậy?"
-    },
-    {
-      "start": 976.0,
-      "end": 979.0,
-      "text": "Máo, máu, người đã giám dùng máu của mình"
-    },
-    {
-      "start": 979.0,
-      "end": 982.0,
-      "text": "Để không chế giải lùa phép thuật của ta sau"
-    },
-    {
-      "start": 982.0,
-      "end": 983.0,
-      "text": "Dừng lấy ngay"
-    },
-    {
-      "start": 984.0,
-      "end": 987.0,
-      "text": "Ta đã đối rồi, hôm nay là ngày tỉnh thế của người"
-    },
-    {
-      "start": 990.0,
-      "end": 992.0,
-      "text": "Dừng lấy, dừng lấy ngay"
-    },
-    {
-      "start": 996.0,
-      "end": 999.0,
-      "text": "Tỉnh lại rồi, cuối cùng thì anh ấy cũng đã tỉnh lại rồi"
-    },
-    {
-      "start": 1000.0,
-      "end": 1008.0,
-      "text": "Ông, ông là, ông có phải là, chủ nhân của cô nhạc gỗ như tháng bật dương không?"
-    },
-    {
-      "start": 1010.0,
-      "end": 1014.0,
-      "text": "Trời ơi, là của trái của chá ư"
-    },
-    {
-      "start": 1014.0,
-      "end": 1017.0,
-      "text": "Là chá, là chá đi cô không?"
-    },
-    {
-      "start": 1020.0,
-      "end": 1024.0,
-      "text": "Nhưng, nhưng mất của chá, mất của chá lập sao thế này"
-    },
-    {
-      "start": 1024.0,
-      "end": 1027.0,
-      "text": "Mùa phụ thủy, nãy dùng ảnh sáng của giải lùa"
-    },
-    {
-      "start": 1027.0,
-      "end": 1030.0,
-      "text": "Khiến cho tất cả những người thở sân đều bị môn"
-    },
-    {
-      "start": 1030.0,
-      "end": 1033.0,
-      "text": "Trành chỉ cần lấy to của giải lùa, bôi lên mắt"
-    },
-    {
-      "start": 1033.0,
-      "end": 1035.0,
-      "text": "Là mọi người sẽ hết mùa ngay"
-    },
-    {
-      "start": 1039.0,
-      "end": 1041.0,
-      "text": "Ôi, chúng ta đã hả đường trở lại rồi"
-    },
-    {
-      "start": 1042.0,
-      "end": 1044.0,
-      "text": "Cảm ơn chạy, cảm ơn trời đất"
-    },
-    {
-      "start": 1047.0,
-      "end": 1050.0,
-      "text": "Cùng trái, cùng trái của ta"
-    },
-    {
-      "start": 1051.0,
-      "end": 1056.0,
-      "text": "Cùng trời, cuối cùng ta đã được nhìn thấy cùng trái của mình rồi"
-    },
-    {
-      "start": 1058.0,
-      "end": 1065.0,
-      "text": "Chạy, chạy, con đến đống chạy về phía mẹ con con đi"
-    },
-    {
-      "start": 1065.0,
-      "end": 1069.0,
-      "text": "Chạy, con đến để chạy cực khổ rồi"
-    },
-    {
-      "start": 1071.0,
-      "end": 1073.0,
-      "text": "Cảm ơn em, đã giúp cho chạy con ta"
-    },
-    {
-      "start": 1074.0,
-      "end": 1078.0,
-      "text": "Nếu không có em, chúng ta cũng không thể đoạn chụng được như thế này nữa"
-    },
-    {
-      "start": 1079.0,
-      "end": 1083.0,
-      "text": "Em, em cũng muốn hoặc khổ ở đây cùng với ta cùng"
-    },
-    {
-      "start": 1083.0,
-      "end": 1086.0,
-      "text": "Bà nhiều năm nay, em bị mẹ nôi điều khiển"
-    },
-    {
-      "start": 1086.0,
-      "end": 1091.0,
-      "text": "Lời dụng sắc đẹp và tiếng hát để làm điều ác như vậy cũng đã quá đủ rồi"
-    },
-    {
-      "start": 1091.0,
-      "end": 1094.0,
-      "text": "Em đã từng rô cùng đau khổ khi bịng nguyên rổ"
-    },
-    {
-      "start": 1094.0,
-      "end": 1099.0,
-      "text": "Em cũng khau khát được yêu thương, giống như bao nhiêu người con gái khát"
-    },
-    {
-      "start": 1100.0,
-      "end": 1103.0,
-      "text": "Vậy thì chúng ta về gia thôi"
-    },
-    {
-      "start": 1104.0,
-      "end": 1107.0,
-      "text": "Bằng sự hiếu thảo và sức mạnh của mình"
-    },
-    {
-      "start": 1107.0,
-      "end": 1111.0,
-      "text": "Chẳng trai Uluken đã dạy khó ác được cho chạy"
-    },
-    {
-      "start": 1111.0,
-      "end": 1115.0,
-      "text": "Và tất cả những người thần săng bị phù phép tài thùng lũng hoa"
-    },
-    {
-      "start": 1115.0,
-      "end": 1118.0,
-      "text": "Họ cũng nhau phơi vẻ trở về nhà"
-    },
-    {
-      "start": 1138.0,
-      "end": 1144.0,
-      "text": "Cuối cùng chúng ta cũng đã tốt nghiệp, dự định tiếp theo của cậu là gì hả phong"
-    },
-    {
-      "start": 1144.0,
-      "end": 1151.0,
-      "text": "Tất nhiên là mình sẽ tập trung vào sáng tác, mình sẽ sáng tạo ra một tác phẩm phí đại để đời"
-    },
-    {
-      "start": 1151.0,
-      "end": 1155.0,
-      "text": "Nó sẽ được diệt ra tất cả các thứ tiếng, nó sẽ cân giải nô bên"
-    },
-    {
-      "start": 1155.0,
-      "end": 1159.0,
-      "text": "Và tên mình, hãy phong sẽ tạo tiếng vang trên toàn thế giới"
-    },
-    {
-      "start": 1160.0,
-      "end": 1164.0,
-      "text": "Chà, giước mộng đẹp đấy ông nhau văn"
-    },
-    {
-      "start": 1164.0,
-      "end": 1167.0,
-      "text": "Mình dúc ước mơ của cậu sớm thân hiện thực nhé"
-    },
-    {
-      "start": 1167.0,
-      "end": 1170.0,
-      "text": "Dù sao, cậu cũng là người có khả năng nhất lớp mình"
-    },
-    {
-      "start": 1170.0,
-      "end": 1174.0,
-      "text": "Ừ, cảm ơn cậu nhé, cả hai chúng ta cùng cố gắng"
-    },
-    {
-      "start": 1183.0,
-      "end": 1185.0,
-      "text": "Có chuyện gì vậy con trai"
-    },
-    {
-      "start": 1190.0,
-      "end": 1196.0,
-      "text": "Mẹ, con đang dùng tâm trí để viết một tác phẩm có tầm bản hướng trên toàn thế giới"
-    },
-    {
-      "start": 1196.0,
-      "end": 1200.0,
-      "text": "Vậy mà con phải ngồi trong cái gốc nhà với nhiều bức tượng sám sịt này"
-    },
-    {
-      "start": 1200.0,
-      "end": 1203.0,
-      "text": "Con biết lấy cảm hứng ở đâu chưa"
-    },
-    {
-      "start": 1206.0,
-      "end": 1208.0,
-      "text": "Ừ, con nói cũng đúng"
-    },
-    {
-      "start": 1208.0,
-      "end": 1213.0,
-      "text": "Để mẹ bàn bạc với bà, tìm một căng nhà khác để thay đổi không dàng cho con xem sao"
-    },
-    {
-      "start": 1219.0,
-      "end": 1243.0,
-      "text": "Mình vẫn chưa có cảm ơn, hình như vẫn còn thiếu một cái gì đó"
-    },
-    {
-      "start": 1243.0,
-      "end": 1245.0,
-      "text": "Phải rồi."
-    },
-    {
-      "start": 1245.0,
-      "end": 1247.0,
-      "text": "Đây là tình yêu."
-    },
-    {
-      "start": 1247.0,
-      "end": 1249.0,
-      "text": "Một điều đẹp đẽ lớn làm như thế."
-    },
-    {
-      "start": 1249.0,
-      "end": 1252.0,
-      "text": "Mà cái viết văn như mình lại không có."
-    },
-    {
-      "start": 1252.0,
-      "end": 1254.0,
-      "text": "Thì làm sao có cảm ứng đẹp viết?"
-    },
-    {
-      "start": 1267.0,
-      "end": 1269.0,
-      "text": "Oi, tình yêu."
-    },
-    {
-      "start": 1269.0,
-      "end": 1270.0,
-      "text": "Ta đang yêu."
-    },
-    {
-      "start": 1271.0,
-      "end": 1274.0,
-      "text": "Tình yêu khiến trái tim ta rộng rằng đây cảm xúc."
-    },
-    {
-      "start": 1276.0,
-      "end": 1277.0,
-      "text": "Nhưng..."
-    },
-    {
-      "start": 1277.0,
-      "end": 1280.0,
-      "text": "Tại sao mình vẫn chưa viết nổi một dòng nào?"
-    },
-    {
-      "start": 1281.0,
-      "end": 1284.0,
-      "text": "Ah, phải rồi. Tình yêu thôi chưa đủ."
-    },
-    {
-      "start": 1284.0,
-      "end": 1286.0,
-      "text": "Mình cần cưới vợ."
-    },
-    {
-      "start": 1286.0,
-      "end": 1288.0,
-      "text": "Cưới vợ và có nhiều đứa con."
-    },
-    {
-      "start": 1288.0,
-      "end": 1290.0,
-      "text": "Mình mới có thể yên tâm sáng tát."
-    },
-    {
-      "start": 1300.0,
-      "end": 1303.0,
-      "text": "Mình cần cưới vợ."
-    },
-    {
-      "start": 1331.0,
-      "end": 1332.0,
-      "text": "Mẹ nói đâu rồi?"
-    },
-    {
-      "start": 1332.0,
-      "end": 1334.0,
-      "text": "Sau để con cái khóc lớp thế này,"
-    },
-    {
-      "start": 1334.0,
-      "end": 1336.0,
-      "text": "thì tôi sáng tát làm sao nổi?"
-    },
-    {
-      "start": 1339.0,
-      "end": 1340.0,
-      "text": "Thời chết."
-    },
-    {
-      "start": 1340.0,
-      "end": 1342.0,
-      "text": "Các con sợ lại khóc thế này."
-    },
-    {
-      "start": 1342.0,
-      "end": 1344.0,
-      "text": "Để yên cho ba làm việc trước."
-    },
-    {
-      "start": 1344.0,
-      "end": 1346.0,
-      "text": "Con với chả cái."
-    },
-    {
-      "start": 1346.0,
-      "end": 1350.0,
-      "text": "Kiểu gì, tôi cũng phải có một căng phòng riêng để chuyên tâm sáng tát."
-    },
-    {
-      "start": 1350.0,
-      "end": 1351.0,
-      "text": "Vâng."
-    },
-    {
-      "start": 1351.0,
-      "end": 1354.0,
-      "text": "Em thấy nhà mình có một căng phòng lớn sau vừa."
-    },
-    {
-      "start": 1354.0,
-      "end": 1356.0,
-      "text": "Mình chuyển ra đấy mà làm việc."
-    },
-    {
-      "start": 1356.0,
-      "end": 1358.0,
-      "text": "Vừa thoáng đảng, vừa yên tỉnh."
-    },
-    {
-      "start": 1360.0,
-      "end": 1363.0,
-      "text": "Thế này mới gọi là không gian sáng tát lý tưởng trước."
-    },
-    {
-      "start": 1363.0,
-      "end": 1366.0,
-      "text": "Giờ thì không còn gì có thể năng cãng một tát phẩm vị đại."
-    },
-    {
-      "start": 1382.0,
-      "end": 1384.0,
-      "text": "Nhà văn trẻ lê ngoài."
-    },
-    {
-      "start": 1384.0,
-      "end": 1386.0,
-      "text": "Đặt trẻ kiểu nhà văn trẻ cho ai."
-    },
-    {
-      "start": 1387.0,
-      "end": 1390.0,
-      "text": "Nếu mình có điều kiện viết tốt hơn,"
-    },
-    {
-      "start": 1390.0,
-      "end": 1392.0,
-      "text": "thì mình đã ký sa hơn cổ ta rồi."
-    },
-    {
-      "start": 1396.0,
-      "end": 1398.0,
-      "text": "Nũ rủ chết thiệt."
-    },
-    {
-      "start": 1398.0,
-      "end": 1400.0,
-      "text": "Chết đi này."
-    },
-    {
-      "start": 1409.0,
-      "end": 1412.0,
-      "text": "Trời ơi, giá như không có rùi,"
-    },
-    {
-      "start": 1412.0,
-      "end": 1414.0,
-      "text": "mình đã viết được một tát phẩm vị đại."
-    },
-    {
-      "start": 1416.0,
-      "end": 1424.0,
-      "text": "Hãy like, comment, subscribe canh để xem thêm những video mới nhớt nhé."
-    }
-  ]
-}
+[
+  {
+    "start": "00:00:00.000",
+    "end": "00:00:04.000",
+    "text": "Một tháng, ăn thịt gà"
+  },
+  {
+    "start": "00:00:11.000",
+    "end": "00:00:15.000",
+    "text": "Mới chậm mắc có tý mà mặc tờ đã đến đánh đẩm đầu rồi"
+  },
+  {
+    "start": "00:00:15.000",
+    "end": "00:00:19.000",
+    "text": "Thôi quá, phải đi kiếm viên gì bỏ bụng thôi"
+  },
+  {
+    "start": "00:00:20.000",
+    "end": "00:00:21.000",
+    "text": "Ăn kia đi kiếm viên làm thuyền hả?"
+  },
+  {
+    "start": "00:00:21.000",
+    "end": "00:00:23.000",
+    "text": "Rùn lúa nhà ta đang thiêu người gắn"
+  },
+  {
+    "start": "00:00:23.000",
+    "end": "00:00:25.000",
+    "text": "Có muốn nhận viên không?"
+  },
+  {
+    "start": "00:00:25.000",
+    "end": "00:00:27.000",
+    "text": "Ta đã cho năm đồng công"
+  },
+  {
+    "start": "00:00:27.000",
+    "end": "00:00:29.000",
+    "text": "Ngoi trời, tôi đang đối lã ra đây"
+  },
+  {
+    "start": "00:00:29.000",
+    "end": "00:00:34.000",
+    "text": "Ta chân bụng rũng, giờ mà đi làm thuy cho nhà ông, có mận ngất lã ra đây"
+  },
+  {
+    "start": "00:00:35.000",
+    "end": "00:00:39.000",
+    "text": "Không làm thịt lây đâu ra cây mà ăn"
+  },
+  {
+    "start": "00:00:40.000",
+    "end": "00:00:42.000",
+    "text": "Làm gì thì làm?"
+  },
+  {
+    "start": "00:00:42.000",
+    "end": "00:00:44.000",
+    "text": "Cái gì?"
+  },
+  {
+    "start": "00:00:44.000",
+    "end": "00:00:45.000",
+    "text": "Cái gì?"
+  },
+  {
+    "start": "00:00:45.000",
+    "end": "00:00:47.000",
+    "text": "Cái gì?"
+  },
+  {
+    "start": "00:00:48.000",
+    "end": "00:00:49.000",
+    "text": "Làm gì thì làm?"
+  },
+  {
+    "start": "00:00:49.000",
+    "end": "00:00:53.000",
+    "text": "Thứ bảo mình đi gặp lúa thuê cho lãu phụ ông hết dịch kì có mà"
+  },
+  {
+    "start": "00:00:53.000",
+    "end": "00:00:55.000",
+    "text": "Thà mình chịu đối còn hơn"
+  },
+  {
+    "start": "00:00:55.000",
+    "end": "00:00:58.000",
+    "text": "Ê lưng ra lãng thuê cho lãu, trở được năm đồng"
+  },
+  {
+    "start": "00:01:01.000",
+    "end": "00:01:03.000",
+    "text": "Chào anh hai, chị hai"
+  },
+  {
+    "start": "00:01:03.000",
+    "end": "00:01:05.000",
+    "text": "Chú Nam đòa, chú đi đâu thế?"
+  },
+  {
+    "start": "00:01:05.000",
+    "end": "00:01:07.000",
+    "text": "Nhà em tung quá"
+  },
+  {
+    "start": "00:01:07.000",
+    "end": "00:01:09.000",
+    "text": "Từ qua đất giờ không có gì bỏ vào bụng"
+  },
+  {
+    "start": "00:01:09.000",
+    "end": "00:01:11.000",
+    "text": "Em đói sắp ngất rồi"
+  },
+  {
+    "start": "00:01:11.000",
+    "end": "00:01:14.000",
+    "text": "Sao cái thần tôi lại cố thì này cơ chứ"
+  },
+  {
+    "start": "00:01:14.000",
+    "end": "00:01:16.000",
+    "text": "Trời ơi lại trời"
+  },
+  {
+    "start": "00:01:16.000",
+    "end": "00:01:18.000",
+    "text": "Thế chú dậu này làm gì rồi"
+  },
+  {
+    "start": "00:01:18.000",
+    "end": "00:01:20.000",
+    "text": "Vậy khó thì em làm không được"
+  },
+  {
+    "start": "00:01:20.000",
+    "end": "00:01:22.000",
+    "text": "Còn mấy việc nặng nhọt quá"
+  },
+  {
+    "start": "00:01:22.000",
+    "end": "00:01:24.000",
+    "text": "Thì em làm gì có sức mà làm"
+  },
+  {
+    "start": "00:01:24.000",
+    "end": "00:01:26.000",
+    "text": "Cái số của em đúng là hậm hiêu"
+  },
+  {
+    "start": "00:01:26.000",
+    "end": "00:01:29.000",
+    "text": "Cái gì đen đủy, đổ hết lên đầu em"
+  },
+  {
+    "start": "00:01:29.000",
+    "end": "00:01:31.000",
+    "text": "Em chán lắm đồ ăn chị ra"
+  },
+  {
+    "start": "00:01:31.000",
+    "end": "00:01:34.000",
+    "text": "Bàu đây, tiền thể nhà ăn cũng chuẩn bị ăn chưa"
+  },
+  {
+    "start": "00:01:34.000",
+    "end": "00:01:37.000",
+    "text": "Bàu đây ngồi với anh, mình xuống nhà dọn mâm lên nhé"
+  },
+  {
+    "start": "00:01:43.000",
+    "end": "00:01:45.000",
+    "text": "Chú Nam mà, chú cũng là kiếm đường mà làm ăn đi"
+  },
+  {
+    "start": "00:01:45.000",
+    "end": "00:01:47.000",
+    "text": "Cô lòng bông mãi như thế này không được"
+  },
+  {
+    "start": "00:01:47.000",
+    "end": "00:01:49.000",
+    "text": "Cũng phải lo làm lụng"
+  },
+  {
+    "start": "00:01:49.000",
+    "end": "00:01:51.000",
+    "text": "Giành dụng mà lấy vỡ nữa chứ"
+  },
+  {
+    "start": "00:01:51.000",
+    "end": "00:01:53.000",
+    "text": "Em cũng muốn thay lắm chứ"
+  },
+  {
+    "start": "00:01:53.000",
+    "end": "00:01:55.000",
+    "text": "Nhưng anh xem"
+  },
+  {
+    "start": "00:01:55.000",
+    "end": "00:01:57.000",
+    "text": "Cái số em nó thay"
+  },
+  {
+    "start": "00:01:57.000",
+    "end": "00:01:59.000",
+    "text": "Bốn làm ăn tử tới cũng không có vốn"
+  },
+  {
+    "start": "00:01:59.000",
+    "end": "00:02:01.000",
+    "text": "Chứ em mà có vốn trong tay thì chắc chắn"
+  },
+  {
+    "start": "00:02:01.000",
+    "end": "00:02:03.000",
+    "text": "Em sẽ dạo lên nhân chóng thôi"
+  },
+  {
+    "start": "00:02:05.000",
+    "end": "00:02:06.000",
+    "text": "À hay là"
+  },
+  {
+    "start": "00:02:06.000",
+    "end": "00:02:08.000",
+    "text": "Anh chỉ có điều kiện thì giúp em"
+  },
+  {
+    "start": "00:02:08.000",
+    "end": "00:02:10.000",
+    "text": "Cho em về một số tiền vốn làm ăn"
+  },
+  {
+    "start": "00:02:10.000",
+    "end": "00:02:12.000",
+    "text": "Sau này khấm khá"
+  },
+  {
+    "start": "00:02:12.000",
+    "end": "00:02:14.000",
+    "text": "Em sẽ trả cả vốn lẫn lời"
+  },
+  {
+    "start": "00:02:14.000",
+    "end": "00:02:18.000",
+    "text": "Tuyền bà cắt thì anh chỉ cũng không có nhiều giả gì"
+  },
+  {
+    "start": "00:02:18.000",
+    "end": "00:02:20.000",
+    "text": "Nhưng mà được rồi"
+  },
+  {
+    "start": "00:02:20.000",
+    "end": "00:02:22.000",
+    "text": "Anh chỉ sẽ cho chú vầy một con châu"
+  },
+  {
+    "start": "00:02:22.000",
+    "end": "00:02:24.000",
+    "text": "Và một nằm gà"
+  },
+  {
+    "start": "00:02:24.000",
+    "end": "00:02:26.000",
+    "text": "Với châu và gà, nếu chú biết chăm chỉ làm ăn"
+  },
+  {
+    "start": "00:02:26.000",
+    "end": "00:02:28.000",
+    "text": "thì số sẽ khấm khá lên thôi"
+  },
+  {
+    "start": "00:02:28.000",
+    "end": "00:02:30.000",
+    "text": "Chả mấy mà thành công"
+  },
+  {
+    "start": "00:02:30.000",
+    "end": "00:02:32.000",
+    "text": "Ê, đổi ở ngăn chỉ"
+  },
+  {
+    "start": "00:02:32.000",
+    "end": "00:02:34.000",
+    "text": "Nhất định em sẽ làm ăn tử tới"
+  },
+  {
+    "start": "00:02:34.000",
+    "end": "00:02:36.000",
+    "text": "Trả đợi anh chỉ cả vốn lẫn lời"
+  },
+  {
+    "start": "00:02:38.000",
+    "end": "00:02:40.000",
+    "text": "Tất cả là thật"
+  },
+  {
+    "start": "00:02:40.000",
+    "end": "00:02:42.000",
+    "text": "Không phải mơ, số mình thấy mà hơn"
+  },
+  {
+    "start": "00:02:42.000",
+    "end": "00:02:44.000",
+    "text": "Từ nay thì có phải đi chăn châu"
+  },
+  {
+    "start": "00:02:44.000",
+    "end": "00:02:46.000",
+    "text": "Cho lạo của ông rồi"
+  },
+  {
+    "start": "00:02:46.000",
+    "end": "00:02:48.000",
+    "text": "Nhân vượt mấy hiếp có này"
+  },
+  {
+    "start": "00:02:48.000",
+    "end": "00:02:51.000",
+    "text": "Mình phải thật con gà béo này để ăn mừng mới nữa"
+  },
+  {
+    "start": "00:03:00.000",
+    "end": "00:03:02.000",
+    "text": "Khi lũ gà này, ngày một ngày"
+  },
+  {
+    "start": "00:03:02.000",
+    "end": "00:03:03.000",
+    "text": "Càng nuôi càng gây"
+  },
+  {
+    "start": "00:03:03.000",
+    "end": "00:03:05.000",
+    "text": "Lấy mất giá mất"
+  },
+  {
+    "start": "00:03:05.000",
+    "end": "00:03:06.000",
+    "text": "Mà gà nuôi cũng để ăn"
+  },
+  {
+    "start": "00:03:06.000",
+    "end": "00:03:07.000",
+    "text": "Đang đối"
+  },
+  {
+    "start": "00:03:07.000",
+    "end": "00:03:09.000",
+    "text": "Đang luôn cho nhan"
+  },
+  {
+    "start": "00:03:12.000",
+    "end": "00:03:14.000",
+    "text": "Cái gì thế này"
+  },
+  {
+    "start": "00:03:14.000",
+    "end": "00:03:16.000",
+    "text": "Bởi có một tuần không ăn, mà mày đã"
+  },
+  {
+    "start": "00:03:16.000",
+    "end": "00:03:18.000",
+    "text": "Chắc phải bán đầu thôi"
+  },
+  {
+    "start": "00:03:18.000",
+    "end": "00:03:20.000",
+    "text": "Xem vước phát được đồng nào"
+  },
+  {
+    "start": "00:03:24.000",
+    "end": "00:03:26.000",
+    "text": "Ê, đổi quá"
+  },
+  {
+    "start": "00:03:26.000",
+    "end": "00:03:28.000",
+    "text": "Mấy ngày này quên không cho con châu ăn"
+  },
+  {
+    "start": "00:03:28.000",
+    "end": "00:03:30.000",
+    "text": "Không biết có sao không nữa"
+  },
+  {
+    "start": "00:03:30.000",
+    "end": "00:03:32.000",
+    "text": "Cái gì thế này"
+  },
+  {
+    "start": "00:03:32.000",
+    "end": "00:03:33.000",
+    "text": "Bởi có một tuần không ăn"
+  },
+  {
+    "start": "00:03:33.000",
+    "end": "00:03:35.000",
+    "text": "Mà mày đã"
+  },
+  {
+    "start": "00:03:35.000",
+    "end": "00:03:37.000",
+    "text": "Chắc phải bán đầu thôi"
+  },
+  {
+    "start": "00:03:37.000",
+    "end": "00:03:39.000",
+    "text": "Xem vước phát được đồng nào"
+  },
+  {
+    "start": "00:03:40.000",
+    "end": "00:03:42.000",
+    "text": "Ê, đổi quá"
+  },
+  {
+    "start": "00:03:42.000",
+    "end": "00:03:44.000",
+    "text": "Nhà hết cái ăn rồi"
+  },
+  {
+    "start": "00:03:44.000",
+    "end": "00:03:46.000",
+    "text": "Giờ châu cũng không còn"
+  },
+  {
+    "start": "00:03:46.000",
+    "end": "00:03:47.000",
+    "text": "Gà cũng hết"
+  },
+  {
+    "start": "00:03:47.000",
+    "end": "00:03:49.000",
+    "text": "Tuyện bán châu ăn được mấy bữa chá bỏ"
+  },
+  {
+    "start": "00:03:49.000",
+    "end": "00:03:52.000",
+    "text": "Đổi chả có gì bỏ buồn làm sao"
+  },
+  {
+    "start": "00:03:52.000",
+    "end": "00:03:54.000",
+    "text": "Đây, chắc muối mặt"
+  },
+  {
+    "start": "00:03:54.000",
+    "end": "00:03:56.000",
+    "text": "Xa nhận hai giúp đứa thôi"
+  },
+  {
+    "start": "00:03:58.000",
+    "end": "00:03:59.000",
+    "text": "Thấy là sao"
+  },
+  {
+    "start": "00:03:59.000",
+    "end": "00:04:01.000",
+    "text": "Châu gà đấu hết rồi chút năm"
+  },
+  {
+    "start": "00:04:01.000",
+    "end": "00:04:03.000",
+    "text": "Em, em, em mấy hầm đổi quá"
+  },
+  {
+    "start": "00:04:03.000",
+    "end": "00:04:06.000",
+    "text": "Em làm thật mấy con gà ăn tạm"
+  },
+  {
+    "start": "00:04:06.000",
+    "end": "00:04:08.000",
+    "text": "Trời ơi, thì"
+  },
+  {
+    "start": "00:04:08.000",
+    "end": "00:04:10.000",
+    "text": "Mấy con mấy hơm"
+  },
+  {
+    "start": "00:04:10.000",
+    "end": "00:04:12.000",
+    "text": "Quận cho châu ăn mà nó đã"
+  },
+  {
+    "start": "00:04:12.000",
+    "end": "00:04:14.000",
+    "text": "Dựa em đổi quá"
+  },
+  {
+    "start": "00:04:14.000",
+    "end": "00:04:18.000",
+    "text": "Đến nước này thì chú không thể đổ lỗi cho số phận được rồi"
+  },
+  {
+    "start": "00:04:18.000",
+    "end": "00:04:20.000",
+    "text": "Chú đã có một con châu, một đàn gà"
+  },
+  {
+    "start": "00:04:20.000",
+    "end": "00:04:23.000",
+    "text": "Nếu chăm chỉ ra, tới giờ đã sắp có trứng gà bán rồi"
+  },
+  {
+    "start": "00:04:23.000",
+    "end": "00:04:25.000",
+    "text": "Rượt nữa có cả nghe con"
+  },
+  {
+    "start": "00:04:25.000",
+    "end": "00:04:27.000",
+    "text": "Tôi đã giúp chú cái cần cầu"
+  },
+  {
+    "start": "00:04:27.000",
+    "end": "00:04:28.000",
+    "text": "Vậy mà chú vẫn ý lại"
+  },
+  {
+    "start": "00:04:28.000",
+    "end": "00:04:30.000",
+    "text": "Lời miếng hết thúc chữa"
+  },
+  {
+    "start": "00:04:30.000",
+    "end": "00:04:32.000",
+    "text": "Dên lỗi chú, chú tôi có giúp chú"
+  },
+  {
+    "start": "00:04:32.000",
+    "end": "00:04:34.000",
+    "text": "Thì nào cũng vô nghĩa mà thôi"
+  },
+  {
+    "start": "00:04:34.000",
+    "end": "00:04:35.000",
+    "text": "Chú về đi"
+  },
+  {
+    "start": "00:04:35.000",
+    "end": "00:04:37.000",
+    "text": "Anh, anh ơi"
+  },
+  {
+    "start": "00:04:37.000",
+    "end": "00:04:39.000",
+    "text": "ơn, sâu lại thế chứ"
+  },
+  {
+    "start": "00:04:43.000",
+    "end": "00:04:45.000",
+    "text": "Khi nhìn ăn"
+  },
+  {
+    "start": "00:04:53.000",
+    "end": "00:04:55.000",
+    "text": "Anh em thân mất"
+  },
+  {
+    "start": "00:04:55.000",
+    "end": "00:04:57.000",
+    "text": "Lượng chú trong rừng ngày càng ít đi"
+  },
+  {
+    "start": "00:04:57.000",
+    "end": "00:04:59.000",
+    "text": "Dô khí hậu khách nghe thương"
+  },
+  {
+    "start": "00:04:59.000",
+    "end": "00:05:01.000",
+    "text": "Và đàn của chúng ta thì ngày càng đông"
+  },
+  {
+    "start": "00:05:01.000",
+    "end": "00:05:05.000",
+    "text": "Thế nên, thử ý kiến của tôi"
+  },
+  {
+    "start": "00:05:05.000",
+    "end": "00:05:07.000",
+    "text": "Chúng ta cần ăn vũ tiết kiểm hơn"
+  },
+  {
+    "start": "00:05:07.000",
+    "end": "00:05:11.000",
+    "text": "Hoặc chúng ta phải tự trồng thêm những cái chú mới"
+  },
+  {
+    "start": "00:05:11.000",
+    "end": "00:05:13.000",
+    "text": "Làm sao mà ăn ất đi được"
+  },
+  {
+    "start": "00:05:13.000",
+    "end": "00:05:16.000",
+    "text": "Đúng rồi, lại còn phải trồng thêm nữa"
+  },
+  {
+    "start": "00:05:16.000",
+    "end": "00:05:19.000",
+    "text": "Cứ ăn hết, thì chú sẽ khác ra thêm quá"
+  },
+  {
+    "start": "00:05:19.000",
+    "end": "00:05:23.000",
+    "text": "Đau, tất cả dữ trật tư một chút"
+  },
+  {
+    "start": "00:05:23.000",
+    "end": "00:05:25.000",
+    "text": "Tà cần nghe kiến cụ thể của tận hình viên"
+  },
+  {
+    "start": "00:05:25.000",
+    "end": "00:05:28.000",
+    "text": "Việc tự trồng chú đi làm thức ăn"
+  },
+  {
+    "start": "00:05:28.000",
+    "end": "00:05:30.000",
+    "text": "Đối với chúng ta không có gì là có cả"
+  },
+  {
+    "start": "00:05:30.000",
+    "end": "00:05:34.000",
+    "text": "Về lâu dài, thì tôi ủng hộ phương án trồng thêm chú"
+  },
+  {
+    "start": "00:05:34.000",
+    "end": "00:05:36.000",
+    "text": "Tại sao là phải tự trồng chú?"
+  },
+  {
+    "start": "00:05:36.000",
+    "end": "00:05:39.000",
+    "text": "Báo như đời này, tổ tiền của chúng ta không trồng chú"
+  },
+  {
+    "start": "00:05:39.000",
+    "end": "00:05:41.000",
+    "text": "mà vẫn sống được đấy thôi"
+  },
+  {
+    "start": "00:05:41.000",
+    "end": "00:05:43.000",
+    "text": "Tôi phản đối việc trồng thêm chú"
+  },
+  {
+    "start": "00:05:43.000",
+    "end": "00:05:45.000",
+    "text": "Vừa mượt, vừa tốn thời gian"
+  },
+  {
+    "start": "00:05:45.000",
+    "end": "00:05:48.000",
+    "text": "Đúng đó, tổ tiền của chúng ta vẫn lấy chú tự nhiên"
+  },
+  {
+    "start": "00:05:48.000",
+    "end": "00:05:50.000",
+    "text": "Chứ có trồng chú bao giờ đâu"
+  },
+  {
+    "start": "00:05:50.000",
+    "end": "00:05:53.000",
+    "text": "Số lượng thành viên trong đàn chúng ta ngay càng đông"
+  },
+  {
+    "start": "00:05:53.000",
+    "end": "00:05:55.000",
+    "text": "Chú trồng rừng thì ngay càng ít đi"
+  },
+  {
+    "start": "00:05:55.000",
+    "end": "00:05:57.000",
+    "text": "Những loại quá khác thì chúng ta cũng chỉ ăn một chút"
+  },
+  {
+    "start": "00:05:57.000",
+    "end": "00:05:59.000",
+    "text": "Chứ không thể thay thế chú được"
+  },
+  {
+    "start": "00:05:59.000",
+    "end": "00:06:02.000",
+    "text": "Nếu không trồng thêm chú, thì sẽ đen lúc"
+  },
+  {
+    "start": "00:06:02.000",
+    "end": "00:06:04.000",
+    "text": "Chúng ta chẳng có chú mà ăn nữa"
+  },
+  {
+    "start": "00:06:04.000",
+    "end": "00:06:07.000",
+    "text": "Trồng chú rất vất vả, tôi không ủng hộ"
+  },
+  {
+    "start": "00:06:07.000",
+    "end": "00:06:09.000",
+    "text": "Chúng ta có thể ăn tiết kiểm chú được"
+  },
+  {
+    "start": "00:06:09.000",
+    "end": "00:06:12.000",
+    "text": "Đúng, trồng chú rất tổng càng sức"
+  },
+  {
+    "start": "00:06:12.000",
+    "end": "00:06:14.000",
+    "text": "Chúng ta thà nhận vài ngày"
+  },
+  {
+    "start": "00:06:14.000",
+    "end": "00:06:16.000",
+    "text": "Không ăn chú rất còn hơn với trồng thêm chú mới"
+  },
+  {
+    "start": "00:06:16.000",
+    "end": "00:06:19.000",
+    "text": "Đúng rồi phải đó"
+  },
+  {
+    "start": "00:06:19.000",
+    "end": "00:06:20.000",
+    "text": "Thôi được"
+  },
+  {
+    "start": "00:06:20.000",
+    "end": "00:06:23.000",
+    "text": "Vậy những ai phản đối việc trồng thêm chú mới"
+  },
+  {
+    "start": "00:06:23.000",
+    "end": "00:06:24.000",
+    "text": "Thì bước sang bên trái của ta"
+  },
+  {
+    "start": "00:06:24.000",
+    "end": "00:06:27.000",
+    "text": "Những thành viên còn lại bước sang bên phải ta"
+  },
+  {
+    "start": "00:06:29.000",
+    "end": "00:06:31.000",
+    "text": "Tôi đứng bên trái"
+  },
+  {
+    "start": "00:06:33.000",
+    "end": "00:06:35.000",
+    "text": "Tôi nữa"
+  },
+  {
+    "start": "00:06:38.000",
+    "end": "00:06:40.000",
+    "text": "Cả tôi nữa"
+  },
+  {
+    "start": "00:06:42.000",
+    "end": "00:06:44.000",
+    "text": "Như vậy là đã rõ"
+  },
+  {
+    "start": "00:06:44.000",
+    "end": "00:06:47.000",
+    "text": "Đà số thành viên trong đàn phản đối việc trồng thêm chú"
+  },
+  {
+    "start": "00:06:47.000",
+    "end": "00:06:49.000",
+    "text": "Nhưng ở vị đây là một việc quan trọng"
+  },
+  {
+    "start": "00:06:49.000",
+    "end": "00:06:52.000",
+    "text": "Nên tạng quyết định thay này"
+  },
+  {
+    "start": "00:06:52.000",
+    "end": "00:06:54.000",
+    "text": "Những thành viên phía bên tay trái ta"
+  },
+  {
+    "start": "00:06:54.000",
+    "end": "00:06:56.000",
+    "text": "Do khi nào đứng đầu"
+  },
+  {
+    "start": "00:06:56.000",
+    "end": "00:06:58.000",
+    "text": "Hãy thử những ăn chú trong một ngày"
+  },
+  {
+    "start": "00:06:58.000",
+    "end": "00:07:00.000",
+    "text": "Nếu tất cả đều làm được"
+  },
+  {
+    "start": "00:07:00.000",
+    "end": "00:07:02.000",
+    "text": "Thì sẽ không cần trồng thêm chú nữa"
+  },
+  {
+    "start": "00:07:02.000",
+    "end": "00:07:04.000",
+    "text": "Còn nếu không thì từ ngày mai"
+  },
+  {
+    "start": "00:07:04.000",
+    "end": "00:07:07.000",
+    "text": "Cả đàn sẽ đi trồng thêm chú để có thức ăn sau này"
+  },
+  {
+    "start": "00:07:07.000",
+    "end": "00:07:08.000",
+    "text": "Được chứ"
+  },
+  {
+    "start": "00:07:08.000",
+    "end": "00:07:10.000",
+    "text": "Tưởng gì chứ một ngày không ăn chú"
+  },
+  {
+    "start": "00:07:10.000",
+    "end": "00:07:11.000",
+    "text": "Để có khó gì đâu"
+  },
+  {
+    "start": "00:07:11.000",
+    "end": "00:07:13.000",
+    "text": "Việc này dễ dàng quá"
+  },
+  {
+    "start": "00:07:13.000",
+    "end": "00:07:15.000",
+    "text": "Chẳng có lý gì mà không làm được cả"
+  },
+  {
+    "start": "00:07:21.000",
+    "end": "00:07:23.000",
+    "text": "Bất đậu thay đối đồ đây"
+  },
+  {
+    "start": "00:07:23.000",
+    "end": "00:07:25.000",
+    "text": "Sau một ngày không ăn gì"
+  },
+  {
+    "start": "00:07:25.000",
+    "end": "00:07:26.000",
+    "text": "Chúng ta sẽ đất đối"
+  },
+  {
+    "start": "00:07:26.000",
+    "end": "00:07:28.000",
+    "text": "Tờ có ý này"
+  },
+  {
+    "start": "00:07:28.000",
+    "end": "00:07:30.000",
+    "text": "Chúng ta nên đi tìm và giữ trưởng thật nhiều chú"
+  },
+  {
+    "start": "00:07:30.000",
+    "end": "00:07:32.000",
+    "text": "Để có thể ăn ngày"
+  },
+  {
+    "start": "00:07:32.000",
+    "end": "00:07:34.000",
+    "text": "Thì ngày hôm nay cất thúc"
+  },
+  {
+    "start": "00:07:34.000",
+    "end": "00:07:36.000",
+    "text": "Đông đang, đông đang"
+  },
+  {
+    "start": "00:07:39.000",
+    "end": "00:07:41.000",
+    "text": "Ê chú nhiều thế"
+  },
+  {
+    "start": "00:07:41.000",
+    "end": "00:07:42.000",
+    "text": "Lại ngon nữa"
+  },
+  {
+    "start": "00:07:42.000",
+    "end": "00:07:44.000",
+    "text": "Ừ, từ giờ phút này"
+  },
+  {
+    "start": "00:07:44.000",
+    "end": "00:07:46.000",
+    "text": "Chúng ta sẽ bắt đầu ngay nhìn ăn"
+  },
+  {
+    "start": "00:07:46.000",
+    "end": "00:07:49.000",
+    "text": "Tốt nhất lại đi ngủ cho quen đi con đối"
+  },
+  {
+    "start": "00:07:52.000",
+    "end": "00:07:54.000",
+    "text": "Thì cất thúc ngay nhìn ăn hơn này"
+  },
+  {
+    "start": "00:07:54.000",
+    "end": "00:07:56.000",
+    "text": "Tất cả chúng ta đều đối"
+  },
+  {
+    "start": "00:07:56.000",
+    "end": "00:07:58.000",
+    "text": "Cả đàn sẽ đồng loạt lâu vào đóng chú này"
+  },
+  {
+    "start": "00:07:58.000",
+    "end": "00:08:01.000",
+    "text": "Tà e rằng sẽ làm hổng hết cả"
+  },
+  {
+    "start": "00:08:01.000",
+    "end": "00:08:04.000",
+    "text": "Chúng ta nên chia cho mỗi người vầy quá"
+  },
+  {
+    "start": "00:08:04.000",
+    "end": "00:08:06.000",
+    "text": "Như thế ai cũng có phần của mình"
+  },
+  {
+    "start": "00:08:06.000",
+    "end": "00:08:08.000",
+    "text": "Ở hô, đó là một ý kiến rất hay"
+  },
+  {
+    "start": "00:08:08.000",
+    "end": "00:08:10.000",
+    "text": "Tà đồng ý"
+  },
+  {
+    "start": "00:08:19.000",
+    "end": "00:08:21.000",
+    "text": "Tôi nghĩ chúng ta đang bóc sản quả chú"
+  },
+  {
+    "start": "00:08:21.000",
+    "end": "00:08:22.000",
+    "text": "và cầm tên tay"
+  },
+  {
+    "start": "00:08:23.000",
+    "end": "00:08:24.000",
+    "text": "Như thế khi bước ra ngày mới"
+  },
+  {
+    "start": "00:08:24.000",
+    "end": "00:08:26.000",
+    "text": "Chúng ta có thể đưa lần ăn"
+  },
+  {
+    "start": "00:08:26.000",
+    "end": "00:08:27.000",
+    "text": "và không tốn thời gian"
+  },
+  {
+    "start": "00:08:28.000",
+    "end": "00:08:30.000",
+    "text": "Thật tuyệt vời, đau"
+  },
+  {
+    "start": "00:08:30.000",
+    "end": "00:08:32.000",
+    "text": "Tất cả hai bóc chú ra"
+  },
+  {
+    "start": "00:08:32.000",
+    "end": "00:08:33.000",
+    "text": "và cầm sản trên tay"
+  },
+  {
+    "start": "00:08:38.000",
+    "end": "00:08:40.000",
+    "text": "Đào anh em, chúng ta hãy nhắm mắc lại"
+  },
+  {
+    "start": "00:08:40.000",
+    "end": "00:08:41.000",
+    "text": "Tập trung nào"
+  },
+  {
+    "start": "00:08:41.000",
+    "end": "00:08:43.000",
+    "text": "Ngày hôm nay sắp hết rồi, cố lên"
+  },
+  {
+    "start": "00:08:53.000",
+    "end": "00:08:55.000",
+    "text": "Nhận rửa thách đối của khí đen"
+  },
+  {
+    "start": "00:08:55.000",
+    "end": "00:08:57.000",
+    "text": "thật là một việc làm vô nghĩa"
+  },
+  {
+    "start": "00:08:57.000",
+    "end": "00:08:59.000",
+    "text": "Đáng lại chúng ta không nên làm thế"
+  },
+  {
+    "start": "00:09:01.000",
+    "end": "00:09:03.000",
+    "text": "Thôi nào, thôi nào"
+  },
+  {
+    "start": "00:09:03.000",
+    "end": "00:09:05.000",
+    "text": "chỉ còn ít dờ đứa là qua ngày rồi"
+  },
+  {
+    "start": "00:09:05.000",
+    "end": "00:09:07.000",
+    "text": "chúng ta không thể để khí đen"
+  },
+  {
+    "start": "00:09:07.000",
+    "end": "00:09:09.000",
+    "text": "và những thành viên gác cười chơi được"
+  },
+  {
+    "start": "00:09:09.000",
+    "end": "00:09:10.000",
+    "text": "tiếp tục đau anh em"
+  },
+  {
+    "start": "00:09:10.000",
+    "end": "00:09:12.000",
+    "text": "Con cây kia nga"
+  },
+  {
+    "start": "00:09:13.000",
+    "end": "00:09:14.000",
+    "text": "Con nghĩ"
+  },
+  {
+    "start": "00:09:14.000",
+    "end": "00:09:16.000",
+    "text": "Tất cả mọi người đều đối rồi"
+  },
+  {
+    "start": "00:09:16.000",
+    "end": "00:09:18.000",
+    "text": "chúng ta đang đưa chú linh miền"
+  },
+  {
+    "start": "00:09:18.000",
+    "end": "00:09:20.000",
+    "text": "tháng sẵn miền ra"
+  },
+  {
+    "start": "00:09:20.000",
+    "end": "00:09:22.000",
+    "text": "ngày khi xa ngày mới"
+  },
+  {
+    "start": "00:09:22.000",
+    "end": "00:09:24.000",
+    "text": "chúng ta chỉ cần cắn mọc phát là được ngay"
+  },
+  {
+    "start": "00:09:24.000",
+    "end": "00:09:26.000",
+    "text": "ý kiến hay"
+  },
+  {
+    "start": "00:09:26.000",
+    "end": "00:09:28.000",
+    "text": "đau, hãy làm theo lời khí con đi"
+  },
+  {
+    "start": "00:09:35.000",
+    "end": "00:09:37.000",
+    "text": "Tôi ơ, tôi ơ"
+  },
+  {
+    "start": "00:09:37.000",
+    "end": "00:09:38.000",
+    "text": "tôi mỏi miền quá"
+  },
+  {
+    "start": "00:09:38.000",
+    "end": "00:09:39.000",
+    "text": "tôi xin lỗi"
+  },
+  {
+    "start": "00:09:51.000",
+    "end": "00:09:55.000",
+    "text": "Như vậy là chúng ta đã không thể nhìn ăn chút trong một ngày"
+  },
+  {
+    "start": "00:09:55.000",
+    "end": "00:09:57.000",
+    "text": "thế nên từ ngày mai"
+  },
+  {
+    "start": "00:09:57.000",
+    "end": "00:09:59.000",
+    "text": "chúng ta sẽ trọng thêm chú"
+  },
+  {
+    "start": "00:09:59.000",
+    "end": "00:10:01.000",
+    "text": "chúng ta không thể ngăn cảnh những ngu cầu"
+  },
+  {
+    "start": "00:10:01.000",
+    "end": "00:10:03.000",
+    "text": "chính đáng của bán thân"
+  },
+  {
+    "start": "00:10:03.000",
+    "end": "00:10:05.000",
+    "text": "nhưng chúng ta có thể dụng sức lâu đồng"
+  },
+  {
+    "start": "00:10:05.000",
+    "end": "00:10:06.000",
+    "text": "để tạo ra cuối cái"
+  },
+  {
+    "start": "00:10:06.000",
+    "end": "00:10:09.000",
+    "text": "vục vụ những ngu cầu đó"
+  },
+  {
+    "start": "00:10:09.000",
+    "end": "00:10:10.000",
+    "text": "Dù sau thì chuyện này"
+  },
+  {
+    "start": "00:10:10.000",
+    "end": "00:10:12.000",
+    "text": "cũng là một bày học cho tất cả chúng ta"
+  },
+  {
+    "start": "00:10:12.000",
+    "end": "00:10:14.000",
+    "text": "ngày bài chúng ta sẽ chăm chỉ lâu đồng"
+  },
+  {
+    "start": "00:10:14.000",
+    "end": "00:10:17.000",
+    "text": "rồi sẽ lại có ngôn vui vô dào cho tất cả thôi"
+  },
+  {
+    "start": "00:10:17.000",
+    "end": "00:10:19.000",
+    "text": "đúng rồi, đúng rồi"
+  },
+  {
+    "start": "00:10:19.000",
+    "end": "00:10:22.000",
+    "text": "chúng ta sẽ cố gắng trọng thêm nhiều chú"
+  },
+  {
+    "start": "00:10:26.000",
+    "end": "00:10:28.000",
+    "text": "Tắc kè mẹ"
+  },
+  {
+    "start": "00:10:35.000",
+    "end": "00:10:37.000",
+    "text": "Hoàng hộ hộ, anh dội quá"
+  },
+  {
+    "start": "00:10:37.000",
+    "end": "00:10:39.000",
+    "text": "cứ như chuyện viên xuyết vậy"
+  },
+  {
+    "start": "00:10:39.000",
+    "end": "00:10:41.000",
+    "text": "Thế đã là gì?"
+  },
+  {
+    "start": "00:10:41.000",
+    "end": "00:10:42.000",
+    "text": "Các con ơi"
+  },
+  {
+    "start": "00:10:42.000",
+    "end": "00:10:44.000",
+    "text": "về ăn cơm đi"
+  },
+  {
+    "start": "00:10:44.000",
+    "end": "00:10:45.000",
+    "text": "ốc đâu rồi nhỉ?"
+  },
+  {
+    "start": "00:10:45.000",
+    "end": "00:10:47.000",
+    "text": "ốc ơi, ốc"
+  },
+  {
+    "start": "00:10:47.000",
+    "end": "00:10:48.000",
+    "text": "thôi cứ về đi đã"
+  },
+  {
+    "start": "00:10:48.000",
+    "end": "00:10:50.000",
+    "text": "Nhất ốc đi chơi đâu đó thôi"
+  },
+  {
+    "start": "00:10:52.000",
+    "end": "00:10:53.000",
+    "text": "ốc đâu hả hai đứa?"
+  },
+  {
+    "start": "00:10:53.000",
+    "end": "00:10:55.000",
+    "text": "con cũng không biết mẹ"
+  },
+  {
+    "start": "00:10:55.000",
+    "end": "00:10:57.000",
+    "text": "em ốc hảm chơi quá"
+  },
+  {
+    "start": "00:10:57.000",
+    "end": "00:10:59.000",
+    "text": "hai con bảo bàn em nha"
+  },
+  {
+    "start": "00:11:01.000",
+    "end": "00:11:03.000",
+    "text": "Mẹ ơi con về rồi"
+  },
+  {
+    "start": "00:11:03.000",
+    "end": "00:11:06.000",
+    "text": "con đi đâu cả ngày mà không nói với hay ăn thế"
+  },
+  {
+    "start": "00:11:06.000",
+    "end": "00:11:09.000",
+    "text": "con đi chơi ngoài bia đơn mẹ ơi"
+  },
+  {
+    "start": "00:11:09.000",
+    "end": "00:11:11.000",
+    "text": "có nhiều cái hay lắm mẹ nha"
+  },
+  {
+    "start": "00:11:11.000",
+    "end": "00:11:13.000",
+    "text": "con gặp bao nhiêu bàn mới"
+  },
+  {
+    "start": "00:11:13.000",
+    "end": "00:11:16.000",
+    "text": "Trời, cho em giám đi một mình ra ngoài bia đơn"
+  },
+  {
+    "start": "00:11:16.000",
+    "end": "00:11:18.000",
+    "text": "đúng đấy, liệu lẫn quá"
+  },
+  {
+    "start": "00:11:18.000",
+    "end": "00:11:19.000",
+    "text": "em lẫn rồi"
+  },
+  {
+    "start": "00:11:19.000",
+    "end": "00:11:21.000",
+    "text": "em có thể sử lý mọi việc"
+  },
+  {
+    "start": "00:11:21.000",
+    "end": "00:11:22.000",
+    "text": "em lẫn rồi"
+  },
+  {
+    "start": "00:11:22.000",
+    "end": "00:11:24.000",
+    "text": "thêm em có biết đù dây leo không?"
+  },
+  {
+    "start": "00:11:24.000",
+    "end": "00:11:26.000",
+    "text": "có biết lụng nhau không?"
+  },
+  {
+    "start": "00:11:26.000",
+    "end": "00:11:27.000",
+    "text": "đù dây leo thì làm gì?"
+  },
+  {
+    "start": "00:11:27.000",
+    "end": "00:11:29.000",
+    "text": "lụng nhau có gì mà giỏi?"
+  },
+  {
+    "start": "00:11:29.000",
+    "end": "00:11:31.000",
+    "text": "em giẳng cần"
+  },
+  {
+    "start": "00:11:32.000",
+    "end": "00:11:33.000",
+    "text": "Còn đế con à"
+  },
+  {
+    "start": "00:11:33.000",
+    "end": "00:11:35.000",
+    "text": "nhất là trong những tình hủng nguy hiểm"
+  },
+  {
+    "start": "00:11:35.000",
+    "end": "00:11:37.000",
+    "text": "để trẻ thoát khỏi kết thù"
+  },
+  {
+    "start": "00:11:37.000",
+    "end": "00:11:41.000",
+    "text": "nhưng vẫn chưa quan trọng bằng kĩ năng đổi bào đâu"
+  },
+  {
+    "start": "00:11:41.000",
+    "end": "00:11:43.000",
+    "text": "đổi bào là gì hả mẹ?"
+  },
+  {
+    "start": "00:11:43.000",
+    "end": "00:11:45.000",
+    "text": "Họ tắc kè hoa nhà ta"
+  },
+  {
+    "start": "00:11:45.000",
+    "end": "00:11:47.000",
+    "text": "bẩm sinh đã có một khả năng đức đặc biệt"
+  },
+  {
+    "start": "00:11:47.000",
+    "end": "00:11:49.000",
+    "text": "đó là biến đổi bào"
+  },
+  {
+    "start": "00:11:49.000",
+    "end": "00:11:51.000",
+    "text": "những người thuần thục"
+  },
+  {
+    "start": "00:11:51.000",
+    "end": "00:11:53.000",
+    "text": "chỉ cần ngay mắc là đổi bào được ngay"
+  },
+  {
+    "start": "00:11:53.000",
+    "end": "00:11:55.000",
+    "text": "để được như thế"
+  },
+  {
+    "start": "00:11:55.000",
+    "end": "00:11:57.000",
+    "text": "phải tập luyện chăm chỉ để ứng phó thực nhân"
+  },
+  {
+    "start": "00:11:59.000",
+    "end": "00:12:01.000",
+    "text": "mẹ, mẹ ơi"
+  },
+  {
+    "start": "00:12:01.000",
+    "end": "00:12:03.000",
+    "text": "có mẹ rồi mà"
+  },
+  {
+    "start": "00:12:03.000",
+    "end": "00:12:05.000",
+    "text": "cho phải học nhiều thế à?"
+  },
+  {
+    "start": "00:12:05.000",
+    "end": "00:12:07.000",
+    "text": "mẹ ngày khẳng có tuổi"
+  },
+  {
+    "start": "00:12:07.000",
+    "end": "00:12:09.000",
+    "text": "hơn được các con cũng lớn rồi"
+  },
+  {
+    "start": "00:12:09.000",
+    "end": "00:12:11.000",
+    "text": "phải học cách tự bảo vệ bình"
+  },
+  {
+    "start": "00:12:11.000",
+    "end": "00:12:13.000",
+    "text": "mẹ không thể ở bên cạnh các con mải được"
+  },
+  {
+    "start": "00:12:13.000",
+    "end": "00:12:15.000",
+    "text": "mẹ in tâm, đúng con lớn rồi"
+  },
+  {
+    "start": "00:12:15.000",
+    "end": "00:12:19.000",
+    "text": "đúng con sẽ chăm chỉ luyện tập để bảo vệ mẹ"
+  },
+  {
+    "start": "00:12:19.000",
+    "end": "00:12:21.000",
+    "text": "cười, chúng ta ăn đi đã"
+  },
+  {
+    "start": "00:12:21.000",
+    "end": "00:12:23.000",
+    "text": "sáng nay mẹ sẽ giải bà nèm đổi màu nhé"
+  },
+  {
+    "start": "00:12:27.000",
+    "end": "00:12:30.000",
+    "text": "Trong trừng, đưa dễ chú ngủ"
+  },
+  {
+    "start": "00:12:30.000",
+    "end": "00:12:32.000",
+    "text": "và lẫn trung nhất là gì nào?"
+  },
+  {
+    "start": "00:12:32.000",
+    "end": "00:12:34.000",
+    "text": "là cách học cây"
+  },
+  {
+    "start": "00:12:34.000",
+    "end": "00:12:36.000",
+    "text": "không phải cây nào cũng có học, đúng không?"
+  },
+  {
+    "start": "00:12:36.000",
+    "end": "00:12:38.000",
+    "text": "à ha, có nghĩ ra rồi"
+  },
+  {
+    "start": "00:12:38.000",
+    "end": "00:12:40.000",
+    "text": "là hàng đá phải không mẹ?"
+  },
+  {
+    "start": "00:12:40.000",
+    "end": "00:12:42.000",
+    "text": "cũng không phải, cũng có ý kiến gì không?"
+  },
+  {
+    "start": "00:12:42.000",
+    "end": "00:12:46.000",
+    "text": "nhé, con chẳng thấy con kiến nào bảo qua đen mẹ à?"
+  },
+  {
+    "start": "00:12:46.000",
+    "end": "00:12:48.000",
+    "text": "không bảo qua đậu, con trung bà chứ?"
+  },
+  {
+    "start": "00:12:48.000",
+    "end": "00:12:52.000",
+    "text": "Trong trừng, những thứ có nhiều nhất chính là có"
+  },
+  {
+    "start": "00:12:52.000",
+    "end": "00:12:54.000",
+    "text": "kỳ, hoa, lá, đá đều"
+  },
+  {
+    "start": "00:12:54.000",
+    "end": "00:12:57.000",
+    "text": "bảo sắc phòng phú, lại ở sắc cạnh nhau"
+  },
+  {
+    "start": "00:12:57.000",
+    "end": "00:13:00.000",
+    "text": "nên kẻ thù trức dễ bị đánh lừa"
+  },
+  {
+    "start": "00:13:00.000",
+    "end": "00:13:02.000",
+    "text": "đa lạc thế"
+  },
+  {
+    "start": "00:13:04.000",
+    "end": "00:13:07.000",
+    "text": "giờ các con hãy nhìn mẹ bín bảo xem thế nào nhé"
+  },
+  {
+    "start": "00:13:08.000",
+    "end": "00:13:11.000",
+    "text": "trời ơi, mẹ bín bất rồi"
+  },
+  {
+    "start": "00:13:11.000",
+    "end": "00:13:13.000",
+    "text": "mẹ đứa con nhận ra mẹ không?"
+  },
+  {
+    "start": "00:13:13.000",
+    "end": "00:13:15.000",
+    "text": "không hạ, mẹ giỏi thật"
+  },
+  {
+    "start": "00:13:17.000",
+    "end": "00:13:21.000",
+    "text": "trời ơi, trong mẹ như một bông hoa thật vậy"
+  },
+  {
+    "start": "00:13:21.000",
+    "end": "00:13:23.000",
+    "text": "quá, suy quá mẹ ơi"
+  },
+  {
+    "start": "00:13:24.000",
+    "end": "00:13:26.000",
+    "text": "chuyện gì thấy cắt ăn?"
+  },
+  {
+    "start": "00:13:26.000",
+    "end": "00:13:28.000",
+    "text": "mẹ, mẹ đâu rồi à?"
+  },
+  {
+    "start": "00:13:28.000",
+    "end": "00:13:31.000",
+    "text": "mẹ đầy ước, con phải chú ý vào"
+  },
+  {
+    "start": "00:13:31.000",
+    "end": "00:13:34.000",
+    "text": "chăm chỉ luyện tập cùng cắt ăn nhé"
+  },
+  {
+    "start": "00:13:34.000",
+    "end": "00:13:36.000",
+    "text": "mẹ đi kiếm chút thức ăn"
+  },
+  {
+    "start": "00:13:36.000",
+    "end": "00:13:38.000",
+    "text": "ăn, bà nèm tử tập nhé"
+  },
+  {
+    "start": "00:13:38.000",
+    "end": "00:13:40.000",
+    "text": "lát về mẹ sẽ có thưởng vâng á"
+  },
+  {
+    "start": "00:13:40.000",
+    "end": "00:13:42.000",
+    "text": "giờ giá vừa có kẻ thù"
+  },
+  {
+    "start": "00:13:42.000",
+    "end": "00:13:45.000",
+    "text": "ăn điếm 1, 2, 3, tất cả chạy trốn nhé"
+  },
+  {
+    "start": "00:13:45.000",
+    "end": "00:13:48.000",
+    "text": "nhất đi, em chẳng tập đông, chẳng chứt"
+  },
+  {
+    "start": "00:13:48.000",
+    "end": "00:13:50.000",
+    "text": "em đi chơi đi"
+  },
+  {
+    "start": "00:13:51.000",
+    "end": "00:13:53.000",
+    "text": "đi ước, không học bà"
+  },
+  {
+    "start": "00:13:53.000",
+    "end": "00:13:56.000",
+    "text": "thôi, ăn nèm mình tập với nhau vậy"
+  },
+  {
+    "start": "00:13:57.000",
+    "end": "00:13:59.000",
+    "text": "tuyệt quá, chúng ta lại được rồi"
+  },
+  {
+    "start": "00:14:02.000",
+    "end": "00:14:05.000",
+    "text": "chẳng hiểu sao hay ăn ái mẹ thích cung với mạng đổi màu thế"
+  },
+  {
+    "start": "00:14:05.000",
+    "end": "00:14:08.000",
+    "text": "chẳng có gì hay cả, mình phải làm mình chứ"
+  },
+  {
+    "start": "00:14:08.000",
+    "end": "00:14:10.000",
+    "text": "sao phải biến thành cách khác"
+  },
+  {
+    "start": "00:14:13.000",
+    "end": "00:14:16.000",
+    "text": "đúng tất cả đồng tờ, mì không hoặc đứa đầu"
+  },
+  {
+    "start": "00:14:19.000",
+    "end": "00:14:21.000",
+    "text": "có chẳng đẳng sao?"
+  },
+  {
+    "start": "00:14:21.000",
+    "end": "00:14:23.000",
+    "text": "mì không hoặc đứa đầu"
+  },
+  {
+    "start": "00:14:24.000",
+    "end": "00:14:26.000",
+    "text": "có chẳng đẳng sao?"
+  },
+  {
+    "start": "00:14:26.000",
+    "end": "00:14:27.000",
+    "text": "mì không hoặc đứa đầu"
+  },
+  {
+    "start": "00:14:27.000",
+    "end": "00:14:29.000",
+    "text": "mì không hoặc đứa đầu"
+  },
+  {
+    "start": "00:14:29.000",
+    "end": "00:14:31.000",
+    "text": "cung với mì không hoặc đứa đầu"
+  },
+  {
+    "start": "00:14:31.000",
+    "end": "00:14:32.000",
+    "text": "Đó bảo đi con"
+  },
+  {
+    "start": "00:14:35.640",
+    "end": "00:14:39.000",
+    "text": "Mẹ ơi, cơm cơm đổi đứa"
+  },
+  {
+    "start": "00:14:49.000",
+    "end": "00:14:53.000",
+    "text": "Hư, tức khóc, miếng ngòn đánh miếng mà còn đánh mất"
+  },
+  {
+    "start": "00:14:57.000",
+    "end": "00:15:00.000",
+    "text": "Mẹ ơi, mẹ, mẹ vậy đi"
+  },
+  {
+    "start": "00:15:00.000",
+    "end": "00:15:02.000",
+    "text": "Tao nghe mẹ giải nhiệm máu thế này"
+  },
+  {
+    "start": "00:15:02.000",
+    "end": "00:15:04.000",
+    "text": "Mẹ ơi đừng làm con sợ"
+  },
+  {
+    "start": "00:15:05.000",
+    "end": "00:15:06.000",
+    "text": "Ủa sao không?"
+  },
+  {
+    "start": "00:15:06.000",
+    "end": "00:15:09.000",
+    "text": "Bình dưới là buổi gai, còn cẩn thận nhé"
+  },
+  {
+    "start": "00:15:09.000",
+    "end": "00:15:11.000",
+    "text": "Còn biết lỗi rồi à"
+  },
+  {
+    "start": "00:15:11.000",
+    "end": "00:15:14.000",
+    "text": "Còn hứa sẽ chấp chỉ luyện tập để tương về"
+  },
+  {
+    "start": "00:15:14.000",
+    "end": "00:15:16.000",
+    "text": "Bà ném con sẽ bảo vệ mẹ"
+  },
+  {
+    "start": "00:15:16.000",
+    "end": "00:15:18.000",
+    "text": "Còn của mẹ dội lắm"
+  },
+  {
+    "start": "00:15:22.000",
+    "end": "00:15:24.000",
+    "text": "Chỉ cần có mẹ thôi"
+  },
+  {
+    "start": "00:15:31.000",
+    "end": "00:15:33.000",
+    "text": "Đời, mẹ về rồi đi"
+  },
+  {
+    "start": "00:15:33.000",
+    "end": "00:15:34.000",
+    "text": "Mẹ"
+  },
+  {
+    "start": "00:15:35.000",
+    "end": "00:15:37.000",
+    "text": "Mẹ ơi, con gặp cho mẹ nhé"
+  },
+  {
+    "start": "00:15:37.000",
+    "end": "00:15:38.000",
+    "text": "Mẹ cơm mẹ"
+  },
+  {
+    "start": "00:15:39.000",
+    "end": "00:15:42.000",
+    "text": "Bắc, bắc lắm, còn cái yếu của mẹ dỏi quá"
+  },
+  {
+    "start": "00:15:43.000",
+    "end": "00:15:47.000",
+    "text": "Đúng là máu mũ, sau 7 tuổi đầu đã biết thương mẹ rồi"
+  },
+  {
+    "start": "00:15:48.000",
+    "end": "00:15:51.000",
+    "text": "Chứ không như cái người bạc tình bạc nghĩa kia"
+  },
+  {
+    "start": "00:15:51.000",
+    "end": "00:15:53.000",
+    "text": "Mẹ, trở đánh tấn mấy năng"
+  },
+  {
+    "start": "00:15:53.000",
+    "end": "00:15:56.000",
+    "text": "Sau mẹ cứ lỗi cái chuyện ấy đã nói dữ buổi cơm mới được à"
+  },
+  {
+    "start": "00:15:57.000",
+    "end": "00:16:03.000",
+    "text": "Tái bà mà mẹ dẫn rồi, con không cho với bà nữa"
+  },
+  {
+    "start": "00:16:10.000",
+    "end": "00:16:12.000",
+    "text": "Chưa ngũ còn làm cái gì đó"
+  },
+  {
+    "start": "00:16:12.000",
+    "end": "00:16:14.000",
+    "text": "Còn dẫn mẹ à"
+  },
+  {
+    "start": "00:16:14.000",
+    "end": "00:16:16.000",
+    "text": "Mẹ, sao mẹ lại nói thế"
+  },
+  {
+    "start": "00:16:16.000",
+    "end": "00:16:18.000",
+    "text": "Dùng gì cũng tại con"
+  },
+  {
+    "start": "00:16:18.000",
+    "end": "00:16:20.000",
+    "text": "Mà con bé không có được hạnh phúc đồn vẹn"
+  },
+  {
+    "start": "00:16:20.000",
+    "end": "00:16:22.000",
+    "text": "Từ cá bà và mẹ"
+  },
+  {
+    "start": "00:16:22.000",
+    "end": "00:16:24.000",
+    "text": "Con thấy mình tự quá"
+  },
+  {
+    "start": "00:16:24.000",
+    "end": "00:16:27.000",
+    "text": "Mẹ, con định sẽ lên thành phố lập nghiệp"
+  },
+  {
+    "start": "00:16:27.000",
+    "end": "00:16:30.000",
+    "text": "Con đậu diễn nổi tiếng về nhà mái tập văn nghị"
+  },
+  {
+    "start": "00:16:30.000",
+    "end": "00:16:33.000",
+    "text": "Ông khèn con hát hay, lại ươi nhìn"
+  },
+  {
+    "start": "00:16:33.000",
+    "end": "00:16:35.000",
+    "text": "Ông sẽ giúp con trở thành diễn viên"
+  },
+  {
+    "start": "00:16:36.000",
+    "end": "00:16:38.000",
+    "text": "Tưởng lần được TV mà dễ"
+  },
+  {
+    "start": "00:16:38.000",
+    "end": "00:16:40.000",
+    "text": "Bảo khóc, rái khóc"
+  },
+  {
+    "start": "00:16:40.000",
+    "end": "00:16:43.000",
+    "text": "Bảo cười, rái cười, con làm được không"
+  },
+  {
+    "start": "00:16:44.000",
+    "end": "00:16:47.000",
+    "text": "Con cũng có tốt chất mà mẹ, diễn thì tập là được mà"
+  },
+  {
+    "start": "00:16:47.000",
+    "end": "00:16:50.000",
+    "text": "Con con nà để cho ai"
+  },
+  {
+    "start": "00:16:50.000",
+    "end": "00:16:52.000",
+    "text": "Ở nhà với bà chứ sao"
+  },
+  {
+    "start": "00:16:52.000",
+    "end": "00:16:55.000",
+    "text": "Người ta cho mình cơ hội mà không nắm lấy là thiệt"
+  },
+  {
+    "start": "00:16:55.000",
+    "end": "00:16:58.000",
+    "text": "Ê, con nghĩ cho kỳ đi"
+  },
+  {
+    "start": "00:16:58.000",
+    "end": "00:17:01.000",
+    "text": "Nó còn nhỏ, bà đã không có rồi"
+  },
+  {
+    "start": "00:17:01.000",
+    "end": "00:17:05.000",
+    "text": "Mẹ đi nữa, không được đâu con"
+  },
+  {
+    "start": "00:17:05.000",
+    "end": "00:17:08.000",
+    "text": "Mẹ cứ làm như con đi hẳn không về nửa"
+  },
+  {
+    "start": "00:17:08.000",
+    "end": "00:17:11.000",
+    "text": "Bàu giờ con đi, cuối tuần con đi rồi mẹ à"
+  },
+  {
+    "start": "00:17:11.000",
+    "end": "00:17:14.000",
+    "text": "Mẹ ơi, mẹ thương con thương cháo"
+  },
+  {
+    "start": "00:17:14.000",
+    "end": "00:17:17.000",
+    "text": "Mẹ cố gắng chờ con đổi đời mẹ nhé"
+  },
+  {
+    "start": "00:17:17.000",
+    "end": "00:17:20.000",
+    "text": "Chỉ xem kỳ lại giúp em với"
+  },
+  {
+    "start": "00:17:20.000",
+    "end": "00:17:24.000",
+    "text": "Đạo diễn kỳ nói sẽ giúp em đăng ký vào lớp diễn viên tài năng mà"
+  },
+  {
+    "start": "00:17:24.000",
+    "end": "00:17:27.000",
+    "text": "Tôi không biết, tôi chỉ tuyển người đóng thú bông trong công viên thôi"
+  },
+  {
+    "start": "00:17:27.000",
+    "end": "00:17:29.000",
+    "text": "Cô có làm không?"
+  },
+  {
+    "start": "00:17:29.000",
+    "end": "00:17:30.000",
+    "text": "Đóng thú bông ơi"
+  },
+  {
+    "start": "00:17:30.000",
+    "end": "00:17:32.000",
+    "text": "Sau lại thấy được"
+  },
+  {
+    "start": "00:17:32.000",
+    "end": "00:17:35.000",
+    "text": "Rõ ràng, anh ấy cầm của tôi 10 triệu tiền phí đào tạo rồi mà"
+  },
+  {
+    "start": "00:17:35.000",
+    "end": "00:17:37.000",
+    "text": "Cô này hay nhé"
+  },
+  {
+    "start": "00:17:37.000",
+    "end": "00:17:39.000",
+    "text": "Nói bao nhiêu lần rồi"
+  },
+  {
+    "start": "00:17:39.000",
+    "end": "00:17:42.000",
+    "text": "Một là làm, hay là về đi cho tôi làm việc"
+  },
+  {
+    "start": "00:17:42.000",
+    "end": "00:17:44.000",
+    "text": "Sáng đã lặng nhận"
+  },
+  {
+    "start": "00:17:44.000",
+    "end": "00:17:46.000",
+    "text": "Này, làm sao bây giờ hả con?"
+  },
+  {
+    "start": "00:17:46.000",
+    "end": "00:17:48.000",
+    "text": "Mẹ làm mất thớ trượt"
+  },
+  {
+    "start": "00:17:48.000",
+    "end": "00:17:52.000",
+    "text": "Mẹ còn mất mối nào nhìn bà, nhìn con đửa đây"
+  },
+  {
+    "start": "00:17:53.000",
+    "end": "00:17:55.000",
+    "text": "Công việc đơn giản lắm"
+  },
+  {
+    "start": "00:17:55.000",
+    "end": "00:17:57.000",
+    "text": "Quảng trò báo làm gì thì làm"
+  },
+  {
+    "start": "00:17:57.000",
+    "end": "00:17:59.000",
+    "text": "Thường thiện với tụi trẻ con là được"
+  },
+  {
+    "start": "00:17:59.000",
+    "end": "00:18:01.000",
+    "text": "Nhìn mua hoặc náo vào đây"
+  },
+  {
+    "start": "00:18:01.000",
+    "end": "00:18:03.000",
+    "text": "Vâng hả?"
+  },
+  {
+    "start": "00:18:04.000",
+    "end": "00:18:05.000",
+    "text": "Mẹ cố gắng chào"
+  },
+  {
+    "start": "00:18:05.000",
+    "end": "00:18:06.000",
+    "text": "Mẹ cố gắng chào"
+  },
+  {
+    "start": "00:18:06.000",
+    "end": "00:18:07.000",
+    "text": "Mẹ cố gắng chào"
+  },
+  {
+    "start": "00:18:07.000",
+    "end": "00:18:09.000",
+    "text": "Mẹ cố gắng chào"
+  },
+  {
+    "start": "00:18:09.000",
+    "end": "00:18:10.000",
+    "text": "Mẹ cố gắng chào"
+  },
+  {
+    "start": "00:18:10.000",
+    "end": "00:18:11.000",
+    "text": "Mẹ cố gắng chào"
+  },
+  {
+    "start": "00:18:11.000",
+    "end": "00:18:12.000",
+    "text": "Mẹ cố gắng chào"
+  },
+  {
+    "start": "00:18:13.000",
+    "end": "00:18:14.000",
+    "text": "Mẹ cố gắng chào"
+  },
+  {
+    "start": "00:18:18.000",
+    "end": "00:18:21.000",
+    "text": "Còn gái, mẹ ngữ con quá"
+  },
+  {
+    "start": "00:18:21.000",
+    "end": "00:18:23.000",
+    "text": "Một vẻ với con quá"
+  },
+  {
+    "start": "00:18:23.000",
+    "end": "00:18:26.000",
+    "text": "I thích gì mọi chuyện gì với một diết mơ thôi"
+  },
+  {
+    "start": "00:18:28.000",
+    "end": "00:18:31.000",
+    "text": "Có đoạn học sinh đến đây, dính giật tốt vào nhé"
+  },
+  {
+    "start": "00:18:31.000",
+    "end": "00:18:34.000",
+    "text": "Giật con, chúng mình đến trào bắt gấu đi nào"
+  },
+  {
+    "start": "00:18:36.000",
+    "end": "00:18:37.000",
+    "text": "Thôi được"
+  },
+  {
+    "start": "00:18:37.000",
+    "end": "00:18:40.000",
+    "text": "Bên nà, là... Bên nà phải không nhỉ"
+  },
+  {
+    "start": "00:18:40.000",
+    "end": "00:18:42.000",
+    "text": "Bên nà phải để con bếp nhận ra mình được"
+  },
+  {
+    "start": "00:18:43.000",
+    "end": "00:18:46.000",
+    "text": "Chá hà, bụng bắt gấu em quá"
+  },
+  {
+    "start": "00:18:46.000",
+    "end": "00:18:49.000",
+    "text": "Còn em nữa, em như bụng mẹ ấy"
+  },
+  {
+    "start": "00:18:51.000",
+    "end": "00:18:53.000",
+    "text": "Bắt gấu, bắt làm sao thế?"
+  },
+  {
+    "start": "00:18:53.000",
+    "end": "00:18:55.000",
+    "text": "Chào bắt góc"
+  },
+  {
+    "start": "00:18:56.000",
+    "end": "00:18:59.000",
+    "text": "Bắt là trung cháo đi, rồi bắt sẽ buồn đồng không"
+  },
+  {
+    "start": "00:18:59.000",
+    "end": "00:19:03.000",
+    "text": "Bắt định góc, cháo cũng rất dưới mẹ"
+  },
+  {
+    "start": "00:19:03.000",
+    "end": "00:19:05.000",
+    "text": "Nhưng cháo không bao giờ không"
+  },
+  {
+    "start": "00:19:05.000",
+    "end": "00:19:08.000",
+    "text": "Nếu biết cháo không, mẹ cháo sẽ rất buồn"
+  },
+  {
+    "start": "00:19:08.000",
+    "end": "00:19:11.000",
+    "text": "Bắt bắt không, là gấu con buồn đây"
+  },
+  {
+    "start": "00:19:11.000",
+    "end": "00:19:14.000",
+    "text": "Bên nà, còn nói với bắt gấu đi ước đi"
+  },
+  {
+    "start": "00:19:14.000",
+    "end": "00:19:16.000",
+    "text": "Nhân còn đứng bằng tiếp theo"
+  },
+  {
+    "start": "00:19:17.000",
+    "end": "00:19:19.000",
+    "text": "Cháo ước mẹ cháo về với cháo"
+  },
+  {
+    "start": "00:19:19.000",
+    "end": "00:19:22.000",
+    "text": "Bắt định qua đi ước của cháo nhé"
+  },
+  {
+    "start": "00:19:25.000",
+    "end": "00:19:27.000",
+    "text": "Bắt gấu đi đâu thấy gì"
+  },
+  {
+    "start": "00:19:29.000",
+    "end": "00:19:31.000",
+    "text": "Bắt gấu, bắt sao thế hả?"
+  },
+  {
+    "start": "00:19:31.000",
+    "end": "00:19:33.000",
+    "text": "Ừ, Ừ, bắt không sao"
+  },
+  {
+    "start": "00:19:34.000",
+    "end": "00:19:36.000",
+    "text": "Cháo ra chờ với các bạn đi"
+  },
+  {
+    "start": "00:19:36.000",
+    "end": "00:19:38.000",
+    "text": "Cậu sắp đến giờ về rồi"
+  },
+  {
+    "start": "00:19:38.000",
+    "end": "00:19:40.000",
+    "text": "Bắt có thể hoa phép"
+  },
+  {
+    "start": "00:19:40.000",
+    "end": "00:19:43.000",
+    "text": "Gọi bức thương này cho mẹ cháo được không à?"
+  },
+  {
+    "start": "00:19:43.000",
+    "end": "00:19:46.000",
+    "text": "Các cầu giáo bảo, buồn điện xa lắm"
+  },
+  {
+    "start": "00:19:46.000",
+    "end": "00:19:48.000",
+    "text": "Oto sẽ không đi qua đó"
+  },
+  {
+    "start": "00:19:48.000",
+    "end": "00:19:51.000",
+    "text": "Được, bắt nhất định sẽ chuyển giúp cháo"
+  },
+  {
+    "start": "00:19:52.000",
+    "end": "00:19:54.000",
+    "text": "Cháo cảm ơn bắt gấu à"
+  },
+  {
+    "start": "00:19:56.000",
+    "end": "00:19:57.000",
+    "text": "Mẹ ấy"
+  },
+  {
+    "start": "00:19:57.000",
+    "end": "00:20:01.000",
+    "text": "Bắt bảo, mẹ đi làm chiếm tiền để mua hoa cho con"
+  },
+  {
+    "start": "00:20:01.000",
+    "end": "00:20:03.000",
+    "text": "Con không cần qua đeo anh"
+  },
+  {
+    "start": "00:20:03.000",
+    "end": "00:20:05.000",
+    "text": "Con không cần bức b"
+  },
+  {
+    "start": "00:20:05.000",
+    "end": "00:20:07.000",
+    "text": "Con không cần gặp sát công dưới"
+  },
+  {
+    "start": "00:20:07.000",
+    "end": "00:20:10.000",
+    "text": "Con chỉ cần mẹ về với con thôi"
+  },
+  {
+    "start": "00:20:12.000",
+    "end": "00:20:15.000",
+    "text": "Còn gái, còn về trước với các bạn nhé"
+  },
+  {
+    "start": "00:20:15.000",
+    "end": "00:20:18.000",
+    "text": "Sớm bài mẹ sẽ về với con"
+  },
+  {
+    "start": "00:20:18.000",
+    "end": "00:20:20.000",
+    "text": "Mẹ sẽ không đi thâu nữa"
+  },
+  {
+    "start": "00:20:21.000",
+    "end": "00:20:23.000",
+    "text": "Thương con"
+  },
+  {
+    "start": "00:20:26.000",
+    "end": "00:20:28.000",
+    "text": "Trúc mừng sinh nhật minh"
+  },
+  {
+    "start": "00:20:28.000",
+    "end": "00:20:29.000",
+    "text": "Bà, con lớn rồi"
+  },
+  {
+    "start": "00:20:29.000",
+    "end": "00:20:31.000",
+    "text": "Bắt định gọi con là minh nữa"
+  },
+  {
+    "start": "00:20:31.000",
+    "end": "00:20:33.000",
+    "text": "Dù là hai hai, hai bà hai, 40 hai"
+  },
+  {
+    "start": "00:20:34.000",
+    "end": "00:20:36.000",
+    "text": "Thì mấy phẩn là con trài huy của bà"
+  },
+  {
+    "start": "00:20:37.000",
+    "end": "00:20:39.000",
+    "text": "Phải không cả nhà"
+  },
+  {
+    "start": "00:20:39.000",
+    "end": "00:20:43.000",
+    "text": "Cảm ơn bà, con sẽ cuối ngắn tiếp quản tập đoàn hiêu hàng của bà"
+  },
+  {
+    "start": "00:20:43.000",
+    "end": "00:20:45.000",
+    "text": "Để bà có thể tự hào vì con"
+  },
+  {
+    "start": "00:20:45.000",
+    "end": "00:20:47.000",
+    "text": "Thế xếp tạng gì cho minh đấy"
+  },
+  {
+    "start": "00:20:47.000",
+    "end": "00:20:48.000",
+    "text": "Đập này thốt nghiệm tra trường"
+  },
+  {
+    "start": "00:20:48.000",
+    "end": "00:20:49.000",
+    "text": "Là phải thưởng lớn"
+  },
+  {
+    "start": "00:20:49.000",
+    "end": "00:20:51.000",
+    "text": "Quà đang trở ngoài kia rồi"
+  },
+  {
+    "start": "00:20:51.000",
+    "end": "00:20:53.000",
+    "text": "Hai muốn xem không"
+  },
+  {
+    "start": "00:20:53.000",
+    "end": "00:20:55.000",
+    "text": "Thần cà bà, tự hiện"
+  },
+  {
+    "start": "00:20:55.000",
+    "end": "00:20:57.000",
+    "text": "Bà là số 1, cà xem luôn bà nhé"
+  },
+  {
+    "start": "00:20:57.000",
+    "end": "00:20:59.000",
+    "text": "Bà của con đây"
+  },
+  {
+    "start": "00:20:59.000",
+    "end": "00:21:00.000",
+    "text": "Sau hả?"
+  },
+  {
+    "start": "00:21:00.000",
+    "end": "00:21:02.000",
+    "text": "Bà, bà không đùa đấy chứ"
+  },
+  {
+    "start": "00:21:02.000",
+    "end": "00:21:04.000",
+    "text": "Cái vừa quài sự tưởng tưởng có con luôn"
+  },
+  {
+    "start": "00:21:04.000",
+    "end": "00:21:07.000",
+    "text": "Ủa kì, bà có thể thấy thận minh lúc đây"
+  },
+  {
+    "start": "00:21:07.000",
+    "end": "00:21:11.000",
+    "text": "Bà đi tâm, tôi sẽ làm tất cả những gì tốt nhất cho con"
+  },
+  {
+    "start": "00:21:11.000",
+    "end": "00:21:14.000",
+    "text": "Sau hả con trài, xe đầy mưa nhất em nhà"
+  },
+  {
+    "start": "00:21:14.000",
+    "end": "00:21:17.000",
+    "text": "Lưu bà học hành trái trường cho cánh thẳng"
+  },
+  {
+    "start": "00:21:17.000",
+    "end": "00:21:19.000",
+    "text": "Chúa tình ký nghiệm của tập đoàn hiêu hàng"
+  },
+  {
+    "start": "00:21:19.000",
+    "end": "00:21:21.000",
+    "text": "Phải tận khoàn tráng mới được"
+  },
+  {
+    "start": "00:21:21.000",
+    "end": "00:21:23.000",
+    "text": "Bà cứ tin đó con"
+  },
+  {
+    "start": "00:21:27.000",
+    "end": "00:21:29.000",
+    "text": "Thật khá mấy, quá tuyệt"
+  },
+  {
+    "start": "00:21:29.000",
+    "end": "00:21:31.000",
+    "text": "Để phần tà một phía nha"
+  },
+  {
+    "start": "00:21:31.000",
+    "end": "00:21:33.000",
+    "text": "Có phải lúc nào cũng mua được phía xem chẳng chẳng chung hết"
+  },
+  {
+    "start": "00:21:33.000",
+    "end": "00:21:34.000",
+    "text": "Xe mộng đâu"
+  },
+  {
+    "start": "00:21:34.000",
+    "end": "00:21:37.000",
+    "text": "Chết, hổng rồi, đúng ngày nợp báo khá thực tập"
+  },
+  {
+    "start": "00:21:37.000",
+    "end": "00:21:38.000",
+    "text": "Alo"
+  },
+  {
+    "start": "00:21:38.000",
+    "end": "00:21:39.000",
+    "text": "Alo"
+  },
+  {
+    "start": "00:21:39.000",
+    "end": "00:21:41.000",
+    "text": "Ừ, tao đây"
+  },
+  {
+    "start": "00:21:41.000",
+    "end": "00:21:43.000",
+    "text": "Cứ lên lịch đi, tạng những định đi cùng anh em"
+  },
+  {
+    "start": "00:21:44.000",
+    "end": "00:21:45.000",
+    "text": "Bà"
+  },
+  {
+    "start": "00:21:45.000",
+    "end": "00:21:47.000",
+    "text": "Minh đà, vào đi con"
+  },
+  {
+    "start": "00:21:47.000",
+    "end": "00:21:49.000",
+    "text": "Hở còn thức khuya vậy"
+  },
+  {
+    "start": "00:21:49.000",
+    "end": "00:21:52.000",
+    "text": "Được sẽ mới sướng quá không ngủ được hả"
+  },
+  {
+    "start": "00:21:52.000",
+    "end": "00:21:54.000",
+    "text": "Con đang rầu hết cáo thuộc đây bà"
+  },
+  {
+    "start": "00:21:54.000",
+    "end": "00:21:56.000",
+    "text": "Ờ, sao phải con trài?"
+  },
+  {
+    "start": "00:21:56.000",
+    "end": "00:21:57.000",
+    "text": "Con việc gì à?"
+  },
+  {
+    "start": "00:21:57.000",
+    "end": "00:21:58.000",
+    "text": "Ừ, bà ơi"
+  },
+  {
+    "start": "00:21:58.000",
+    "end": "00:22:00.000",
+    "text": "Bà cũng biết con mày bống đá thế nào rồi đấy"
+  },
+  {
+    "start": "00:22:00.000",
+    "end": "00:22:02.000",
+    "text": "Khó khăn lắm con mới nhờ được bàn con"
+  },
+  {
+    "start": "00:22:02.000",
+    "end": "00:22:04.000",
+    "text": "Mùi cho con với xem chẳng chẳng chung hết"
+  },
+  {
+    "start": "00:22:04.000",
+    "end": "00:22:06.000",
+    "text": "Cứp xe mộng ở đây băng nha"
+  },
+  {
+    "start": "00:22:06.000",
+    "end": "00:22:08.000",
+    "text": "Thế phải đi thôi"
+  },
+  {
+    "start": "00:22:08.000",
+    "end": "00:22:10.000",
+    "text": "Nhưng mà chẳng nói rồi đúng vào"
+  },
+  {
+    "start": "00:22:10.000",
+    "end": "00:22:12.000",
+    "text": "Đợi cuối kỳ thực tập ở công ty 3"
+  },
+  {
+    "start": "00:22:12.000",
+    "end": "00:22:15.000",
+    "text": "Tụi sao đó là nợp và chuẩn bị tốt nghiệp rồi"
+  },
+  {
+    "start": "00:22:15.000",
+    "end": "00:22:17.000",
+    "text": "Con tổng hợp số liệu các thứ nữa"
+  },
+  {
+    "start": "00:22:17.000",
+    "end": "00:22:19.000",
+    "text": "Ê, lo gì?"
+  },
+  {
+    "start": "00:22:19.000",
+    "end": "00:22:20.000",
+    "text": "Mấy cái số liệu đấy"
+  },
+  {
+    "start": "00:22:20.000",
+    "end": "00:22:22.000",
+    "text": "Đưa cho phòng kinh doanh làm gắn cái là sông"
+  },
+  {
+    "start": "00:22:22.000",
+    "end": "00:22:24.000",
+    "text": "Còn lại kích ra cho cô suôn thưa ký"
+  },
+  {
+    "start": "00:22:24.000",
+    "end": "00:22:26.000",
+    "text": "Yện tâm, bà tuyệt vời"
+  },
+  {
+    "start": "00:22:26.000",
+    "end": "00:22:28.000",
+    "text": "Bọn bàn con sẽ phát gian cho bà xem"
+  },
+  {
+    "start": "00:22:28.000",
+    "end": "00:22:30.000",
+    "text": "Bà đúng là người bà lý tưởng trong 5"
+  },
+  {
+    "start": "00:22:30.000",
+    "end": "00:22:32.000",
+    "text": "Bà của ngò ngả"
+  },
+  {
+    "start": "00:22:41.000",
+    "end": "00:22:44.000",
+    "text": "Thu sep, có phát khẩn của phòng giáo vụ trường tiếng Minh nạ"
+  },
+  {
+    "start": "00:22:44.000",
+    "end": "00:22:46.000",
+    "text": "Ờ, sao lại thế này?"
+  },
+  {
+    "start": "00:22:46.000",
+    "end": "00:22:48.000",
+    "text": "Con nhằm lướng gì không vậy"
+  },
+  {
+    "start": "00:22:48.000",
+    "end": "00:22:50.000",
+    "text": "Dạ, Thu sep, tôi đang gọi lại sát nhận"
+  },
+  {
+    "start": "00:22:50.000",
+    "end": "00:22:52.000",
+    "text": "Thì giáo vụ trường báo"
+  },
+  {
+    "start": "00:22:52.000",
+    "end": "00:22:54.000",
+    "text": "Mình không đứng việc bản sữa khó lượng luôn cuối"
+  },
+  {
+    "start": "00:22:54.000",
+    "end": "00:22:57.000",
+    "text": "Vì thế bị mỹ tự cách tham gia bảo vệ tốt nghiệp à"
+  },
+  {
+    "start": "00:22:57.000",
+    "end": "00:23:00.000",
+    "text": "Ờ, vụ lý, cắt cô các cậu tụng chuyên gia làm cho nó"
+  },
+  {
+    "start": "00:23:00.000",
+    "end": "00:23:02.000",
+    "text": "Bà phẩn phải sữa sang là sao"
+  },
+  {
+    "start": "00:23:02.000",
+    "end": "00:23:04.000",
+    "text": "Sau báo đọc cụ, đúng hãng là nước"
+  },
+  {
+    "start": "00:23:04.000",
+    "end": "00:23:05.000",
+    "text": "Cụ liên để viết quà"
+  },
+  {
+    "start": "00:23:05.000",
+    "end": "00:23:06.000",
+    "text": "Còn xử lý ngay cho tôi"
+  },
+  {
+    "start": "00:23:06.000",
+    "end": "00:23:08.000",
+    "text": "Sẽ bà, tôi đã cố thí phục họ"
+  },
+  {
+    "start": "00:23:08.000",
+    "end": "00:23:09.000",
+    "text": "Nhưng mà bẳng không được"
+  },
+  {
+    "start": "00:23:09.000",
+    "end": "00:23:12.000",
+    "text": "Nguyên tắc là sinh viên phải đất thân có mặt"
+  },
+  {
+    "start": "00:23:12.000",
+    "end": "00:23:13.000",
+    "text": "Để sửa lượng văn và giáo sư"
+  },
+  {
+    "start": "00:23:13.000",
+    "end": "00:23:15.000",
+    "text": "Kí sát nhận bản cuối cùng"
+  },
+  {
+    "start": "00:23:15.000",
+    "end": "00:23:16.000",
+    "text": "Với đủ tương cách bảo vệ tốt nghiệp"
+  },
+  {
+    "start": "00:23:16.000",
+    "end": "00:23:17.000",
+    "text": "Tôi e..."
+  },
+  {
+    "start": "00:23:17.000",
+    "end": "00:23:19.000",
+    "text": "Bây giờ đã quá mụng rồi"
+  },
+  {
+    "start": "00:23:19.000",
+    "end": "00:23:21.000",
+    "text": "Cảm ơn, hơi điện mất thôi"
+  },
+  {
+    "start": "00:23:21.000",
+    "end": "00:23:22.000",
+    "text": "Làm sao bây giờ"
+  },
+  {
+    "start": "00:23:28.000",
+    "end": "00:23:29.000",
+    "text": "Hành nấm bây giờ hả?"
+  },
+  {
+    "start": "00:23:29.000",
+    "end": "00:23:30.000",
+    "text": "Chúng thích xe bộ cơ bà"
+  },
+  {
+    "start": "00:23:30.000",
+    "end": "00:23:31.000",
+    "text": "Hứ"
+  },
+  {
+    "start": "00:23:31.000",
+    "end": "00:23:32.000",
+    "text": "Hãy bảo vệ không đi"
+  },
+  {
+    "start": "00:23:32.000",
+    "end": "00:23:34.000",
+    "text": "Giờ thà hồn thiên gia"
+  },
+  {
+    "start": "00:23:34.000",
+    "end": "00:23:35.000",
+    "text": "Ờ, bà"
+  },
+  {
+    "start": "00:23:35.000",
+    "end": "00:23:37.000",
+    "text": "Còn về rồi à"
+  },
+  {
+    "start": "00:23:37.000",
+    "end": "00:23:38.000",
+    "text": "Ờ, bà"
+  },
+  {
+    "start": "00:23:38.000",
+    "end": "00:23:39.000",
+    "text": "Sao bà không bật đen hết"
+  },
+  {
+    "start": "00:23:39.000",
+    "end": "00:23:41.000",
+    "text": "Bùm cái này rồi, bà phẩn chức mũa"
+  },
+  {
+    "start": "00:23:41.000",
+    "end": "00:23:43.000",
+    "text": "Bà nợi con này, lấy đây"
+  },
+  {
+    "start": "00:23:46.000",
+    "end": "00:23:47.000",
+    "text": "Mình này"
+  },
+  {
+    "start": "00:23:47.000",
+    "end": "00:23:49.000",
+    "text": "Còn mươi vệ của nặng thật"
+  },
+  {
+    "start": "00:23:49.000",
+    "end": "00:23:51.000",
+    "text": "Bà không muốn lặng cộng sốc"
+  },
+  {
+    "start": "00:23:51.000",
+    "end": "00:23:54.000",
+    "text": "Nhịp bà phải thông báo với con một tình buồn"
+  },
+  {
+    "start": "00:23:54.000",
+    "end": "00:23:56.000",
+    "text": "Ờ, tình gì vậy bà"
+  },
+  {
+    "start": "00:23:56.000",
+    "end": "00:23:58.000",
+    "text": "Bà đừng làm con sợ chứ"
+  },
+  {
+    "start": "00:23:58.000",
+    "end": "00:24:00.000",
+    "text": "Hơn, hết rồi"
+  },
+  {
+    "start": "00:24:00.000",
+    "end": "00:24:03.000",
+    "text": "Còn, con không được báo vệ tôn nghiệm nữa"
+  },
+  {
+    "start": "00:24:03.000",
+    "end": "00:24:05.000",
+    "text": "Ờ, sau lại thấy"
+  },
+  {
+    "start": "00:24:05.000",
+    "end": "00:24:07.000",
+    "text": "Nhài được bắt bột sinh viên"
+  },
+  {
+    "start": "00:24:07.000",
+    "end": "00:24:10.000",
+    "text": "Phải định thân con bạc sữa lũng văn với các giáo sư"
+  },
+  {
+    "start": "00:24:10.000",
+    "end": "00:24:12.000",
+    "text": "Khi xem chẳng cuối cùng"
+  },
+  {
+    "start": "00:24:12.000",
+    "end": "00:24:14.000",
+    "text": "Phải đủ từ cắt báo về hình"
+  },
+  {
+    "start": "00:24:14.000",
+    "end": "00:24:17.000",
+    "text": "Quên định này bà thử sinh viên nào mà phải biết như"
+  },
+  {
+    "start": "00:24:17.000",
+    "end": "00:24:19.000",
+    "text": "Còn không biết đâu"
+  },
+  {
+    "start": "00:24:19.000",
+    "end": "00:24:20.000",
+    "text": "Tất cả là tại bà"
+  },
+  {
+    "start": "00:24:20.000",
+    "end": "00:24:22.000",
+    "text": "Tại bà định con mới bị thế này"
+  },
+  {
+    "start": "00:24:22.000",
+    "end": "00:24:23.000",
+    "text": "Bà đi mà giải quyết đi"
+  },
+  {
+    "start": "00:24:23.000",
+    "end": "00:24:24.000",
+    "text": "Còn không uống tập"
+  },
+  {
+    "start": "00:24:24.000",
+    "end": "00:24:26.000",
+    "text": "Chờ đợi thí 1 năm nào nữa để ra trường nữa"
+  },
+  {
+    "start": "00:24:26.000",
+    "end": "00:24:27.000",
+    "text": "Còn bởi lắm rồi"
+  },
+  {
+    "start": "00:24:27.000",
+    "end": "00:24:28.000",
+    "text": "Còn bà kể"
+  },
+  {
+    "start": "00:24:28.000",
+    "end": "00:24:31.000",
+    "text": "Đúng, đúng, lại do bà"
+  },
+  {
+    "start": "00:24:31.000",
+    "end": "00:24:32.000",
+    "text": "Từ khi mẹ con mức"
+  },
+  {
+    "start": "00:24:32.000",
+    "end": "00:24:34.000",
+    "text": "Bà đã luôn từ hứa rạng"
+  },
+  {
+    "start": "00:24:34.000",
+    "end": "00:24:36.000",
+    "text": "Xe chậm sốc cho con hết sức con thể"
+  },
+  {
+    "start": "00:24:36.000",
+    "end": "00:24:38.000",
+    "text": "Để con không phải lo lắng điều gì"
+  },
+  {
+    "start": "00:24:39.000",
+    "end": "00:24:41.000",
+    "text": "Bà cứ nghĩ gánh phát cho con"
+  },
+  {
+    "start": "00:24:41.000",
+    "end": "00:24:44.000",
+    "text": "Không để con vức và cường dọng là thương con"
+  },
+  {
+    "start": "00:24:44.000",
+    "end": "00:24:45.000",
+    "text": "Bà đà bà không bọng con"
+  },
+  {
+    "start": "00:24:45.000",
+    "end": "00:24:47.000",
+    "text": "Bà cũng con đi từ bấy tây giờ"
+  },
+  {
+    "start": "00:24:47.000",
+    "end": "00:24:48.000",
+    "text": "Bà quên mức rằng"
+  },
+  {
+    "start": "00:24:48.000",
+    "end": "00:24:50.000",
+    "text": "Bà cũng đưa trẻ một trướng cạnh"
+  },
+  {
+    "start": "00:24:50.000",
+    "end": "00:24:52.000",
+    "text": "Thì nó phải tự tập đi"
+  },
+  {
+    "start": "00:24:52.000",
+    "end": "00:24:53.000",
+    "text": "Trình chính đôi chân của mình"
+  },
+  {
+    "start": "00:24:56.000",
+    "end": "00:24:57.000",
+    "text": "Bà ơi"
+  },
+  {
+    "start": "00:24:58.000",
+    "end": "00:25:00.000",
+    "text": "Là bà con lỗi"
+  },
+  {
+    "start": "00:25:00.000",
+    "end": "00:25:01.000",
+    "text": "Bà ơi"
+  },
+  {
+    "start": "00:25:01.000",
+    "end": "00:25:02.000",
+    "text": "Không phải tài bà"
+  },
+  {
+    "start": "00:25:02.000",
+    "end": "00:25:03.000",
+    "text": "Là tài con"
+  },
+  {
+    "start": "00:25:03.000",
+    "end": "00:25:05.000",
+    "text": "Bà đường tự thích mình nữa"
+  },
+  {
+    "start": "00:25:07.000",
+    "end": "00:25:08.000",
+    "text": "Còn trái"
+  },
+  {
+    "start": "00:25:08.000",
+    "end": "00:25:09.000",
+    "text": "Phải lầm sao bây giờ"
+  },
+  {
+    "start": "00:25:09.000",
+    "end": "00:25:11.000",
+    "text": "Còn không bảo vệ được nữa"
+  },
+  {
+    "start": "00:25:11.000",
+    "end": "00:25:13.000",
+    "text": "Giờ phải làm thế nào đi"
+  },
+  {
+    "start": "00:25:15.000",
+    "end": "00:25:16.000",
+    "text": "Còn con sẽ làm lại"
+  },
+  {
+    "start": "00:25:16.000",
+    "end": "00:25:17.000",
+    "text": "Thì lại"
+  },
+  {
+    "start": "00:25:17.000",
+    "end": "00:25:18.000",
+    "text": "Bảo vệ lại"
+  },
+  {
+    "start": "00:25:18.000",
+    "end": "00:25:19.000",
+    "text": "Còn sẽ cố gánh"
+  },
+  {
+    "start": "00:25:19.000",
+    "end": "00:25:20.000",
+    "text": "Còn con trẻ"
+  },
+  {
+    "start": "00:25:20.000",
+    "end": "00:25:22.000",
+    "text": "Còn bức đình sẽ làm được bà"
+  },
+  {
+    "start": "00:25:22.000",
+    "end": "00:25:23.000",
+    "text": "Bà hãy tinh vệ trợ con"
+  },
+  {
+    "start": "00:25:23.000",
+    "end": "00:25:24.000",
+    "text": "Được không bà"
+  },
+  {
+    "start": "00:25:25.000",
+    "end": "00:25:26.000",
+    "text": "Còn trái"
+  },
+  {
+    "start": "00:25:26.000",
+    "end": "00:25:28.000",
+    "text": "Hứa về bà thế nhé"
+  },
+  {
+    "start": "00:25:28.000",
+    "end": "00:25:29.000",
+    "text": "Bà con mình"
+  },
+  {
+    "start": "00:25:29.000",
+    "end": "00:25:31.000",
+    "text": "Điết định phải chiếm hay trên trời"
+  },
+  {
+    "start": "00:25:31.000",
+    "end": "00:25:32.000",
+    "text": "Tự hào"
+  },
+  {
+    "start": "00:25:32.000",
+    "end": "00:25:33.000",
+    "text": "Cô lịch con"
+  },
+  {
+    "start": "00:25:38.000",
+    "end": "00:25:40.000",
+    "text": "Hãy like, comment, subscribe con"
+  },
+  {
+    "start": "00:25:40.000",
+    "end": "00:25:42.000",
+    "text": "Để xem thêm những video mới nhớt nhé"
+  },
+  {
+    "start": "00:25:49.000",
+    "end": "00:25:51.000",
+    "text": "Để xem thêm những video mới nhớt nhé"
+  }
+]
