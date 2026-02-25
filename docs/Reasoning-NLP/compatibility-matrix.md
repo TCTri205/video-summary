@@ -34,6 +34,7 @@ Tai lieu nay tom tat nhanh de tranh nham lan giua:
 | `summary_video_manifest.json` | Deliverable lien module | `contracts/v1/template/summary_video_manifest.schema.json` | Khong | Must keep `keep_original_audio=true` |
 | `summary_video.mp4` | Deliverable cuoi | QC theo checklist | Khong ap dung | File media |
 | `final_summary.json` | Deliverable (optional) | `contracts/v1/template/final_summary.schema.json` | Khong | Strict contract, khong chen field metadata noi bo |
+| `context_blocks.json` | Internal | Format context merge theo `docs/Reasoning-NLP/alignment-spec.md` | Co | Artifact context build (G3) |
 | `alignment_result.json` | Internal | `docs/Reasoning-NLP/schema/alignment_result.schema.json` | Co | Artifact align + confidence |
 | `quality_report.json` | Internal | `docs/Reasoning-NLP/schema/quality_report.schema.json` | Co | Artifact gate/metric |
 | `summary_script.internal.json` | Internal | `docs/Reasoning-NLP/schema/summary_script.internal.schema.json` | Co | Noi luu `evidence`, `quality_flags`, `generation_meta` |

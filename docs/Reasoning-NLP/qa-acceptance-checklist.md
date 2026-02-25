@@ -33,6 +33,7 @@ Checklist:
 
 - [ ] `audio_transcripts.json` parse JSON thanh cong.
 - [ ] `visual_captions.json` parse JSON thanh cong.
+- [ ] `raw_video.mp4` ton tai, doc duoc, va co duration hop le (>0).
 - [ ] Timestamp dung format `HH:MM:SS.mmm`.
 - [ ] Transcript co `start < end`, khong am.
 - [ ] Text field bat buoc khong rong sau trim (neu rong phai danh dau theo policy).
@@ -141,6 +142,7 @@ Muc tieu: render video summary thanh cong voi audio goc.
 Checklist:
 
 - [ ] Cat/ghep dung thu tu segment.
+- [ ] `source_video_path` trong `summary_video_manifest.json` tro den file nguon hop le (`raw_video.mp4` hoac duong dan da config).
 - [ ] `keep_original_audio=true` va audio co mat trong output.
 - [ ] Retry render/fallback duoc kich hoat dung rule neu loi.
 - [ ] Output `summary_video.mp4` playable.

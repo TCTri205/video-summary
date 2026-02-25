@@ -17,6 +17,7 @@ Deliverable machine-checkable (duong dan thuc te trong repo):
 
 Artifact noi bo Module 3 (khong phai I/O ban giao lien module):
 
+- `context_blocks.json`
 - `alignment_result.json`
 - `quality_report.json`
 - `summary_script.internal.json`
@@ -34,6 +35,7 @@ Contract lane (deliverable):
 Reasoning lane (internal):
 
 - `summary_script.internal.json` (noi luu `evidence`, `quality_flags`, `generation_meta`)
+- `context_blocks.json`
 - `alignment_result.json`
 - `quality_report.json`
 

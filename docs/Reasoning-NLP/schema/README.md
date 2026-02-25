@@ -124,6 +124,31 @@ python docs/Reasoning-NLP/schema/validate_artifacts.py \
   --max-total-duration-ms 20000
 ```
 
+Metric mismatch fail-fast test (du kien fail voi `QC_METRIC_MISMATCH`):
+
+```bash
+python docs/Reasoning-NLP/schema/validate_artifacts.py \
+  --alignment docs/Reasoning-NLP/schema/examples/alignment_result.valid.json \
+  --script docs/Reasoning-NLP/schema/examples/summary_script.valid.json \
+  --manifest docs/Reasoning-NLP/schema/examples/summary_video_manifest.valid.json \
+  --report docs/Reasoning-NLP/schema/examples/invalid/quality_report.invalid.metric_mismatch.json \
+  --contracts-dir contracts/v1/template \
+  --source-duration-ms 120000 \
+  --metric-tolerance 0.02
+```
+
+Alignment no-match consistency fail-fast test (du kien fail voi `ALIGN_NO_MATCH_CONSISTENCY`):
+
+```bash
+python docs/Reasoning-NLP/schema/validate_artifacts.py \
+  --alignment docs/Reasoning-NLP/schema/examples/invalid/alignment_result.invalid.no_match_consistency.json \
+  --script docs/Reasoning-NLP/schema/examples/summary_script.valid.json \
+  --manifest docs/Reasoning-NLP/schema/examples/summary_video_manifest.valid.json \
+  --report docs/Reasoning-NLP/schema/examples/quality_report.valid.json \
+  --contracts-dir contracts/v1/template \
+  --source-duration-ms 120000
+```
+
 Internal debug profile:
 
 ```bash
