@@ -19,6 +19,7 @@ Luu y contract-first:
 - Chuan schema: JSON Schema Draft 2020-12.
 - `schema_version` noi bo hien tai: `1.1`.
 - Timestamp video format: `HH:MM:SS.mmm`.
+- `jsonschema` la dependency bat buoc cho validator; neu thieu se fail-fast voi `SCHEMA_ENGINE_MISSING`.
 
 ## Validation profiles
 
@@ -29,7 +30,7 @@ Muc dich: nghiem thu deliverable lien module truoc handoff.
 - `summary_script.json` -> `contracts/v1/template/summary_script.schema.json`
 - `summary_video_manifest.json` -> `contracts/v1/template/summary_video_manifest.schema.json`
 - `alignment_result.json`, `quality_report.json` -> internal schemas
-- Cross-file consistency + threshold gates: bat
+- Cross-file consistency + threshold gates + metric consistency: bat
 
 ### 2) Internal debug profile
 
@@ -53,6 +54,8 @@ Muc dich: debug reasoning lane voi artifact mo rong.
 - `ALIGN_*`: mismatch timeline -> check delta policy, tie-break, no_match_rate.
 - `LLM_*`: parse fail/hallucination -> retry JSON repair, fallback neutral.
 - `MANIFEST_*`: script-manifest lech -> dong bo `segment_id`, `script_ref`, timestamps.
+- `BUDGET_*`: tong do dai segment vuot/khong dat budget -> dieu chinh segment planning.
+- `SCHEMA_ENGINE_MISSING`: thieu dependency validate schema -> cai `jsonschema` truoc khi chay QA.
 - `RENDER_*`: render/codec/audio -> retry safe profile 1 lan, neu van fail thi stop.
 - `QC_*`: fail gate cuoi -> triage theo metric fail trong `quality_report.metrics`.
 
@@ -75,6 +78,9 @@ python docs/Reasoning-NLP/schema/validate_artifacts.py \
   --report docs/Reasoning-NLP/schema/examples/quality_report.valid.json \
   --contracts-dir contracts/v1/template \
   --source-duration-ms 120000 \
+  --min-total-duration-ms 12000 \
+  --max-total-duration-ms 24000 \
+  --metric-tolerance 0.02 \
   --enforce-thresholds
 ```
 
@@ -88,7 +94,34 @@ python docs/Reasoning-NLP/schema/validate_artifacts.py \
   --report docs/Reasoning-NLP/schema/examples/invalid/quality_report.invalid.json \
   --contracts-dir contracts/v1/template \
   --source-duration-ms 120000 \
+  --min-total-duration-ms 12000 \
+  --max-total-duration-ms 24000 \
   --enforce-thresholds
+```
+
+Overlap fail-fast test (du kien fail voi `MANIFEST_OVERLAP`):
+
+```bash
+python docs/Reasoning-NLP/schema/validate_artifacts.py \
+  --alignment docs/Reasoning-NLP/schema/examples/alignment_result.valid.json \
+  --script docs/Reasoning-NLP/schema/examples/invalid/summary_script.invalid.overlap.json \
+  --manifest docs/Reasoning-NLP/schema/examples/invalid/summary_video_manifest.invalid.overlap.json \
+  --report docs/Reasoning-NLP/schema/examples/quality_report.valid.json \
+  --contracts-dir contracts/v1/template \
+  --source-duration-ms 120000
+```
+
+Budget overflow fail-fast test (du kien fail voi `BUDGET_OVERFLOW`):
+
+```bash
+python docs/Reasoning-NLP/schema/validate_artifacts.py \
+  --alignment docs/Reasoning-NLP/schema/examples/alignment_result.valid.json \
+  --script docs/Reasoning-NLP/schema/examples/invalid/summary_script.invalid.budget_overflow.json \
+  --manifest docs/Reasoning-NLP/schema/examples/invalid/summary_video_manifest.invalid.budget_overflow.json \
+  --report docs/Reasoning-NLP/schema/examples/quality_report.valid.json \
+  --contracts-dir contracts/v1/template \
+  --source-duration-ms 120000 \
+  --max-total-duration-ms 20000
 ```
 
 Internal debug profile:
@@ -100,5 +133,7 @@ python docs/Reasoning-NLP/schema/validate_artifacts.py \
   --manifest docs/Reasoning-NLP/schema/examples/internal/summary_video_manifest.internal.valid.json \
   --report docs/Reasoning-NLP/schema/examples/quality_report.valid.json \
   --use-internal-summary-schemas \
-  --source-duration-ms 120000
+  --source-duration-ms 120000 \
+  --min-total-duration-ms 12000 \
+  --max-total-duration-ms 24000
 ```

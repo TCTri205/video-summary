@@ -56,6 +56,7 @@ Checklist:
 - [ ] Tie-break duoc ap dung dung thu tu uu tien.
 - [ ] `alignment_result.json` pass schema `schema/alignment_result.schema.json`.
 - [ ] Theo doi metric alignment: `no_match_rate`, `median_confidence`, `high_confidence_ratio`.
+- [ ] Block alignment tang dan theo `timestamp` va consistency fallback (`no_match` -> `dialogue_text="(khong co)"`, `matched_transcript_ids=[]`).
 
 Pass criteria:
 
@@ -105,6 +106,7 @@ Checklist:
 - [ ] Segment sap theo `segment_id` tang dan.
 - [ ] Moi segment thoa min/max duration policy.
 - [ ] Tong duration nam trong budget he thong.
+- [ ] Segment timeline khong overlap bat thuong.
 - [ ] Coverage su kien (mo dau, dien bien, ket) duoc dam bao trong noi dung segment.
 - [ ] `summary_script.json` pass `contracts/v1/template/summary_script.schema.json`.
 
@@ -123,7 +125,9 @@ Checklist:
 - [ ] Moi `script_ref` ton tai trong `summary_script.segments.segment_id`.
 - [ ] `source_start/source_end` giua script va manifest khop theo segment.
 - [ ] `segment_id` unique trong moi file.
+- [ ] `segment_id` tang dan nghiem ngat trong moi file.
 - [ ] Tat ca timestamps nam trong range video nguon.
+- [ ] Timeline script/manifest khong overlap segment.
 
 Pass criteria:
 
@@ -159,6 +163,7 @@ Checklist:
 - [ ] `overall_status` phu hop voi ket qua cac gate.
 - [ ] Metric bat buoc co gia tri hop le.
 - [ ] Co metric alignment bo sung (`no_match_rate`, `median_confidence`, `high_confidence_ratio`).
+- [ ] Co metric consistency check: metric trong `quality_report.metrics` khop voi metric recompute tu artifact (trong tolerance he thong).
 
 Pass criteria:
 

@@ -56,9 +56,9 @@
     "duration_match_score": 0.98,
     "black_frame_ratio": 0.01,
     "decode_error_count": 0,
-    "no_match_rate": 0.07,
-    "median_confidence": 0.81,
-    "high_confidence_ratio": 0.73
+    "no_match_rate": 0.0,
+    "median_confidence": 0.89,
+    "high_confidence_ratio": 1.0
   },
   "warnings": [],
   "errors": []

@@ -130,6 +130,7 @@ Khong map cac field noi bo sau vao deliverable:
 - Tong do dai summary phai nam trong budget:
   - `target_ratio` de xuat: `0.15` do dai video goc
   - `min_total_duration_ms` va `max_total_duration_ms` do he thong cau hinh
+  - Neu bat threshold ratio: tong duration hop le khi nam trong `target_ratio +- target_ratio_tolerance` (de xuat tolerance `0.20`)
 
 ## Cross-file consistency checks
 
@@ -138,6 +139,7 @@ Khong map cac field noi bo sau vao deliverable:
 - Moi `script_ref` trong manifest phai ton tai trong `summary_script.segments.segment_id`.
 - `source_start/source_end` cua script va manifest phai dong nhat theo tung segment.
 - Tat ca timestamps phai nam trong `[0, source_video_duration]`.
+- Segment timeline trong moi file phai khong overlap va giu thu tu tang dan theo thoi gian.
 
 ## Rule chat luong
 
