@@ -15,7 +15,12 @@ Thu muc nay la nguon chuan de rang buoc Input/Output giua cac module.
 - `visual_captions.schema.json`
 - `summary_script.schema.json`
 - `summary_video_manifest.schema.json`
-- `final_summary.schema.json` (internal artifact, optional)
+- `final_summary.schema.json` (optional contract artifact)
+
+Luu y runtime hien tai:
+
+- Pipeline publish deliverable cuoi mac dinh: `summary_video.mp4` + `summary_text.txt`.
+- `final_summary.json` la optional contract artifact, chi validate/xu ly khi duoc xuat bo sung.
 
 ## Examples
 

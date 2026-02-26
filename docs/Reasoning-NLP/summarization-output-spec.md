@@ -25,12 +25,17 @@ Artifact noi bo Module 3 (khong phai I/O ban giao lien module):
 
 ## Artifact lanes (de tranh nham)
 
-Contract lane (deliverable):
+Contract lane (deliverable lien module):
 
 - `summary_script.json`
 - `summary_video_manifest.json`
 - `summary_video.mp4`
 - `final_summary.json` (optional, strict schema)
+
+Deliverable cuoi publish cho nguoi dung (runtime hien tai):
+
+- `deliverables/<run_id>/summary_video.mp4`
+- `deliverables/<run_id>/summary_text.txt`
 
 Reasoning lane (internal):
 
@@ -98,6 +103,7 @@ Reasoning lane (internal):
 `summary_script.internal.json` toi thieu phai co:
 
 - `schema_version`
+- `title`
 - `plot_summary`
 - `moral_lesson`
 - `evidence`
@@ -106,6 +112,11 @@ Reasoning lane (internal):
 - `segments` (co `confidence`, `role`)
 
 Validate bang `docs/Reasoning-NLP/schema/summary_script.internal.schema.json`.
+
+Luu y stage boundary runtime:
+
+- G4 (`summarize`) sinh internal summary va gan `segments` noi bo (co `confidence`, `role`).
+- G5 (`segment_plan`) map tu internal sang deliverable `summary_script.json` + `summary_video_manifest.json`.
 
 ## Mapping tu internal sang deliverable
 

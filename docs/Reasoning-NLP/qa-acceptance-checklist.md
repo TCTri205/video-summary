@@ -87,11 +87,12 @@ Muc tieu: sinh tom tat grounded, parse-safe.
 Checklist:
 
 - [ ] Output internal chi la JSON, khong chen text ngoai.
-- [ ] Internal output co day du key: `plot_summary`, `moral_lesson`, `quality_flags`, `evidence`.
+- [ ] Internal output co day du key bat buoc: `schema_version`, `title`, `plot_summary`, `moral_lesson`, `evidence`, `quality_flags`, `generation_meta`, `segments`.
 - [ ] `plot_summary` va `moral_lesson` khong rong sau trim.
 - [ ] `evidence.timestamps` ton tai trong context.
 - [ ] Retry/repair policy duoc ap dung neu parse fail.
-- [ ] Internal artifact (`summary_script.internal.json` neu xuat) pass `docs/Reasoning-NLP/schema/summary_script.internal.schema.json`.
+- [ ] Internal artifact (`summary_script.internal.json` neu xuat) pass `docs/Reasoning-NLP/schema/summary_script.internal.schema.json` (bao gom required fields va kieu du lieu).
+- [ ] Neu co `LLM_NEUTRAL_FALLBACK` trong `quality_flags` thi gate phai duoc danh dau blocker (run fail).
 
 Pass criteria:
 
@@ -174,7 +175,8 @@ Pass criteria:
 
 ## Rule cross-check voi contract global
 
-- [ ] Deliverable I/O (`summary_script.json`, `summary_video_manifest.json`, `final_summary.json` neu xuat) validate theo `contracts/v1/template/`.
+- [ ] Deliverable I/O (`summary_script.json`, `summary_video_manifest.json`) validate theo `contracts/v1/template/`.
+- [ ] `final_summary.json` chi validate khi artifact nay duoc xuat bo sung.
 - [ ] Khong chen metadata noi bo (`quality_flags`, `evidence`, `confidence`, `role`, `generation_meta`) vao deliverable neu schema global khong cho phep.
 
 ## KPI gate de xuat (release baseline)

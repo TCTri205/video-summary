@@ -37,16 +37,9 @@ Luu y: `schema_version` chi ap dung cho artifact noi bo, khong bat buoc trong de
 
 ## Fallback rules
 
-- Neu segment ngan hon `min_segment_duration_ms`, thu merge voi doan ke can de tranh flicker.
-- Neu render loi profile chinh, retry 1 lan voi profile an toan (codec/container fallback da dinh nghia san).
-- Neu van loi, dung pipeline va tra `RENDER_FATAL`.
-
-Neu co merge segment do fallback:
-
-1. Bat buoc cap nhat dong bo ca `summary_script.json` va `summary_video_manifest.json`.
-2. Validate lai 2 file theo global contracts.
-3. Chay lai cross-file consistency.
-4. Chi render tiep khi cac check deu pass.
+- Runtime hien tai retry 1 lan voi safe render profile khi profile chinh fail.
+- Runtime hien tai KHONG tu dong merge segment trong stage assemble.
+- Neu van loi sau retry, dung pipeline va tra `RENDER_FATAL`.
 
 ## Output
 

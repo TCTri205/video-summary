@@ -12,7 +12,7 @@
 
 - [ ] Tat ca timestamp dung `HH:MM:SS.mmm`.
 - [ ] Khong co timestamp thieu milliseconds.
-- [ ] `start <= end` cho moi transcript segment.
+- [ ] `start < end` cho moi transcript segment.
 - [ ] Du lieu transcript sap xep tang dan theo `start`.
 
 ## C. Alignment quality

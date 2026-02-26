@@ -76,10 +76,11 @@ Moi ket qua match can co `confidence` trong [0,1]:
 
 - `containment_bonus`: +0.45 neu containment.
 - `distance_score`: `max(0, 1 - (distance_ms / delta)) * 0.45`.
-- `lexical_bonus` (mac dinh tat): +0.10 neu caption/dialogue co overlap keyword co nghia.
+- Runtime hien tai khong dung `lexical_bonus`.
+- Neu `fallback_type=no_match` thi `confidence=0`.
 - Chuan hoa score ve [0,1].
 
-De giu deterministic giua cac run, MVP de xuat `lexical_bonus = 0` tru khi bo keyword va tokenizer da duoc khoa version.
+Ghi chu roadmap: co the bo sung `lexical_bonus` trong tuong lai neu bo keyword/tokenizer duoc khoa version de giu deterministic.
 
 Confidence buckets:
 

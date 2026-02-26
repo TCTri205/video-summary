@@ -6,11 +6,14 @@ Xay dung he thong tom tat video theo pipeline 3 module, tach biet trach nhiem, g
 
 - System input: `raw_video.mp4`
 - System output chinh:
+  - `deliverables/<run_id>/summary_video.mp4`
+  - `deliverables/<run_id>/summary_text.txt`
+- Artifact ky thuat lien module:
   - `summary_script.json`
-  - `summary_video.mp4`
-- Artifact noi bo (optional):
   - `summary_video_manifest.json`
-  - `final_summary.json`
+  - `summary_video.mp4` (trong `artifacts/<run_id>/g7_assemble/`)
+- Optional contract artifact:
+  - `final_summary.json` (neu xuat bo sung)
 
 ## 2) Y tuong tong quat
 
@@ -93,5 +96,5 @@ Xay dung he thong tom tat video theo pipeline 3 module, tach biet trach nhiem, g
 2. 100% file giao tiep pass schema v1.
 3. Thay mock data bang data that khong can sua logic merge.
 4. Tao duoc 2 deliverable cuoi:
-   - `summary_script.json`
-   - `summary_video.mp4`
+   - `deliverables/<run_id>/summary_video.mp4`
+   - `deliverables/<run_id>/summary_text.txt`

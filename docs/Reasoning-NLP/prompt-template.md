@@ -7,7 +7,8 @@ Sinh tom tat cot truyen va bai hoc tu context merge, khong them chi tiet ngoai d
 Luu y contract-first:
 
 - Output LLM o buoc nay la artifact noi bo cho reasoning.
-- Deliverable cuoi `summary_script.json`, `summary_video_manifest.json`, va `final_summary.json` (neu xuat) phai map ve schema trong `contracts/v1/template/`.
+- Deliverable lien module `summary_script.json`, `summary_video_manifest.json` (va `final_summary.json` neu xuat bo sung) phai map ve schema trong `contracts/v1/template/`.
+- Runtime hien tai publish deliverable cuoi cho nguoi dung la `summary_video.mp4` + `summary_text.txt` trong `deliverables/<run_id>/`.
 
 ## Nguyen tac prompting
 
@@ -30,10 +31,11 @@ Input:
   - `[Dialogue]: ...`
 - Metadata bo tro (neu co): `confidence`, `fallback_type`.
 
-Output yeu cau (internal schema toi thieu):
+Output yeu cau (payload infer toi thieu truoc parse-repair):
 
 ```json
 {
+  "title": "string",
   "plot_summary": "string",
   "moral_lesson": "string",
   "quality_flags": [],
@@ -48,10 +50,16 @@ Output yeu cau (internal schema toi thieu):
 
 Rang buoc:
 
+- `title` khong duoc rong sau trim.
 - `plot_summary` va `moral_lesson` khong duoc rong sau trim.
 - `quality_flags` co the rong, nhung neu co phai la danh sach string.
 - `evidence.timestamps` phai tham chieu moc thoi gian ton tai trong context.
 - Khong duoc chen key ngoai schema neu che do strict bat buoc.
+
+Sau parse-repair, internal artifact can co them:
+
+- `schema_version=1.1`
+- `generation_meta` (`model`, `seed`, `temperature`, `backend`, `retry_count`, `latency_ms`, `token_count`)
 
 ## Canonical mapping toi artifacts
 
@@ -76,17 +84,11 @@ Khong duoc dua cac field noi bo sau vao deliverable:
 - `confidence`
 - `role`
 
-## Long-context policy (toi uu token)
+## Long-context policy (runtime hien tai)
 
-- Neu context vuot token budget:
-  1. Chia chunk theo timeline (co overlap nho).
-  2. Tom tat tung chunk theo cung internal schema.
-  3. Tong hop global summary tu cac chunk summaries.
-- Uu tien block confidence cao khi can rut gon.
-- Khuyen nghi budget:
-  - `max_blocks_per_chunk`: 120
-  - `chunk_overlap_blocks`: 8
-  - `low_confidence_prune_threshold`: 0.25 (chi prune khi token pressure cao)
+- Runtime dung prompt truncation theo `--summarize-prompt-max-chars`.
+- Prompt builder uu tien giu coverage dau/giua/cuoi timeline va block confidence cao.
+- Chua co chunking da pha trong code runtime hien tai.
 
 ## Retry va parse-repair policy
 
@@ -98,7 +100,6 @@ Khong duoc dua cac field noi bo sau vao deliverable:
 
 - `do_sample=false`
 - `temperature=0.1` (neu backend yeu cau)
-- `top_p=0.9` (chi dung khi sampling bat)
 - `max_new_tokens`: theo budget he thong
 - `seed`: co dinh trong moi run
 

@@ -120,6 +120,11 @@ Bat buoc:
 - `keep_original_audio` phai la `true`.
 - `segments` phai map duoc toi `summary_script.json` qua `script_ref`.
 
-## final_summary.json (internal, optional)
+## final_summary.json (optional contract artifact)
 
-File nay chi dung cho debug/fine-tune noi bo, khong phai deliverable cuoi.
+File nay thuoc contract lane va phai pass `contracts/v1/template/final_summary.schema.json` neu duoc xuat bo sung.
+
+Luu y runtime hien tai:
+
+- Deliverable publish mac dinh cho nguoi dung la `deliverables/<run_id>/summary_video.mp4` va `deliverables/<run_id>/summary_text.txt`.
+- `final_summary.json` khong phai output publish mac dinh.

@@ -44,8 +44,9 @@ Internal artifacts (khong phai deliverable lien module):
 
 Luu y quan trong:
 
-- `final_summary.json` neu duoc xuat thi phai strict theo `contracts/v1/template/final_summary.schema.json`.
-- Khong chen `evidence`, `quality_flags`, `generation_meta`, `confidence`, `role` vao `final_summary.json`.
+- Runtime hien tai publish deliverable cuoi gom `summary_video.mp4` va `summary_text.txt`.
+- `final_summary.json` la contract optional; neu duoc xuat bo sung thi phai strict theo `contracts/v1/template/final_summary.schema.json`.
+- Khong chen `evidence`, `quality_flags`, `generation_meta`, `confidence`, `role` vao deliverable contract.
 
 ## Kien truc pipeline (bat buoc theo thu tu)
 
@@ -142,8 +143,8 @@ python -m reasoning_nlp.cli \
 
 Dual-mode LLM:
 
-- `--summarize-backend {api,local}` chon backend chinh.
-- `--summarize-fallback-backend {api,local}` cho phep fallback neu backend chinh fail.
+- `--summarize-backend {api,local,heuristic}` chon backend chinh.
+- `--summarize-fallback-backend {api,local,heuristic}` cho phep fallback neu backend chinh fail.
 - Env cho API mode: `OPENAI_BASE_URL`, `OPENAI_API_KEY`, `OPENAI_MODEL`.
 
 QC threshold enforcement:
