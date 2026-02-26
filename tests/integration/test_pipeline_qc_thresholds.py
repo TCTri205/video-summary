@@ -55,8 +55,8 @@ class PipelineQCThresholdTests(unittest.TestCase):
                     raw_video_path=str(source_video),
                     artifacts_root=str(root / "artifacts"),
                     run_id="qc_threshold_case",
-                    summarize_backend="api",
-                    summarize_fallback_backend="api",
+                    summarize_backend="heuristic",
+                    summarize_fallback_backend="heuristic",
                     qc_enforce_thresholds=True,
                     qc_min_timeline_consistency_score=1.1,
                 )

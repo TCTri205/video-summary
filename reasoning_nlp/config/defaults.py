@@ -9,6 +9,7 @@ DEFAULT_ALIGNMENT = {
 DEFAULT_RUNTIME = {
     "input_profile": "strict_contract_v1",
     "artifacts_root": "artifacts",
+    "deliverables_root": "deliverables",
     "emit_internal_artifacts": True,
     "strict_replay_hash": False,
 }

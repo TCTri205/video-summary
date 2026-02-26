@@ -9,6 +9,67 @@ Du an tom tat video theo pipeline 3 module, phan tach ro trach nhiem de 2 thanh 
   + Chọn bản ffmpeg-release-essentials.zip
   + Giải nén, thêm thư mục `bin/` vào PATH của hệ thống.
 
+## One-command local run
+
+Muc tieu: chi can mot lenh `python main.py` de chay full he thong Module 1 -> 2 -> 3.
+
+Lenh mac dinh:
+
+```bash
+python main.py
+```
+
+Mac dinh se:
+
+- Input video: `Data/raw/video1.mp4`
+- Output extraction/perception: `Data/processed/<video_name>/extraction/...`
+- Stage reasoning: `g8` (full)
+- Summarize backend: `local` (khong can API key)
+
+Artifact cuoi (G8):
+
+- `artifacts/<run_id>/g5_segment/summary_script.json`
+- `artifacts/<run_id>/g5_segment/summary_video_manifest.json`
+- `artifacts/<run_id>/g7_assemble/summary_video.mp4`
+- `artifacts/<run_id>/g8_qc/quality_report.json`
+
+Co the override linh hoat qua CLI/env/config JSON.
+
+Vi du CLI:
+
+```bash
+python main.py --video-path Data/raw/video2.mp4 --run-id run_local_002 --stage g8
+```
+
+Vi du ENV:
+
+```bash
+set VIDEO_SUMMARY_VIDEO_PATH=Data/raw/video2.mp4
+set VIDEO_SUMMARY_SUMMARIZE_BACKEND=local
+python main.py
+```
+
+Vi du config file:
+
+```json
+{
+  "video_path": "Data/raw/video2.mp4",
+  "output_root": "Data/processed",
+  "artifacts_root": "artifacts",
+  "stage": "g8",
+  "run_id": "run_local_cfg_001",
+  "summarize_backend": "local",
+  "summarize_fallback_backend": "local",
+  "qc_enforce_thresholds": false
+}
+```
+
+```bash
+python main.py --config run_config.json
+```
+
+Thu tu uu tien config: `CLI > ENV > config file > default`.
+
 
 ## Architecture
 
@@ -18,10 +79,10 @@ Du an tom tat video theo pipeline 3 module, phan tach ro trach nhiem de 2 thanh 
 
 ## Final deliverables
 
-- `summary_script.json` (script tom tat chuan may doc)
-- `summary_video.mp4` (cat + ghep tu video goc, giu audio goc)
+- `deliverables/<run_id>/summary_video.mp4` (video tom tat cat + ghep tu video goc, giu audio goc)
+- `deliverables/<run_id>/summary_text.txt` (van ban tom tat de doc cho nguoi dung)
 
-Ghi chu: `final_summary.json` la artifact optional theo global contract (khong phai deliverable media chinh), co the dung cho debug/fine-tune va nghiem thu schema.
+Ghi chu: `summary_script.json`, `summary_video_manifest.json`, `quality_report.json` la artifact ky thuat trong `artifacts/<run_id>/` de debug va nghiem thu.
 
 ## Contract-first integration
 

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import re
 
 from reasoning_nlp.common.errors import fail
 from reasoning_nlp.common.timecode import to_ms
@@ -29,7 +30,7 @@ def plan_segments_from_context(
 
     total_blocks = len(context_blocks)
     target_count = min(3, total_blocks)
-    picks = _pick_block_indexes(total_blocks, target_count)
+    picks = _pick_block_indexes(context_blocks, target_count)
 
     segments: list[PlannedSegment] = []
     total_duration_ms = 0
@@ -39,7 +40,8 @@ def plan_segments_from_context(
         anchor_ts = str(block.get("timestamp", "00:00:00.000"))
         anchor_ms = to_ms(anchor_ts)
         start_ms = max(anchor_ms, prev_end_ms)
-        end_ms = start_ms + min(1500, budget.max_segment_duration_ms)
+        target_segment_ms = min(3000, budget.max_segment_duration_ms)
+        end_ms = start_ms + target_segment_ms
         if source_duration_ms is not None and source_duration_ms > 0:
             latest_start_ms = max(prev_end_ms, source_duration_ms - budget.min_segment_duration_ms)
             if start_ms > latest_start_ms:
@@ -97,12 +99,181 @@ def plan_segments_from_context(
     return segments
 
 
-def _pick_block_indexes(total_blocks: int, target_count: int) -> list[int]:
+def _pick_block_indexes(context_blocks: list[dict[str, object]], target_count: int) -> list[int]:
+    total_blocks = len(context_blocks)
+    if total_blocks == 0:
+        return []
+
+    scores = [_score_block(x) for x in context_blocks]
+
+    def best(start: int, end: int, exclude: set[int] | None = None) -> int:
+        return _best_in_range(total_blocks, start, end, scores=scores, exclude=exclude)
+
     if target_count == 1:
-        return [0]
+        return [best(0, total_blocks)]
+
     if target_count == 2:
-        return [0, total_blocks - 1]
-    return [0, total_blocks // 2, total_blocks - 1]
+        setup = best(0, max(1, total_blocks // 2))
+        resolution = best(max(0, total_blocks // 2), total_blocks, exclude={setup})
+        if setup == resolution:
+            resolution = _best_in_range(total_blocks, 0, total_blocks, scores=scores, exclude={setup})
+        picks = [setup, resolution]
+        return sorted(set(picks))
+
+    setup = best(0, max(1, total_blocks // 3))
+    development = best(max(0, total_blocks // 3), max(1, (2 * total_blocks) // 3), exclude={setup})
+    resolution = best(max(0, (2 * total_blocks) // 3), total_blocks, exclude={setup, development})
+
+    picks = [setup, development, resolution]
+    unique = []
+    seen: set[int] = set()
+    for idx in picks:
+        if idx not in seen:
+            unique.append(idx)
+            seen.add(idx)
+
+    if len(unique) < target_count:
+        ordered = sorted(range(total_blocks), key=lambda i: (-scores[i], i))
+        for idx in ordered:
+            if idx not in seen:
+                unique.append(idx)
+                seen.add(idx)
+            if len(unique) == target_count:
+                break
+
+    unique = _reduce_cta_candidates(unique, scores, context_blocks, target_count)
+
+    return sorted(unique)
+
+
+def _best_in_range(
+    total_blocks: int,
+    start: int,
+    end: int,
+    scores: list[float] | None = None,
+    exclude: set[int] | None = None,
+) -> int:
+    start_idx = max(0, min(total_blocks - 1, start))
+    end_idx = max(start_idx + 1, min(total_blocks, end))
+    deny = exclude or set()
+    if scores is None:
+        candidates = [i for i in range(start_idx, end_idx) if i not in deny]
+        if not candidates:
+            candidates = [i for i in range(total_blocks) if i not in deny]
+        if not candidates:
+            return 0
+        return candidates[0]
+
+    candidates = [i for i in range(start_idx, end_idx) if i not in deny]
+    if not candidates:
+        candidates = [i for i in range(total_blocks) if i not in deny]
+    if not candidates:
+        return 0
+    return max(candidates, key=lambda i: (scores[i], -i))
+
+
+_CTA_PATTERNS = [
+    re.compile(r"\blike\b", re.IGNORECASE),
+    re.compile(r"\bcomment\b", re.IGNORECASE),
+    re.compile(r"\bsubscribe\b", re.IGNORECASE),
+    re.compile(r"\bdang\s*ky\b", re.IGNORECASE),
+    re.compile(r"\bdang\s*ki\b", re.IGNORECASE),
+]
+
+
+def _score_block(block: dict[str, object]) -> float:
+    confidence = max(0.0, min(1.0, _to_float(block.get("confidence", 0.0))))
+    fallback_type = str(block.get("fallback_type", "")).strip().lower()
+    text = " ".join(
+        [
+            str(block.get("dialogue_text", "")).strip(),
+            str(block.get("image_text", "")).strip(),
+        ]
+    ).strip()
+
+    score = confidence
+    if fallback_type == "exact":
+        score += 0.10
+    elif fallback_type == "containment":
+        score += 0.05
+    elif fallback_type == "nearest":
+        score -= 0.10
+    elif fallback_type == "no_match":
+        score -= 0.30
+
+    if _looks_like_cta(text):
+        score -= 0.50
+
+    if not text or text == "(khong co)":
+        score -= 0.20
+
+    return score
+
+
+def _looks_like_cta(text: str) -> bool:
+    lowered = text.strip().lower()
+    if not lowered:
+        return False
+    return any(pattern.search(lowered) for pattern in _CTA_PATTERNS)
+
+
+def _reduce_cta_candidates(
+    selected: list[int],
+    scores: list[float],
+    context_blocks: list[dict[str, object]],
+    target_count: int,
+) -> list[int]:
+    if len(selected) <= 1:
+        return selected
+
+    selected_set = set(selected)
+    pool = [i for i in range(len(context_blocks)) if i not in selected_set]
+    if not pool:
+        return selected
+
+    def is_cta_idx(idx: int) -> bool:
+        text = " ".join(
+            [
+                str(context_blocks[idx].get("dialogue_text", "")).strip(),
+                str(context_blocks[idx].get("image_text", "")).strip(),
+            ]
+        )
+        return _looks_like_cta(text)
+
+    cta_selected = [i for i in selected if is_cta_idx(i)]
+    if not cta_selected:
+        return selected
+
+    non_cta_pool = [i for i in pool if not is_cta_idx(i)]
+    if not non_cta_pool:
+        return selected
+
+    non_cta_pool.sort(key=lambda i: (-scores[i], i))
+    updated = list(selected)
+    for bad in sorted(cta_selected, key=lambda i: (scores[i], i)):
+        if not non_cta_pool:
+            break
+        candidate = non_cta_pool[0]
+        if scores[candidate] <= scores[bad]:
+            continue
+        updated[updated.index(bad)] = candidate
+        non_cta_pool.pop(0)
+
+    dedup = []
+    seen: set[int] = set()
+    for idx in updated:
+        if idx not in seen:
+            dedup.append(idx)
+            seen.add(idx)
+
+    if len(dedup) < target_count:
+        for idx in sorted(range(len(context_blocks)), key=lambda i: (-scores[i], i)):
+            if idx not in seen:
+                dedup.append(idx)
+                seen.add(idx)
+            if len(dedup) == target_count:
+                break
+    return dedup
 
 
 def _ms_to_ts(value: int) -> str:

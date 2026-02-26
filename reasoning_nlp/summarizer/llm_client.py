@@ -304,6 +304,19 @@ def generate_internal_summary(
             token_count=0,
         )
 
+    if backend == "heuristic":
+        return _heuristic_summary(
+            context_blocks=context_blocks,
+            run_seed=run_seed,
+            model_version=model_version,
+            temperature=temperature,
+            backend="heuristic",
+            retry_count=0,
+            latency_ms=0,
+            token_count=0,
+            extra_flags=[],
+        )
+
     prompt = build_summary_prompt(context_blocks, max_chars=prompt_max_chars)
     backends = [backend]
     if fallback_backend and fallback_backend not in backends:
@@ -331,6 +344,20 @@ def generate_internal_summary(
                         temperature=temperature,
                         do_sample=do_sample,
                     )
+                elif backend_name == "heuristic":
+                    payload = _heuristic_summary(
+                        context_blocks=context_blocks,
+                        run_seed=run_seed,
+                        model_version=model_version,
+                        temperature=temperature,
+                        backend="heuristic",
+                        retry_count=attempt,
+                        latency_ms=0,
+                        token_count=0,
+                        extra_flags=[],
+                    )
+                    latency_ms = 0
+                    token_count = 0
                 else:
                     raise RuntimeError(f"unsupported backend: {backend_name}")
 

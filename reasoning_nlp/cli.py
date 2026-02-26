@@ -16,10 +16,15 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--stage", choices=["g3", "g5", "g8"], default="g8", help="Pipeline target stage")
     parser.add_argument("--run-id", default=None, help="Run id; required for replay")
     parser.add_argument("--artifacts-root", default=DEFAULT_RUNTIME["artifacts_root"], help="Artifacts root directory")
+    parser.add_argument("--deliverables-root", default=DEFAULT_RUNTIME["deliverables_root"], help="Final deliverables root directory")
     parser.add_argument("--input-profile", default=DEFAULT_RUNTIME["input_profile"], choices=["strict_contract_v1", "legacy_member1"])
     parser.add_argument("--source-duration-ms", type=int, default=None)
-    parser.add_argument("--summarize-backend", choices=["api", "local"], default=DEFAULT_SUMMARIZATION["backend"])
-    parser.add_argument("--summarize-fallback-backend", choices=["api", "local"], default=DEFAULT_SUMMARIZATION["fallback_backend"])
+    parser.add_argument("--summarize-backend", choices=["api", "local", "heuristic"], default=DEFAULT_SUMMARIZATION["backend"])
+    parser.add_argument(
+        "--summarize-fallback-backend",
+        choices=["api", "local", "heuristic"],
+        default=DEFAULT_SUMMARIZATION["fallback_backend"],
+    )
     parser.add_argument("--summarize-timeout-ms", type=int, default=DEFAULT_SUMMARIZATION["timeout_ms"])
     parser.add_argument("--summarize-max-retries", type=int, default=DEFAULT_SUMMARIZATION["max_retries"])
     parser.add_argument("--summarize-max-new-tokens", type=int, default=DEFAULT_SUMMARIZATION["max_new_tokens"])
@@ -60,6 +65,7 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
         raw_video_path=args.raw_video,
         run_id=args.run_id,
         artifacts_root=args.artifacts_root,
+        deliverables_root=args.deliverables_root,
         input_profile=args.input_profile,
         source_duration_ms=args.source_duration_ms,
         summarize_backend=args.summarize_backend,

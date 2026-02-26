@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 import hashlib
 import os
+import re
+import shutil
 import subprocess
 import time
 import uuid
@@ -56,6 +58,7 @@ class PipelineConfig:
     raw_video_path: str
     run_id: str | None = None
     artifacts_root: str = DEFAULT_RUNTIME["artifacts_root"]
+    deliverables_root: str = DEFAULT_RUNTIME["deliverables_root"]
     input_profile: str = DEFAULT_RUNTIME["input_profile"]
     align_k: float = float(DEFAULT_ALIGNMENT["k"])
     align_min_delta_ms: int = int(DEFAULT_ALIGNMENT["min_delta_ms"])
@@ -243,6 +246,15 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
             stage_results,
             logger,
         )
+        if _quality_report_has_error(quality_report, "QC_LLM_NEUTRAL_FALLBACK"):
+            raise fail("qc", "QC_LLM_NEUTRAL_FALLBACK", "LLM_NEUTRAL_FALLBACK detected")
+        deliverables = _publish_final_deliverables(
+            config=config,
+            run_id=run_id,
+            base=base,
+            summary_internal_payload=summary_internal_payload,
+            script_payload=script_payload,
+        )
         _write_run_meta(base, run_meta)
     except PipelineError:
         raise
@@ -259,6 +271,8 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
             "summary_script": str(base / "g5_segment" / "summary_script.json"),
             "summary_video_manifest": str(base / "g5_segment" / "summary_video_manifest.json"),
             "summary_video": str(base / "g7_assemble" / "summary_video.mp4"),
+            "final_summary_video": str(deliverables["summary_video"]),
+            "final_summary_text": str(deliverables["summary_text"]),
             "quality_report": str(base / "g8_qc" / "quality_report.json"),
         },
         "summary_script": script_payload,
@@ -655,6 +669,16 @@ def _run_g8_qc(
             warnings.append("QC_BLACKDETECT_FALLBACK")
 
         threshold_errors: list[dict[str, str]] = []
+        quality_flags = summary_internal_payload.get("quality_flags", [])
+        if isinstance(quality_flags, list) and any(str(x) == "LLM_NEUTRAL_FALLBACK" for x in quality_flags):
+            threshold_errors.append(
+                {
+                    "stage": "qc",
+                    "error_code": "QC_LLM_NEUTRAL_FALLBACK",
+                    "message": "LLM_NEUTRAL_FALLBACK detected",
+                }
+            )
+
         if bool(config.qc_enforce_thresholds):
             checks = [
                 ("QC_PARSE_VALIDITY_LOW", metrics["parse_validity_rate"] >= config.qc_min_parse_validity_rate, f"parse_validity_rate < {config.qc_min_parse_validity_rate}"),
@@ -723,6 +747,126 @@ def _run_g8_qc(
         _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
         logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
         raise
+
+
+_CTA_PATTERNS = [
+    re.compile(r"\blike\b", re.IGNORECASE),
+    re.compile(r"\bcomment\b", re.IGNORECASE),
+    re.compile(r"\bsubscribe\b", re.IGNORECASE),
+    re.compile(r"\bdang\s*ky\b", re.IGNORECASE),
+    re.compile(r"\bdang\s*ki\b", re.IGNORECASE),
+]
+
+
+def _publish_final_deliverables(
+    config: PipelineConfig,
+    run_id: str,
+    base: Path,
+    summary_internal_payload: dict[str, Any],
+    script_payload: dict[str, Any],
+) -> dict[str, Path]:
+    deliverable_dir = Path(config.deliverables_root) / run_id
+    if deliverable_dir.exists():
+        shutil.rmtree(deliverable_dir)
+    deliverable_dir.mkdir(parents=True, exist_ok=True)
+
+    src_video = base / "g7_assemble" / "summary_video.mp4"
+    dst_video = deliverable_dir / "summary_video.mp4"
+    if not src_video.exists() or src_video.stat().st_size <= 0:
+        raise fail("qc", "QC_FINAL_VIDEO_MISSING", f"Missing rendered video: {src_video}")
+    shutil.copy2(src_video, dst_video)
+
+    text_output = _build_summary_text(summary_internal_payload, script_payload)
+    dst_text = deliverable_dir / "summary_text.txt"
+    dst_text.write_text(text_output, encoding="utf-8")
+
+    if not dst_video.exists() or dst_video.stat().st_size <= 0:
+        raise fail("qc", "QC_FINAL_VIDEO_INVALID", f"Invalid final video: {dst_video}")
+    if not _probe_has_audio_stream(dst_video):
+        raise fail("qc", "QC_FINAL_AUDIO_MISSING", "Final summary video does not contain audio stream")
+    if not dst_text.exists():
+        raise fail("qc", "QC_FINAL_TEXT_MISSING", f"Missing final summary text: {dst_text}")
+
+    text_value = dst_text.read_text(encoding="utf-8").strip()
+    if len(text_value) < 30:
+        raise fail("qc", "QC_FINAL_TEXT_TOO_SHORT", "Final summary text is too short")
+    if _looks_like_cta(text_value):
+        raise fail("qc", "QC_FINAL_TEXT_CTA", "Final summary text contains CTA boilerplate")
+
+    files = [x for x in deliverable_dir.iterdir() if x.is_file()]
+    expected_names = {"summary_video.mp4", "summary_text.txt"}
+    actual_names = {x.name for x in files}
+    if actual_names != expected_names:
+        raise fail("qc", "QC_FINAL_DELIVERABLE_SET", f"Expected deliverables {sorted(expected_names)}, got {sorted(actual_names)}")
+
+    return {
+        "summary_video": dst_video,
+        "summary_text": dst_text,
+    }
+
+
+def _build_summary_text(summary_internal_payload: dict[str, Any], script_payload: dict[str, Any]) -> str:
+    title = str(summary_internal_payload.get("title", script_payload.get("title", "Video Summary"))).strip() or "Video Summary"
+    plot_summary = str(summary_internal_payload.get("plot_summary", script_payload.get("plot_summary", ""))).strip()
+    moral_lesson = str(summary_internal_payload.get("moral_lesson", script_payload.get("moral_lesson", ""))).strip()
+
+    segment_lines: list[str] = []
+    segments = script_payload.get("segments", [])
+    if isinstance(segments, list):
+        for idx, seg in enumerate(segments[:3], start=1):
+            text = str(seg.get("script_text", "")).strip()
+            if text and not _looks_like_cta(text):
+                segment_lines.append(f"{idx}. {text}")
+
+    lines = [
+        title,
+        "",
+        "Tom tat:",
+        plot_summary or "Khong du du lieu de tom tat chi tiet.",
+        "",
+        "Bai hoc:",
+        moral_lesson or "Can doi chieu them bang chung.",
+    ]
+    if segment_lines:
+        lines.extend(["", "Cac diem chinh:", *segment_lines])
+    return "\n".join(lines).strip() + "\n"
+
+
+def _looks_like_cta(text: str) -> bool:
+    lowered = text.strip().lower()
+    if not lowered:
+        return False
+    return any(pattern.search(lowered) for pattern in _CTA_PATTERNS)
+
+
+def _probe_has_audio_stream(video_path: Path) -> bool:
+    cmd = [
+        "ffprobe",
+        "-v",
+        "error",
+        "-select_streams",
+        "a",
+        "-show_entries",
+        "stream=codec_type",
+        "-of",
+        "csv=p=0",
+        str(video_path),
+    ]
+    proc = subprocess.run(cmd, capture_output=True, text=True)
+    if proc.returncode != 0:
+        return False
+    out = (proc.stdout or "").strip().lower()
+    return "audio" in out
+
+
+def _quality_report_has_error(report: dict[str, Any], error_code: str) -> bool:
+    errors = report.get("errors", [])
+    if not isinstance(errors, list):
+        return False
+    for item in errors:
+        if isinstance(item, dict) and str(item.get("error_code", "")) == error_code:
+            return True
+    return False
 
 
 def _append_stage_result(

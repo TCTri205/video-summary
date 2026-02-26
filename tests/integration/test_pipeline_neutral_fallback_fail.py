@@ -6,9 +6,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from reasoning_nlp.common.errors import PipelineError
+from reasoning_nlp.pipeline_runner import PipelineConfig, run_pipeline_g1_g8
 
-class CLIRoutesTests(unittest.TestCase):
-    def test_cli_routes_g3_g5_g8(self) -> None:
+
+class PipelineNeutralFallbackFailTests(unittest.TestCase):
+    def test_llm_neutral_fallback_fails_run(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             data_dir = root / "data"
@@ -46,37 +49,20 @@ class CLIRoutesTests(unittest.TestCase):
                 encoding="utf-8",
             )
 
-            for stage in ("g3", "g5", "g8"):
-                run_id = f"cli_{stage}"
-                cmd = [
-                    "python",
-                    "-m",
-                    "reasoning_nlp.cli",
-                    "--audio-transcripts",
-                    str(transcripts),
-                    "--visual-captions",
-                    str(captions),
-                    "--raw-video",
-                    str(source_video),
-                    "--stage",
-                    stage,
-                    "--run-id",
-                    run_id,
-                    "--artifacts-root",
-                    str(root / "artifacts"),
-                    "--deliverables-root",
-                    str(root / "deliverables"),
-                    "--summarize-backend",
-                    "heuristic",
-                    "--summarize-fallback-backend",
-                    "heuristic",
-                ]
-                proc = subprocess.run(cmd, capture_output=True, text=True)
-                self.assertEqual(proc.returncode, 0, msg=f"stage={stage}\nstdout={proc.stdout}\nstderr={proc.stderr}")
+            with self.assertRaises(PipelineError) as ctx:
+                run_pipeline_g1_g8(
+                    PipelineConfig(
+                        audio_transcripts_path=str(transcripts),
+                        visual_captions_path=str(captions),
+                        raw_video_path=str(source_video),
+                        artifacts_root=str(root / "artifacts"),
+                        run_id="neutral_fallback_case",
+                        summarize_backend="unsupported_backend",
+                        summarize_fallback_backend="unsupported_fallback",
+                    )
+                )
 
-            final_dir = root / "deliverables" / "cli_g8"
-            self.assertTrue((final_dir / "summary_video.mp4").exists())
-            self.assertTrue((final_dir / "summary_text.txt").exists())
+            self.assertEqual(ctx.exception.code, "QC_LLM_NEUTRAL_FALLBACK")
 
     def _make_test_video(self, output_path: Path) -> None:
         cmd = [

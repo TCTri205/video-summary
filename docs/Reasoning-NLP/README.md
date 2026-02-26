@@ -23,7 +23,12 @@ Ban phu trach Module 3 va chien luoc QLoRA.
 
 ## Output ban giao
 
-Deliverable lien module (global contract):
+Deliverable cuoi cho nguoi dung:
+
+- `deliverables/<run_id>/summary_video.mp4`
+- `deliverables/<run_id>/summary_text.txt`
+
+Deliverable lien module (global contract, technical):
 
 - `summary_script.json`
 - `summary_video_manifest.json`
@@ -113,6 +118,7 @@ KPI hieu nang (nen theo doi them):
 - Moi stage phai ghi log: `run_id`, `stage`, `status`, `error_code` (neu co), `duration_ms`.
 - Khong cho phep output parse duoc nhung rong/noi dung vo nghia.
 - Khong chen voice-over moi trong MVP.
+- Neu phat hien `LLM_NEUTRAL_FALLBACK` trong quality flags thi fail run ngay.
 
 ## Huong dan chay pipeline
 

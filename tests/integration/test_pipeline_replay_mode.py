@@ -54,8 +54,8 @@ class PipelineReplayModeTests(unittest.TestCase):
                 raw_video_path=str(source_video),
                 artifacts_root=str(root / "artifacts"),
                 run_id="replay_case",
-                summarize_backend="api",
-                summarize_fallback_backend="api",
+                summarize_backend="heuristic",
+                summarize_fallback_backend="heuristic",
                 replay_mode=False,
             )
             first = run_pipeline_g1_g8(cfg)
@@ -67,8 +67,8 @@ class PipelineReplayModeTests(unittest.TestCase):
                 raw_video_path=str(source_video),
                 artifacts_root=str(root / "artifacts"),
                 run_id="replay_case",
-                summarize_backend="api",
-                summarize_fallback_backend="api",
+                summarize_backend="heuristic",
+                summarize_fallback_backend="heuristic",
                 replay_mode=True,
             )
             second = run_pipeline_g1_g8(replay_cfg)
@@ -127,8 +127,8 @@ class PipelineReplayModeTests(unittest.TestCase):
                 raw_video_path=str(source_video),
                 artifacts_root=str(root / "artifacts"),
                 run_id="replay_invalidate_case",
-                summarize_backend="api",
-                summarize_fallback_backend="api",
+                summarize_backend="heuristic",
+                summarize_fallback_backend="heuristic",
                 model_version="model_a",
                 replay_mode=False,
             )
@@ -140,8 +140,8 @@ class PipelineReplayModeTests(unittest.TestCase):
                 raw_video_path=str(source_video),
                 artifacts_root=str(root / "artifacts"),
                 run_id="replay_invalidate_case",
-                summarize_backend="api",
-                summarize_fallback_backend="api",
+                summarize_backend="heuristic",
+                summarize_fallback_backend="heuristic",
                 model_version="model_b",
                 replay_mode=True,
             )
