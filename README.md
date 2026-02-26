@@ -76,3 +76,46 @@ Hardware behavior:
 1. Thanh vien 2 dung mock data trong `docs/Overview-Project/mock-data/`.
 2. Thanh vien 1 chay pipeline that de tao 2 JSON that.
 3. Thay mock bang JSON that, chay lai Module 3 khong doi logic.
+
+## Colab hybrid runbook (optimized)
+
+- Muc tieu: giu nguyen core pipeline, toi uu toc do/bo nho khi chay Colab.
+- Cach chay: xu ly trung gian o `/content/video-summary-work`, sau do sync co chon loc ve Drive.
+- Mac dinh summarize backend tren Colab: `local` (khong can API key).
+
+### Runtime profiles
+
+- Notebook tu detect profile va tu dieu chinh tham so:
+  - `CPU`: batch caption nho, token summarize thap de on dinh RAM.
+  - `T4`: can bang toc do va bo nho.
+  - `L4`: uu tien throughput cao hon.
+
+### Resume an toan (replay)
+
+- Dat `RUN_ID` co dinh qua bien moi truong truoc khi chay cell pipeline:
+  - `VIDEO_SUMMARY_RUN_ID=<run-id-ban-muon-replay>`
+- Trong notebook, dat `REPLAY_MODE = True` de bat `--replay`.
+- Replay se skip stage hop le dua tren `run_meta.json` + stage hashes.
+
+### Balanced checkpoint policy
+
+- Notebook giu cac artifact can cho replay nhanh va an toan:
+  - `run_meta.json`
+  - `g1_validate/normalized_input.json`
+  - `g2_align/alignment_result.json`
+  - `g3_context/context_blocks.json`
+  - `g4_summarize/parse_meta.json`
+  - `g4_summarize/summary_script.internal.json`
+  - `g5_segment/summary_script.json`
+  - `g5_segment/summary_video_manifest.json`
+  - `g6_manifest/manifest_validation.json`
+  - `g7_assemble/render_meta.json`
+  - `g7_assemble/summary_video.mp4`
+  - `g8_qc/quality_report.json`
+
+### Disk cleanup policy
+
+- Co the xoa endpoint nang sau khi dong bo artifact cuoi:
+  - `processed/<video>/extraction/keyframes/`
+  - `processed/<video>/extraction/audio/audio_16k.wav`
+- Giu so luong run gan nhat bang `KEEP_LAST_RUNS` de tranh day Drive.
