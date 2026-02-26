@@ -1,0 +1,10 @@
+{
+  "render_success": true,
+  "audio_present": true,
+  "decode_error_count": 0,
+  "duration_ms": 4640,
+  "expected_duration_ms": 4500,
+  "duration_match_score": 0.9688888888888889,
+  "retry_count": 0,
+  "output_video_path": "D:\\S-GROUP\\Final-Project-AI-Sgroup\\video-summary\\artifacts\\cli_replay_demo_v2\\g7_assemble\\summary_video.mp4"
+}

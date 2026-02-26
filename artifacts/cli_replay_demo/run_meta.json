@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "config_hash": "b3ee839359474ea90495e4444f944ff2b83f0b8164a6b8e92686039adf5c1834",
+  "tracked": {
+    "input_profile": "strict_contract_v1",
+    "align_k": 1.2,
+    "align_min_delta_ms": 1500,
+    "align_max_delta_ms": 6000,
+    "summarize_seed": 42,
+    "summarize_temperature": 0.1,
+    "model_version": "Qwen2.5-3B-Instruct",
+    "tokenizer_version": "default",
+    "source_duration_ms": 1900000,
+    "min_segment_duration_ms": 1200,
+    "max_segment_duration_ms": 15000,
+    "min_total_duration_ms": 3000,
+    "max_total_duration_ms": 45000,
+    "target_ratio": null,
+    "target_ratio_tolerance": 0.2
+  }
+}

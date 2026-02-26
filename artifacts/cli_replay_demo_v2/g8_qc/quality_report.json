@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.1",
+  "run_id": "cli_replay_demo_v2",
+  "input_profile": "strict_contract_v1",
+  "overall_status": "pass",
+  "stage_results": [
+    {
+      "stage": "validate",
+      "status": "pass",
+      "duration_ms": 56
+    },
+    {
+      "stage": "align",
+      "status": "pass",
+      "duration_ms": 167
+    },
+    {
+      "stage": "context_build",
+      "status": "pass",
+      "duration_ms": 18
+    },
+    {
+      "stage": "summarize",
+      "status": "pass",
+      "duration_ms": 6
+    },
+    {
+      "stage": "segment_plan",
+      "status": "pass",
+      "duration_ms": 6
+    },
+    {
+      "stage": "manifest",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "stage": "assemble",
+      "status": "pass",
+      "duration_ms": 2751
+    },
+    {
+      "stage": "qc",
+      "status": "pass",
+      "duration_ms": 0
+    }
+  ],
+  "metrics": {
+    "parse_validity_rate": 1.0,
+    "timeline_consistency_score": 1.0,
+    "grounding_score": 0.9,
+    "compression_ratio": 0.002368421052631579,
+    "manifest_consistency_pass": true,
+    "render_success": true,
+    "audio_present": true,
+    "duration_match_score": 0.9688888888888889,
+    "black_frame_ratio": 0.0,
+    "decode_error_count": 0,
+    "no_match_rate": 0.047619047619047616,
+    "median_confidence": 0.735188,
+    "high_confidence_ratio": 0.4557823129251701
+  },
+  "warnings": [
+    "ALIGN_WEAK_GROUNDING_SIGNAL"
+  ],
+  "errors": []
+}

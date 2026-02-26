@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "config_hash": "5cb179986366616adcf8c8e3c49daa8eaa13a82debf16c24e6dd7f4b4b78fb72",
+  "tracked": {
+    "input_profile": "strict_contract_v1",
+    "align_k": 1.2,
+    "align_min_delta_ms": 1500,
+    "align_max_delta_ms": 6000,
+    "summarize_seed": 42,
+    "summarize_temperature": 0.1,
+    "model_version": "Qwen2.5-3B-Instruct",
+    "tokenizer_version": "default",
+    "source_duration_ms": 1900000,
+    "min_segment_duration_ms": 1200,
+    "max_segment_duration_ms": 15000,
+    "min_total_duration_ms": 3000,
+    "max_total_duration_ms": 45000,
+    "target_ratio": null,
+    "target_ratio_tolerance": 0.2,
+    "audio_transcripts_sha256": "0e50d9c9db55737f5e637c68ec044997bee5d2c176b43406a8250eecffb1b9c2",
+    "visual_captions_sha256": "67f21d93c1d83f03f3e904852177032d556cb62965d5a265f9dd06daa733d76f",
+    "raw_video_sha256": "da1cad2d6df650c2a55b2fc634ca7a76704b18d4d4ad34f5adf32d3dccddc052"
+  }
+}

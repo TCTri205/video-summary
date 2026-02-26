@@ -1,0 +1,99 @@
+{
+  "input_profile": "strict_contract_v1",
+  "transcripts": [
+    {
+      "transcript_id": "t_0001",
+      "start": "00:00:06.000",
+      "end": "00:00:13.200",
+      "start_ms": 6000,
+      "end_ms": 13200,
+      "text": "Con uoc gi con co du tien de mua chiec dien thoai trong tu kinh.",
+      "index": 0,
+      "is_empty_text": false
+    },
+    {
+      "transcript_id": "t_0002",
+      "start": "00:00:24.100",
+      "end": "00:00:31.000",
+      "start_ms": 24100,
+      "end_ms": 31000,
+      "text": "Cha muon con di cung cha den mot noi truoc khi quyet dinh.",
+      "index": 1,
+      "is_empty_text": false
+    },
+    {
+      "transcript_id": "t_0003",
+      "start": "00:00:44.050",
+      "end": "00:00:52.500",
+      "start_ms": 44050,
+      "end_ms": 52500,
+      "text": "Con thay cay tam gui kia khong, no song nho vao than cay khac.",
+      "index": 2,
+      "is_empty_text": false
+    },
+    {
+      "transcript_id": "t_0004",
+      "start": "00:01:02.000",
+      "end": "00:01:11.300",
+      "start_ms": 62000,
+      "end_ms": 71300,
+      "text": "Neu chi biet bam vao ben ngoai, den luc than cay yeu thi no cung heo tan.",
+      "index": 3,
+      "is_empty_text": false
+    },
+    {
+      "transcript_id": "t_0005",
+      "start": "00:01:20.000",
+      "end": "00:01:30.800",
+      "start_ms": 80000,
+      "end_ms": 90800,
+      "text": "Con hieu roi, dieu quan trong la nang luc va tinh cach cua chinh minh.",
+      "index": 4,
+      "is_empty_text": false
+    }
+  ],
+  "captions": [
+    {
+      "caption_id": "c_0001",
+      "timestamp": "00:00:08.150",
+      "timestamp_ms": 8150,
+      "caption": "Cau be dung truoc cua hang, nhin chiec dien thoai voi anh mat khao khat.",
+      "index": 0,
+      "is_empty_text": false
+    },
+    {
+      "caption_id": "c_0002",
+      "timestamp": "00:00:27.000",
+      "timestamp_ms": 27000,
+      "caption": "Nguoi cha dat tay len vai con, ra hieu di cung minh.",
+      "index": 1,
+      "is_empty_text": false
+    },
+    {
+      "caption_id": "c_0003",
+      "timestamp": "00:00:47.500",
+      "timestamp_ms": 47500,
+      "caption": "Hai cha con dung ben than cay lon co nhanh tam gui kho heo bam vao.",
+      "index": 2,
+      "is_empty_text": false
+    },
+    {
+      "caption_id": "c_0004",
+      "timestamp": "00:01:06.080",
+      "timestamp_ms": 66080,
+      "caption": "Nguoi cha chi tay vao nhanh cay va giai thich, cau be lang nghe cham chu.",
+      "index": 3,
+      "is_empty_text": false
+    },
+    {
+      "caption_id": "c_0005",
+      "timestamp": "00:01:24.200",
+      "timestamp_ms": 84200,
+      "caption": "Cau be mim cuoi nhe, ve mat binh tam va hieu ra van de.",
+      "index": 4,
+      "is_empty_text": false
+    }
+  ],
+  "raw_video_path": "D:\\S-GROUP\\Final-Project-AI-Sgroup\\Short\\CHUYỆN TÍ VÀ TÈO 1 ｜ Quà Tặng Cuộc Sống ｜ Phim Hoạt Hình Cổ Tích Việt Nam Hay Nhất.mp4",
+  "source_duration_ms": 50048
+}

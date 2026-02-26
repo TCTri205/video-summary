@@ -1,0 +1,62 @@
+[
+  {
+    "caption_id": "c_0001",
+    "timestamp": "00:00:08.150",
+    "context_text": "[Image @00:00:08.150]: Cau be dung truoc cua hang, nhin chiec dien thoai voi anh mat khao khat.\n[Dialogue]: Con uoc gi con co du tien de mua chiec dien thoai trong tu kinh.",
+    "image_text": "Cau be dung truoc cua hang, nhin chiec dien thoai voi anh mat khao khat.",
+    "dialogue_text": "Con uoc gi con co du tien de mua chiec dien thoai trong tu kinh.",
+    "matched_transcript_ids": [
+      "t_0001"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.73875
+  },
+  {
+    "caption_id": "c_0002",
+    "timestamp": "00:00:27.000",
+    "context_text": "[Image @00:00:27.000]: Nguoi cha dat tay len vai con, ra hieu di cung minh.\n[Dialogue]: Cha muon con di cung cha den mot noi truoc khi quyet dinh.",
+    "image_text": "Nguoi cha dat tay len vai con, ra hieu di cung minh.",
+    "dialogue_text": "Cha muon con di cung cha den mot noi truoc khi quyet dinh.",
+    "matched_transcript_ids": [
+      "t_0002"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.6825
+  },
+  {
+    "caption_id": "c_0003",
+    "timestamp": "00:00:47.500",
+    "context_text": "[Image @00:00:47.500]: Hai cha con dung ben than cay lon co nhanh tam gui kho heo bam vao.\n[Dialogue]: Con thay cay tam gui kia khong, no song nho vao than cay khac.",
+    "image_text": "Hai cha con dung ben than cay lon co nhanh tam gui kho heo bam vao.",
+    "dialogue_text": "Con thay cay tam gui kia khong, no song nho vao than cay khac.",
+    "matched_transcript_ids": [
+      "t_0003"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.64125
+  },
+  {
+    "caption_id": "c_0004",
+    "timestamp": "00:01:06.080",
+    "context_text": "[Image @00:01:06.080]: Nguoi cha chi tay vao nhanh cay va giai thich, cau be lang nghe cham chu.\n[Dialogue]: Neu chi biet bam vao ben ngoai, den luc than cay yeu thi no cung heo tan.",
+    "image_text": "Nguoi cha chi tay vao nhanh cay va giai thich, cau be lang nghe cham chu.",
+    "dialogue_text": "Neu chi biet bam vao ben ngoai, den luc than cay yeu thi no cung heo tan.",
+    "matched_transcript_ids": [
+      "t_0004"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.594
+  },
+  {
+    "caption_id": "c_0005",
+    "timestamp": "00:01:24.200",
+    "context_text": "[Image @00:01:24.200]: Cau be mim cuoi nhe, ve mat binh tam va hieu ra van de.\n[Dialogue]: Con hieu roi, dieu quan trong la nang luc va tinh cach cua chinh minh.",
+    "image_text": "Cau be mim cuoi nhe, ve mat binh tam va hieu ra van de.",
+    "dialogue_text": "Con hieu roi, dieu quan trong la nang luc va tinh cach cua chinh minh.",
+    "matched_transcript_ids": [
+      "t_0005"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.585
+  }
+]
