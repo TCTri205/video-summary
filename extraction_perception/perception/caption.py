@@ -49,7 +49,12 @@ class VisualCaptioner:
                     }
                 )
 
-        results.sort(key=lambda item: (_to_ms(item["timestamp"]), item["frame_id"]))
+        if any(
+            (_to_ms(results[i]["timestamp"]), int(results[i]["frame_id"]))
+            > (_to_ms(results[i + 1]["timestamp"]), int(results[i + 1]["frame_id"]))
+            for i in range(len(results) - 1)
+        ):
+            results.sort(key=lambda item: (_to_ms(item["timestamp"]), item["frame_id"]))
 
         normalized_results = [
             {

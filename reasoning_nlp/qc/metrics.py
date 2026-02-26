@@ -101,13 +101,32 @@ def compute_parse_validity_rate(summary_payload: dict[str, Any]) -> float:
 
 
 def compute_black_frame_ratio(video_path: str, duration_ms: int | None = None, mode: str = "full") -> float:
+    result = compute_black_frame_ratio_with_status(video_path, duration_ms=duration_ms, mode=mode)
+    return float(result["ratio"])
+
+
+def compute_black_frame_ratio_with_status(
+    video_path: str,
+    duration_ms: int | None = None,
+    mode: str = "full",
+) -> dict[str, Any]:
     path = Path(video_path)
     if not path.exists() or not path.is_file() or path.stat().st_size <= 0:
-        return 1.0
+        return {
+            "ratio": 1.0,
+            "status": "error",
+            "error_code": "QC_BLACKDETECT_VIDEO_INVALID",
+            "message": f"Invalid video path: {video_path}",
+        }
 
     selected_mode = str(mode).strip().lower()
     if selected_mode == "off":
-        return 0.0
+        return {
+            "ratio": 0.0,
+            "status": "off",
+            "error_code": None,
+            "message": "blackdetect disabled",
+        }
     if selected_mode not in {"full", "sampled"}:
         selected_mode = "full"
 
@@ -115,7 +134,12 @@ def compute_black_frame_ratio(video_path: str, duration_ms: int | None = None, m
     if duration_seconds <= 0:
         duration_seconds = _probe_duration_seconds(path)
     if duration_seconds <= 0:
-        return 1.0
+        return {
+            "ratio": 1.0,
+            "status": "error",
+            "error_code": "QC_BLACKDETECT_DURATION_INVALID",
+            "message": "Cannot determine positive video duration",
+        }
 
     vf = "blackdetect=d=0.05:pix_th=0.10"
     if selected_mode == "sampled":
@@ -133,11 +157,41 @@ def compute_black_frame_ratio(video_path: str, duration_ms: int | None = None, m
         "null",
         "-",
     ]
-    proc = subprocess.run(cmd, capture_output=True, text=True)
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
+    except subprocess.TimeoutExpired:
+        return {
+            "ratio": 1.0,
+            "status": "error",
+            "error_code": "QC_BLACKDETECT_TIMEOUT",
+            "message": "ffmpeg blackdetect timed out",
+        }
+    except Exception as exc:
+        return {
+            "ratio": 1.0,
+            "status": "error",
+            "error_code": "QC_BLACKDETECT_RUN_FAILED",
+            "message": str(exc),
+        }
+
+    if proc.returncode != 0:
+        msg = (proc.stderr or proc.stdout or "ffmpeg blackdetect failed").strip()
+        return {
+            "ratio": 1.0,
+            "status": "error",
+            "error_code": "QC_BLACKDETECT_FAILED",
+            "message": msg[-500:],
+        }
+
     text = f"{proc.stdout}\n{proc.stderr}"
     black_seconds = _sum_black_duration(text)
     ratio = black_seconds / duration_seconds if duration_seconds > 0 else 1.0
-    return max(0.0, min(1.0, ratio))
+    return {
+        "ratio": max(0.0, min(1.0, ratio)),
+        "status": "ok",
+        "error_code": None,
+        "message": "",
+    }
 
 
 def _probe_duration_seconds(path: Path) -> float:

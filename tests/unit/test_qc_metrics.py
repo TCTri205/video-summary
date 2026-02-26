@@ -4,6 +4,7 @@ import unittest
 
 from reasoning_nlp.qc.metrics import (
     compute_black_frame_ratio,
+    compute_black_frame_ratio_with_status,
     compute_grounding_score,
     compute_parse_validity_rate,
 )
@@ -46,6 +47,11 @@ class QCMetricsTests(unittest.TestCase):
     def test_black_frame_ratio_missing_file(self) -> None:
         ratio = compute_black_frame_ratio("missing_file.mp4")
         self.assertEqual(ratio, 1.0)
+
+    def test_black_frame_ratio_status_missing_file(self) -> None:
+        result = compute_black_frame_ratio_with_status("missing_file.mp4")
+        self.assertEqual(result["status"], "error")
+        self.assertEqual(result["error_code"], "QC_BLACKDETECT_VIDEO_INVALID")
 
 
 if __name__ == "__main__":

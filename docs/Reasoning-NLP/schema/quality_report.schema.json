@@ -89,6 +89,7 @@
       "additionalProperties": false,
       "required": [
         "parse_validity_rate",
+        "repaired_parse_validity_rate",
         "timeline_consistency_score",
         "grounding_score",
         "compression_ratio",
@@ -104,6 +105,11 @@
       ],
       "properties": {
         "parse_validity_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "repaired_parse_validity_rate": {
           "type": "number",
           "minimum": 0,
           "maximum": 1

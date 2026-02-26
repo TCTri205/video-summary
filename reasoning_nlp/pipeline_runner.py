@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import json
 import hashlib
+import os
+import subprocess
 import time
 import uuid
 from dataclasses import asdict, dataclass
@@ -23,7 +25,7 @@ from reasoning_nlp.common.types import AlignmentBlock, CanonicalCaption, Canonic
 from reasoning_nlp.config.defaults import DEFAULT_ALIGNMENT, DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SEGMENT_BUDGET, DEFAULT_SUMMARIZATION
 from reasoning_nlp.qc.metrics import (
     compute_alignment_metrics,
-    compute_black_frame_ratio,
+    compute_black_frame_ratio_with_status,
     compute_compression_ratio,
     compute_grounding_score,
     compute_parse_validity_rate,
@@ -68,6 +70,7 @@ class PipelineConfig:
     summarize_max_retries: int = int(DEFAULT_SUMMARIZATION["max_retries"])
     summarize_max_new_tokens: int = int(DEFAULT_SUMMARIZATION["max_new_tokens"])
     summarize_do_sample: bool = bool(DEFAULT_SUMMARIZATION["do_sample"])
+    summarize_prompt_max_chars: int | None = int(DEFAULT_SUMMARIZATION["prompt_max_chars"])
     source_duration_ms: int | None = None
     min_segment_duration_ms: int = int(DEFAULT_SEGMENT_BUDGET["min_segment_duration_ms"])
     max_segment_duration_ms: int = int(DEFAULT_SEGMENT_BUDGET["max_segment_duration_ms"])
@@ -85,6 +88,7 @@ class PipelineConfig:
     qc_min_median_confidence: float = float(DEFAULT_QC["min_median_confidence"])
     qc_min_high_confidence_ratio: float = float(DEFAULT_QC["min_high_confidence_ratio"])
     emit_internal_artifacts: bool = bool(DEFAULT_RUNTIME["emit_internal_artifacts"])
+    strict_replay_hash: bool = bool(DEFAULT_RUNTIME["strict_replay_hash"])
     replay_mode: bool = False
 
 
@@ -406,8 +410,18 @@ def _run_g4_summarize(
             max_retries=config.summarize_max_retries,
             max_new_tokens=config.summarize_max_new_tokens,
             do_sample=config.summarize_do_sample,
+            prompt_max_chars=config.summarize_prompt_max_chars,
         )
+        raw_parse_validity_rate = compute_parse_validity_rate(raw)
         repaired = repair_internal_summary(raw)
+        repaired_parse_validity_rate = compute_parse_validity_rate(repaired)
+        write_json(
+            base / "g4_summarize" / "parse_meta.json",
+            {
+                "raw_parse_validity_rate": max(0.0, min(1.0, float(raw_parse_validity_rate))),
+                "repaired_parse_validity_rate": max(0.0, min(1.0, float(repaired_parse_validity_rate))),
+            },
+        )
         repaired.setdefault("quality_flags", [])
         repaired["quality_flags"] = list(repaired["quality_flags"])
         repaired["quality_flags"].append(f"model_version={config.model_version}")
@@ -593,18 +607,29 @@ def _run_g8_qc(
         timeline_consistency_score = compute_timeline_consistency(script_payload, manifest_payload)
         compression_ratio = compute_compression_ratio(script_payload, source_duration_ms)
         grounding_score = compute_grounding_score(summary_internal_payload, context_payload)
+        parse_meta = _load_json_if_exists(base / "g4_summarize" / "parse_meta.json")
         parse_validity_rate = compute_parse_validity_rate(summary_internal_payload)
+        repaired_parse_validity_rate = parse_validity_rate
+        if isinstance(parse_meta, dict):
+            raw_metric = parse_meta.get("raw_parse_validity_rate")
+            if isinstance(raw_metric, (int, float)):
+                parse_validity_rate = max(0.0, min(1.0, float(raw_metric)))
+            repaired_metric = parse_meta.get("repaired_parse_validity_rate")
+            if isinstance(repaired_metric, (int, float)):
+                repaired_parse_validity_rate = max(0.0, min(1.0, float(repaired_metric)))
         output_video_path = str(base / "g7_assemble" / "summary_video.mp4")
         blackdetect_mode = str(config.qc_blackdetect_mode).strip().lower()
         if blackdetect_mode == "auto":
             blackdetect_mode = "full" if bool(config.qc_enforce_thresholds) else "sampled"
-        black_frame_ratio = compute_black_frame_ratio(
+        blackdetect_result = compute_black_frame_ratio_with_status(
             output_video_path,
             duration_ms=int(assemble_payload.get("duration_ms", 0)),
             mode=blackdetect_mode,
         )
+        black_frame_ratio = float(blackdetect_result["ratio"])
         metrics = {
             "parse_validity_rate": parse_validity_rate,
+            "repaired_parse_validity_rate": repaired_parse_validity_rate,
             "timeline_consistency_score": timeline_consistency_score,
             "grounding_score": grounding_score,
             "compression_ratio": compression_ratio,
@@ -626,6 +651,8 @@ def _run_g8_qc(
             warnings.append("ALIGN_LOW_CONFIDENCE")
         if metrics["high_confidence_ratio"] < 0.50:
             warnings.append("ALIGN_WEAK_GROUNDING_SIGNAL")
+        if str(blackdetect_result.get("status", "")) == "error":
+            warnings.append("QC_BLACKDETECT_FALLBACK")
 
         threshold_errors: list[dict[str, str]] = []
         if bool(config.qc_enforce_thresholds):
@@ -652,6 +679,11 @@ def _run_g8_qc(
                     "QC_HIGH_CONFIDENCE_RATIO_LOW",
                     metrics["high_confidence_ratio"] >= config.qc_min_high_confidence_ratio,
                     f"high_confidence_ratio < {config.qc_min_high_confidence_ratio}",
+                ),
+                (
+                    "QC_BLACKDETECT_FAILED",
+                    str(blackdetect_result.get("status", "")) != "error",
+                    str(blackdetect_result.get("error_code", "QC_BLACKDETECT_FAILED")),
                 ),
                 ("QC_RENDER_FAILED", metrics["render_success"] is True, "render_success != true"),
                 ("QC_AUDIO_MISSING", metrics["audio_present"] is True, "audio_present != true"),
@@ -898,13 +930,20 @@ def _load_json_if_exists(path: Path) -> dict[str, Any] | list[dict[str, Any]] | 
 
 
 def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
+    audio_fp = _file_fingerprint(Path(config.audio_transcripts_path), strict_hash=True)
+    caption_fp = _file_fingerprint(Path(config.visual_captions_path), strict_hash=True)
+    video_fp = _file_fingerprint(Path(config.raw_video_path), strict_hash=bool(config.strict_replay_hash))
+    runtime = _collect_runtime_fingerprints()
+    schema_checksums = _collect_schema_checksums()
+
     input_checksums = {
-        "audio_transcripts_sha256": _file_sha256(Path(config.audio_transcripts_path)),
-        "visual_captions_sha256": _file_sha256(Path(config.visual_captions_path)),
-        "raw_video_sha256": _file_sha256(Path(config.raw_video_path)),
+        "audio_transcripts_sha256": audio_fp["sha256"],
+        "visual_captions_sha256": caption_fp["sha256"],
+        "raw_video_sha256": video_fp["sha256"],
     }
     tracked = {
         "input_profile": config.input_profile,
+        "strict_replay_hash": config.strict_replay_hash,
         "align_k": config.align_k,
         "align_min_delta_ms": config.align_min_delta_ms,
         "align_max_delta_ms": config.align_max_delta_ms,
@@ -919,6 +958,7 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
         "summarize_max_retries": config.summarize_max_retries,
         "summarize_max_new_tokens": config.summarize_max_new_tokens,
         "summarize_do_sample": config.summarize_do_sample,
+        "summarize_prompt_max_chars": config.summarize_prompt_max_chars,
         "min_segment_duration_ms": config.min_segment_duration_ms,
         "max_segment_duration_ms": config.max_segment_duration_ms,
         "min_total_duration_ms": config.min_total_duration_ms,
@@ -934,15 +974,27 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
         "qc_max_no_match_rate": config.qc_max_no_match_rate,
         "qc_min_median_confidence": config.qc_min_median_confidence,
         "qc_min_high_confidence_ratio": config.qc_min_high_confidence_ratio,
+        "pipeline_version": runtime["pipeline_version"],
+        "ffmpeg_version": runtime["ffmpeg_version"],
+        "ffprobe_version": runtime["ffprobe_version"],
+        "schema_checksums": schema_checksums,
+        "audio_transcripts_quick": audio_fp["quick"],
+        "visual_captions_quick": caption_fp["quick"],
+        "raw_video_quick": video_fp["quick"],
         **input_checksums,
     }
 
     stage_inputs = {
         "validate": {
             "input_profile": config.input_profile,
+            "strict_replay_hash": config.strict_replay_hash,
+            "pipeline_version": runtime["pipeline_version"],
             "audio_transcripts_sha256": input_checksums["audio_transcripts_sha256"],
             "visual_captions_sha256": input_checksums["visual_captions_sha256"],
             "raw_video_sha256": input_checksums["raw_video_sha256"],
+            "audio_transcripts_quick": audio_fp["quick"],
+            "visual_captions_quick": caption_fp["quick"],
+            "raw_video_quick": video_fp["quick"],
             "source_duration_ms": config.source_duration_ms,
         },
         "align": {
@@ -962,6 +1014,8 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
             "summarize_max_retries": config.summarize_max_retries,
             "summarize_max_new_tokens": config.summarize_max_new_tokens,
             "summarize_do_sample": config.summarize_do_sample,
+            "summarize_prompt_max_chars": config.summarize_prompt_max_chars,
+            "schema_summary_internal_sha256": schema_checksums.get("summary_script.internal.schema.json", "missing"),
         },
         "segment_plan": {
             "min_segment_duration_ms": config.min_segment_duration_ms,
@@ -971,10 +1025,18 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
             "target_ratio": config.target_ratio,
             "target_ratio_tolerance": config.target_ratio_tolerance,
         },
-        "manifest": {},
-        "assemble": {},
+        "manifest": {
+            "schema_summary_script_sha256": schema_checksums.get("summary_script.schema.json", "missing"),
+            "schema_summary_manifest_sha256": schema_checksums.get("summary_video_manifest.schema.json", "missing"),
+        },
+        "assemble": {
+            "ffmpeg_version": runtime["ffmpeg_version"],
+            "ffprobe_version": runtime["ffprobe_version"],
+        },
         "qc": {
             "input_profile": config.input_profile,
+            "ffmpeg_version": runtime["ffmpeg_version"],
+            "schema_quality_report_sha256": schema_checksums.get("quality_report.schema.json", "missing"),
             "qc_enforce_thresholds": config.qc_enforce_thresholds,
             "qc_blackdetect_mode": config.qc_blackdetect_mode,
             "qc_min_parse_validity_rate": config.qc_min_parse_validity_rate,
@@ -1041,6 +1103,87 @@ def _file_sha256(path: Path) -> str:
                 break
             h.update(chunk)
     return h.hexdigest()
+
+
+def _file_fingerprint(path: Path, strict_hash: bool) -> dict[str, Any]:
+    if not path.exists() or not path.is_file():
+        return {
+            "exists": False,
+            "size": -1,
+            "mtime_ns": -1,
+            "quick": "missing",
+            "sha256": "missing",
+        }
+
+    stat = path.stat()
+    size = int(stat.st_size)
+    mtime_ns = int(getattr(stat, "st_mtime_ns", int(stat.st_mtime * 1_000_000_000)))
+    quick_material = f"{path.resolve()}|{size}|{mtime_ns}"
+    quick = hashlib.sha256(quick_material.encode("utf-8")).hexdigest()
+    sha256 = _file_sha256(path) if strict_hash else f"quick:{quick}"
+    return {
+        "exists": True,
+        "size": size,
+        "mtime_ns": mtime_ns,
+        "quick": quick,
+        "sha256": sha256,
+    }
+
+
+def _collect_runtime_fingerprints() -> dict[str, str]:
+    return {
+        "pipeline_version": _detect_pipeline_version(),
+        "ffmpeg_version": _detect_binary_version("ffmpeg"),
+        "ffprobe_version": _detect_binary_version("ffprobe"),
+    }
+
+
+def _detect_pipeline_version() -> str:
+    env_version = os.getenv("PIPELINE_VERSION", "").strip()
+    if env_version:
+        return env_version
+
+    try:
+        proc = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            capture_output=True,
+            text=True,
+            timeout=2,
+        )
+        if proc.returncode == 0:
+            value = (proc.stdout or "").strip()
+            if value:
+                return value
+    except Exception:
+        pass
+    return "unknown"
+
+
+def _detect_binary_version(binary: str) -> str:
+    try:
+        proc = subprocess.run([binary, "-version"], capture_output=True, text=True, timeout=2)
+        if proc.returncode != 0:
+            return "unavailable"
+        first_line = (proc.stdout or "").splitlines()
+        if first_line:
+            return first_line[0].strip()
+    except Exception:
+        return "unavailable"
+    return "unavailable"
+
+
+def _collect_schema_checksums() -> dict[str, str]:
+    schema_paths = [
+        Path("docs/Reasoning-NLP/schema/alignment_result.schema.json"),
+        Path("docs/Reasoning-NLP/schema/summary_script.internal.schema.json"),
+        Path("docs/Reasoning-NLP/schema/quality_report.schema.json"),
+        Path("contracts/v1/template/summary_script.schema.json"),
+        Path("contracts/v1/template/summary_video_manifest.schema.json"),
+    ]
+    checksums: dict[str, str] = {}
+    for path in schema_paths:
+        checksums[path.name] = _file_sha256(path)
+    return checksums
 
 
 def main() -> int:

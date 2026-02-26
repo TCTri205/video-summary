@@ -10,6 +10,7 @@ DEFAULT_RUNTIME = {
     "input_profile": "strict_contract_v1",
     "artifacts_root": "artifacts",
     "emit_internal_artifacts": True,
+    "strict_replay_hash": False,
 }
 
 DEFAULT_SUMMARIZATION = {
@@ -23,6 +24,7 @@ DEFAULT_SUMMARIZATION = {
     "max_retries": 2,
     "max_new_tokens": 512,
     "do_sample": False,
+    "prompt_max_chars": 12000,
 }
 
 DEFAULT_SEGMENT_BUDGET = {

@@ -289,6 +289,7 @@ def generate_internal_summary(
     max_retries: int = 2,
     max_new_tokens: int = 512,
     do_sample: bool = False,
+    prompt_max_chars: int | None = None,
 ) -> dict[str, object]:
     del tokenizer_version
     if not context_blocks:
@@ -303,7 +304,7 @@ def generate_internal_summary(
             token_count=0,
         )
 
-    prompt = build_summary_prompt(context_blocks)
+    prompt = build_summary_prompt(context_blocks, max_chars=prompt_max_chars)
     backends = [backend]
     if fallback_backend and fallback_backend not in backends:
         backends.append(fallback_backend)

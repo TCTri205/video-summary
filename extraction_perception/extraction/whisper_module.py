@@ -64,7 +64,8 @@ class WhisperExtractor:
                 "text": segment.text.strip()
             })
 
-        results.sort(key=lambda item: item["start"])
+        if any(results[i]["start"] > results[i + 1]["start"] for i in range(len(results) - 1)):
+            results.sort(key=lambda item: item["start"])
 
         final_output = results
 

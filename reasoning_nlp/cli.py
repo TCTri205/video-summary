@@ -24,6 +24,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--summarize-max-retries", type=int, default=DEFAULT_SUMMARIZATION["max_retries"])
     parser.add_argument("--summarize-max-new-tokens", type=int, default=DEFAULT_SUMMARIZATION["max_new_tokens"])
     parser.add_argument("--summarize-do-sample", action="store_true", default=DEFAULT_SUMMARIZATION["do_sample"])
+    parser.add_argument("--summarize-prompt-max-chars", type=int, default=DEFAULT_SUMMARIZATION["prompt_max_chars"])
     parser.add_argument("--qc-enforce-thresholds", action="store_true", default=DEFAULT_QC["enforce_thresholds"])
     parser.add_argument(
         "--qc-blackdetect-mode",
@@ -48,6 +49,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--replay", action="store_true", help="Replay valid existing stage artifacts")
     parser.add_argument("--emit-internal-artifacts", action="store_true", default=True)
     parser.add_argument("--no-emit-internal-artifacts", action="store_false", dest="emit_internal_artifacts")
+    parser.add_argument("--strict-replay-hash", action="store_true", default=DEFAULT_RUNTIME["strict_replay_hash"])
     return parser.parse_args()
 
 
@@ -66,6 +68,7 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
         summarize_max_retries=args.summarize_max_retries,
         summarize_max_new_tokens=args.summarize_max_new_tokens,
         summarize_do_sample=args.summarize_do_sample,
+        summarize_prompt_max_chars=args.summarize_prompt_max_chars,
         qc_enforce_thresholds=args.qc_enforce_thresholds,
         qc_blackdetect_mode=args.qc_blackdetect_mode,
         qc_min_parse_validity_rate=args.qc_min_parse_validity_rate,
@@ -76,6 +79,7 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
         qc_min_median_confidence=args.qc_min_median_confidence,
         qc_min_high_confidence_ratio=args.qc_min_high_confidence_ratio,
         emit_internal_artifacts=args.emit_internal_artifacts,
+        strict_replay_hash=args.strict_replay_hash,
         replay_mode=bool(args.replay),
     )
 

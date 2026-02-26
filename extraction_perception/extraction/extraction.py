@@ -101,33 +101,9 @@ class VideoPreprocessor:
             prev_frame_no = frame_no
 
         if monotonic:
-            frames_map = self._extract_frames_sequential(cap, targets)
+            self._extract_frames_sequential(cap, targets, frames_metadata)
         else:
-            frames_map = self._extract_frames_random_seek(cap, targets)
-
-        for idx, ts, _ in targets:
-            frame = frames_map.get(idx)
-
-            if frame is None:
-                continue
-
-            # Resize về 448x448 hoặc 336x336
-            frame = cv2.resize(frame, (self.resize, self.resize))
-
-            # Format timestamp: HH:MM:SS.mmm
-            formatted_ts = self._format_timestamp(ts)
-
-            # File name theo quy ước
-            filename = f"frame_{formatted_ts.replace(':', '_').replace('.', '_')}.jpg"
-            file_path = os.path.join(self.keyframe_dir, filename)
-
-            cv2.imwrite(file_path, frame)
-
-            frames_metadata.append({
-                "frame_id": idx + 1,
-                "timestamp": formatted_ts,
-                "file_path": f"keyframes/{filename}"
-            })
+            self._extract_frames_random_seek(cap, targets, frames_metadata)
 
         cap.release()
 
@@ -141,8 +117,7 @@ class VideoPreprocessor:
 
         return metadata
 
-    def _extract_frames_sequential(self, cap, targets):
-        result = {}
+    def _extract_frames_sequential(self, cap, targets, frames_metadata):
         target_pos = 0
         frame_cursor = 0
 
@@ -151,23 +126,31 @@ class VideoPreprocessor:
             if not success:
                 break
 
-            target_idx, _, target_frame = targets[target_pos]
+            target_idx, ts, target_frame = targets[target_pos]
             if frame_cursor >= target_frame:
-                result[target_idx] = frame
+                self._persist_frame(target_idx, ts, frame, frames_metadata)
                 target_pos += 1
 
             frame_cursor += 1
 
-        return result
-
-    def _extract_frames_random_seek(self, cap, targets):
-        result = {}
-        for idx, _, frame_number in targets:
+    def _extract_frames_random_seek(self, cap, targets, frames_metadata):
+        for idx, ts, frame_number in targets:
             cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
             success, frame = cap.read()
             if success:
-                result[idx] = frame
-        return result
+                self._persist_frame(idx, ts, frame, frames_metadata)
+
+    def _persist_frame(self, idx, ts, frame, frames_metadata):
+        frame = cv2.resize(frame, (self.resize, self.resize))
+        formatted_ts = self._format_timestamp(ts)
+        filename = f"frame_{formatted_ts.replace(':', '_').replace('.', '_')}.jpg"
+        file_path = os.path.join(self.keyframe_dir, filename)
+        cv2.imwrite(file_path, frame)
+        frames_metadata.append({
+            "frame_id": idx + 1,
+            "timestamp": formatted_ts,
+            "file_path": f"keyframes/{filename}"
+        })
 
     def _format_timestamp(self, seconds: float):
         td = timedelta(seconds=seconds)
