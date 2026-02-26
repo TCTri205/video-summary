@@ -26,6 +26,7 @@ DEFAULT_SUMMARIZATION = {
     "max_new_tokens": 512,
     "do_sample": False,
     "prompt_max_chars": 12000,
+    "production_strict": True,
 }
 
 DEFAULT_SEGMENT_BUDGET = {

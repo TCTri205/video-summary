@@ -8,7 +8,7 @@ from reasoning_nlp.segment_planner.planner import plan_segments_from_context
 
 
 class SummaryTextAndSegmentFilterTests(unittest.TestCase):
-    def test_build_summary_text_excludes_cta_line(self) -> None:
+    def test_build_summary_text_returns_single_paragraph(self) -> None:
         internal = {
             "title": "Video Summary",
             "plot_summary": "Noi dung tom tat.",
@@ -23,9 +23,11 @@ class SummaryTextAndSegmentFilterTests(unittest.TestCase):
         }
 
         text = _build_summary_text(internal, script)
-        self.assertIn("Noi dung chinh 1", text)
-        self.assertIn("Noi dung chinh 2", text)
+        self.assertIn("Noi dung tom tat.", text)
+        self.assertIn("Bai hoc.", text)
         self.assertNotIn("subscribe", text.lower())
+        self.assertNotIn("Tom tat:", text)
+        self.assertNotIn("Cac diem chinh:", text)
 
     def test_planner_avoids_cta_when_possible(self) -> None:
         context_blocks = [

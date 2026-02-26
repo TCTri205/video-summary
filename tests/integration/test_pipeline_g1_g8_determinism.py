@@ -58,6 +58,8 @@ class PipelineDeterminismTests(unittest.TestCase):
                     summarize_seed=42,
                     summarize_backend="heuristic",
                     summarize_fallback_backend="heuristic",
+                    summarize_production_strict=False,
+                    allow_heuristic_for_tests=True,
                 )
             )
             result_2 = run_pipeline_g1_g8(
@@ -70,6 +72,8 @@ class PipelineDeterminismTests(unittest.TestCase):
                     summarize_seed=42,
                     summarize_backend="heuristic",
                     summarize_fallback_backend="heuristic",
+                    summarize_production_strict=False,
+                    allow_heuristic_for_tests=True,
                 )
             )
 

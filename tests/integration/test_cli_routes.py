@@ -67,9 +67,15 @@ class CLIRoutesTests(unittest.TestCase):
                     "--deliverables-root",
                     str(root / "deliverables"),
                     "--summarize-backend",
-                    "heuristic",
+                    "api",
                     "--summarize-fallback-backend",
-                    "heuristic",
+                    "api",
+                    "--summarize-timeout-ms",
+                    "500",
+                    "--summarize-max-retries",
+                    "0",
+                    "--no-summarize-production-strict",
+                    "--allow-heuristic-for-tests",
                 ]
                 proc = subprocess.run(cmd, capture_output=True, text=True)
                 self.assertEqual(proc.returncode, 0, msg=f"stage={stage}\nstdout={proc.stdout}\nstderr={proc.stderr}")

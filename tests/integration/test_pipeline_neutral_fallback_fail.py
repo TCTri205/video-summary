@@ -11,7 +11,7 @@ from reasoning_nlp.pipeline_runner import PipelineConfig, run_pipeline_g1_g8
 
 
 class PipelineNeutralFallbackFailTests(unittest.TestCase):
-    def test_llm_neutral_fallback_fails_run(self) -> None:
+    def test_strict_mode_fails_when_backends_invalid(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             data_dir = root / "data"
@@ -62,7 +62,7 @@ class PipelineNeutralFallbackFailTests(unittest.TestCase):
                     )
                 )
 
-            self.assertEqual(ctx.exception.code, "QC_LLM_NEUTRAL_FALLBACK")
+            self.assertEqual(ctx.exception.code, "LLM_BACKEND_ALL_FAILED")
 
     def _make_test_video(self, output_path: Path) -> None:
         cmd = [

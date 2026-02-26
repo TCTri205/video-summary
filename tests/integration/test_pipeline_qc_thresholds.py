@@ -57,6 +57,8 @@ class PipelineQCThresholdTests(unittest.TestCase):
                     run_id="qc_threshold_case",
                     summarize_backend="heuristic",
                     summarize_fallback_backend="heuristic",
+                    summarize_production_strict=False,
+                    allow_heuristic_for_tests=True,
                     qc_enforce_thresholds=True,
                     qc_min_timeline_consistency_score=1.1,
                 )

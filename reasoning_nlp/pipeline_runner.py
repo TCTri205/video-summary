@@ -74,6 +74,8 @@ class PipelineConfig:
     summarize_max_new_tokens: int = int(DEFAULT_SUMMARIZATION["max_new_tokens"])
     summarize_do_sample: bool = bool(DEFAULT_SUMMARIZATION["do_sample"])
     summarize_prompt_max_chars: int | None = int(DEFAULT_SUMMARIZATION["prompt_max_chars"])
+    summarize_production_strict: bool = bool(DEFAULT_SUMMARIZATION["production_strict"])
+    allow_heuristic_for_tests: bool = False
     source_duration_ms: int | None = None
     min_segment_duration_ms: int = int(DEFAULT_SEGMENT_BUDGET["min_segment_duration_ms"])
     max_segment_duration_ms: int = int(DEFAULT_SEGMENT_BUDGET["max_segment_duration_ms"])
@@ -246,7 +248,7 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
             stage_results,
             logger,
         )
-        if _quality_report_has_error(quality_report, "QC_LLM_NEUTRAL_FALLBACK"):
+        if bool(config.summarize_production_strict) and _quality_report_has_error(quality_report, "QC_LLM_NEUTRAL_FALLBACK"):
             raise fail("qc", "QC_LLM_NEUTRAL_FALLBACK", "LLM_NEUTRAL_FALLBACK detected")
         deliverables = _publish_final_deliverables(
             config=config,
@@ -425,6 +427,8 @@ def _run_g4_summarize(
             max_new_tokens=config.summarize_max_new_tokens,
             do_sample=config.summarize_do_sample,
             prompt_max_chars=config.summarize_prompt_max_chars,
+            production_strict=config.summarize_production_strict,
+            allow_heuristic_for_tests=config.allow_heuristic_for_tests,
         )
         raw_parse_validity_rate = compute_parse_validity_rate(raw)
         repaired = repair_internal_summary(raw)
@@ -475,6 +479,10 @@ def _run_g4_summarize(
         _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
         logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
         raise
+    except Exception as exc:
+        _append_stage_result(stage_results, stage, "fail", started, error_code="LLM_BACKEND_ALL_FAILED")
+        logger.error("run stage=%s status=fail error_code=LLM_BACKEND_ALL_FAILED", stage)
+        raise fail(stage, "LLM_BACKEND_ALL_FAILED", str(exc)) from exc
 
 
 def _run_g5_segment_plan(
@@ -806,30 +814,28 @@ def _publish_final_deliverables(
 
 
 def _build_summary_text(summary_internal_payload: dict[str, Any], script_payload: dict[str, Any]) -> str:
-    title = str(summary_internal_payload.get("title", script_payload.get("title", "Video Summary"))).strip() or "Video Summary"
     plot_summary = str(summary_internal_payload.get("plot_summary", script_payload.get("plot_summary", ""))).strip()
     moral_lesson = str(summary_internal_payload.get("moral_lesson", script_payload.get("moral_lesson", ""))).strip()
 
-    segment_lines: list[str] = []
-    segments = script_payload.get("segments", [])
-    if isinstance(segments, list):
-        for idx, seg in enumerate(segments[:3], start=1):
-            text = str(seg.get("script_text", "")).strip()
-            if text and not _looks_like_cta(text):
-                segment_lines.append(f"{idx}. {text}")
+    sentences: list[str] = []
+    if plot_summary:
+        sentences.append(_as_sentence(plot_summary))
+    if moral_lesson and moral_lesson.lower() != plot_summary.lower():
+        sentences.append(_as_sentence(moral_lesson))
 
-    lines = [
-        title,
-        "",
-        "Tom tat:",
-        plot_summary or "Khong du du lieu de tom tat chi tiet.",
-        "",
-        "Bai hoc:",
-        moral_lesson or "Can doi chieu them bang chung.",
-    ]
-    if segment_lines:
-        lines.extend(["", "Cac diem chinh:", *segment_lines])
-    return "\n".join(lines).strip() + "\n"
+    if not sentences:
+        sentences.append("Khong du du lieu de tao tom tat ngan cho video.")
+
+    return " ".join(sentences).strip() + "\n"
+
+
+def _as_sentence(text: str) -> str:
+    compact = re.sub(r"\s+", " ", text).strip()
+    if not compact:
+        return ""
+    if compact[-1] in {".", "!", "?"}:
+        return compact
+    return f"{compact}."
 
 
 def _looks_like_cta(text: str) -> bool:
@@ -1103,6 +1109,8 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
         "summarize_max_new_tokens": config.summarize_max_new_tokens,
         "summarize_do_sample": config.summarize_do_sample,
         "summarize_prompt_max_chars": config.summarize_prompt_max_chars,
+        "summarize_production_strict": config.summarize_production_strict,
+        "allow_heuristic_for_tests": config.allow_heuristic_for_tests,
         "min_segment_duration_ms": config.min_segment_duration_ms,
         "max_segment_duration_ms": config.max_segment_duration_ms,
         "min_total_duration_ms": config.min_total_duration_ms,
@@ -1159,6 +1167,8 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
             "summarize_max_new_tokens": config.summarize_max_new_tokens,
             "summarize_do_sample": config.summarize_do_sample,
             "summarize_prompt_max_chars": config.summarize_prompt_max_chars,
+            "summarize_production_strict": config.summarize_production_strict,
+            "allow_heuristic_for_tests": config.allow_heuristic_for_tests,
             "schema_summary_internal_sha256": schema_checksums.get("summary_script.internal.schema.json", "missing"),
         },
         "segment_plan": {

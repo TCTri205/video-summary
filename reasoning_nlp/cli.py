@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from argparse import SUPPRESS
 
 from reasoning_nlp.common.errors import PipelineError
 from reasoning_nlp.config.defaults import DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SUMMARIZATION
@@ -19,10 +20,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--deliverables-root", default=DEFAULT_RUNTIME["deliverables_root"], help="Final deliverables root directory")
     parser.add_argument("--input-profile", default=DEFAULT_RUNTIME["input_profile"], choices=["strict_contract_v1", "legacy_member1"])
     parser.add_argument("--source-duration-ms", type=int, default=None)
-    parser.add_argument("--summarize-backend", choices=["api", "local", "heuristic"], default=DEFAULT_SUMMARIZATION["backend"])
+    parser.add_argument("--summarize-backend", choices=["api", "local"], default=DEFAULT_SUMMARIZATION["backend"])
     parser.add_argument(
         "--summarize-fallback-backend",
-        choices=["api", "local", "heuristic"],
+        choices=["api", "local"],
         default=DEFAULT_SUMMARIZATION["fallback_backend"],
     )
     parser.add_argument("--summarize-timeout-ms", type=int, default=DEFAULT_SUMMARIZATION["timeout_ms"])
@@ -30,6 +31,17 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--summarize-max-new-tokens", type=int, default=DEFAULT_SUMMARIZATION["max_new_tokens"])
     parser.add_argument("--summarize-do-sample", action="store_true", default=DEFAULT_SUMMARIZATION["do_sample"])
     parser.add_argument("--summarize-prompt-max-chars", type=int, default=DEFAULT_SUMMARIZATION["prompt_max_chars"])
+    parser.add_argument(
+        "--summarize-production-strict",
+        action="store_true",
+        default=DEFAULT_SUMMARIZATION["production_strict"],
+    )
+    parser.add_argument(
+        "--no-summarize-production-strict",
+        action="store_false",
+        dest="summarize_production_strict",
+    )
+    parser.add_argument("--allow-heuristic-for-tests", action="store_true", default=False, help=SUPPRESS)
     parser.add_argument("--qc-enforce-thresholds", action="store_true", default=DEFAULT_QC["enforce_thresholds"])
     parser.add_argument(
         "--qc-blackdetect-mode",
@@ -75,6 +87,8 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
         summarize_max_new_tokens=args.summarize_max_new_tokens,
         summarize_do_sample=args.summarize_do_sample,
         summarize_prompt_max_chars=args.summarize_prompt_max_chars,
+        summarize_production_strict=args.summarize_production_strict,
+        allow_heuristic_for_tests=bool(args.allow_heuristic_for_tests),
         qc_enforce_thresholds=args.qc_enforce_thresholds,
         qc_blackdetect_mode=args.qc_blackdetect_mode,
         qc_min_parse_validity_rate=args.qc_min_parse_validity_rate,

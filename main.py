@@ -81,12 +81,13 @@ def parse_args() -> argparse.Namespace:
 
     parser.add_argument("--input-profile", default=None, choices=["strict_contract_v1", "legacy_member1"])
     parser.add_argument("--source-duration-ms", type=int, default=None)
-    parser.add_argument("--summarize-backend", choices=["api", "local", "heuristic"], default=None)
-    parser.add_argument("--summarize-fallback-backend", choices=["api", "local", "heuristic"], default=None)
+    parser.add_argument("--summarize-backend", choices=["api", "local"], default=None)
+    parser.add_argument("--summarize-fallback-backend", choices=["api", "local"], default=None)
     parser.add_argument("--summarize-timeout-ms", type=int, default=None)
     parser.add_argument("--summarize-max-retries", type=int, default=None)
     parser.add_argument("--summarize-max-new-tokens", type=int, default=None)
     parser.add_argument("--summarize-prompt-max-chars", type=int, default=None)
+    parser.add_argument("--summarize-production-strict", action="store_true", default=None)
 
     parser.add_argument("--qc-enforce-thresholds", action="store_true", default=None)
     parser.add_argument("--replay", action="store_true", default=None)
@@ -340,6 +341,16 @@ def main() -> int:
         12000,
     )
     summarize_prompt_max_chars = int(summarize_prompt_max_chars_raw) if summarize_prompt_max_chars_raw is not None else None
+    summarize_production_strict = _coerce_bool(
+        _resolve_value(
+            args.summarize_production_strict,
+            "VIDEO_SUMMARY_SUMMARIZE_PRODUCTION_STRICT",
+            file_config,
+            "summarize_production_strict",
+            True,
+        ),
+        default=True,
+    )
 
     run_id = str(
         _resolve_value(
@@ -438,6 +449,7 @@ def main() -> int:
             summarize_max_retries=summarize_max_retries,
             summarize_max_new_tokens=summarize_max_new_tokens,
             summarize_prompt_max_chars=summarize_prompt_max_chars,
+            summarize_production_strict=summarize_production_strict,
             qc_enforce_thresholds=qc_enforce_thresholds,
             strict_replay_hash=strict_replay_hash,
             replay_mode=replay,

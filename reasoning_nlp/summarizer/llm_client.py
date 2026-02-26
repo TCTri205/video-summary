@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import Counter
 import json
 import os
+import re
 import time
 import urllib.error
 import urllib.request
@@ -20,6 +21,14 @@ _SYSTEM_PROMPT = (
 
 
 _LOCAL_GENERATOR_CACHE: dict[str, tuple[Any, Any]] = {}
+
+_CTA_PATTERNS = [
+    re.compile(r"\blike\b", re.IGNORECASE),
+    re.compile(r"\bcomment\b", re.IGNORECASE),
+    re.compile(r"\bsubscribe\b", re.IGNORECASE),
+    re.compile(r"\bdang\s*ky\b", re.IGNORECASE),
+    re.compile(r"\bdang\s*ki\b", re.IGNORECASE),
+]
 
 
 def _neutral_summary(
@@ -103,8 +112,8 @@ def _heuristic_summary(
         if str(x.get("image_text", "")).strip() and str(x.get("image_text", "")).strip() != "(khong co)"
     ]
 
-    sample_image = image_non_empty[0] if image_non_empty else "Khung hinh khong ro"
-    sample_dialogue = dialogue_non_empty[0] if dialogue_non_empty else "(khong co)"
+    dialogue_clean = _collect_non_cta(dialogue_non_empty)
+    image_clean = _collect_non_cta(image_non_empty)
 
     fallback_counter = Counter(str(x.get("fallback_type", "")) for x in context_blocks)
     quality_flags: list[str] = []
@@ -121,14 +130,14 @@ def _heuristic_summary(
             }
         )
 
+    plot_summary = _build_heuristic_plot(dialogue_clean, image_clean)
+    moral_lesson = _build_heuristic_moral(dialogue_clean)
+
     return {
         "schema_version": "1.1",
         "title": "Video Summary",
-        "plot_summary": (
-            "Noi dung cho thay dien bien theo thu tu thoi gian voi hinh anh chinh la "
-            f"'{sample_image}' va hoi thoai noi bat la '{sample_dialogue}'."
-        ),
-        "moral_lesson": "Thong diep duoc rut ra tu cac su kien da xuat hien trong video.",
+        "plot_summary": plot_summary,
+        "moral_lesson": moral_lesson,
         "evidence": evidence,
         "quality_flags": sorted(set(quality_flags)),
         "generation_meta": {
@@ -141,6 +150,60 @@ def _heuristic_summary(
             "token_count": token_count,
         },
     }
+
+
+def _collect_non_cta(values: list[str]) -> list[str]:
+    out: list[str] = []
+    seen: set[str] = set()
+    for raw in values:
+        cleaned = _clean_text(raw)
+        if not cleaned:
+            continue
+        if _looks_like_cta(cleaned):
+            continue
+        key = cleaned.lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(cleaned)
+    return out
+
+
+def _build_heuristic_plot(dialogue_clean: list[str], image_clean: list[str]) -> str:
+    parts: list[str] = []
+    if image_clean:
+        parts.append(f"Video mo ta boi canh {image_clean[0]}.")
+    if dialogue_clean:
+        parts.append(f"Dien bien chinh duoc the hien qua loi thoai '{dialogue_clean[0]}'.")
+    if len(dialogue_clean) >= 2:
+        parts.append(f"Mach noi dung tiep tuc voi chi tiet '{dialogue_clean[1]}'.")
+
+    if not parts:
+        return "Khong du du lieu de tao tom tat chi tiet cho video."
+    return " ".join(parts)
+
+
+def _build_heuristic_moral(dialogue_clean: list[str]) -> str:
+    if len(dialogue_clean) >= 2:
+        return "Bai hoc la can lang nghe day du boi canh truoc khi ket luan va hanh dong."
+    if dialogue_clean:
+        return "Bai hoc la can quan sat ky noi dung va giu cach nhin can bang."
+    return "Bai hoc la can du bang chung ro rang truoc khi dua ra nhan dinh."
+
+
+def _clean_text(text: str, max_len: int = 120) -> str:
+    cleaned = re.sub(r"\s+", " ", str(text)).strip(" '\"\t\r\n")
+    cleaned = re.sub(r"[,.!?;:]{2,}$", ".", cleaned)
+    if len(cleaned) > max_len:
+        cleaned = cleaned[: max_len - 1].rstrip() + "..."
+    return cleaned.strip()
+
+
+def _looks_like_cta(text: str) -> bool:
+    lowered = text.strip().lower()
+    if not lowered:
+        return False
+    return any(pattern.search(lowered) for pattern in _CTA_PATTERNS)
 
 
 def _api_chat_completion(
@@ -290,6 +353,8 @@ def generate_internal_summary(
     max_new_tokens: int = 512,
     do_sample: bool = False,
     prompt_max_chars: int | None = None,
+    production_strict: bool = True,
+    allow_heuristic_for_tests: bool = False,
 ) -> dict[str, object]:
     del tokenizer_version
     if not context_blocks:
@@ -303,6 +368,23 @@ def generate_internal_summary(
             latency_ms=0,
             token_count=0,
         )
+
+    supported_runtime_backends = {"api", "local"}
+    supported_test_backends = {"heuristic"}
+
+    if backend in supported_test_backends and not allow_heuristic_for_tests:
+        raise RuntimeError("heuristic backend is test-only and disabled in runtime")
+    if fallback_backend in supported_test_backends and not allow_heuristic_for_tests:
+        raise RuntimeError("heuristic fallback backend is test-only and disabled in runtime")
+
+    allowed_backends = set(supported_runtime_backends)
+    if allow_heuristic_for_tests:
+        allowed_backends.update(supported_test_backends)
+
+    if backend not in allowed_backends:
+        raise RuntimeError(f"unsupported backend: {backend}")
+    if fallback_backend and fallback_backend not in allowed_backends:
+        raise RuntimeError(f"unsupported fallback backend: {fallback_backend}")
 
     if backend == "heuristic":
         return _heuristic_summary(
@@ -345,6 +427,8 @@ def generate_internal_summary(
                         do_sample=do_sample,
                     )
                 elif backend_name == "heuristic":
+                    if not allow_heuristic_for_tests:
+                        raise RuntimeError("heuristic backend is test-only and disabled in runtime")
                     payload = _heuristic_summary(
                         context_blocks=context_blocks,
                         run_seed=run_seed,
@@ -380,7 +464,24 @@ def generate_internal_summary(
             except Exception as exc:
                 errors.append(f"{backend_name}:{exc}")
 
-    return _heuristic_summary(
+    if production_strict:
+        detail = "; ".join(errors[:5]) if errors else "unknown backend failure"
+        raise RuntimeError(f"all summarize backends failed: {detail}")
+
+    if allow_heuristic_for_tests:
+        return _heuristic_summary(
+            context_blocks=context_blocks,
+            run_seed=run_seed,
+            model_version=model_version,
+            temperature=temperature,
+            backend="fallback",
+            retry_count=max(0, int(max_retries)),
+            latency_ms=0,
+            token_count=0,
+            extra_flags=["LLM_NEUTRAL_FALLBACK", "LLM_BACKEND_FAILED", *errors[:3]],
+        )
+
+    return _neutral_summary(
         context_blocks=context_blocks,
         run_seed=run_seed,
         model_version=model_version,
@@ -389,5 +490,5 @@ def generate_internal_summary(
         retry_count=max(0, int(max_retries)),
         latency_ms=0,
         token_count=0,
-        extra_flags=["LLM_NEUTRAL_FALLBACK", "LLM_BACKEND_FAILED", *errors[:3]],
+        quality_flags=["LLM_NEUTRAL_FALLBACK", "LLM_BACKEND_FAILED", *errors[:3]],
     )
