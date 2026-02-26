@@ -34,21 +34,26 @@ def plan_segments_from_context(
     segments: list[PlannedSegment] = []
     total_duration_ms = 0
     prev_end_ms = 0
-    for seg_id, block_index in enumerate(picks, start=1):
+    for block_index in picks:
         block = context_blocks[block_index]
         anchor_ts = str(block.get("timestamp", "00:00:00.000"))
         anchor_ms = to_ms(anchor_ts)
         start_ms = max(anchor_ms, prev_end_ms)
-        end_ms = start_ms + 1500
+        end_ms = start_ms + min(1500, budget.max_segment_duration_ms)
         if source_duration_ms is not None and source_duration_ms > 0:
+            latest_start_ms = max(prev_end_ms, source_duration_ms - budget.min_segment_duration_ms)
+            if start_ms > latest_start_ms:
+                start_ms = latest_start_ms
             end_ms = min(end_ms, source_duration_ms)
-            if end_ms <= start_ms:
-                end_ms = min(source_duration_ms, start_ms + 1200)
+            if end_ms - start_ms < budget.min_segment_duration_ms:
+                start_ms = max(prev_end_ms, source_duration_ms - budget.min_segment_duration_ms)
+                end_ms = min(source_duration_ms, start_ms + budget.max_segment_duration_ms)
 
         duration_ms = end_ms - start_ms
         if not validate_segment_duration(duration_ms, budget):
-            raise fail("segment_plan", "BUDGET_SEGMENT_DURATION", f"segment_id={seg_id} duration invalid")
+            continue
 
+        seg_id = len(segments) + 1
         role = assign_role(seg_id - 1, target_count)
         script_text = _script_text_from_block(summary_plot, block)
         confidence = _to_float(block.get("confidence", 0.0))
@@ -65,12 +70,28 @@ def plan_segments_from_context(
         total_duration_ms += duration_ms
         prev_end_ms = end_ms
 
+    if not segments:
+        raise fail("segment_plan", "BUDGET_SEGMENT_DURATION", "No segments satisfy duration budget")
+
+    if len(segments) != target_count:
+        segments = [
+            PlannedSegment(
+                segment_id=seg.segment_id,
+                source_start=seg.source_start,
+                source_end=seg.source_end,
+                script_text=seg.script_text,
+                confidence=seg.confidence,
+                role=assign_role(idx, len(segments)),
+            )
+            for idx, seg in enumerate(segments)
+        ]
+
     budget_errors = validate_total_duration(total_duration_ms, source_duration_ms, budget)
     if budget_errors:
         raise fail("segment_plan", budget_errors[0], "Total duration violates budget policy")
 
     missing_roles = ensure_role_coverage([s.role for s in segments])
-    if total_blocks >= 3 and missing_roles:
+    if len(segments) >= 3 and missing_roles:
         raise fail("segment_plan", "BUDGET_ROLE_COVERAGE", f"Missing roles: {missing_roles}")
 
     return segments
