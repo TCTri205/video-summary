@@ -76,6 +76,7 @@ class PipelineConfig:
     target_ratio: float | None = DEFAULT_SEGMENT_BUDGET["target_ratio"]
     target_ratio_tolerance: float = float(DEFAULT_SEGMENT_BUDGET["target_ratio_tolerance"])
     qc_enforce_thresholds: bool = bool(DEFAULT_QC["enforce_thresholds"])
+    qc_blackdetect_mode: str = str(DEFAULT_QC["blackdetect_mode"])
     qc_min_parse_validity_rate: float = float(DEFAULT_QC["min_parse_validity_rate"])
     qc_min_timeline_consistency_score: float = float(DEFAULT_QC["min_timeline_consistency_score"])
     qc_min_grounding_score: float = float(DEFAULT_QC["min_grounding_score"])
@@ -319,7 +320,12 @@ def _run_g2_align(
             min_delta_ms=config.align_min_delta_ms,
             max_delta_ms=config.align_max_delta_ms,
         )
-        match_results = match_captions(transcripts=transcripts, captions=captions, delta_ms=delta_ms)
+        match_results = match_captions(
+            transcripts=transcripts,
+            captions=captions,
+            delta_ms=delta_ms,
+            assume_sorted=True,
+        )
 
         blocks: list[AlignmentBlock] = []
         for caption, matched in zip(captions, match_results):
@@ -589,8 +595,13 @@ def _run_g8_qc(
         grounding_score = compute_grounding_score(summary_internal_payload, context_payload)
         parse_validity_rate = compute_parse_validity_rate(summary_internal_payload)
         output_video_path = str(base / "g7_assemble" / "summary_video.mp4")
+        blackdetect_mode = str(config.qc_blackdetect_mode).strip().lower()
+        if blackdetect_mode == "auto":
+            blackdetect_mode = "full" if bool(config.qc_enforce_thresholds) else "sampled"
         black_frame_ratio = compute_black_frame_ratio(
-            output_video_path, duration_ms=int(assemble_payload.get("duration_ms", 0))
+            output_video_path,
+            duration_ms=int(assemble_payload.get("duration_ms", 0)),
+            mode=blackdetect_mode,
         )
         metrics = {
             "parse_validity_rate": parse_validity_rate,
@@ -915,6 +926,7 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
         "target_ratio": config.target_ratio,
         "target_ratio_tolerance": config.target_ratio_tolerance,
         "qc_enforce_thresholds": config.qc_enforce_thresholds,
+        "qc_blackdetect_mode": config.qc_blackdetect_mode,
         "qc_min_parse_validity_rate": config.qc_min_parse_validity_rate,
         "qc_min_timeline_consistency_score": config.qc_min_timeline_consistency_score,
         "qc_min_grounding_score": config.qc_min_grounding_score,
@@ -964,6 +976,7 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
         "qc": {
             "input_profile": config.input_profile,
             "qc_enforce_thresholds": config.qc_enforce_thresholds,
+            "qc_blackdetect_mode": config.qc_blackdetect_mode,
             "qc_min_parse_validity_rate": config.qc_min_parse_validity_rate,
             "qc_min_timeline_consistency_score": config.qc_min_timeline_consistency_score,
             "qc_min_grounding_score": config.qc_min_grounding_score,

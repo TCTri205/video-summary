@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import subprocess
-import tempfile
 from pathlib import Path
 from typing import Any
 
@@ -55,62 +54,18 @@ class PipelineRuntimeError(RuntimeError):
 
 
 def _render_with_profile(source: Path, output: Path, segments: list[dict[str, Any]], safe_profile: bool) -> None:
-    with tempfile.TemporaryDirectory(prefix="rnlp_segments_", dir=str(output.parent)) as tmp_dir:
-        tmp_path = Path(tmp_dir)
-        clip_paths: list[Path] = []
-
-        for idx, seg in enumerate(segments, start=1):
-            start = str(seg.get("source_start", ""))
-            end = str(seg.get("source_end", ""))
-            clip = tmp_path / f"clip_{idx:04d}.mp4"
-            clip_paths.append(clip)
-            _cut_segment(source, clip, start, end, safe_profile=safe_profile)
-
-        concat_file = tmp_path / "concat_list.txt"
-        concat_file.write_text("".join([f"file '{_escape_concat_path(x)}'\n" for x in clip_paths]), encoding="utf-8")
-
-        concat_cmd = [
-            "ffmpeg",
-            "-y",
-            "-f",
-            "concat",
-            "-safe",
-            "0",
-            "-i",
-            str(concat_file),
-            "-c:v",
-            "libx264",
-            "-preset",
-            "ultrafast" if safe_profile else "veryfast",
-            "-crf",
-            "23" if safe_profile else "20",
-            "-pix_fmt",
-            "yuv420p",
-            "-c:a",
-            "aac",
-            "-b:a",
-            "128k",
-            "-movflags",
-            "+faststart",
-            str(output),
-        ]
-        _run_checked(concat_cmd, "concat")
-
-
-def _cut_segment(source: Path, clip: Path, start: str, end: str, safe_profile: bool) -> None:
-    cut_cmd = [
+    filter_complex = _build_filter_complex(segments)
+    concat_cmd = [
         "ffmpeg",
         "-y",
-        "-ss",
-        start,
-        "-to",
-        end,
         "-i",
         str(source),
+        "-filter_complex",
+        filter_complex,
         "-map",
-        "0:v:0",
+        "[vout]",
         "-map",
-        "0:a?",
+        "[aout]",
         "-c:v",
         "libx264",
         "-preset",
@@ -123,9 +78,40 @@ def _cut_segment(source: Path, clip: Path, start: str, end: str, safe_profile: b
         "aac",
         "-b:a",
         "128k",
-        str(clip),
+        "-movflags",
+        "+faststart",
+        str(output),
     ]
-    _run_checked(cut_cmd, "cut")
+    _run_checked(concat_cmd, "concat")
+
+
+def _build_filter_complex(segments: list[dict[str, Any]]) -> str:
+    chains: list[str] = []
+    v_labels: list[str] = []
+    a_labels: list[str] = []
+
+    for idx, seg in enumerate(segments):
+        start = str(seg.get("source_start", "00:00:00.000"))
+        end = str(seg.get("source_end", "00:00:00.000"))
+        start_sec = _ts_to_seconds(start)
+        end_sec = _ts_to_seconds(end)
+        if end_sec <= start_sec:
+            raise PipelineRuntimeError(f"RENDER_CUT_FAILED: invalid segment range {start} -> {end}")
+
+        v_label = f"v{idx}"
+        a_label = f"a{idx}"
+        v_labels.append(f"[{v_label}]")
+        a_labels.append(f"[{a_label}]")
+        chains.append(
+            f"[0:v]trim=start={start_sec:.3f}:end={end_sec:.3f},setpts=PTS-STARTPTS[{v_label}]"
+        )
+        chains.append(
+            f"[0:a]atrim=start={start_sec:.3f}:end={end_sec:.3f},asetpts=PTS-STARTPTS[{a_label}]"
+        )
+
+    concat_inputs = "".join([f"{v}{a}" for v, a in zip(v_labels, a_labels)])
+    chains.append(f"{concat_inputs}concat=n={len(segments)}:v=1:a=1[vout][aout]")
+    return ";".join(chains)
 
 
 def _run_checked(cmd: list[str], step: str) -> None:
@@ -194,5 +180,6 @@ def _duration_match_score(actual_ms: int, expected_ms: int) -> float:
     return max(0.0, min(1.0, score))
 
 
-def _escape_concat_path(path: Path) -> str:
-    return path.resolve().as_posix().replace("'", "'\\''")
+def _ts_to_seconds(timestamp: str) -> float:
+    ms = to_ms(timestamp)
+    return max(0.0, float(ms) / 1000.0)

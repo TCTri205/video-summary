@@ -32,6 +32,7 @@ def plan_segments_from_context(
     picks = _pick_block_indexes(total_blocks, target_count)
 
     segments: list[PlannedSegment] = []
+    total_duration_ms = 0
     prev_end_ms = 0
     for seg_id, block_index in enumerate(picks, start=1):
         block = context_blocks[block_index]
@@ -61,10 +62,10 @@ def plan_segments_from_context(
                 role=role,
             )
         )
+        total_duration_ms += duration_ms
         prev_end_ms = end_ms
 
-    total_ms = sum(to_ms(s.source_end) - to_ms(s.source_start) for s in segments)
-    budget_errors = validate_total_duration(total_ms, source_duration_ms, budget)
+    budget_errors = validate_total_duration(total_duration_ms, source_duration_ms, budget)
     if budget_errors:
         raise fail("segment_plan", budget_errors[0], "Total duration violates budget policy")
 

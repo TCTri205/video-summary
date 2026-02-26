@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import statistics
 from dataclasses import dataclass
+from typing import Iterable
 
 from reasoning_nlp.common.types import CanonicalCaption, CanonicalTranscript
 
@@ -31,42 +32,77 @@ def match_captions(
     transcripts: list[CanonicalTranscript],
     captions: list[CanonicalCaption],
     delta_ms: int,
+    assume_sorted: bool = False,
 ) -> list[MatchResult]:
-    results: list[MatchResult] = []
-    for caption in captions:
-        t = caption.timestamp_ms
-        candidates: list[tuple[int, int, int, int, CanonicalTranscript]] = []
-        for tr in transcripts:
-            in_range = tr.start_ms <= t <= tr.end_ms
-            dist = min(abs(t - tr.start_ms), abs(t - tr.end_ms))
-            if in_range:
-                candidates.append((0, dist, tr.start_ms, tr.index, tr))
-            elif dist <= delta_ms:
-                candidates.append((1, dist, tr.start_ms, tr.index, tr))
+    if not captions:
+        return []
 
-        if not candidates:
-            results.append(
-                MatchResult(
-                    transcript_ids=[],
-                    dialogue_text="(khong co)",
-                    fallback_type="no_match",
-                    distance_ms=delta_ms,
-                    match_type_rank=2,
-                )
+    results: list[MatchResult | None] = [None] * len(captions)
+    if assume_sorted:
+        ordered_captions = list(enumerate(captions))
+    else:
+        ordered_captions = sorted(enumerate(captions), key=lambda x: (x[1].timestamp_ms, x[1].index))
+
+    left = 0
+    right = 0
+    transcript_count = len(transcripts)
+
+    for original_idx, caption in ordered_captions:
+        t = caption.timestamp_ms
+        upper_bound = t + delta_ms
+        lower_bound = t - delta_ms
+
+        while right < transcript_count and transcripts[right].start_ms <= upper_bound:
+            right += 1
+
+        while left < right and transcripts[left].end_ms < lower_bound:
+            left += 1
+
+        best = _select_best_candidate(t, transcripts[left:right], delta_ms)
+        if best is None:
+            results[original_idx] = MatchResult(
+                transcript_ids=[],
+                dialogue_text="(khong co)",
+                fallback_type="no_match",
+                distance_ms=delta_ms,
+                match_type_rank=2,
             )
             continue
 
-        best = sorted(candidates, key=lambda x: (x[0], x[1], x[2], x[3]))[0]
         _, dist, _, _, tr = best
         fallback = "containment" if best[0] == 0 else "nearest"
-        results.append(
-            MatchResult(
-                transcript_ids=[tr.transcript_id],
-                dialogue_text=tr.text,
-                fallback_type=fallback,
-                distance_ms=dist,
-                match_type_rank=best[0],
-            )
+        results[original_idx] = MatchResult(
+            transcript_ids=[tr.transcript_id],
+            dialogue_text=tr.text,
+            fallback_type=fallback,
+            distance_ms=dist,
+            match_type_rank=best[0],
         )
 
-    return results
+    final_results: list[MatchResult] = []
+    for item in results:
+        if item is None:
+            raise RuntimeError("internal matcher error: missing result item")
+        final_results.append(item)
+    return final_results
+
+
+def _select_best_candidate(
+    timestamp_ms: int,
+    candidates: Iterable[CanonicalTranscript],
+    delta_ms: int,
+) -> tuple[int, int, int, int, CanonicalTranscript] | None:
+    best: tuple[int, int, int, int, CanonicalTranscript] | None = None
+    for tr in candidates:
+        in_range = tr.start_ms <= timestamp_ms <= tr.end_ms
+        dist = min(abs(timestamp_ms - tr.start_ms), abs(timestamp_ms - tr.end_ms))
+        if in_range:
+            candidate = (0, dist, tr.start_ms, tr.index, tr)
+        elif dist <= delta_ms:
+            candidate = (1, dist, tr.start_ms, tr.index, tr)
+        else:
+            continue
+
+        if best is None or candidate < best:
+            best = candidate
+    return best

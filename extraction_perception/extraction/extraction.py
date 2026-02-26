@@ -88,12 +88,27 @@ class VideoPreprocessor:
 
         frames_metadata = []
 
+        targets = []
         for idx, ts in enumerate(timestamps):
-            frame_number = int(ts * fps)
-            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
-            success, frame = cap.read()
+            targets.append((idx, float(ts), int(float(ts) * fps)))
 
-            if not success:
+        monotonic = True
+        prev_frame_no = -1
+        for _, _, frame_no in targets:
+            if frame_no < prev_frame_no:
+                monotonic = False
+                break
+            prev_frame_no = frame_no
+
+        if monotonic:
+            frames_map = self._extract_frames_sequential(cap, targets)
+        else:
+            frames_map = self._extract_frames_random_seek(cap, targets)
+
+        for idx, ts, _ in targets:
+            frame = frames_map.get(idx)
+
+            if frame is None:
                 continue
 
             # Resize về 448x448 hoặc 336x336
@@ -125,6 +140,34 @@ class VideoPreprocessor:
             json.dump(metadata, f, indent=4)
 
         return metadata
+
+    def _extract_frames_sequential(self, cap, targets):
+        result = {}
+        target_pos = 0
+        frame_cursor = 0
+
+        while target_pos < len(targets):
+            success, frame = cap.read()
+            if not success:
+                break
+
+            target_idx, _, target_frame = targets[target_pos]
+            if frame_cursor >= target_frame:
+                result[target_idx] = frame
+                target_pos += 1
+
+            frame_cursor += 1
+
+        return result
+
+    def _extract_frames_random_seek(self, cap, targets):
+        result = {}
+        for idx, _, frame_number in targets:
+            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number)
+            success, frame = cap.read()
+            if success:
+                result[idx] = frame
+        return result
 
     def _format_timestamp(self, seconds: float):
         td = timedelta(seconds=seconds)

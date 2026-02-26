@@ -36,6 +36,7 @@ DEFAULT_SEGMENT_BUDGET = {
 
 DEFAULT_QC = {
     "enforce_thresholds": False,
+    "blackdetect_mode": "auto",
     "min_parse_validity_rate": 0.995,
     "min_timeline_consistency_score": 0.90,
     "min_grounding_score": 0.85,

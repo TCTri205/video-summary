@@ -19,6 +19,9 @@ _SYSTEM_PROMPT = (
 )
 
 
+_LOCAL_GENERATOR_CACHE: dict[str, tuple[Any, Any]] = {}
+
+
 def _neutral_summary(
     context_blocks: list[dict[str, object]],
     run_seed: int,
@@ -211,15 +214,8 @@ def _local_transformers_completion(
     do_sample: bool,
 ) -> tuple[dict[str, Any], int, int]:
     del timeout_ms
-    try:
-        from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
-    except Exception as exc:
-        raise RuntimeError(f"transformers backend unavailable: {exc}") from exc
-
     started = time.perf_counter()
-    tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name)
-    generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
+    generator, tokenizer = _get_local_generator(model_name)
     prompt_text = (
         f"{_SYSTEM_PROMPT}\n\n"
         "Tra ve JSON: {\"title\":...,\"plot_summary\":...,\"moral_lesson\":...,\"evidence\":[],\"quality_flags\":[]}\n\n"
@@ -240,6 +236,24 @@ def _local_transformers_completion(
         raise RuntimeError("local backend produced blank text")
     token_count = len(tokenizer.encode(text)) if hasattr(tokenizer, "encode") else 0
     return _parse_json_payload(text), latency_ms, token_count
+
+
+def _get_local_generator(model_name: str) -> tuple[Any, Any]:
+    cached = _LOCAL_GENERATOR_CACHE.get(model_name)
+    if cached is not None:
+        return cached
+
+    try:
+        from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+    except Exception as exc:
+        raise RuntimeError(f"transformers backend unavailable: {exc}") from exc
+
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    model = AutoModelForCausalLM.from_pretrained(model_name)
+    generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
+    pair = (generator, tokenizer)
+    _LOCAL_GENERATOR_CACHE[model_name] = pair
+    return pair
 
 
 def _parse_json_payload(text: str) -> dict[str, Any]:

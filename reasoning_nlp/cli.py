@@ -25,6 +25,11 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--summarize-max-new-tokens", type=int, default=DEFAULT_SUMMARIZATION["max_new_tokens"])
     parser.add_argument("--summarize-do-sample", action="store_true", default=DEFAULT_SUMMARIZATION["do_sample"])
     parser.add_argument("--qc-enforce-thresholds", action="store_true", default=DEFAULT_QC["enforce_thresholds"])
+    parser.add_argument(
+        "--qc-blackdetect-mode",
+        choices=["auto", "full", "sampled", "off"],
+        default=DEFAULT_QC["blackdetect_mode"],
+    )
     parser.add_argument("--qc-min-parse-validity-rate", type=float, default=DEFAULT_QC["min_parse_validity_rate"])
     parser.add_argument(
         "--qc-min-timeline-consistency-score",
@@ -62,6 +67,7 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
         summarize_max_new_tokens=args.summarize_max_new_tokens,
         summarize_do_sample=args.summarize_do_sample,
         qc_enforce_thresholds=args.qc_enforce_thresholds,
+        qc_blackdetect_mode=args.qc_blackdetect_mode,
         qc_min_parse_validity_rate=args.qc_min_parse_validity_rate,
         qc_min_timeline_consistency_score=args.qc_min_timeline_consistency_score,
         qc_min_grounding_score=args.qc_min_grounding_score,

@@ -100,10 +100,16 @@ def compute_parse_validity_rate(summary_payload: dict[str, Any]) -> float:
     return 1.0
 
 
-def compute_black_frame_ratio(video_path: str, duration_ms: int | None = None) -> float:
+def compute_black_frame_ratio(video_path: str, duration_ms: int | None = None, mode: str = "full") -> float:
     path = Path(video_path)
     if not path.exists() or not path.is_file() or path.stat().st_size <= 0:
         return 1.0
+
+    selected_mode = str(mode).strip().lower()
+    if selected_mode == "off":
+        return 0.0
+    if selected_mode not in {"full", "sampled"}:
+        selected_mode = "full"
 
     duration_seconds = max(0.0, float(duration_ms or 0) / 1000.0)
     if duration_seconds <= 0:
@@ -111,13 +117,17 @@ def compute_black_frame_ratio(video_path: str, duration_ms: int | None = None) -
     if duration_seconds <= 0:
         return 1.0
 
+    vf = "blackdetect=d=0.05:pix_th=0.10"
+    if selected_mode == "sampled":
+        vf = "fps=2," + vf
+
     cmd = [
         "ffmpeg",
         "-hide_banner",
         "-i",
         str(path),
         "-vf",
-        "blackdetect=d=0.05:pix_th=0.10",
+        vf,
         "-an",
         "-f",
         "null",
