@@ -17,7 +17,7 @@ DEFAULT_RUNTIME = {
 DEFAULT_SUMMARIZATION = {
     "seed": 42,
     "temperature": 0.1,
-    "model_version": "Qwen2.5-3B-Instruct",
+    "model_version": "Qwen/Qwen2.5-3B-Instruct",
     "tokenizer_version": "default",
     "backend": "api",
     "fallback_backend": "local",
