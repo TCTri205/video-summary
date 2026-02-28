@@ -933,7 +933,7 @@ def _build_summary_text_internal(script_payload: dict[str, Any]) -> dict[str, An
         sentences = [
             {
                 "order": 1,
-                "text": "Khong du du lieu noi dung an toan de tao tom tat van ban.",
+                "text": "Không đủ dữ liệu nội dung an toàn để tạo tóm tắt văn bản.",
                 "support_segment_ids": [],
                 "support_timestamps": [],
             }
@@ -965,48 +965,26 @@ def _build_summary_text(
     summary_text_internal: dict[str, Any] | None = None,
 ) -> str:
     del script_payload
-    internal = summary_text_internal if isinstance(summary_text_internal, dict) else {"sentences": []}
-    sentences = internal.get("sentences", [])
-    if not isinstance(sentences, list):
-        sentences = []
+    del summary_text_internal
 
     title = _clean_sentence_fragment(str(summary_internal_payload.get("title", "")).strip())
     plot = _clean_sentence_fragment(str(summary_internal_payload.get("plot_summary", "")).strip())
     moral = _clean_sentence_fragment(str(summary_internal_payload.get("moral_lesson", "")).strip())
 
-    support_lines: list[str] = []
-    for item in sentences:
-        if not isinstance(item, dict):
-            continue
-        text = _clean_sentence_fragment(str(item.get("text", "")).strip())
-        if not text:
-            continue
-        lowered = text.lower()
-        if lowered.startswith("khong du du lieu"):
-            continue
-        if text not in support_lines:
-            support_lines.append(text)
-        if len(support_lines) >= 2:
-            break
-
     lines: list[str] = []
     if plot:
         lines.append(_as_sentence(plot))
-    if support_lines:
-        bridge = " ".join(support_lines)
-        if bridge and bridge not in lines:
-            lines.append(_as_sentence(bridge))
     if moral:
-        lines.append(_as_sentence(f"Tu cau chuyen nay, bai hoc de lai la {moral}"))
+        lines.append(_as_sentence(f"Nhìn từ câu chuyện này, điều đọng lại là {moral}"))
 
     if not lines and title:
-        lines = [_as_sentence(f"{title} mang thong diep doi song can su lang nghe va thau hieu")]
+        lines = [_as_sentence(f"{title} mang theo thông điệp về sự lắng nghe và thấu hiểu")]
     if not lines:
-        lines = ["Khong du du lieu de tao tom tat ngan cho video."]
+        lines = ["Không đủ dữ liệu để tạo tóm tắt ngắn cho video."]
 
     output = " ".join(lines).strip()
     if len(output) < 30:
-        output = f"{output} Noi dung duoc tong hop tu cac doan da chon theo moc thoi gian.".strip()
+        output = f"{output} Nội dung được tổng hợp từ các phần thông tin đã được đối chiếu theo mốc thời gian.".strip()
     if contains_hard_prompt_leakage(output):
         raise fail("qc", "QC_FINAL_TEXT_PROMPT_LEAKAGE", "Summary text build detected prompt leakage markers")
     return output + "\n"
@@ -1025,11 +1003,11 @@ def _build_group_sentence(group: list[dict[str, Any]], order: int, total_groups:
         return ""
 
     if order == 1:
-        lead = "Video mo ra voi"
+        lead = "Video mở ra với"
     elif order == total_groups:
-        lead = "Doan ket cho thay"
+        lead = "Đoạn kết cho thấy"
     else:
-        lead = "Mach dien bien tiep tuc voi"
+        lead = "Mạch diễn biến tiếp tục với"
 
     if len(parts) == 1:
         return _as_sentence(f"{lead} {parts[0]}")

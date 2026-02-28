@@ -54,8 +54,8 @@ def _neutral_summary(
     return {
         "schema_version": "1.1",
         "title": "Neutral Summary",
-        "plot_summary": "Khong du du lieu de tao tom tat chi tiet.",
-        "moral_lesson": "Hay dua tren bang chung ro rang truoc khi ket luan.",
+        "plot_summary": "Không đủ dữ liệu để tạo tóm tắt chi tiết.",
+        "moral_lesson": "Hãy dựa trên bằng chứng rõ ràng trước khi đưa ra kết luận.",
         "evidence": _build_basic_evidence(context_blocks),
         "quality_flags": sorted(set(flags)),
         "generation_meta": {
@@ -76,7 +76,7 @@ def _build_basic_evidence(context_blocks: list[dict[str, object]]) -> list[dict[
         return []
     return [
         {
-            "claim": "Tom tat dua tren cac moc canh/chu thich va hoi thoai da align.",
+            "claim": "Tóm tắt được xây dựng từ các mốc cảnh, chú thích hình ảnh và lời thoại đã được đối chiếu.",
             "timestamps": sorted(set(timestamps))[:3],
         }
     ]
@@ -131,7 +131,7 @@ def _heuristic_summary(
     if timestamps:
         evidence.append(
             {
-                "claim": "Tom tat dua tren cac moc canh/chu thich va hoi thoai da align.",
+                "claim": "Tóm tắt được xây dựng từ các mốc cảnh, chú thích hình ảnh và lời thoại đã được đối chiếu.",
                 "timestamps": sorted(set(timestamps))[:3],
             }
         )
@@ -178,23 +178,23 @@ def _collect_non_cta(values: list[str]) -> list[str]:
 def _build_heuristic_plot(dialogue_clean: list[str], image_clean: list[str]) -> str:
     parts: list[str] = []
     if image_clean:
-        parts.append(f"Video mo ta boi canh {image_clean[0]}.")
+        parts.append(f"Video gợi ra bối cảnh {image_clean[0]}.")
     if dialogue_clean:
-        parts.append(f"Dien bien chinh duoc the hien qua loi thoai '{dialogue_clean[0]}'.")
+        parts.append(f"Diễn biến chính được thể hiện qua lời thoại {dialogue_clean[0]}.")
     if len(dialogue_clean) >= 2:
-        parts.append(f"Mach noi dung tiep tuc voi chi tiet '{dialogue_clean[1]}'.")
+        parts.append(f"Mạch nội dung tiếp tục mở ra với chi tiết {dialogue_clean[1]}.")
 
     if not parts:
-        return "Khong du du lieu de tao tom tat chi tiet cho video."
+        return "Không đủ dữ liệu để tạo tóm tắt chi tiết cho video."
     return " ".join(parts)
 
 
 def _build_heuristic_moral(dialogue_clean: list[str]) -> str:
     if len(dialogue_clean) >= 2:
-        return "Bai hoc la can lang nghe day du boi canh truoc khi ket luan va hanh dong."
+        return "Bài học rút ra là cần lắng nghe trọn vẹn bối cảnh trước khi kết luận hay hành động."
     if dialogue_clean:
-        return "Bai hoc la can quan sat ky noi dung va giu cach nhin can bang."
-    return "Bai hoc la can du bang chung ro rang truoc khi dua ra nhan dinh."
+        return "Bài học rút ra là cần quan sát kỹ sự việc và giữ một cái nhìn cân bằng."
+    return "Bài học rút ra là nên dựa trên bằng chứng rõ ràng trước khi đưa ra nhận định."
 
 
 def _clean_text(text: str, max_len: int = 120) -> str:

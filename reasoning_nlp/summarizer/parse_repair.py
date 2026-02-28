@@ -32,12 +32,12 @@ def repair_internal_summary(payload: dict[str, Any]) -> dict[str, Any]:
     raw_plot_summary = str(fixed.get("plot_summary", "")).strip()
     plot_clean, plot_was_repaired = scrub_llm_generated_text(raw_plot_summary)
     leak_repaired = leak_repaired or plot_was_repaired
-    fixed["plot_summary"] = plot_clean or "Khong du du lieu de tom tat."
+    fixed["plot_summary"] = plot_clean or "Không đủ dữ liệu để tóm tắt."
 
     raw_moral_lesson = str(fixed.get("moral_lesson", "")).strip()
     moral_clean, moral_was_repaired = scrub_llm_generated_text(raw_moral_lesson)
     leak_repaired = leak_repaired or moral_was_repaired
-    fixed["moral_lesson"] = moral_clean or "Can doi chieu them bang chung."
+    fixed["moral_lesson"] = moral_clean or "Cần đối chiếu thêm bằng chứng."
 
     evidence = fixed.get("evidence")
     if not isinstance(evidence, list):
