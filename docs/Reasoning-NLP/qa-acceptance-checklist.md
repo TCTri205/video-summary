@@ -166,6 +166,12 @@ Checklist:
 - [ ] `overall_status` phu hop voi ket qua cac gate.
 - [ ] Metric bat buoc co gia tri hop le.
 - [ ] Co metric alignment bo sung (`no_match_rate`, `median_confidence`, `high_confidence_ratio`).
+- [ ] Co day du metric text-video consistency:
+  - `text_sentence_grounded_ratio`
+  - `text_segment_coverage_ratio`
+  - `text_temporal_order_score`
+  - `text_video_keyword_overlap`
+  - `text_cta_leak_ratio`
 - [ ] Co metric consistency check: metric trong `quality_report.metrics` khop voi metric recompute tu artifact (trong tolerance he thong).
 
 Pass criteria:
@@ -191,6 +197,11 @@ Pass criteria:
 - `no_match_rate <= 0.30`
 - `median_confidence >= 0.60`
 - `high_confidence_ratio >= 0.50`
+- `text_sentence_grounded_ratio >= 1.0`
+- `text_segment_coverage_ratio >= 0.70`
+- `text_temporal_order_score >= 0.90`
+- `text_video_keyword_overlap >= 0.45`
+- `text_cta_leak_ratio <= 0.0`
 
 ## Mau ket luan QA
 

@@ -56,6 +56,8 @@ def to_ms(ts: str) -> int:
 
 def validate_schema(data: Dict[str, Any], schema: Dict[str, Any], name: str) -> List[str]:
     errors = []
+    if jsonschema is None:
+        return [f"[{name}] jsonschema engine is not available"]
     validator = jsonschema.Draft202012Validator(schema)
     for err in sorted(validator.iter_errors(data), key=lambda e: str(e.path)):
         loc = ".".join(str(x) for x in err.path) or "<root>"
@@ -416,6 +418,11 @@ def check_quality_report(report: Dict[str, Any], enforce_thresholds: bool) -> Li
             ("no_match_rate", metrics.get("no_match_rate", 1) <= 0.30, "<= 0.30"),
             ("median_confidence", metrics.get("median_confidence", 0) >= 0.60, ">= 0.60"),
             ("high_confidence_ratio", metrics.get("high_confidence_ratio", 0) >= 0.50, ">= 0.50"),
+            ("text_sentence_grounded_ratio", metrics.get("text_sentence_grounded_ratio", 0) >= 1.0, ">= 1.0"),
+            ("text_segment_coverage_ratio", metrics.get("text_segment_coverage_ratio", 0) >= 0.70, ">= 0.70"),
+            ("text_temporal_order_score", metrics.get("text_temporal_order_score", 0) >= 0.90, ">= 0.90"),
+            ("text_video_keyword_overlap", metrics.get("text_video_keyword_overlap", 0) >= 0.45, ">= 0.45"),
+            ("text_cta_leak_ratio", metrics.get("text_cta_leak_ratio", 1) <= 0.0, "<= 0.0"),
         ]
         for metric, ok, expect in threshold_checks:
             if not ok:

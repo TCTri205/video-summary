@@ -13,7 +13,7 @@
 - G1 `validate`: validate input profile + normalize canonical + auto probe `source_duration_ms`.
 - G2 `align`: adaptive delta + matching deterministic + confidence.
 - G3 `context_build`: tao merged context blocks.
-- G4 `summarize`: infer (api/local/heuristic) + parse repair + grounding check + gan internal segments.
+- G4 `summarize`: infer (api/local) + parse repair + grounding check + gan internal segments (segment planning dong duoc tinh tai day).
 - G5 `segment_plan`: map internal summary sang deliverable `summary_script.json` + `summary_video_manifest.json`.
 - G6 `manifest`: cross-file consistency checks.
 - G7 `assemble`: render ffmpeg + retry safe profile 1 lan + verify audio.
@@ -38,7 +38,8 @@ Artifacts lane:
 
 - Fallback assemble hien tai la retry safe render profile; khong co auto-merge segment o stage G7.
 - Neu `LLM_NEUTRAL_FALLBACK` xuat hien trong quality flags, run bi fail o gate QC.
-- Backend summarize ho tro: `api`, `local`, `heuristic` (main va fallback).
+- Backend summarize runtime ho tro: `api`, `local` (main va fallback).
+- `heuristic` chi dung cho test/integration khi bat co test-only, khong phai runtime production option.
 
 ## 3) Backlog nang cap tiep theo (roadmap)
 
