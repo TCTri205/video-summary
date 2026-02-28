@@ -22,7 +22,7 @@ _SYSTEM_PROMPT = (
 )
 
 
-_LOCAL_GENERATOR_CACHE: dict[str, tuple[Any, Any]] = {}
+_LOCAL_GENERATOR_CACHE: dict[str, tuple[Any, Any, str]] = {}
 
 _CTA_PATTERNS = [
     re.compile(r"\blike\b", re.IGNORECASE),
@@ -279,25 +279,40 @@ def _local_transformers_completion(
     do_sample: bool,
 ) -> tuple[dict[str, Any], int, int]:
     del timeout_ms
+    try:
+        import torch
+    except Exception as exc:
+        raise RuntimeError(f"torch backend unavailable: {exc}") from exc
+
     started = time.perf_counter()
-    generator, tokenizer = _get_local_generator(model_name)
+    model, tokenizer, runtime_device = _get_local_generator(model_name)
     prompt_text = _build_local_prompt_text(tokenizer, prompt)
     generate_kwargs: dict[str, Any] = {
         "max_new_tokens": max(64, int(max_new_tokens)),
         "do_sample": bool(do_sample),
-        "return_full_text": False,
     }
     if do_sample:
         generate_kwargs["temperature"] = float(temperature)
+    if getattr(tokenizer, "eos_token_id", None) is not None:
+        generate_kwargs["eos_token_id"] = tokenizer.eos_token_id
+    if getattr(tokenizer, "pad_token_id", None) is not None:
+        generate_kwargs["pad_token_id"] = tokenizer.pad_token_id
 
-    out = generator(prompt_text, **generate_kwargs)
+    encoded = tokenizer(prompt_text, return_tensors="pt")
+    if runtime_device == "cuda":
+        encoded = {k: v.to("cuda") for k, v in encoded.items()}
+    prompt_tokens = int(encoded["input_ids"].shape[-1]) if "input_ids" in encoded else 0
+
+    with torch.inference_mode():
+        generated = model.generate(**encoded, **generate_kwargs)
     latency_ms = int((time.perf_counter() - started) * 1000)
-    if not isinstance(out, list) or not out:
+    if getattr(generated, "shape", None) is None or int(generated.shape[0]) <= 0:
         raise RuntimeError("local backend produced empty output")
-    text = str(out[0].get("generated_text", "")).strip()
+    generated_ids = generated[0][prompt_tokens:]
+    text = str(tokenizer.decode(generated_ids, skip_special_tokens=True)).strip()
     if not text:
         raise RuntimeError("local backend produced blank text")
-    token_count = len(tokenizer.encode(text, add_special_tokens=False)) if hasattr(tokenizer, "encode") else 0
+    token_count = int(generated_ids.shape[-1]) if getattr(generated_ids, "shape", None) is not None else 0
     return _parse_json_payload(text), latency_ms, token_count
 
 
@@ -323,13 +338,13 @@ def _build_local_prompt_text(tokenizer: Any, prompt: str) -> str:
     return f"{_SYSTEM_PROMPT}\n\n{user_prompt}"
 
 
-def _get_local_generator(model_name: str) -> tuple[Any, Any]:
+def _get_local_generator(model_name: str) -> tuple[Any, Any, str]:
     cached = _LOCAL_GENERATOR_CACHE.get(model_name)
     if cached is not None:
         return cached
 
     try:
-        from transformers import AutoModelForCausalLM, AutoTokenizer, pipeline
+        from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
     except Exception as exc:
         raise RuntimeError(f"transformers backend unavailable: {exc}") from exc
 
@@ -339,12 +354,22 @@ def _get_local_generator(model_name: str) -> tuple[Any, Any]:
         raise RuntimeError(f"torch backend unavailable: {exc}") from exc
 
     model_kwargs: dict[str, Any] = {"low_cpu_mem_usage": True}
+    runtime_device = "cuda" if torch.cuda.is_available() else "cpu"
     if torch.cuda.is_available():
         model_kwargs["device_map"] = "auto"
         bf16_supported = bool(getattr(torch.cuda, "is_bf16_supported", lambda: False)())
-        model_kwargs["torch_dtype"] = torch.bfloat16 if bf16_supported else torch.float16
+        runtime_dtype = torch.bfloat16 if bf16_supported else torch.float16
+        use_4bit = os.getenv("VIDEO_SUMMARY_LOCAL_4BIT", "1").strip() != "0"
+        if use_4bit:
+            model_kwargs["quantization_config"] = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_compute_dtype=runtime_dtype,
+            )
+        model_kwargs["dtype"] = runtime_dtype
     else:
-        model_kwargs["torch_dtype"] = torch.float32
+        model_kwargs["dtype"] = torch.float32
 
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     if getattr(tokenizer, "pad_token_id", None) is None and getattr(tokenizer, "eos_token_id", None) is not None:
@@ -352,10 +377,20 @@ def _get_local_generator(model_name: str) -> tuple[Any, Any]:
 
     model = AutoModelForCausalLM.from_pretrained(model_name, **model_kwargs)
     model.eval()
-    generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
-    pair = (generator, tokenizer)
+    generation_config = getattr(model, "generation_config", None)
+    if generation_config is not None and hasattr(generation_config, "max_length"):
+        try:
+            generation_config.max_length = None
+        except Exception:
+            pass
+    pair = (model, tokenizer, runtime_device)
     _LOCAL_GENERATOR_CACHE[model_name] = pair
     return pair
+
+
+def _is_cuda_oom_error(exc: Exception) -> bool:
+    lowered = str(exc).lower()
+    return "cuda out of memory" in lowered or "cublas" in lowered and "alloc" in lowered
 
 
 def _parse_json_payload(text: str) -> dict[str, Any]:
@@ -502,6 +537,8 @@ def generate_internal_summary(
                 return out
             except Exception as exc:
                 errors.append(f"{backend_name}:{exc}")
+                if backend_name == "local" and _is_cuda_oom_error(exc):
+                    break
 
     if production_strict:
         detail = "; ".join(errors[:5]) if errors else "unknown backend failure"
