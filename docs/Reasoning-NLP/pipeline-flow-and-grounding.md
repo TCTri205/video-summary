@@ -1,6 +1,6 @@
 # Pipeline Flow and Grounding
 
-Tai lieu nay mo ta luong du lieu thuc te trong runtime G1->G8, cach he thong tom tat video, va cach sinh van ban tom tat co grounded provenance.
+Tai lieu nay mo ta luong du lieu thuc te trong runtime G1->G8, cach he thong tom tat video, va cach runtime tao summary text + provenance noi bo.
 
 ## 1) End-to-end flow
 
@@ -10,11 +10,11 @@ flowchart TD
     B --> C[G2 align\nmatch caption-transcript\nconfidence+fallback]
     C --> D[G3 context_build\ncontext_blocks.json]
     D --> E[G4 summarize\nsummary_script.internal.json]
-    D --> F[G5 segment_plan\nsummary_script.json\nsummary_video_manifest.json]
+    D --> F[G5 segment_plan\nmap internal -> deliverable\nsummary_script.json\nsummary_video_manifest.json]
     E --> F
     F --> G[G7 assemble\nsummary_video.mp4]
     F --> H[Build summary_text.internal.json\nfrom selected segments]
-    H --> I[Build summary_text.txt\nfrom grounded sentences]
+    H --> I[Build summary_text.txt\nfrom plot_summary + moral_lesson]
     G --> J[G8 QC\nquality_report.json]
     I --> J
     J --> K[deliverables/<run_id>/\nsummary_video.mp4\nsummary_text.txt]
@@ -37,32 +37,34 @@ VIDEO SUMMARY LANE
   |- summary_script.json + summary_video_manifest.json
   |- ffmpeg render -> summary_video.mp4
 
-TEXT SUMMARY LANE (grounded)
+TEXT SUMMARY LANE (runtime hien tai)
   |- read selected segments from summary_script.json
   |- build summary_text.internal.json
   |    |- sentences[].text
   |    |- sentences[].support_segment_ids
   |    |- sentences[].support_timestamps
-  |- build summary_text.txt from sentences[]
+  |- build summary_text.txt from plot_summary + moral_lesson
 
 QC LANE
   |- classic metrics: parse/timeline/grounding/compression/audio/render
   |- consistency metrics: grounded_ratio/coverage/order/overlap/cta_leak
 ```
 
-## 3) Grounding contract for summary text
+## 3) Runtime contract for summary text
 
-- Muc tieu: text cuoi phai bam vao segment da render video, khong drift.
+- Muc tieu: text cuoi parse-safe, khong prompt leakage/CTA va phu hop noi dung tong quat.
 - Nguon su that cuoi: `summary_script.json` (segments da chon).
 - Moi cau trong `summary_text.internal.json` phai co provenance:
   - `support_segment_ids`
   - `support_timestamps`
-- `summary_text.txt` duoc sinh tu `summary_text.internal.json`, khong sinh truc tiep tu `plot_summary/moral_lesson`.
+- Runtime hien tai tao `summary_text.txt` truc tiep tu `summary_script.internal.{plot_summary,moral_lesson}` sau khi loc an toan.
+- `summary_text.internal.json` duoc ghi de truy vet provenance/coverage va tinh metric text-video consistency.
 
 ## 4) Dynamic segment planning (runtime behavior)
 
 - Planner tinh `target_total_ms` tu budget + duration video (neu co ratio thi uu tien ratio).
 - Planner suy ra `target_count` dong, khong hard-cap 3.
+- Runtime co tran operational `target_count <= 15` de giu on dinh van hanh.
 - Planner chon anchor theo bucket coverage mem + diversity penalty.
 - Duration moi segment duoc chia theo remaining budget va clamp trong min/max duration.
 - CTA/noise/prompt leakage duoc phat hien va giam uu tien.
@@ -104,7 +106,7 @@ sequenceDiagram
     Runner->>Asm: G7 render_summary_video(ffmpeg)
     Asm-->>Runner: summary_video.mp4 + render_meta
     Runner->>Runner: build summary_text.internal.json from selected segments
-    Runner->>Runner: build summary_text.txt from grounded sentences
+    Runner->>Runner: build summary_text.txt from plot_summary + moral_lesson
     Runner->>QC: G8 compute metrics + enforce thresholds
     QC-->>Runner: quality_report.json
     Runner-->>CLI: deliverables + artifact paths

@@ -24,8 +24,8 @@ Luu y runtime hien tai:
 
 ## Examples
 
-- `examples/valid/`: du lieu hop le de test happy path.
-- `examples/invalid/`: du lieu sai de test fail-fast.
+- `valid/`: du lieu hop le de test happy path.
+- `invalid/`: du lieu sai de test fail-fast.
 
 ## Versioning
 

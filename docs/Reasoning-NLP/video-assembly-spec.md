@@ -33,7 +33,7 @@ Luu y: `schema_version` chi ap dung cho artifact noi bo, khong bat buoc trong de
 ## Audio policy
 
 - Giu nguyen track audio goc.
-- Cho phep loudness smoothing nhe giua cac doan cat de giam nhay am luong (khong thay doi noi dung).
+- Runtime hien tai giu audio goc theo cut/concat, chua ap dung loudness smoothing rieng.
 
 ## Fallback rules
 
@@ -44,7 +44,8 @@ Luu y: `schema_version` chi ap dung cho artifact noi bo, khong bat buoc trong de
 ## Output
 
 - `summary_video.mp4`
-- Metadata render trong `quality_report.json` (`duration`, `codec`, `retry_count`, `warnings`)
+- Render metadata ky thuat duoc ghi trong `artifacts/<run_id>/g7_assemble/render_meta.json` (vi du: `duration_ms`, `expected_duration_ms`, `duration_match_score`, `retry_count`, `output_video_path`)
+- `quality_report.json` chi tong hop cac metric QC lien quan den render nhu `render_success`, `audio_present`, `duration_match_score`, `black_frame_ratio`, `decode_error_count`
 
 ## Post-assembly QC (bat buoc)
 

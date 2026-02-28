@@ -53,23 +53,24 @@ Luu y quan trong:
 1. Validate input schema va time invariants.
 2. Align transcript + caption tren cung truc thoi gian.
 3. Build merged context co confidence metadata.
-4. Summarize bang LLM voi structured output internal.
-5. Segment planning theo budget va coverage.
-6. Tao deliverable `summary_script.json` + `summary_video_manifest.json`.
+4. Summarize bang LLM voi structured output internal + tinh segment planning dong va gan vao `summary_script.internal.json`.
+5. Map internal segments sang deliverable `summary_script.json` + `summary_video_manifest.json`.
+6. Validate cross-file consistency script/manifest (manifest stage).
 7. Video assembly tu `raw_video.mp4` voi `keep_original_audio = true`.
 8. Chay quality gates va xuat `quality_report.json`.
 
 ## Runtime guarantees
 
 - Deterministic voi cung input + cung config + cung seed.
-- Fail-fast theo stage: fail o dau dung o do, khong render tiep.
+- Fail-fast cho cac stage G1-G7 khi gap `PipelineError`.
+- O G8, threshold fail duoc ghi vao `quality_report` voi `overall_status=fail`; process chi dung ngay khi co exception.
 - Co the replay tung stage bang artifacts trung gian.
 
 ## Rule tich hop
 
 - Input phai pass profile validation (`strict_contract_v1` hoac `legacy_member1`) va input invariants (xem `alignment-spec.md`).
 - Timestamp bat buoc format `HH:MM:SS.mmm`.
-- Neu fail bat ky gate nao, pipeline dung va tra ma loi chuan.
+- Neu fail gate G1-G7, pipeline dung va tra ma loi chuan; fail gate QC duoc the hien qua `quality_report` (`overall_status=fail`).
 - Video summary phai cat/ghep tu video goc va giu audio goc.
 - Script va manifest phai pass cross-file consistency checks.
 
@@ -119,7 +120,7 @@ KPI hieu nang (nen theo doi them):
 - Moi stage phai ghi log: `run_id`, `stage`, `status`, `error_code` (neu co), `duration_ms`.
 - Khong cho phep output parse duoc nhung rong/noi dung vo nghia.
 - Khong chen voice-over moi trong MVP.
-- Neu phat hien `LLM_NEUTRAL_FALLBACK` trong quality flags thi fail run ngay.
+- Neu phat hien `LLM_NEUTRAL_FALLBACK` trong quality flags, QC se ghi `QC_LLM_NEUTRAL_FALLBACK` va danh dau run fail.
 
 ## Huong dan chay pipeline
 
@@ -141,16 +142,24 @@ python -m reasoning_nlp.cli \
 
 `source_duration_ms` duoc auto-probe tu `raw_video.mp4` o G1. `--source-duration-ms` chi dung khi can override debug.
 
-Dual-mode LLM:
+Dual-mode LLM (runtime):
 
-- `--summarize-backend {api,local,heuristic}` chon backend chinh.
-- `--summarize-fallback-backend {api,local,heuristic}` cho phep fallback neu backend chinh fail.
+- `--summarize-backend {api,local}` chon backend chinh.
+- `--summarize-fallback-backend {api,local}` cho phep fallback neu backend chinh fail.
+- `heuristic` la test-only backend (chi dung trong test/integration khi bat co an), khong phai runtime production option.
 - Env cho API mode: `OPENAI_BASE_URL`, `OPENAI_API_KEY`, `OPENAI_MODEL`.
 
 QC threshold enforcement:
 
 - Bat strict gate runtime bang `--qc-enforce-thresholds`.
-- Co the dieu chinh threshold qua cac flag `--qc-min-*` / `--qc-max-*`.
+- Co the dieu chinh threshold qua cac flag `--qc-min-*` / `--qc-max-*` cho parse/timeline/grounding/black/no-match/confidence.
+- Nguong text-video consistency hien tai dang duoc enforce co dinh trong runtime.
+- Runtime enforce them bo metric text-video consistency:
+  - `text_sentence_grounded_ratio >= 1.0`
+  - `text_segment_coverage_ratio >= 0.70`
+  - `text_temporal_order_score >= 0.90`
+  - `text_video_keyword_overlap >= 0.45`
+  - `text_cta_leak_ratio <= 0.0`
 
 Artifacts se duoc ghi vao:
 

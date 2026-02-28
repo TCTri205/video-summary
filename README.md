@@ -134,7 +134,7 @@ Hardware behavior:
 
 ## Day 0 quick start
 
-1. Thanh vien 2 dung mock data trong `docs/Overview-Project/mock-data/`.
+1. Thanh vien 2 dung mock data trong `Data/mock/`.
 2. Thanh vien 1 chay pipeline that de tao 2 JSON that.
 3. Thay mock bang JSON that, chay lai Module 3 khong doi logic.
 

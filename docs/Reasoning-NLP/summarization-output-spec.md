@@ -47,7 +47,7 @@ Reasoning lane (internal):
 ## Schema version
 
 - Deliverable I/O theo global schema v1 trong `contracts/v1/template/`.
-- Internal artifacts co `schema_version` rieng (de xuat `1.1`).
+- Internal artifacts co `schema_version` rieng (da so `1.1`; `summary_text.internal.json` hien tai la `1.0`).
 
 ## Dinh dang output deliverable
 
@@ -141,9 +141,36 @@ Khong map cac field noi bo sau vao deliverable:
   - `max_segment_duration_ms <= 15000`
   - `source_end > source_start`
 - Tong do dai summary phai nam trong budget:
-  - `target_ratio` de xuat: `0.15` do dai video goc
-  - `min_total_duration_ms` va `max_total_duration_ms` do he thong cau hinh
-  - Neu bat threshold ratio: tong duration hop le khi nam trong `target_ratio +- target_ratio_tolerance` (de xuat tolerance `0.20`)
+  - Runtime mac dinh: `target_ratio = None`; khi khong set, planner suy ra tong budget tu fallback policy theo do dai video (`~0.035 * source_duration_ms`) roi clamp theo `min_total_duration_ms`/`max_total_duration_ms`.
+  - `min_total_duration_ms` va `max_total_duration_ms` do he thong cau hinh.
+  - Neu bat `target_ratio`, tong duration hop le khi nam trong `target_ratio +- target_ratio_tolerance`.
+- So luong segment la dong theo budget/do dai nguon; khong con hard-cap 3, nhung runtime hien tai van co tran operational `15` segment.
+
+## Summary text lane (runtime hien tai)
+
+- Runtime tao `summary_text.txt` truc tiep tu `summary_script.internal.{plot_summary,moral_lesson}` sau khi loc an toan.
+- Runtime van xay `summary_text.internal.json` tu cac `summary_script.json.segments[]` da duoc chon va loc an toan.
+- Moi cau trong `summary_text.internal.json.sentences[]` phai co:
+  - `text`
+  - `support_segment_ids`
+  - `support_timestamps`
+- `summary_text.internal.json` duoc dung cho provenance/coverage va tinh metric text-video consistency.
+
+## Text-video consistency metrics
+
+- `text_sentence_grounded_ratio`
+- `text_segment_coverage_ratio`
+- `text_temporal_order_score`
+- `text_video_keyword_overlap`
+- `text_cta_leak_ratio`
+
+Trong runtime strict QC, cac nguong enforce hien tai la:
+
+- `text_sentence_grounded_ratio >= 1.0`
+- `text_segment_coverage_ratio >= 0.70`
+- `text_temporal_order_score >= 0.90`
+- `text_video_keyword_overlap >= 0.45`
+- `text_cta_leak_ratio <= 0.0`
 
 ## Cross-file consistency checks
 

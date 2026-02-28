@@ -17,7 +17,7 @@ Luu y contract-first:
 ## Quy uoc
 
 - Chuan schema: JSON Schema Draft 2020-12.
-- `schema_version` noi bo hien tai: `1.1`.
+- Da so artifact noi bo dung `schema_version=1.1`; rieng `summary_text.internal.json` hien tai dung `schema_version=1.0`.
 - Timestamp video format: `HH:MM:SS.mmm`.
 - `jsonschema` la dependency bat buoc cho validator; neu thieu se fail-fast voi `SCHEMA_ENGINE_MISSING`.
 

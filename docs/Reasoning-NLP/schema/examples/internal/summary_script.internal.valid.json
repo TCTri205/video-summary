@@ -22,7 +22,11 @@
   "generation_meta": {
     "model": "Qwen2.5-3B-Instruct",
     "seed": 42,
-    "temperature": 0.1
+    "temperature": 0.1,
+    "backend": "local",
+    "retry_count": 0,
+    "latency_ms": 120,
+    "token_count": 256
   },
   "segments": [
     {

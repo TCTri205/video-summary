@@ -53,7 +53,7 @@ Bat buoc:
 
 Bat buoc:
 - Danh sach duoc sap xep tang dan theo `start`.
-- `start` <= `end`.
+- `start` < `end` (nghiem ngat, khong chap nhan bang nhau).
 - `text` khong rong sau khi trim.
 
 ## visual_captions.json
