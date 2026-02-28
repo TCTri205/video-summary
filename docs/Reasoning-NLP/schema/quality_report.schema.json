@@ -102,6 +102,11 @@
         "no_match_rate",
         "median_confidence",
         "high_confidence_ratio"
+        ,"text_sentence_grounded_ratio"
+        ,"text_segment_coverage_ratio"
+        ,"text_temporal_order_score"
+        ,"text_video_keyword_overlap"
+        ,"text_cta_leak_ratio"
       ],
       "properties": {
         "parse_validity_rate": {
@@ -162,6 +167,31 @@
           "maximum": 1
         },
         "high_confidence_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_sentence_grounded_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_segment_coverage_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_temporal_order_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_video_keyword_overlap": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_cta_leak_ratio": {
           "type": "number",
           "minimum": 0,
           "maximum": 1

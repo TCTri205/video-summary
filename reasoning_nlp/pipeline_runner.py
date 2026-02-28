@@ -31,6 +31,7 @@ from reasoning_nlp.qc.metrics import (
     compute_compression_ratio,
     compute_grounding_score,
     compute_parse_validity_rate,
+    compute_text_video_consistency_metrics,
     compute_timeline_consistency,
 )
 from reasoning_nlp.qc.report_builder import build_quality_report
@@ -650,6 +651,13 @@ def _run_g8_qc(
             mode=blackdetect_mode,
         )
         black_frame_ratio = float(blackdetect_result["ratio"])
+        summary_text_internal = _build_summary_text_internal(script_payload)
+        summary_text_value = _build_summary_text(summary_internal_payload, script_payload, summary_text_internal)
+        text_video_consistency = compute_text_video_consistency_metrics(
+            summary_text=summary_text_value,
+            summary_text_internal=summary_text_internal,
+            script_payload=script_payload,
+        )
         metrics = {
             "parse_validity_rate": parse_validity_rate,
             "repaired_parse_validity_rate": repaired_parse_validity_rate,
@@ -665,6 +673,11 @@ def _run_g8_qc(
             "no_match_rate": alignment_metrics["no_match_rate"],
             "median_confidence": alignment_metrics["median_confidence"],
             "high_confidence_ratio": alignment_metrics["high_confidence_ratio"],
+            "text_sentence_grounded_ratio": text_video_consistency["text_sentence_grounded_ratio"],
+            "text_segment_coverage_ratio": text_video_consistency["text_segment_coverage_ratio"],
+            "text_temporal_order_score": text_video_consistency["text_temporal_order_score"],
+            "text_video_keyword_overlap": text_video_consistency["text_video_keyword_overlap"],
+            "text_cta_leak_ratio": text_video_consistency["text_cta_leak_ratio"],
         }
 
         warnings: list[str] = []
@@ -676,6 +689,10 @@ def _run_g8_qc(
             warnings.append("ALIGN_WEAK_GROUNDING_SIGNAL")
         if str(blackdetect_result.get("status", "")) == "error":
             warnings.append("QC_BLACKDETECT_FALLBACK")
+        if metrics["text_segment_coverage_ratio"] < 0.70:
+            warnings.append("QC_TEXT_SEGMENT_COVERAGE_LOW")
+        if metrics["text_video_keyword_overlap"] < 0.55:
+            warnings.append("QC_TEXT_VIDEO_OVERLAP_LOW")
 
         threshold_errors: list[dict[str, str]] = []
 
@@ -726,6 +743,31 @@ def _run_g8_qc(
                 ),
                 ("QC_RENDER_FAILED", metrics["render_success"] is True, "render_success != true"),
                 ("QC_AUDIO_MISSING", metrics["audio_present"] is True, "audio_present != true"),
+                (
+                    "QC_TEXT_VIDEO_UNGROUNDED_SENTENCE",
+                    metrics["text_sentence_grounded_ratio"] >= 1.0,
+                    "text_sentence_grounded_ratio < 1.0",
+                ),
+                (
+                    "QC_TEXT_VIDEO_LOW_SEGMENT_COVERAGE",
+                    metrics["text_segment_coverage_ratio"] >= 0.70,
+                    "text_segment_coverage_ratio < 0.70",
+                ),
+                (
+                    "QC_TEXT_VIDEO_ORDER_MISMATCH",
+                    metrics["text_temporal_order_score"] >= 0.90,
+                    "text_temporal_order_score < 0.90",
+                ),
+                (
+                    "QC_TEXT_VIDEO_LOW_OVERLAP",
+                    metrics["text_video_keyword_overlap"] >= 0.45,
+                    "text_video_keyword_overlap < 0.45",
+                ),
+                (
+                    "QC_TEXT_VIDEO_CTA_MISMATCH",
+                    metrics["text_cta_leak_ratio"] <= 0.0,
+                    "text_cta_leak_ratio > 0.0",
+                ),
             ]
             for code, ok, message in checks:
                 if not ok:
@@ -779,7 +821,7 @@ def _publish_final_deliverables(
     base: Path,
     summary_internal_payload: dict[str, Any],
     script_payload: dict[str, Any],
-) -> dict[str, Path]:
+) -> dict[str, Any]:
     deliverable_dir = Path(config.deliverables_root) / run_id
     if deliverable_dir.exists():
         shutil.rmtree(deliverable_dir)
@@ -791,7 +833,9 @@ def _publish_final_deliverables(
         raise fail("qc", "QC_FINAL_VIDEO_MISSING", f"Missing rendered video: {src_video}")
     shutil.copy2(src_video, dst_video)
 
-    text_output = _build_summary_text(summary_internal_payload, script_payload)
+    summary_text_internal = _build_summary_text_internal(script_payload)
+    write_json(base / "g8_qc" / "summary_text.internal.json", summary_text_internal)
+    text_output = _build_summary_text(summary_internal_payload, script_payload, summary_text_internal)
     dst_text = deliverable_dir / "summary_text.txt"
     dst_text.write_text(text_output, encoding="utf-8")
 
@@ -819,26 +863,164 @@ def _publish_final_deliverables(
     return {
         "summary_video": dst_video,
         "summary_text": dst_text,
+        "summary_text_internal": summary_text_internal,
+        "summary_text_value": text_output,
     }
 
 
-def _build_summary_text(summary_internal_payload: dict[str, Any], script_payload: dict[str, Any]) -> str:
-    plot_summary = str(summary_internal_payload.get("plot_summary", script_payload.get("plot_summary", ""))).strip()
-    moral_lesson = str(summary_internal_payload.get("moral_lesson", script_payload.get("moral_lesson", ""))).strip()
+def _build_summary_text_internal(script_payload: dict[str, Any]) -> dict[str, Any]:
+    segments = script_payload.get("segments", [])
+    if not isinstance(segments, list):
+        segments = []
 
-    sentences: list[str] = []
-    if plot_summary:
-        sentences.append(_as_sentence(plot_summary))
-    if moral_lesson and moral_lesson.lower() != plot_summary.lower():
-        sentences.append(_as_sentence(moral_lesson))
+    safe_segments: list[dict[str, Any]] = []
+    for seg in segments:
+        if not isinstance(seg, dict):
+            continue
+        seg_id = seg.get("segment_id")
+        source_start = str(seg.get("source_start", "")).strip()
+        source_end = str(seg.get("source_end", "")).strip()
+        script_text = str(seg.get("script_text", "")).strip()
+        if not isinstance(seg_id, int) or not source_start or not source_end or not script_text:
+            continue
+        if contains_hard_prompt_leakage(script_text):
+            continue
+        if _looks_like_cta(script_text):
+            continue
+        safe_segments.append(
+            {
+                "segment_id": seg_id,
+                "source_start": source_start,
+                "source_end": source_end,
+                "script_text": script_text,
+            }
+        )
+
+    grouped: list[list[dict[str, Any]]] = []
+    n = len(safe_segments)
+    if n == 0:
+        grouped = []
+    elif n <= 3:
+        grouped = [[x] for x in safe_segments]
+    elif n <= 6:
+        mid = n // 2
+        grouped = [safe_segments[:mid], safe_segments[mid:]]
+    else:
+        one = max(1, n // 3)
+        two = max(one + 1, (2 * n) // 3)
+        grouped = [safe_segments[:one], safe_segments[one:two], safe_segments[two:]]
+
+    sentences: list[dict[str, Any]] = []
+    total_groups = len(grouped)
+    for idx, group in enumerate(grouped, start=1):
+        if not group:
+            continue
+        snippet = _build_group_sentence(group, idx, total_groups)
+        if not snippet:
+            continue
+        segment_ids = [int(x["segment_id"]) for x in group]
+        timestamps = [str(x["source_start"]) for x in group]
+        sentences.append(
+            {
+                "order": idx,
+                "text": snippet,
+                "support_segment_ids": segment_ids,
+                "support_timestamps": timestamps,
+            }
+        )
 
     if not sentences:
-        sentences.append("Khong du du lieu de tao tom tat ngan cho video.")
+        sentences = [
+            {
+                "order": 1,
+                "text": "Khong du du lieu noi dung an toan de tao tom tat van ban.",
+                "support_segment_ids": [],
+                "support_timestamps": [],
+            }
+        ]
 
-    output = " ".join(sentences).strip()
+    covered_ids = sorted(
+        {
+            int(seg_id)
+            for sentence in sentences
+            for seg_id in sentence.get("support_segment_ids", [])
+            if isinstance(seg_id, int)
+        }
+    )
+    all_safe_ids = [int(x["segment_id"]) for x in safe_segments]
+    uncovered_ids = [sid for sid in all_safe_ids if sid not in set(covered_ids)]
+    return {
+        "schema_version": "1.0",
+        "sentences": sentences,
+        "coverage": {
+            "covered_segment_ids": covered_ids,
+            "uncovered_segment_ids": uncovered_ids,
+        },
+    }
+
+
+def _build_summary_text(
+    summary_internal_payload: dict[str, Any],
+    script_payload: dict[str, Any],
+    summary_text_internal: dict[str, Any] | None = None,
+) -> str:
+    del summary_internal_payload
+    del script_payload
+    internal = summary_text_internal if isinstance(summary_text_internal, dict) else {"sentences": []}
+    sentences = internal.get("sentences", [])
+    if not isinstance(sentences, list):
+        sentences = []
+
+    lines: list[str] = []
+    for item in sentences:
+        if not isinstance(item, dict):
+            continue
+        text = _as_sentence(str(item.get("text", "")).strip())
+        if not text:
+            continue
+        lines.append(text)
+
+    if not lines:
+        lines = ["Khong du du lieu de tao tom tat ngan cho video."]
+
+    output = " ".join(lines).strip()
+    if len(output) < 30:
+        output = f"{output} Noi dung duoc tong hop tu cac doan da chon theo moc thoi gian.".strip()
     if contains_hard_prompt_leakage(output):
         raise fail("qc", "QC_FINAL_TEXT_PROMPT_LEAKAGE", "Summary text build detected prompt leakage markers")
     return output + "\n"
+
+
+def _build_group_sentence(group: list[dict[str, Any]], order: int, total_groups: int) -> str:
+    parts: list[str] = []
+    for item in group[:2]:
+        raw = str(item.get("script_text", "")).strip()
+        clean = _clean_sentence_fragment(raw)
+        if not clean:
+            continue
+        parts.append(clean)
+
+    if not parts:
+        return ""
+
+    if order == 1:
+        lead = "Mo dau"
+    elif order == total_groups:
+        lead = "Cuoi cung"
+    else:
+        lead = "Tiep theo"
+
+    if len(parts) == 1:
+        return _as_sentence(f"{lead}, video cho thay '{parts[0]}'")
+    return _as_sentence(f"{lead}, video lan luot the hien '{parts[0]}' va '{parts[1]}'")
+
+
+def _clean_sentence_fragment(text: str) -> str:
+    compact = re.sub(r"\s+", " ", text).strip()
+    if not compact:
+        return ""
+    compact = compact.strip(" .,!?:;\"'")
+    return compact
 
 
 def _as_sentence(text: str) -> str:

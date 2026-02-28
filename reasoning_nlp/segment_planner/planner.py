@@ -30,18 +30,31 @@ def plan_segments_from_context(
         raise fail("segment_plan", "BUDGET_NO_CONTEXT", "No context blocks to plan segments")
 
     total_blocks = len(context_blocks)
-    target_count = min(3, total_blocks)
+    target_total_ms = _compute_target_total_ms(budget, source_duration_ms)
+    preferred_segment_ms = _compute_preferred_segment_ms(budget, source_duration_ms)
+    target_count = _compute_target_count(
+        total_blocks=total_blocks,
+        target_total_ms=target_total_ms,
+        preferred_segment_ms=preferred_segment_ms,
+    )
     picks = _pick_block_indexes(context_blocks, target_count)
 
     segments: list[PlannedSegment] = []
     total_duration_ms = 0
     prev_end_ms = 0
-    for block_index in picks:
+    for pick_idx, block_index in enumerate(picks):
         block = context_blocks[block_index]
         anchor_ts = str(block.get("timestamp", "00:00:00.000"))
         anchor_ms = to_ms(anchor_ts)
+
+        remaining_slots = max(1, len(picks) - pick_idx)
+        remaining_budget_ms = max(0, target_total_ms - total_duration_ms)
+        dynamic_target_ms = (
+            remaining_budget_ms // remaining_slots if remaining_budget_ms > 0 else preferred_segment_ms
+        )
+        target_segment_ms = max(budget.min_segment_duration_ms, min(budget.max_segment_duration_ms, dynamic_target_ms))
+
         start_ms = max(anchor_ms, prev_end_ms)
-        target_segment_ms = min(3000, budget.max_segment_duration_ms)
         end_ms = start_ms + target_segment_ms
         if source_duration_ms is not None and source_duration_ms > 0:
             latest_start_ms = max(prev_end_ms, source_duration_ms - budget.min_segment_duration_ms)
@@ -106,45 +119,120 @@ def _pick_block_indexes(context_blocks: list[dict[str, object]], target_count: i
         return []
 
     scores = [_score_block(x) for x in context_blocks]
+    target = max(1, min(target_count, total_blocks))
 
-    def best(start: int, end: int, exclude: set[int] | None = None) -> int:
-        return _best_in_range(total_blocks, start, end, scores=scores, exclude=exclude)
-
-    if target_count == 1:
-        return [best(0, total_blocks)]
-
-    if target_count == 2:
-        setup = best(0, max(1, total_blocks // 2))
-        resolution = best(max(0, total_blocks // 2), total_blocks, exclude={setup})
-        if setup == resolution:
-            resolution = _best_in_range(total_blocks, 0, total_blocks, scores=scores, exclude={setup})
-        picks = [setup, resolution]
-        return sorted(set(picks))
-
-    setup = best(0, max(1, total_blocks // 3))
-    development = best(max(0, total_blocks // 3), max(1, (2 * total_blocks) // 3), exclude={setup})
-    resolution = best(max(0, (2 * total_blocks) // 3), total_blocks, exclude={setup, development})
-
-    picks = [setup, development, resolution]
-    unique = []
+    picks: list[int] = []
     seen: set[int] = set()
-    for idx in picks:
-        if idx not in seen:
-            unique.append(idx)
-            seen.add(idx)
+    min_gap = 1 if target <= 3 else max(1, total_blocks // (target * 3))
 
-    if len(unique) < target_count:
+    for bucket_idx in range(target):
+        start = int((bucket_idx * total_blocks) / target)
+        end = int(((bucket_idx + 1) * total_blocks) / target)
+        end = max(start + 1, end)
+
+        candidate = _best_in_range_with_diversity(
+            total_blocks=total_blocks,
+            start=start,
+            end=end,
+            scores=scores,
+            selected=picks,
+            min_gap=min_gap,
+            exclude=seen,
+        )
+        if candidate is not None and candidate not in seen:
+            picks.append(candidate)
+            seen.add(candidate)
+
+    if len(picks) < target:
         ordered = sorted(range(total_blocks), key=lambda i: (-scores[i], i))
         for idx in ordered:
-            if idx not in seen:
-                unique.append(idx)
-                seen.add(idx)
-            if len(unique) == target_count:
+            if idx in seen:
+                continue
+            if _is_too_close_to_selected(idx, picks, min_gap):
+                continue
+            picks.append(idx)
+            seen.add(idx)
+            if len(picks) == target:
                 break
 
-    unique = _reduce_cta_candidates(unique, scores, context_blocks, target_count)
+    if len(picks) < target:
+        ordered = sorted(range(total_blocks), key=lambda i: (-scores[i], i))
+        for idx in ordered:
+            if idx in seen:
+                continue
+            picks.append(idx)
+            seen.add(idx)
+            if len(picks) == target:
+                break
 
-    return sorted(unique)
+    picks = _reduce_cta_candidates(picks, scores, context_blocks, target)
+    return sorted(picks)
+
+
+def _compute_target_total_ms(budget: BudgetConfig, source_duration_ms: int | None) -> int:
+    floor_ms = int(budget.min_total_duration_ms) if budget.min_total_duration_ms is not None else 3000
+    cap_ms = int(budget.max_total_duration_ms) if budget.max_total_duration_ms is not None else 45000
+    floor_ms = max(1000, floor_ms)
+    cap_ms = max(floor_ms, cap_ms)
+
+    if source_duration_ms is not None and source_duration_ms > 0:
+        if budget.target_ratio is not None:
+            derived = int(source_duration_ms * float(budget.target_ratio))
+        else:
+            derived = int(source_duration_ms * 0.035)
+        return max(floor_ms, min(cap_ms, derived))
+
+    default_target = min(cap_ms, max(floor_ms, 9000))
+    return default_target
+
+
+def _compute_preferred_segment_ms(budget: BudgetConfig, source_duration_ms: int | None) -> int:
+    base = 4000
+    if source_duration_ms is not None and source_duration_ms > 15 * 60 * 1000:
+        base = 6000
+    return max(budget.min_segment_duration_ms, min(budget.max_segment_duration_ms, base))
+
+
+def _compute_target_count(total_blocks: int, target_total_ms: int, preferred_segment_ms: int) -> int:
+    if total_blocks <= 0:
+        return 0
+    denom = max(1, preferred_segment_ms)
+    raw = int(round(target_total_ms / denom))
+    capped = max(1, min(raw, total_blocks, 15))
+    return capped
+
+
+def _best_in_range_with_diversity(
+    total_blocks: int,
+    start: int,
+    end: int,
+    scores: list[float],
+    selected: list[int],
+    min_gap: int,
+    exclude: set[int],
+) -> int | None:
+    candidates = [i for i in range(max(0, start), min(total_blocks, end)) if i not in exclude]
+    if not candidates:
+        candidates = [i for i in range(total_blocks) if i not in exclude]
+    if not candidates:
+        return None
+
+    def rank(i: int) -> tuple[float, int]:
+        penalty = 0.0
+        for sel in selected:
+            dist = abs(i - sel)
+            if dist <= min_gap:
+                penalty += 0.25
+        return scores[i] - penalty, -i
+
+    return max(candidates, key=rank)
+
+
+def _is_too_close_to_selected(idx: int, selected: list[int], min_gap: int) -> bool:
+    for sel in selected:
+        if abs(idx - sel) <= min_gap:
+            return True
+    return False
 
 
 def _best_in_range(

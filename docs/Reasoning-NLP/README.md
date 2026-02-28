@@ -204,3 +204,4 @@ python docs/Reasoning-NLP/schema/validate_artifacts.py \
 - Validator chuan: `docs/Reasoning-NLP/schema/validate_artifacts.py`.
 - QA gates chuan: `docs/Reasoning-NLP/qa-acceptance-checklist.md`.
 - Bang doi chieu tuong thich: `docs/Reasoning-NLP/compatibility-matrix.md`.
+- So do luong pipeline + grounding text-video: `docs/Reasoning-NLP/pipeline-flow-and-grounding.md`.

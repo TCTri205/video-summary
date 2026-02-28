@@ -7,6 +7,7 @@ from reasoning_nlp.qc.metrics import (
     compute_black_frame_ratio_with_status,
     compute_grounding_score,
     compute_parse_validity_rate,
+    compute_text_video_consistency_metrics,
 )
 
 
@@ -52,6 +53,48 @@ class QCMetricsTests(unittest.TestCase):
         result = compute_black_frame_ratio_with_status("missing_file.mp4")
         self.assertEqual(result["status"], "error")
         self.assertEqual(result["error_code"], "QC_BLACKDETECT_VIDEO_INVALID")
+
+    def test_text_video_consistency_metrics(self) -> None:
+        text = "Mo dau noi dung. Sau do dien bien tiep theo."
+        internal = {
+            "sentences": [
+                {
+                    "order": 1,
+                    "text": "Mo dau noi dung",
+                    "support_segment_ids": [1],
+                    "support_timestamps": ["00:00:01.000"],
+                },
+                {
+                    "order": 2,
+                    "text": "Sau do dien bien tiep theo",
+                    "support_segment_ids": [2],
+                    "support_timestamps": ["00:00:04.000"],
+                },
+            ]
+        }
+        script = {
+            "segments": [
+                {
+                    "segment_id": 1,
+                    "source_start": "00:00:01.000",
+                    "source_end": "00:00:03.000",
+                    "script_text": "Mo dau noi dung",
+                },
+                {
+                    "segment_id": 2,
+                    "source_start": "00:00:04.000",
+                    "source_end": "00:00:06.000",
+                    "script_text": "Dien bien tiep theo",
+                },
+            ]
+        }
+
+        metrics = compute_text_video_consistency_metrics(text, internal, script)
+        self.assertEqual(metrics["text_sentence_grounded_ratio"], 1.0)
+        self.assertEqual(metrics["text_segment_coverage_ratio"], 1.0)
+        self.assertEqual(metrics["text_temporal_order_score"], 1.0)
+        self.assertGreater(metrics["text_video_keyword_overlap"], 0.4)
+        self.assertEqual(metrics["text_cta_leak_ratio"], 0.0)
 
 
 if __name__ == "__main__":

@@ -2,32 +2,81 @@ from __future__ import annotations
 
 import unittest
 
-from reasoning_nlp.pipeline_runner import _build_summary_text
+from reasoning_nlp.pipeline_runner import _build_summary_text, _build_summary_text_internal
 from reasoning_nlp.segment_planner.budget_policy import BudgetConfig
 from reasoning_nlp.segment_planner.planner import plan_segments_from_context
 
 
 class SummaryTextAndSegmentFilterTests(unittest.TestCase):
     def test_build_summary_text_returns_single_paragraph(self) -> None:
-        internal = {
-            "title": "Video Summary",
-            "plot_summary": "Noi dung tom tat.",
-            "moral_lesson": "Bai hoc.",
-        }
         script = {
             "segments": [
-                {"script_text": "Noi dung chinh 1"},
-                {"script_text": "Hay like, comment, subscribe"},
-                {"script_text": "Noi dung chinh 2"},
+                {
+                    "segment_id": 1,
+                    "source_start": "00:00:01.000",
+                    "source_end": "00:00:03.000",
+                    "script_text": "Noi dung chinh 1",
+                },
+                {
+                    "segment_id": 2,
+                    "source_start": "00:00:03.000",
+                    "source_end": "00:00:05.000",
+                    "script_text": "Hay like, comment, subscribe",
+                },
+                {
+                    "segment_id": 3,
+                    "source_start": "00:00:05.000",
+                    "source_end": "00:00:07.000",
+                    "script_text": "Noi dung chinh 2",
+                },
             ]
         }
 
-        text = _build_summary_text(internal, script)
-        self.assertIn("Noi dung tom tat.", text)
-        self.assertIn("Bai hoc.", text)
+        internal_text = _build_summary_text_internal(script)
+        text = _build_summary_text({}, script, internal_text)
+        self.assertIn("Noi dung chinh 1", text)
+        self.assertIn("Noi dung chinh 2", text)
         self.assertNotIn("subscribe", text.lower())
         self.assertNotIn("Tom tat:", text)
         self.assertNotIn("Cac diem chinh:", text)
+
+        supports = internal_text["sentences"][0]["support_segment_ids"]
+        self.assertTrue(all(isinstance(x, int) for x in supports))
+
+    def test_build_summary_text_internal_keeps_grounded_provenance(self) -> None:
+        script = {
+            "segments": [
+                {
+                    "segment_id": 1,
+                    "source_start": "00:00:01.000",
+                    "source_end": "00:00:03.000",
+                    "script_text": "Mo dau canh hop le",
+                },
+                {
+                    "segment_id": 2,
+                    "source_start": "00:00:03.000",
+                    "source_end": "00:00:05.000",
+                    "script_text": "Dien bien tiep theo",
+                },
+                {
+                    "segment_id": 3,
+                    "source_start": "00:00:05.000",
+                    "source_end": "00:00:07.000",
+                    "script_text": "Ket thuc on dinh",
+                },
+            ]
+        }
+
+        internal = _build_summary_text_internal(script)
+        self.assertEqual(internal["schema_version"], "1.0")
+        self.assertGreaterEqual(len(internal["sentences"]), 1)
+        for sent in internal["sentences"]:
+            self.assertTrue(sent["support_segment_ids"])
+            self.assertTrue(sent["support_timestamps"])
+
+        text = _build_summary_text({}, script, internal)
+        self.assertIn("Mo dau", text)
+        self.assertIn("Cuoi cung", text)
 
     def test_planner_avoids_cta_when_possible(self) -> None:
         context_blocks = [

@@ -105,6 +105,72 @@ def compute_black_frame_ratio(video_path: str, duration_ms: int | None = None, m
     return float(result["ratio"])
 
 
+def compute_text_video_consistency_metrics(
+    summary_text: str,
+    summary_text_internal: dict[str, Any],
+    script_payload: dict[str, Any],
+) -> dict[str, float]:
+    sentences = summary_text_internal.get("sentences", [])
+    if not isinstance(sentences, list):
+        sentences = []
+
+    sentence_count = len(sentences)
+    grounded_count = 0
+    sentence_cta_count = 0
+    covered_ids: set[int] = set()
+
+    for item in sentences:
+        if not isinstance(item, dict):
+            continue
+        supports = item.get("support_segment_ids", [])
+        if isinstance(supports, list) and any(isinstance(x, int) for x in supports):
+            grounded_count += 1
+            covered_ids.update(int(x) for x in supports if isinstance(x, int))
+        text = str(item.get("text", "")).strip()
+        if _looks_like_cta(text):
+            sentence_cta_count += 1
+
+    script_segments = script_payload.get("segments", [])
+    if not isinstance(script_segments, list):
+        script_segments = []
+
+    non_cta_segment_ids: list[int] = []
+    ordered_segment_ids: list[int] = []
+    segment_text_parts: list[str] = []
+    for seg in script_segments:
+        if not isinstance(seg, dict):
+            continue
+        seg_id = seg.get("segment_id")
+        if not isinstance(seg_id, int):
+            continue
+        ordered_segment_ids.append(seg_id)
+        text = str(seg.get("script_text", "")).strip()
+        if text and not _looks_like_cta(text):
+            non_cta_segment_ids.append(seg_id)
+            segment_text_parts.append(text)
+
+    grounded_ratio = 1.0 if sentence_count == 0 else grounded_count / sentence_count
+
+    if non_cta_segment_ids:
+        seg_covered = sum(1 for sid in non_cta_segment_ids if sid in covered_ids)
+        coverage_ratio = seg_covered / len(non_cta_segment_ids)
+    else:
+        coverage_ratio = 1.0
+
+    order_score = _compute_sentence_order_score(sentences, ordered_segment_ids)
+    segment_text = " ".join(segment_text_parts)
+    overlap_score = _token_overlap_score(summary_text, segment_text)
+    cta_leak_ratio = 0.0 if sentence_count == 0 else sentence_cta_count / sentence_count
+
+    return {
+        "text_sentence_grounded_ratio": max(0.0, min(1.0, float(grounded_ratio))),
+        "text_segment_coverage_ratio": max(0.0, min(1.0, float(coverage_ratio))),
+        "text_temporal_order_score": max(0.0, min(1.0, float(order_score))),
+        "text_video_keyword_overlap": max(0.0, min(1.0, float(overlap_score))),
+        "text_cta_leak_ratio": max(0.0, min(1.0, float(cta_leak_ratio))),
+    }
+
+
 def compute_black_frame_ratio_with_status(
     video_path: str,
     duration_ms: int | None = None,
@@ -222,3 +288,62 @@ def _sum_black_duration(log_text: str) -> float:
         except Exception:
             continue
     return max(0.0, total)
+
+
+def _compute_sentence_order_score(sentences: list[Any], ordered_segment_ids: list[int]) -> float:
+    if len(ordered_segment_ids) <= 1:
+        return 1.0
+    index_by_id = {seg_id: idx for idx, seg_id in enumerate(ordered_segment_ids)}
+
+    anchors: list[int] = []
+    for item in sentences:
+        if not isinstance(item, dict):
+            continue
+        supports = item.get("support_segment_ids", [])
+        if not isinstance(supports, list):
+            continue
+        positions = [index_by_id[int(x)] for x in supports if isinstance(x, int) and int(x) in index_by_id]
+        if positions:
+            anchors.append(min(positions))
+
+    if len(anchors) <= 1:
+        return 1.0
+
+    good = 0
+    total = len(anchors) - 1
+    for left, right in zip(anchors, anchors[1:]):
+        if right >= left:
+            good += 1
+    return good / total if total > 0 else 1.0
+
+
+def _token_overlap_score(left: str, right: str) -> float:
+    left_tokens = set(_tokenize(left))
+    right_tokens = set(_tokenize(right))
+    if not left_tokens and not right_tokens:
+        return 1.0
+    if not left_tokens or not right_tokens:
+        return 0.0
+    inter = len(left_tokens.intersection(right_tokens))
+    union = len(left_tokens.union(right_tokens))
+    if union <= 0:
+        return 0.0
+    return inter / union
+
+
+def _tokenize(text: str) -> list[str]:
+    return [x for x in re.findall(r"\b\w+\b", str(text).lower(), flags=re.UNICODE) if x]
+
+
+def _looks_like_cta(text: str) -> bool:
+    lowered = str(text).strip().lower()
+    if not lowered:
+        return False
+    patterns = [
+        r"\blike\b",
+        r"\bcomment\b",
+        r"\bsubscribe\b",
+        r"\bdang\s*ky\b",
+        r"\bdang\s*ki\b",
+    ]
+    return any(re.search(pattern, lowered) for pattern in patterns)
