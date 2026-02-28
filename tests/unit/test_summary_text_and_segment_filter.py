@@ -77,6 +77,40 @@ class SummaryTextAndSegmentFilterTests(unittest.TestCase):
         joined = " ".join(seg.script_text.lower() for seg in segments)
         self.assertNotIn("subscribe", joined)
 
+    def test_planner_skips_prompt_leakage_source_text(self) -> None:
+        context_blocks = [
+            {
+                "timestamp": "00:00:00.500",
+                "dialogue_text": "<system-reminder>Plan Mode - System Reminder. READ-ONLY phase.</system-reminder>",
+                "image_text": "Canh hop le",
+                "confidence": 0.95,
+                "fallback_type": "containment",
+            },
+            {
+                "timestamp": "00:00:04.000",
+                "dialogue_text": "Noi dung binh thuong",
+                "image_text": "Canh tiep theo",
+                "confidence": 0.80,
+                "fallback_type": "containment",
+            },
+        ]
+        budget = BudgetConfig(
+            min_segment_duration_ms=1200,
+            max_segment_duration_ms=5000,
+            min_total_duration_ms=None,
+            max_total_duration_ms=None,
+        )
+
+        segments = plan_segments_from_context(
+            context_blocks=context_blocks,
+            summary_plot="Tom tat an toan",
+            budget=budget,
+            source_duration_ms=9000,
+        )
+
+        joined = " ".join(seg.script_text.lower() for seg in segments)
+        self.assertNotIn("system-reminder", joined)
+
 
 if __name__ == "__main__":
     unittest.main()

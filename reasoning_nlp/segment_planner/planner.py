@@ -7,6 +7,7 @@ from reasoning_nlp.common.errors import fail
 from reasoning_nlp.common.timecode import to_ms
 from reasoning_nlp.segment_planner.budget_policy import BudgetConfig, validate_segment_duration, validate_total_duration
 from reasoning_nlp.segment_planner.role_coverage import assign_role, ensure_role_coverage
+from reasoning_nlp.summarizer.leakage_guard import is_raw_text_unsafe_for_script
 
 
 @dataclass(frozen=True)
@@ -289,9 +290,9 @@ def _ms_to_ts(value: int) -> str:
 def _script_text_from_block(summary_plot: str, block: dict[str, object]) -> str:
     image_text = str(block.get("image_text", "")).strip()
     dialogue_text = str(block.get("dialogue_text", "")).strip()
-    if dialogue_text and dialogue_text != "(khong co)":
+    if dialogue_text and dialogue_text != "(khong co)" and not is_raw_text_unsafe_for_script(dialogue_text):
         return dialogue_text
-    if image_text and image_text != "(khong co)":
+    if image_text and image_text != "(khong co)" and not is_raw_text_unsafe_for_script(image_text):
         return image_text
     return summary_plot
 

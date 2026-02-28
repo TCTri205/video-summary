@@ -37,6 +37,7 @@ from reasoning_nlp.qc.report_builder import build_quality_report
 from reasoning_nlp.segment_planner.budget_policy import BudgetConfig
 from reasoning_nlp.segment_planner.planner import plan_segments_from_context
 from reasoning_nlp.summarizer.grounding_checks import check_grounding
+from reasoning_nlp.summarizer.leakage_guard import contains_hard_prompt_leakage, contains_soft_prompt_leakage
 from reasoning_nlp.summarizer.llm_client import generate_internal_summary
 from reasoning_nlp.summarizer.parse_repair import repair_internal_summary
 from reasoning_nlp.validators.artifact_validator import (
@@ -677,6 +678,12 @@ def _run_g8_qc(
             warnings.append("QC_BLACKDETECT_FALLBACK")
 
         threshold_errors: list[dict[str, str]] = []
+
+        leakage_errors = _collect_prompt_leakage_errors(summary_internal_payload)
+        threshold_errors.extend(leakage_errors)
+        if leakage_errors or _has_soft_prompt_leakage(summary_internal_payload):
+            warnings.append("QC_PROMPT_LEAKAGE_SUSPECTED")
+
         quality_flags = summary_internal_payload.get("quality_flags", [])
         if isinstance(quality_flags, list) and any(str(x) == "LLM_NEUTRAL_FALLBACK" for x in quality_flags):
             threshold_errors.append(
@@ -798,6 +805,8 @@ def _publish_final_deliverables(
     text_value = dst_text.read_text(encoding="utf-8").strip()
     if len(text_value) < 30:
         raise fail("qc", "QC_FINAL_TEXT_TOO_SHORT", "Final summary text is too short")
+    if contains_hard_prompt_leakage(text_value):
+        raise fail("qc", "QC_FINAL_TEXT_PROMPT_LEAKAGE", "Final summary text contains prompt leakage markers")
     if _looks_like_cta(text_value):
         raise fail("qc", "QC_FINAL_TEXT_CTA", "Final summary text contains CTA boilerplate")
 
@@ -826,7 +835,10 @@ def _build_summary_text(summary_internal_payload: dict[str, Any], script_payload
     if not sentences:
         sentences.append("Khong du du lieu de tao tom tat ngan cho video.")
 
-    return " ".join(sentences).strip() + "\n"
+    output = " ".join(sentences).strip()
+    if contains_hard_prompt_leakage(output):
+        raise fail("qc", "QC_FINAL_TEXT_PROMPT_LEAKAGE", "Summary text build detected prompt leakage markers")
+    return output + "\n"
 
 
 def _as_sentence(text: str) -> str:
@@ -872,6 +884,87 @@ def _quality_report_has_error(report: dict[str, Any], error_code: str) -> bool:
     for item in errors:
         if isinstance(item, dict) and str(item.get("error_code", "")) == error_code:
             return True
+    return False
+
+
+def _collect_prompt_leakage_errors(summary_internal_payload: dict[str, Any]) -> list[dict[str, str]]:
+    errors: list[dict[str, str]] = []
+
+    text_fields = [
+        ("title", str(summary_internal_payload.get("title", ""))),
+        ("plot_summary", str(summary_internal_payload.get("plot_summary", ""))),
+        ("moral_lesson", str(summary_internal_payload.get("moral_lesson", ""))),
+    ]
+    for field_name, value in text_fields:
+        if contains_hard_prompt_leakage(value):
+            errors.append(
+                {
+                    "stage": "qc",
+                    "error_code": "QC_PROMPT_LEAKAGE_DETECTED",
+                    "message": f"{field_name} contains hard prompt leakage markers",
+                }
+            )
+
+    evidence = summary_internal_payload.get("evidence", [])
+    if isinstance(evidence, list):
+        for idx, item in enumerate(evidence):
+            if not isinstance(item, dict):
+                continue
+            claim = str(item.get("claim", ""))
+            if contains_hard_prompt_leakage(claim):
+                errors.append(
+                    {
+                        "stage": "qc",
+                        "error_code": "QC_PROMPT_LEAKAGE_DETECTED",
+                        "message": f"evidence[{idx}].claim contains hard prompt leakage markers",
+                    }
+                )
+
+    segments = summary_internal_payload.get("segments", [])
+    if isinstance(segments, list):
+        for idx, seg in enumerate(segments):
+            if not isinstance(seg, dict):
+                continue
+            script_text = str(seg.get("script_text", ""))
+            if contains_hard_prompt_leakage(script_text):
+                errors.append(
+                    {
+                        "stage": "qc",
+                        "error_code": "QC_PROMPT_LEAKAGE_DETECTED",
+                        "message": f"segments[{idx}].script_text contains hard prompt leakage markers",
+                    }
+                )
+    dedup: list[dict[str, str]] = []
+    seen: set[tuple[str, str]] = set()
+    for item in errors:
+        key = (str(item.get("error_code", "")), str(item.get("message", "")))
+        if key in seen:
+            continue
+        seen.add(key)
+        dedup.append(item)
+    return dedup
+
+
+def _has_soft_prompt_leakage(summary_internal_payload: dict[str, Any]) -> bool:
+    text_fields = [
+        str(summary_internal_payload.get("title", "")),
+        str(summary_internal_payload.get("plot_summary", "")),
+        str(summary_internal_payload.get("moral_lesson", "")),
+    ]
+    if any(contains_soft_prompt_leakage(x) for x in text_fields):
+        return True
+
+    evidence = summary_internal_payload.get("evidence", [])
+    if isinstance(evidence, list):
+        for item in evidence:
+            if isinstance(item, dict) and contains_soft_prompt_leakage(str(item.get("claim", ""))):
+                return True
+
+    segments = summary_internal_payload.get("segments", [])
+    if isinstance(segments, list):
+        for seg in segments:
+            if isinstance(seg, dict) and contains_soft_prompt_leakage(str(seg.get("script_text", ""))):
+                return True
     return False
 
 
@@ -977,6 +1070,8 @@ def _replay_or_run_g4(
         if isinstance(payload, dict):
             try:
                 validate_summary_internal_artifact(payload, Path("docs/Reasoning-NLP/schema/summary_script.internal.schema.json"))
+                if _collect_prompt_leakage_errors(payload):
+                    raise ValueError("replayed summarize artifact contains prompt leakage markers")
                 _append_stage_skipped(stage_results, "summarize")
                 logger.info("run stage=summarize status=skipped")
                 return payload
