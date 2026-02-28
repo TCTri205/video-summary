@@ -1,0 +1,88 @@
+{
+  "summary": {
+    "num_runs": 5,
+    "pass_rate": 1.0,
+    "render_success_rate": 1.0,
+    "audio_present_rate": 1.0,
+    "avg_parse_validity_rate": 1.0,
+    "avg_timeline_consistency_score": 1.0,
+    "avg_grounding_score": 0.9,
+    "avg_duration_match_score": 0.9751111111111112,
+    "avg_black_frame_ratio": 0.0,
+    "avg_no_match_rate": 0.047619047619047616,
+    "avg_median_confidence": 0.735188,
+    "avg_high_confidence_ratio": 0.4557823129251701
+  },
+  "runs": [
+    {
+      "run_id": "cli_replay_demo",
+      "overall_status": "pass",
+      "parse_validity_rate": 1.0,
+      "timeline_consistency_score": 1.0,
+      "grounding_score": 0.9,
+      "duration_match_score": 0.9688888888888889,
+      "black_frame_ratio": 0.0,
+      "no_match_rate": 0.047619047619047616,
+      "median_confidence": 0.735188,
+      "high_confidence_ratio": 0.4557823129251701,
+      "render_success": true,
+      "audio_present": true
+    },
+    {
+      "run_id": "cli_replay_demo_v2",
+      "overall_status": "pass",
+      "parse_validity_rate": 1.0,
+      "timeline_consistency_score": 1.0,
+      "grounding_score": 0.9,
+      "duration_match_score": 0.9688888888888889,
+      "black_frame_ratio": 0.0,
+      "no_match_rate": 0.047619047619047616,
+      "median_confidence": 0.735188,
+      "high_confidence_ratio": 0.4557823129251701,
+      "render_success": true,
+      "audio_present": true
+    },
+    {
+      "run_id": "cli_replay_demo_v3",
+      "overall_status": "pass",
+      "parse_validity_rate": 1.0,
+      "timeline_consistency_score": 1.0,
+      "grounding_score": 0.9,
+      "duration_match_score": 0.9688888888888889,
+      "black_frame_ratio": 0.0,
+      "no_match_rate": 0.047619047619047616,
+      "median_confidence": 0.735188,
+      "high_confidence_ratio": 0.4557823129251701,
+      "render_success": true,
+      "audio_present": true
+    },
+    {
+      "run_id": "run_24f8d6f8a13c",
+      "overall_status": "pass",
+      "parse_validity_rate": 1.0,
+      "timeline_consistency_score": 1.0,
+      "grounding_score": 0.9,
+      "duration_match_score": 1.0,
+      "black_frame_ratio": 0.0,
+      "no_match_rate": 0.047619047619047616,
+      "median_confidence": 0.735188,
+      "high_confidence_ratio": 0.4557823129251701,
+      "render_success": true,
+      "audio_present": true
+    },
+    {
+      "run_id": "run_a83cffe0a696",
+      "overall_status": "pass",
+      "parse_validity_rate": 1.0,
+      "timeline_consistency_score": 1.0,
+      "grounding_score": 0.9,
+      "duration_match_score": 0.9688888888888889,
+      "black_frame_ratio": 0.0,
+      "no_match_rate": 0.047619047619047616,
+      "median_confidence": 0.735188,
+      "high_confidence_ratio": 0.4557823129251701,
+      "render_success": true,
+      "audio_present": true
+    }
+  ]
+}

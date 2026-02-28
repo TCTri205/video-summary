@@ -1,0 +1,3502 @@
+[
+  {
+    "caption_id": "c_0001",
+    "timestamp": "00:00:02.500",
+    "context_text": "[Image @00:00:02.500]: a cartoon picture of two men eating food\n[Dialogue]: Một tháng, ăn thịt gà",
+    "image_text": "a cartoon picture of two men eating food",
+    "dialogue_text": "Một tháng, ăn thịt gà",
+    "matched_transcript_ids": [
+      "t_0001"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.61875
+  },
+  {
+    "caption_id": "c_0002",
+    "timestamp": "00:00:07.299",
+    "context_text": "[Image @00:00:07.299]: a house in the middle of a field\n[Dialogue]: (khong co)",
+    "image_text": "a house in the middle of a field",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0003",
+    "timestamp": "00:00:12.320",
+    "context_text": "[Image @00:00:12.320]: a cartoon character in a zoo\n[Dialogue]: Mới chậm mắc có tý mà mặc tờ đã đến đánh đẩm đầu rồi",
+    "image_text": "a cartoon character in a zoo",
+    "dialogue_text": "Mới chậm mắc có tý mà mặc tờ đã đến đánh đẩm đầu rồi",
+    "matched_transcript_ids": [
+      "t_0002"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.6525
+  },
+  {
+    "caption_id": "c_0004",
+    "timestamp": "00:00:16.699",
+    "context_text": "[Image @00:00:16.699]: a cartoon character with a sad look on his face\n[Dialogue]: Thôi quá, phải đi kiếm viên gì bỏ bụng thôi",
+    "image_text": "a cartoon character with a sad look on his face",
+    "dialogue_text": "Thôi quá, phải đi kiếm viên gì bỏ bụng thôi",
+    "matched_transcript_ids": [
+      "t_0003"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.581438
+  },
+  {
+    "caption_id": "c_0005",
+    "timestamp": "00:00:21.420",
+    "context_text": "[Image @00:00:21.420]: a cartoon character is walking down a path\n[Dialogue]: Rùn lúa nhà ta đang thiêu người gắn",
+    "image_text": "a cartoon character is walking down a path",
+    "dialogue_text": "Rùn lúa nhà ta đang thiêu người gắn",
+    "matched_transcript_ids": [
+      "t_0005"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.82125
+  },
+  {
+    "caption_id": "c_0006",
+    "timestamp": "00:00:25.179",
+    "context_text": "[Image @00:00:25.179]: a cartoon character in a field with a tree\n[Dialogue]: Ta đã cho năm đồng công",
+    "image_text": "a cartoon character in a field with a tree",
+    "dialogue_text": "Ta đã cho năm đồng công",
+    "matched_transcript_ids": [
+      "t_0007"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.866437
+  },
+  {
+    "caption_id": "c_0007",
+    "timestamp": "00:00:29.640",
+    "context_text": "[Image @00:00:29.640]: a cartoon character is talking to another character\n[Dialogue]: Ta chân bụng rũng, giờ mà đi làm thuy cho nhà ông, có mận ngất lã ra đây",
+    "image_text": "a cartoon character is talking to another character",
+    "dialogue_text": "Ta chân bụng rũng, giờ mà đi làm thuy cho nhà ông, có mận ngất lã ra đây",
+    "matched_transcript_ids": [
+      "t_0009"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.78
+  },
+  {
+    "caption_id": "c_0008",
+    "timestamp": "00:00:37.299",
+    "context_text": "[Image @00:00:37.299]: a cartoon of a man in a forest\n[Dialogue]: Không làm thịt lây đâu ra cây mà ăn",
+    "image_text": "a cartoon of a man in a forest",
+    "dialogue_text": "Không làm thịt lây đâu ra cây mà ăn",
+    "matched_transcript_ids": [
+      "t_0010"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.581063
+  },
+  {
+    "caption_id": "c_0009",
+    "timestamp": "00:00:42.240",
+    "context_text": "[Image @00:00:42.240]: a cartoon character with a red hair and a brown jacket\n[Dialogue]: Cái gì?",
+    "image_text": "a cartoon character with a red hair and a brown jacket",
+    "dialogue_text": "Cái gì?",
+    "matched_transcript_ids": [
+      "t_0012"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.855
+  },
+  {
+    "caption_id": "c_0010",
+    "timestamp": "00:00:45.039",
+    "context_text": "[Image @00:00:45.039]: a cartoon character holding a piece of paper\n[Dialogue]: Cái gì?",
+    "image_text": "a cartoon character holding a piece of paper",
+    "dialogue_text": "Cái gì?",
+    "matched_transcript_ids": [
+      "t_0014"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.892688
+  },
+  {
+    "caption_id": "c_0011",
+    "timestamp": "00:00:53.820",
+    "context_text": "[Image @00:00:53.820]: a cartoon scene with a monkey in the middle of the scene\n[Dialogue]: Thà mình chịu đối còn hơn",
+    "image_text": "a cartoon scene with a monkey in the middle of the scene",
+    "dialogue_text": "Thà mình chịu đối còn hơn",
+    "matched_transcript_ids": [
+      "t_0017"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.74625
+  },
+  {
+    "caption_id": "c_0012",
+    "timestamp": "00:01:01.960",
+    "context_text": "[Image @00:01:01.960]: a cartoon image of a man and woman in a garden\n[Dialogue]: Chào anh hai, chị hai",
+    "image_text": "a cartoon image of a man and woman in a garden",
+    "dialogue_text": "Chào anh hai, chị hai",
+    "matched_transcript_ids": [
+      "t_0019"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.72
+  },
+  {
+    "caption_id": "c_0013",
+    "timestamp": "00:01:04.159",
+    "context_text": "[Image @00:01:04.159]: a cartoon character holding a sword in his hand\n[Dialogue]: Chú Nam đòa, chú đi đâu thế?",
+    "image_text": "a cartoon character holding a sword in his hand",
+    "dialogue_text": "Chú Nam đòa, chú đi đâu thế?",
+    "matched_transcript_ids": [
+      "t_0020"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.742313
+  },
+  {
+    "caption_id": "c_0014",
+    "timestamp": "00:01:08.219",
+    "context_text": "[Image @00:01:08.219]: a cartoon character in a jungle scene\n[Dialogue]: Từ qua đất giờ không có gì bỏ vào bụng",
+    "image_text": "a cartoon character in a jungle scene",
+    "dialogue_text": "Từ qua đất giờ không có gì bỏ vào bụng",
+    "matched_transcript_ids": [
+      "t_0022"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.753563
+  },
+  {
+    "caption_id": "c_0015",
+    "timestamp": "00:01:13.599",
+    "context_text": "[Image @00:01:13.599]: a cartoon character with a very expression\n[Dialogue]: Sao cái thần tôi lại cố thì này cơ chứ",
+    "image_text": "a cartoon character with a very expression",
+    "dialogue_text": "Sao cái thần tôi lại cố thì này cơ chứ",
+    "matched_transcript_ids": [
+      "t_0024"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.824812
+  },
+  {
+    "caption_id": "c_0016",
+    "timestamp": "00:01:16.900",
+    "context_text": "[Image @00:01:16.900]: a cartoon character holding a stick in a park\n[Dialogue]: Thế chú dậu này làm gì rồi",
+    "image_text": "a cartoon character holding a stick in a park",
+    "dialogue_text": "Thế chú dậu này làm gì rồi",
+    "matched_transcript_ids": [
+      "t_0026"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.73125
+  },
+  {
+    "caption_id": "c_0017",
+    "timestamp": "00:01:20.780",
+    "context_text": "[Image @00:01:20.780]: a cartoon character with a sad look on his face\n[Dialogue]: Còn mấy việc nặng nhọt quá",
+    "image_text": "a cartoon character with a sad look on his face",
+    "dialogue_text": "Còn mấy việc nặng nhọt quá",
+    "matched_transcript_ids": [
+      "t_0028"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.75375
+  },
+  {
+    "caption_id": "c_0018",
+    "timestamp": "00:01:25.039",
+    "context_text": "[Image @00:01:25.039]: a cartoon character holding a stick in a park\n[Dialogue]: Cái số của em đúng là hậm hiêu",
+    "image_text": "a cartoon character holding a stick in a park",
+    "dialogue_text": "Cái số của em đúng là hậm hiêu",
+    "matched_transcript_ids": [
+      "t_0030"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.719812
+  },
+  {
+    "caption_id": "c_0019",
+    "timestamp": "00:01:28.680",
+    "context_text": "[Image @00:01:28.680]: a cartoon character with a sad look on his face\n[Dialogue]: Cái gì đen đủy, đổ hết lên đầu em",
+    "image_text": "a cartoon character with a sad look on his face",
+    "dialogue_text": "Cái gì đen đủy, đổ hết lên đầu em",
+    "matched_transcript_ids": [
+      "t_0031"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.84
+  },
+  {
+    "caption_id": "c_0020",
+    "timestamp": "00:01:33.200",
+    "context_text": "[Image @00:01:33.200]: a cartoon of two people standing in front of a hut\n[Dialogue]: Bàu đây, tiền thể nhà ăn cũng chuẩn bị ăn chưa",
+    "image_text": "a cartoon of two people standing in front of a hut",
+    "dialogue_text": "Bàu đây, tiền thể nhà ăn cũng chuẩn bị ăn chưa",
+    "matched_transcript_ids": [
+      "t_0033"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.75
+  },
+  {
+    "caption_id": "c_0021",
+    "timestamp": "00:01:36.379",
+    "context_text": "[Image @00:01:36.379]: a cartoon character and a cartoon character\n[Dialogue]: Bàu đây ngồi với anh, mình xuống nhà dọn mâm lên nhé",
+    "image_text": "a cartoon character and a cartoon character",
+    "dialogue_text": "Bàu đây ngồi với anh, mình xuống nhà dọn mâm lên nhé",
+    "matched_transcript_ids": [
+      "t_0034"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.783562
+  },
+  {
+    "caption_id": "c_0022",
+    "timestamp": "00:01:39.319",
+    "context_text": "[Image @00:01:39.319]: a cartoon character is talking to another character\n[Dialogue]: Bàu đây ngồi với anh, mình xuống nhà dọn mâm lên nhé",
+    "image_text": "a cartoon character is talking to another character",
+    "dialogue_text": "Bàu đây ngồi với anh, mình xuống nhà dọn mâm lên nhé",
+    "matched_transcript_ids": [
+      "t_0034"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.015187
+  },
+  {
+    "caption_id": "c_0023",
+    "timestamp": "00:01:41.640",
+    "context_text": "[Image @00:01:41.640]: a black background with a white and pink flower\n[Dialogue]: Chú Nam mà, chú cũng là kiếm đường mà làm ăn đi",
+    "image_text": "a black background with a white and pink flower",
+    "dialogue_text": "Chú Nam mà, chú cũng là kiếm đường mà làm ăn đi",
+    "matched_transcript_ids": [
+      "t_0035"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.195
+  },
+  {
+    "caption_id": "c_0024",
+    "timestamp": "00:01:42.700",
+    "context_text": "[Image @00:01:42.700]: a cartoon scene of a family eating together\n[Dialogue]: Chú Nam mà, chú cũng là kiếm đường mà làm ăn đi",
+    "image_text": "a cartoon scene of a family eating together",
+    "dialogue_text": "Chú Nam mà, chú cũng là kiếm đường mà làm ăn đi",
+    "matched_transcript_ids": [
+      "t_0035"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.39375
+  },
+  {
+    "caption_id": "c_0025",
+    "timestamp": "00:01:47.680",
+    "context_text": "[Image @00:01:47.680]: a cartoon character with a surprised look on his face\n[Dialogue]: Cũng phải lo làm lụng",
+    "image_text": "a cartoon character with a surprised look on his face",
+    "dialogue_text": "Cũng phải lo làm lụng",
+    "matched_transcript_ids": [
+      "t_0037"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7725
+  },
+  {
+    "caption_id": "c_0026",
+    "timestamp": "00:01:55.079",
+    "context_text": "[Image @00:01:55.079]: a cartoon character in a room with a red carpet\n[Dialogue]: Cái số em nó thay",
+    "image_text": "a cartoon character in a room with a red carpet",
+    "dialogue_text": "Cái số em nó thay",
+    "matched_transcript_ids": [
+      "t_0041"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.885188
+  },
+  {
+    "caption_id": "c_0027",
+    "timestamp": "00:01:59.460",
+    "context_text": "[Image @00:01:59.460]: a cartoon character with a black hair and a black shirt\n[Dialogue]: Chứ em mà có vốn trong tay thì chắc chắn",
+    "image_text": "a cartoon character with a black hair and a black shirt",
+    "dialogue_text": "Chứ em mà có vốn trong tay thì chắc chắn",
+    "matched_transcript_ids": [
+      "t_0043"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.81375
+  },
+  {
+    "caption_id": "c_0028",
+    "timestamp": "00:02:02.180",
+    "context_text": "[Image @00:02:02.180]: a cartoon character in a room with a red carpet\n[Dialogue]: Em sẽ dạo lên nhân chóng thôi",
+    "image_text": "a cartoon character in a room with a red carpet",
+    "dialogue_text": "Em sẽ dạo lên nhân chóng thôi",
+    "matched_transcript_ids": [
+      "t_0044"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.74625
+  },
+  {
+    "caption_id": "c_0029",
+    "timestamp": "00:02:04.319",
+    "context_text": "[Image @00:02:04.319]: a cartoon character with a black hat and a brown shirt\n[Dialogue]: À hay là",
+    "image_text": "a cartoon character with a black hat and a brown shirt",
+    "dialogue_text": "À hay là",
+    "matched_transcript_ids": [
+      "t_0045"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.322313
+  },
+  {
+    "caption_id": "c_0030",
+    "timestamp": "00:02:06.060",
+    "context_text": "[Image @00:02:06.060]: a cartoon character with a smile on his face\n[Dialogue]: Anh chỉ có điều kiện thì giúp em",
+    "image_text": "a cartoon character with a smile on his face",
+    "dialogue_text": "Anh chỉ có điều kiện thì giúp em",
+    "matched_transcript_ids": [
+      "t_0046"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.88875
+  },
+  {
+    "caption_id": "c_0031",
+    "timestamp": "00:02:09.180",
+    "context_text": "[Image @00:02:09.180]: a cartoon scene with two men talking\n[Dialogue]: Cho em về một số tiền vốn làm ăn",
+    "image_text": "a cartoon scene with two men talking",
+    "dialogue_text": "Cho em về một số tiền vốn làm ăn",
+    "matched_transcript_ids": [
+      "t_0047"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.74625
+  },
+  {
+    "caption_id": "c_0032",
+    "timestamp": "00:02:13.860",
+    "context_text": "[Image @00:02:13.860]: a cartoon character and a woman in a room\n[Dialogue]: Em sẽ trả cả vốn lẫn lời",
+    "image_text": "a cartoon character and a woman in a room",
+    "dialogue_text": "Em sẽ trả cả vốn lẫn lời",
+    "matched_transcript_ids": [
+      "t_0049"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.87375
+  },
+  {
+    "caption_id": "c_0033",
+    "timestamp": "00:02:18.480",
+    "context_text": "[Image @00:02:18.480]: a cartoon character in a purple jacket and brown pants\n[Dialogue]: Nhưng mà được rồi",
+    "image_text": "a cartoon character in a purple jacket and brown pants",
+    "dialogue_text": "Nhưng mà được rồi",
+    "matched_transcript_ids": [
+      "t_0051"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.81
+  },
+  {
+    "caption_id": "c_0034",
+    "timestamp": "00:02:22.660",
+    "context_text": "[Image @00:02:22.660]: a cartoon picture of a man and woman sitting at a table\n[Dialogue]: Và một nằm gà",
+    "image_text": "a cartoon picture of a man and woman sitting at a table",
+    "dialogue_text": "Và một nằm gà",
+    "matched_transcript_ids": [
+      "t_0053"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.77625
+  },
+  {
+    "caption_id": "c_0035",
+    "timestamp": "00:02:25.759",
+    "context_text": "[Image @00:02:25.759]: a cartoon character with a smile on his face\n[Dialogue]: Với châu và gà, nếu chú biết chăm chỉ làm ăn",
+    "image_text": "a cartoon character with a smile on his face",
+    "dialogue_text": "Với châu và gà, nếu chú biết chăm chỉ làm ăn",
+    "matched_transcript_ids": [
+      "t_0054"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.854812
+  },
+  {
+    "caption_id": "c_0036",
+    "timestamp": "00:02:28.420",
+    "context_text": "[Image @00:02:28.420]: a cartoon scene with a man and woman talking\n[Dialogue]: Chả mấy mà thành công",
+    "image_text": "a cartoon scene with a man and woman talking",
+    "dialogue_text": "Chả mấy mà thành công",
+    "matched_transcript_ids": [
+      "t_0056"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.82125
+  },
+  {
+    "caption_id": "c_0037",
+    "timestamp": "00:02:33.540",
+    "context_text": "[Image @00:02:33.540]: a cartoon character with a finger up\n[Dialogue]: Nhất định em sẽ làm ăn tử tới",
+    "image_text": "a cartoon character with a finger up",
+    "dialogue_text": "Nhất định em sẽ làm ăn tử tới",
+    "matched_transcript_ids": [
+      "t_0058"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.81375
+  },
+  {
+    "caption_id": "c_0038",
+    "timestamp": "00:02:37.300",
+    "context_text": "[Image @00:02:37.300]: a black background with a pink and yellow flower\n[Dialogue]: Tất cả là thật",
+    "image_text": "a black background with a pink and yellow flower",
+    "dialogue_text": "Tất cả là thật",
+    "matched_transcript_ids": [
+      "t_0060"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.31875
+  },
+  {
+    "caption_id": "c_0039",
+    "timestamp": "00:02:42.099",
+    "context_text": "[Image @00:02:42.099]: a cartoon scene with a man sitting on a bench in front of an elephant\n[Dialogue]: Từ nay thì có phải đi chăn châu",
+    "image_text": "a cartoon scene with a man sitting on a bench in front of an elephant",
+    "dialogue_text": "Từ nay thì có phải đi chăn châu",
+    "matched_transcript_ids": [
+      "t_0062"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.881438
+  },
+  {
+    "caption_id": "c_0040",
+    "timestamp": "00:02:50.360",
+    "context_text": "[Image @00:02:50.360]: a cartoon character holding a bird in front of a hut\n[Dialogue]: Mình phải thật con gà béo này để ăn mừng mới nữa",
+    "image_text": "a cartoon character holding a bird in front of a hut",
+    "dialogue_text": "Mình phải thật con gà béo này để ăn mừng mới nữa",
+    "matched_transcript_ids": [
+      "t_0065"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.78
+  },
+  {
+    "caption_id": "c_0041",
+    "timestamp": "00:02:55.060",
+    "context_text": "[Image @00:02:55.060]: a cartoon character with a smile on his face\n[Dialogue]: (khong co)",
+    "image_text": "a cartoon character with a smile on his face",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0042",
+    "timestamp": "00:02:57.300",
+    "context_text": "[Image @00:02:57.300]: a cartoon scene with a bridge and a river\n[Dialogue]: (khong co)",
+    "image_text": "a cartoon scene with a bridge and a river",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0043",
+    "timestamp": "00:02:59.419",
+    "context_text": "[Image @00:02:59.419]: a man sitting on a stool in the woods\n[Dialogue]: Khi lũ gà này, ngày một ngày",
+    "image_text": "a man sitting on a stool in the woods",
+    "dialogue_text": "Khi lũ gà này, ngày một ngày",
+    "matched_transcript_ids": [
+      "t_0066"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.341062
+  },
+  {
+    "caption_id": "c_0044",
+    "timestamp": "00:03:03.280",
+    "context_text": "[Image @00:03:03.280]: a cartoon character is talking to a chicken\n[Dialogue]: Lấy mất giá mất",
+    "image_text": "a cartoon character is talking to a chicken",
+    "dialogue_text": "Lấy mất giá mất",
+    "matched_transcript_ids": [
+      "t_0068"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.8475
+  },
+  {
+    "caption_id": "c_0045",
+    "timestamp": "00:03:15.139",
+    "context_text": "[Image @00:03:15.139]: the chicken family\n[Dialogue]: Bởi có một tuần không ăn, mà mày đã",
+    "image_text": "the chicken family",
+    "dialogue_text": "Bởi có một tuần không ăn, mà mày đã",
+    "matched_transcript_ids": [
+      "t_0073"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.738563
+  },
+  {
+    "caption_id": "c_0046",
+    "timestamp": "00:03:26.180",
+    "context_text": "[Image @00:03:26.180]: a cartoon character is sitting on the ground\n[Dialogue]: Mấy ngày này quên không cho con châu ăn",
+    "image_text": "a cartoon character is sitting on the ground",
+    "dialogue_text": "Mấy ngày này quên không cho con châu ăn",
+    "matched_transcript_ids": [
+      "t_0077"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.86625
+  },
+  {
+    "caption_id": "c_0047",
+    "timestamp": "00:03:29.079",
+    "context_text": "[Image @00:03:29.079]: a cartoon of a buffalo running through the jungle\n[Dialogue]: Không biết có sao không nữa",
+    "image_text": "a cartoon of a buffalo running through the jungle",
+    "dialogue_text": "Không biết có sao không nữa",
+    "matched_transcript_ids": [
+      "t_0078"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.727313
+  },
+  {
+    "caption_id": "c_0048",
+    "timestamp": "00:03:31.719",
+    "context_text": "[Image @00:03:31.719]: a cartoon of a man and a cow\n[Dialogue]: Cái gì thế này",
+    "image_text": "a cartoon of a man and a cow",
+    "dialogue_text": "Cái gì thế này",
+    "matched_transcript_ids": [
+      "t_0079"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.847313
+  },
+  {
+    "caption_id": "c_0049",
+    "timestamp": "00:03:35.560",
+    "context_text": "[Image @00:03:35.560]: a cartoon character with a big nose and a big nose\n[Dialogue]: Chắc phải bán đầu thôi",
+    "image_text": "a cartoon character with a big nose and a big nose",
+    "dialogue_text": "Chắc phải bán đầu thôi",
+    "matched_transcript_ids": [
+      "t_0082"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.795
+  },
+  {
+    "caption_id": "c_0050",
+    "timestamp": "00:03:38.659",
+    "context_text": "[Image @00:03:38.659]: a black background with the words vasa\n[Dialogue]: Xem vước phát được đồng nào",
+    "image_text": "a black background with the words vasa",
+    "dialogue_text": "Xem vước phát được đồng nào",
+    "matched_transcript_ids": [
+      "t_0083"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.836063
+  },
+  {
+    "caption_id": "c_0051",
+    "timestamp": "00:03:44.699",
+    "context_text": "[Image @00:03:44.699]: a cartoon character sitting on a bench\n[Dialogue]: Giờ châu cũng không còn",
+    "image_text": "a cartoon character sitting on a bench",
+    "dialogue_text": "Giờ châu cũng không còn",
+    "matched_transcript_ids": [
+      "t_0086"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.768938
+  },
+  {
+    "caption_id": "c_0052",
+    "timestamp": "00:03:52.819",
+    "context_text": "[Image @00:03:52.819]: a cartoon character sitting on the ground\n[Dialogue]: Đây, chắc muối mặt",
+    "image_text": "a cartoon character sitting on the ground",
+    "dialogue_text": "Đây, chắc muối mặt",
+    "matched_transcript_ids": [
+      "t_0090"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.746437
+  },
+  {
+    "caption_id": "c_0053",
+    "timestamp": "00:03:56.500",
+    "context_text": "[Image @00:03:56.500]: a black background with a white and pink flower\n[Dialogue]: Xa nhận hai giúp đứa thôi",
+    "image_text": "a black background with a white and pink flower",
+    "dialogue_text": "Xa nhận hai giúp đứa thôi",
+    "matched_transcript_ids": [
+      "t_0091"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.35625
+  },
+  {
+    "caption_id": "c_0054",
+    "timestamp": "00:03:57.340",
+    "context_text": "[Image @00:03:57.340]: a cartoon scene of two people sitting at a table\n[Dialogue]: Thấy là sao",
+    "image_text": "a cartoon scene of two people sitting at a table",
+    "dialogue_text": "Thấy là sao",
+    "matched_transcript_ids": [
+      "t_0092"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.32625
+  },
+  {
+    "caption_id": "c_0055",
+    "timestamp": "00:03:59.199",
+    "context_text": "[Image @00:03:59.199]: a cartoon character sitting at a table with a pot\n[Dialogue]: Châu gà đấu hết rồi chút năm",
+    "image_text": "a cartoon character sitting at a table with a pot",
+    "dialogue_text": "Châu gà đấu hết rồi chút năm",
+    "matched_transcript_ids": [
+      "t_0093"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.862688
+  },
+  {
+    "caption_id": "c_0056",
+    "timestamp": "00:04:03.900",
+    "context_text": "[Image @00:04:03.900]: a cartoon character with a sad look on his face\n[Dialogue]: Em làm thật mấy con gà ăn tạm",
+    "image_text": "a cartoon character with a sad look on his face",
+    "dialogue_text": "Em làm thật mấy con gà ăn tạm",
+    "matched_transcript_ids": [
+      "t_0095"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.73125
+  },
+  {
+    "caption_id": "c_0057",
+    "timestamp": "00:04:08.439",
+    "context_text": "[Image @00:04:08.439]: a cartoon character with a black hat and a green shirt\n[Dialogue]: Mấy con mấy hơm",
+    "image_text": "a cartoon character with a black hat and a green shirt",
+    "dialogue_text": "Mấy con mấy hơm",
+    "matched_transcript_ids": [
+      "t_0097"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.817688
+  },
+  {
+    "caption_id": "c_0058",
+    "timestamp": "00:04:11.519",
+    "context_text": "[Image @00:04:11.519]: a cartoon character with a sad look on his face\n[Dialogue]: Quận cho châu ăn mà nó đã",
+    "image_text": "a cartoon character with a sad look on his face",
+    "dialogue_text": "Quận cho châu ăn mà nó đã",
+    "matched_transcript_ids": [
+      "t_0098"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.809813
+  },
+  {
+    "caption_id": "c_0059",
+    "timestamp": "00:04:15.540",
+    "context_text": "[Image @00:04:15.540]: a cartoon character with a pot of tea\n[Dialogue]: Đến nước này thì chú không thể đổ lỗi cho số phận được rồi",
+    "image_text": "a cartoon character with a pot of tea",
+    "dialogue_text": "Đến nước này thì chú không thể đổ lỗi cho số phận được rồi",
+    "matched_transcript_ids": [
+      "t_0100"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.61125
+  },
+  {
+    "caption_id": "c_0060",
+    "timestamp": "00:04:18.879",
+    "context_text": "[Image @00:04:18.879]: a cartoon character with a sad look on his face\n[Dialogue]: Chú đã có một con châu, một đàn gà",
+    "image_text": "a cartoon character with a sad look on his face",
+    "dialogue_text": "Chú đã có một con châu, một đàn gà",
+    "matched_transcript_ids": [
+      "t_0101"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.735188
+  },
+  {
+    "caption_id": "c_0061",
+    "timestamp": "00:04:22.560",
+    "context_text": "[Image @00:04:22.560]: a cartoon character is sitting at a table\n[Dialogue]: Nếu chăm chỉ ra, tới giờ đã sắp có trứng gà bán rồi",
+    "image_text": "a cartoon character is sitting at a table",
+    "dialogue_text": "Nếu chăm chỉ ra, tới giờ đã sắp có trứng gà bán rồi",
+    "matched_transcript_ids": [
+      "t_0102"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.8175
+  },
+  {
+    "caption_id": "c_0062",
+    "timestamp": "00:04:29.939",
+    "context_text": "[Image @00:04:29.939]: a cartoon character with a black hat and a green shirt\n[Dialogue]: Lời miếng hết thúc chữa",
+    "image_text": "a cartoon character with a black hat and a green shirt",
+    "dialogue_text": "Lời miếng hết thúc chữa",
+    "matched_transcript_ids": [
+      "t_0106"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.888563
+  },
+  {
+    "caption_id": "c_0063",
+    "timestamp": "00:04:36.860",
+    "context_text": "[Image @00:04:36.860]: a cartoon character with a black hair and a green shirt\n[Dialogue]: Anh, anh ơi",
+    "image_text": "a cartoon character with a black hair and a green shirt",
+    "dialogue_text": "Anh, anh ơi",
+    "matched_transcript_ids": [
+      "t_0110"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.87375
+  },
+  {
+    "caption_id": "c_0064",
+    "timestamp": "00:04:40.500",
+    "context_text": "[Image @00:04:40.500]: a cartoon character with a sad look on his face\n[Dialogue]: ơn, sâu lại thế chứ",
+    "image_text": "a cartoon character with a sad look on his face",
+    "dialogue_text": "ơn, sâu lại thế chứ",
+    "matched_transcript_ids": [
+      "t_0111"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.16875
+  },
+  {
+    "caption_id": "c_0065",
+    "timestamp": "00:04:44.319",
+    "context_text": "[Image @00:04:44.319]: a black background with the words ' kinn ' in rainbow colors\n[Dialogue]: Khi nhìn ăn",
+    "image_text": "a black background with the words ' kinn ' in rainbow colors",
+    "dialogue_text": "Khi nhìn ăn",
+    "matched_transcript_ids": [
+      "t_0112"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.772313
+  },
+  {
+    "caption_id": "c_0066",
+    "timestamp": "00:04:46.939",
+    "context_text": "[Image @00:04:46.939]: a black background with a white and red flower\n[Dialogue]: Khi nhìn ăn",
+    "image_text": "a black background with a white and red flower",
+    "dialogue_text": "Khi nhìn ăn",
+    "matched_transcript_ids": [
+      "t_0112"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.086438
+  },
+  {
+    "caption_id": "c_0067",
+    "timestamp": "00:04:54.500",
+    "context_text": "[Image @00:04:54.500]: a cartoon character sitting on top of a rock in the jungle\n[Dialogue]: Anh em thân mất",
+    "image_text": "a cartoon character sitting on top of a rock in the jungle",
+    "dialogue_text": "Anh em thân mất",
+    "matched_transcript_ids": [
+      "t_0113"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.80625
+  },
+  {
+    "caption_id": "c_0068",
+    "timestamp": "00:05:02.759",
+    "context_text": "[Image @00:05:02.759]: the jungle of the lost children\n[Dialogue]: Thế nên, thử ý kiến của tôi",
+    "image_text": "the jungle of the lost children",
+    "dialogue_text": "Thế nên, thử ý kiến của tôi",
+    "matched_transcript_ids": [
+      "t_0117"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.570188
+  },
+  {
+    "caption_id": "c_0069",
+    "timestamp": "00:05:07.680",
+    "context_text": "[Image @00:05:07.680]: a cartoon character with a big face and a big nose\n[Dialogue]: Hoặc chúng ta phải tự trồng thêm những cái chú mới",
+    "image_text": "a cartoon character with a big face and a big nose",
+    "dialogue_text": "Hoặc chúng ta phải tự trồng thêm những cái chú mới",
+    "matched_transcript_ids": [
+      "t_0119"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7725
+  },
+  {
+    "caption_id": "c_0070",
+    "timestamp": "00:05:13.700",
+    "context_text": "[Image @00:05:13.700]: the jungle of the apes\n[Dialogue]: Đúng rồi, lại còn phải trồng thêm nữa",
+    "image_text": "the jungle of the apes",
+    "dialogue_text": "Đúng rồi, lại còn phải trồng thêm nữa",
+    "matched_transcript_ids": [
+      "t_0121"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.76875
+  },
+  {
+    "caption_id": "c_0071",
+    "timestamp": "00:05:16.800",
+    "context_text": "[Image @00:05:16.800]: a monkey with a big smile on his face\n[Dialogue]: Cứ ăn hết, thì chú sẽ khác ra thêm quá",
+    "image_text": "a monkey with a big smile on his face",
+    "dialogue_text": "Cứ ăn hết, thì chú sẽ khác ra thêm quá",
+    "matched_transcript_ids": [
+      "t_0122"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.75
+  },
+  {
+    "caption_id": "c_0072",
+    "timestamp": "00:05:19.019",
+    "context_text": "[Image @00:05:19.019]: the three monkeys\n[Dialogue]: Đau, tất cả dữ trật tư một chút",
+    "image_text": "the three monkeys",
+    "dialogue_text": "Đau, tất cả dữ trật tư một chút",
+    "matched_transcript_ids": [
+      "t_0123"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.896437
+  },
+  {
+    "caption_id": "c_0073",
+    "timestamp": "00:05:23.340",
+    "context_text": "[Image @00:05:23.340]: a cartoon monkey with a big nose and a big nose\n[Dialogue]: Tà cần nghe kiến cụ thể của tận hình viên",
+    "image_text": "a cartoon monkey with a big nose and a big nose",
+    "dialogue_text": "Tà cần nghe kiến cụ thể của tận hình viên",
+    "matched_transcript_ids": [
+      "t_0124"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.83625
+  },
+  {
+    "caption_id": "c_0074",
+    "timestamp": "00:05:28.799",
+    "context_text": "[Image @00:05:28.799]: a cartoon character with long hair and a black face\n[Dialogue]: Đối với chúng ta không có gì là có cả",
+    "image_text": "a cartoon character with long hair and a black face",
+    "dialogue_text": "Đối với chúng ta không có gì là có cả",
+    "matched_transcript_ids": [
+      "t_0126"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.750188
+  },
+  {
+    "caption_id": "c_0075",
+    "timestamp": "00:05:33.220",
+    "context_text": "[Image @00:05:33.220]: the monkeys are all looking at each other monkeys\n[Dialogue]: Về lâu dài, thì tôi ủng hộ phương án trồng thêm chú",
+    "image_text": "the monkeys are all looking at each other monkeys",
+    "dialogue_text": "Về lâu dài, thì tôi ủng hộ phương án trồng thêm chú",
+    "matched_transcript_ids": [
+      "t_0127"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.75375
+  },
+  {
+    "caption_id": "c_0076",
+    "timestamp": "00:05:36.259",
+    "context_text": "[Image @00:05:36.259]: a cartoon of a monkey in the jungle\n[Dialogue]: Báo như đời này, tổ tiền của chúng ta không trồng chú",
+    "image_text": "a cartoon of a monkey in the jungle",
+    "dialogue_text": "Báo như đời này, tổ tiền của chúng ta không trồng chú",
+    "matched_transcript_ids": [
+      "t_0129"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.851438
+  },
+  {
+    "caption_id": "c_0077",
+    "timestamp": "00:05:39.600",
+    "context_text": "[Image @00:05:39.600]: a cartoon monkey with a big head and a big nose\n[Dialogue]: mà vẫn sống được đấy thôi",
+    "image_text": "a cartoon monkey with a big head and a big nose",
+    "dialogue_text": "mà vẫn sống được đấy thôi",
+    "matched_transcript_ids": [
+      "t_0130"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7875
+  },
+  {
+    "caption_id": "c_0078",
+    "timestamp": "00:05:43.600",
+    "context_text": "[Image @00:05:43.600]: a cartoon of a monkey in the jungle\n[Dialogue]: Vừa mượt, vừa tốn thời gian",
+    "image_text": "a cartoon of a monkey in the jungle",
+    "dialogue_text": "Vừa mượt, vừa tốn thời gian",
+    "matched_transcript_ids": [
+      "t_0132"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7875
+  },
+  {
+    "caption_id": "c_0079",
+    "timestamp": "00:05:47.939",
+    "context_text": "[Image @00:05:47.939]: the three monkeys\n[Dialogue]: Đúng đó, tổ tiền của chúng ta vẫn lấy chú tự nhiên",
+    "image_text": "the three monkeys",
+    "dialogue_text": "Đúng đó, tổ tiền của chúng ta vẫn lấy chú tự nhiên",
+    "matched_transcript_ids": [
+      "t_0133"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.888563
+  },
+  {
+    "caption_id": "c_0080",
+    "timestamp": "00:05:52.899",
+    "context_text": "[Image @00:05:52.899]: a cartoon character sitting in the middle of a forest\n[Dialogue]: Số lượng thành viên trong đàn chúng ta ngay càng đông",
+    "image_text": "a cartoon character sitting in the middle of a forest",
+    "dialogue_text": "Số lượng thành viên trong đàn chúng ta ngay càng đông",
+    "matched_transcript_ids": [
+      "t_0135"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.881063
+  },
+  {
+    "caption_id": "c_0081",
+    "timestamp": "00:05:57.339",
+    "context_text": "[Image @00:05:57.339]: the jungle of the apes\n[Dialogue]: Chứ không thể thay thế chú được",
+    "image_text": "the jungle of the apes",
+    "dialogue_text": "Chứ không thể thay thế chú được",
+    "matched_transcript_ids": [
+      "t_0138"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.836437
+  },
+  {
+    "caption_id": "c_0082",
+    "timestamp": "00:06:01.919",
+    "context_text": "[Image @00:06:01.919]: a cartoon monkey sitting in the middle of a forest\n[Dialogue]: Nếu không trồng thêm chú, thì sẽ đen lúc",
+    "image_text": "a cartoon monkey sitting in the middle of a forest",
+    "dialogue_text": "Nếu không trồng thêm chú, thì sẽ đen lúc",
+    "matched_transcript_ids": [
+      "t_0139"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.884813
+  },
+  {
+    "caption_id": "c_0083",
+    "timestamp": "00:06:07.379",
+    "context_text": "[Image @00:06:07.379]: a cartoon monkey with a mohawk on his head\n[Dialogue]: Chúng ta có thể ăn tiết kiểm chú được",
+    "image_text": "a cartoon monkey with a mohawk on his head",
+    "dialogue_text": "Chúng ta có thể ăn tiết kiểm chú được",
+    "matched_transcript_ids": [
+      "t_0142"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.828937
+  },
+  {
+    "caption_id": "c_0084",
+    "timestamp": "00:06:13.600",
+    "context_text": "[Image @00:06:13.600]: a cartoon monkey in the jungle\n[Dialogue]: Chúng ta thà nhận vài ngày",
+    "image_text": "a cartoon monkey in the jungle",
+    "dialogue_text": "Chúng ta thà nhận vài ngày",
+    "matched_transcript_ids": [
+      "t_0144"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.825
+  },
+  {
+    "caption_id": "c_0085",
+    "timestamp": "00:06:17.980",
+    "context_text": "[Image @00:06:17.980]: a cartoon of two monkeys in the jungle\n[Dialogue]: Đúng rồi phải đó",
+    "image_text": "a cartoon of two monkeys in the jungle",
+    "dialogue_text": "Đúng rồi phải đó",
+    "matched_transcript_ids": [
+      "t_0146"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.70875
+  },
+  {
+    "caption_id": "c_0086",
+    "timestamp": "00:06:23.439",
+    "context_text": "[Image @00:06:23.439]: a cartoon of a monkey and a monkey in the jungle\n[Dialogue]: Thì bước sang bên trái của ta",
+    "image_text": "a cartoon of a monkey and a monkey in the jungle",
+    "dialogue_text": "Thì bước sang bên trái của ta",
+    "matched_transcript_ids": [
+      "t_0149"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.817688
+  },
+  {
+    "caption_id": "c_0087",
+    "timestamp": "00:06:29.080",
+    "context_text": "[Image @00:06:29.080]: a cartoon of a gorilla standing in the jungle\n[Dialogue]: Tôi đứng bên trái",
+    "image_text": "a cartoon of a gorilla standing in the jungle",
+    "dialogue_text": "Tôi đứng bên trái",
+    "matched_transcript_ids": [
+      "t_0151"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.885
+  },
+  {
+    "caption_id": "c_0088",
+    "timestamp": "00:06:31.439",
+    "context_text": "[Image @00:06:31.439]: the jungle of the apes\n[Dialogue]: Tôi đứng bên trái",
+    "image_text": "the jungle of the apes",
+    "dialogue_text": "Tôi đứng bên trái",
+    "matched_transcript_ids": [
+      "t_0151"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.367688
+  },
+  {
+    "caption_id": "c_0089",
+    "timestamp": "00:06:35.019",
+    "context_text": "[Image @00:06:35.019]: the jungle book\n[Dialogue]: Tôi nữa",
+    "image_text": "the jungle book",
+    "dialogue_text": "Tôi nữa",
+    "matched_transcript_ids": [
+      "t_0152"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.446437
+  },
+  {
+    "caption_id": "c_0090",
+    "timestamp": "00:06:38.319",
+    "context_text": "[Image @00:06:38.319]: a cartoon character is standing in the woods\n[Dialogue]: Cả tôi nữa",
+    "image_text": "a cartoon character is standing in the woods",
+    "dialogue_text": "Cả tôi nữa",
+    "matched_transcript_ids": [
+      "t_0153"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.840188
+  },
+  {
+    "caption_id": "c_0091",
+    "timestamp": "00:06:40.680",
+    "context_text": "[Image @00:06:40.680]: the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle\n[Dialogue]: Cả tôi nữa",
+    "image_text": "the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle",
+    "dialogue_text": "Cả tôi nữa",
+    "matched_transcript_ids": [
+      "t_0153"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.3225
+  },
+  {
+    "caption_id": "c_0092",
+    "timestamp": "00:06:46.840",
+    "context_text": "[Image @00:06:46.840]: a cartoon of a monkey in the jungle\n[Dialogue]: Đà số thành viên trong đàn phản đối việc trồng thêm chú",
+    "image_text": "a cartoon of a monkey in the jungle",
+    "dialogue_text": "Đà số thành viên trong đàn phản đối việc trồng thêm chú",
+    "matched_transcript_ids": [
+      "t_0155"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.87
+  },
+  {
+    "caption_id": "c_0093",
+    "timestamp": "00:06:54.720",
+    "context_text": "[Image @00:06:54.720]: the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle\n[Dialogue]: Do khi nào đứng đầu",
+    "image_text": "the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle",
+    "dialogue_text": "Do khi nào đứng đầu",
+    "matched_transcript_ids": [
+      "t_0159"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.765
+  },
+  {
+    "caption_id": "c_0094",
+    "timestamp": "00:06:59.779",
+    "context_text": "[Image @00:06:59.779]: the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle\n[Dialogue]: Nếu tất cả đều làm được",
+    "image_text": "the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle",
+    "dialogue_text": "Nếu tất cả đều làm được",
+    "matched_transcript_ids": [
+      "t_0161"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.858563
+  },
+  {
+    "caption_id": "c_0095",
+    "timestamp": "00:07:04.659",
+    "context_text": "[Image @00:07:04.659]: a cartoon of a monkey in the jungle\n[Dialogue]: Cả đàn sẽ đi trồng thêm chú để có thức ăn sau này",
+    "image_text": "a cartoon of a monkey in the jungle",
+    "dialogue_text": "Cả đàn sẽ đi trồng thêm chú để có thức ăn sau này",
+    "matched_transcript_ids": [
+      "t_0164"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.776438
+  },
+  {
+    "caption_id": "c_0096",
+    "timestamp": "00:07:12.100",
+    "context_text": "[Image @00:07:12.100]: two monkeys in the jungle\n[Dialogue]: Việc này dễ dàng quá",
+    "image_text": "two monkeys in the jungle",
+    "dialogue_text": "Việc này dễ dàng quá",
+    "matched_transcript_ids": [
+      "t_0168"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.73125
+  },
+  {
+    "caption_id": "c_0097",
+    "timestamp": "00:07:16.740",
+    "context_text": "[Image @00:07:16.740]: a black background with a white and pink flower\n[Dialogue]: Chẳng có lý gì mà không làm được cả",
+    "image_text": "a black background with a white and pink flower",
+    "dialogue_text": "Chẳng có lý gì mà không làm được cả",
+    "matched_transcript_ids": [
+      "t_0169"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.12375
+  },
+  {
+    "caption_id": "c_0098",
+    "timestamp": "00:07:18.560",
+    "context_text": "[Image @00:07:18.560]: monkeys in the jungle\n[Dialogue]: (khong co)",
+    "image_text": "monkeys in the jungle",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0099",
+    "timestamp": "00:07:21.419",
+    "context_text": "[Image @00:07:21.419]: a cartoon monkey is standing in the jungle\n[Dialogue]: Bất đậu thay đối đồ đây",
+    "image_text": "a cartoon monkey is standing in the jungle",
+    "dialogue_text": "Bất đậu thay đối đồ đây",
+    "matched_transcript_ids": [
+      "t_0170"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.821438
+  },
+  {
+    "caption_id": "c_0100",
+    "timestamp": "00:07:28.259",
+    "context_text": "[Image @00:07:28.259]: a cartoon monkey is looking at another monkey\n[Dialogue]: Chúng ta nên đi tìm và giữ trưởng thật nhiều chú",
+    "image_text": "a cartoon monkey is looking at another monkey",
+    "dialogue_text": "Chúng ta nên đi tìm và giữ trưởng thật nhiều chú",
+    "matched_transcript_ids": [
+      "t_0174"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.851438
+  },
+  {
+    "caption_id": "c_0101",
+    "timestamp": "00:07:35.980",
+    "context_text": "[Image @00:07:35.980]: the three monkeys\n[Dialogue]: Đông đang, đông đang",
+    "image_text": "the three monkeys",
+    "dialogue_text": "Đông đang, đông đang",
+    "matched_transcript_ids": [
+      "t_0177"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.89625
+  },
+  {
+    "caption_id": "c_0102",
+    "timestamp": "00:07:38.799",
+    "context_text": "[Image @00:07:38.799]: a cartoon monkey with a big smile on his face\n[Dialogue]: Ê chú nhiều thế",
+    "image_text": "a cartoon monkey with a big smile on his face",
+    "dialogue_text": "Ê chú nhiều thế",
+    "matched_transcript_ids": [
+      "t_0178"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.412313
+  },
+  {
+    "caption_id": "c_0103",
+    "timestamp": "00:07:40.959",
+    "context_text": "[Image @00:07:40.959]: the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle\n[Dialogue]: Ê chú nhiều thế",
+    "image_text": "the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle",
+    "dialogue_text": "Ê chú nhiều thế",
+    "matched_transcript_ids": [
+      "t_0178"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.892313
+  },
+  {
+    "caption_id": "c_0104",
+    "timestamp": "00:07:49.279",
+    "context_text": "[Image @00:07:49.279]: a cartoon character in the jungle\n[Dialogue]: Tốt nhất lại đi ngủ cho quen đi con đối",
+    "image_text": "a cartoon character in the jungle",
+    "dialogue_text": "Tốt nhất lại đi ngủ cho quen đi con đối",
+    "matched_transcript_ids": [
+      "t_0182"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.397688
+  },
+  {
+    "caption_id": "c_0105",
+    "timestamp": "00:07:58.879",
+    "context_text": "[Image @00:07:58.879]: a cartoon monkey with a big nose and a big nose\n[Dialogue]: Tà e rằng sẽ làm hổng hết cả",
+    "image_text": "a cartoon monkey with a big nose and a big nose",
+    "dialogue_text": "Tà e rằng sẽ làm hổng hết cả",
+    "matched_transcript_ids": [
+      "t_0186"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.735188
+  },
+  {
+    "caption_id": "c_0106",
+    "timestamp": "00:08:03.940",
+    "context_text": "[Image @00:08:03.940]: a cartoon monkey in the jungle\n[Dialogue]: Chúng ta nên chia cho mỗi người vầy quá",
+    "image_text": "a cartoon monkey in the jungle",
+    "dialogue_text": "Chúng ta nên chia cho mỗi người vầy quá",
+    "matched_transcript_ids": [
+      "t_0187"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.88875
+  },
+  {
+    "caption_id": "c_0107",
+    "timestamp": "00:08:11.700",
+    "context_text": "[Image @00:08:11.700]: the jungle book\n[Dialogue]: Tà đồng ý",
+    "image_text": "the jungle book",
+    "dialogue_text": "Tà đồng ý",
+    "matched_transcript_ids": [
+      "t_0190"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.13125
+  },
+  {
+    "caption_id": "c_0108",
+    "timestamp": "00:08:22.539",
+    "context_text": "[Image @00:08:22.539]: a cartoon monkey and a monkey in the jungle\n[Dialogue]: Như thế khi bước ra ngày mới",
+    "image_text": "a cartoon monkey and a monkey in the jungle",
+    "dialogue_text": "Như thế khi bước ra ngày mới",
+    "matched_transcript_ids": [
+      "t_0193"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.363563
+  },
+  {
+    "caption_id": "c_0109",
+    "timestamp": "00:08:31.699",
+    "context_text": "[Image @00:08:31.699]: a cartoon monkey with a mohawk on his head\n[Dialogue]: Tất cả hai bóc chú ra",
+    "image_text": "a cartoon monkey with a mohawk on his head",
+    "dialogue_text": "Tất cả hai bóc chú ra",
+    "matched_transcript_ids": [
+      "t_0197"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.843562
+  },
+  {
+    "caption_id": "c_0110",
+    "timestamp": "00:08:36.299",
+    "context_text": "[Image @00:08:36.299]: a cartoon monkey eating a banana in the jungle\n[Dialogue]: Đào anh em, chúng ta hãy nhắm mắc lại",
+    "image_text": "a cartoon monkey eating a banana in the jungle",
+    "dialogue_text": "Đào anh em, chúng ta hãy nhắm mắc lại",
+    "matched_transcript_ids": [
+      "t_0199"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.131062
+  },
+  {
+    "caption_id": "c_0111",
+    "timestamp": "00:08:40.559",
+    "context_text": "[Image @00:08:40.559]: a cartoon monkey holding a banana in the jungle\n[Dialogue]: Tập trung nào",
+    "image_text": "a cartoon monkey holding a banana in the jungle",
+    "dialogue_text": "Tập trung nào",
+    "matched_transcript_ids": [
+      "t_0200"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.817313
+  },
+  {
+    "caption_id": "c_0112",
+    "timestamp": "00:08:44.940",
+    "context_text": "[Image @00:08:44.940]: the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle\n[Dialogue]: Ngày hôm nay sắp hết rồi, cố lên",
+    "image_text": "the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle",
+    "dialogue_text": "Ngày hôm nay sắp hết rồi, cố lên",
+    "matched_transcript_ids": [
+      "t_0201"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.08625
+  },
+  {
+    "caption_id": "c_0113",
+    "timestamp": "00:08:46.960",
+    "context_text": "[Image @00:08:46.960]: a cartoon of a monkey and a monkey hugging\n[Dialogue]: (khong co)",
+    "image_text": "a cartoon of a monkey and a monkey hugging",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0114",
+    "timestamp": "00:08:49.059",
+    "context_text": "[Image @00:08:49.059]: a cartoon monkey with a big nose and a big nose\n[Dialogue]: (khong co)",
+    "image_text": "a cartoon monkey with a big nose and a big nose",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0115",
+    "timestamp": "00:08:51.019",
+    "context_text": "[Image @00:08:51.019]: the three monkeys\n[Dialogue]: Nhận rửa thách đối của khí đen",
+    "image_text": "the three monkeys",
+    "dialogue_text": "Nhận rửa thách đối của khí đen",
+    "matched_transcript_ids": [
+      "t_0202"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.078562
+  },
+  {
+    "caption_id": "c_0116",
+    "timestamp": "00:08:52.919",
+    "context_text": "[Image @00:08:52.919]: a cartoon monkey with a tooth in its mouth\n[Dialogue]: Nhận rửa thách đối của khí đen",
+    "image_text": "a cartoon monkey with a tooth in its mouth",
+    "dialogue_text": "Nhận rửa thách đối của khí đen",
+    "matched_transcript_ids": [
+      "t_0202"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.434813
+  },
+  {
+    "caption_id": "c_0117",
+    "timestamp": "00:08:56.700",
+    "context_text": "[Image @00:08:56.700]: a cartoon monkey in the jungle\n[Dialogue]: thật là một việc làm vô nghĩa",
+    "image_text": "a cartoon monkey in the jungle",
+    "dialogue_text": "thật là một việc làm vô nghĩa",
+    "matched_transcript_ids": [
+      "t_0203"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.84375
+  },
+  {
+    "caption_id": "c_0118",
+    "timestamp": "00:09:00.420",
+    "context_text": "[Image @00:09:00.420]: the jungle of the apes\n[Dialogue]: Thôi nào, thôi nào",
+    "image_text": "the jungle of the apes",
+    "dialogue_text": "Thôi nào, thôi nào",
+    "matched_transcript_ids": [
+      "t_0205"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.34125
+  },
+  {
+    "caption_id": "c_0119",
+    "timestamp": "00:09:05.840",
+    "context_text": "[Image @00:09:05.840]: a monkey with a banana in its mouth\n[Dialogue]: chúng ta không thể để khí đen",
+    "image_text": "a monkey with a banana in its mouth",
+    "dialogue_text": "chúng ta không thể để khí đen",
+    "matched_transcript_ids": [
+      "t_0207"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7425
+  },
+  {
+    "caption_id": "c_0120",
+    "timestamp": "00:09:11.740",
+    "context_text": "[Image @00:09:11.740]: the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle\n[Dialogue]: Con cây kia nga",
+    "image_text": "the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle",
+    "dialogue_text": "Con cây kia nga",
+    "matched_transcript_ids": [
+      "t_0210"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.85125
+  },
+  {
+    "caption_id": "c_0121",
+    "timestamp": "00:09:18.879",
+    "context_text": "[Image @00:09:18.879]: the three monkeys are talking to each other monkeys\n[Dialogue]: tháng sẵn miền ra",
+    "image_text": "the three monkeys are talking to each other monkeys",
+    "dialogue_text": "tháng sẵn miền ra",
+    "matched_transcript_ids": [
+      "t_0214"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.735188
+  },
+  {
+    "caption_id": "c_0122",
+    "timestamp": "00:09:26.740",
+    "context_text": "[Image @00:09:26.740]: a cartoon monkey with a mohawk on his head\n[Dialogue]: đau, hãy làm theo lời khí con đi",
+    "image_text": "a cartoon monkey with a mohawk on his head",
+    "dialogue_text": "đau, hãy làm theo lời khí con đi",
+    "matched_transcript_ids": [
+      "t_0218"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.76125
+  },
+  {
+    "caption_id": "c_0123",
+    "timestamp": "00:09:30.579",
+    "context_text": "[Image @00:09:30.579]: a cartoon monkey and a banana are in the jungle\n[Dialogue]: (khong co)",
+    "image_text": "a cartoon monkey and a banana are in the jungle",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0124",
+    "timestamp": "00:09:33.720",
+    "context_text": "[Image @00:09:33.720]: a cartoon monkey holding a banana in its mouth\n[Dialogue]: Tôi ơ, tôi ơ",
+    "image_text": "a cartoon monkey holding a banana in its mouth",
+    "dialogue_text": "Tôi ơ, tôi ơ",
+    "matched_transcript_ids": [
+      "t_0219"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.21
+  },
+  {
+    "caption_id": "c_0125",
+    "timestamp": "00:09:37.399",
+    "context_text": "[Image @00:09:37.399]: a cartoon monkey is standing in the woods\n[Dialogue]: tôi mỏi miền quá",
+    "image_text": "a cartoon monkey is standing in the woods",
+    "dialogue_text": "tôi mỏi miền quá",
+    "matched_transcript_ids": [
+      "t_0220"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.825187
+  },
+  {
+    "caption_id": "c_0126",
+    "timestamp": "00:09:41.039",
+    "context_text": "[Image @00:09:41.039]: the monkeys are playing in the jungle\n[Dialogue]: tôi xin lỗi",
+    "image_text": "the monkeys are playing in the jungle",
+    "dialogue_text": "tôi xin lỗi",
+    "matched_transcript_ids": [
+      "t_0221"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.067687
+  },
+  {
+    "caption_id": "c_0127",
+    "timestamp": "00:09:43.080",
+    "context_text": "[Image @00:09:43.080]: a cartoon monkey with a red mohawk on his head\n[Dialogue]: (khong co)",
+    "image_text": "a cartoon monkey with a red mohawk on his head",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0128",
+    "timestamp": "00:09:44.840",
+    "context_text": "[Image @00:09:44.840]: a cartoon monkey and a monkey eating bananas\n[Dialogue]: (khong co)",
+    "image_text": "a cartoon monkey and a monkey eating bananas",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0129",
+    "timestamp": "00:09:46.759",
+    "context_text": "[Image @00:09:46.759]: the three monkeys\n[Dialogue]: (khong co)",
+    "image_text": "the three monkeys",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0130",
+    "timestamp": "00:09:49.019",
+    "context_text": "[Image @00:09:49.019]: the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle\n[Dialogue]: Như vậy là chúng ta đã không thể nhìn ăn chút trong một ngày",
+    "image_text": "the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle",
+    "dialogue_text": "Như vậy là chúng ta đã không thể nhìn ăn chút trong một ngày",
+    "matched_transcript_ids": [
+      "t_0222"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.078562
+  },
+  {
+    "caption_id": "c_0131",
+    "timestamp": "00:09:51.480",
+    "context_text": "[Image @00:09:51.480]: the monkeys are all looking up to the camera\n[Dialogue]: Như vậy là chúng ta đã không thể nhìn ăn chút trong một ngày",
+    "image_text": "the monkeys are all looking up to the camera",
+    "dialogue_text": "Như vậy là chúng ta đã không thể nhìn ăn chút trong một ngày",
+    "matched_transcript_ids": [
+      "t_0222"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.81
+  },
+  {
+    "caption_id": "c_0132",
+    "timestamp": "00:09:55.940",
+    "context_text": "[Image @00:09:55.940]: a cartoon monkey in the jungle\n[Dialogue]: thế nên từ ngày mai",
+    "image_text": "a cartoon monkey in the jungle",
+    "dialogue_text": "thế nên từ ngày mai",
+    "matched_transcript_ids": [
+      "t_0223"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.72375
+  },
+  {
+    "caption_id": "c_0133",
+    "timestamp": "00:10:01.000",
+    "context_text": "[Image @00:10:01.000]: a cartoon monkey with a big nose and a big nose\n[Dialogue]: chúng ta không thể ngăn cảnh những ngu cầu",
+    "image_text": "a cartoon monkey with a big nose and a big nose",
+    "dialogue_text": "chúng ta không thể ngăn cảnh những ngu cầu",
+    "matched_transcript_ids": [
+      "t_0225"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.9
+  },
+  {
+    "caption_id": "c_0134",
+    "timestamp": "00:10:03.840",
+    "context_text": "[Image @00:10:03.840]: the monkeys are all looking up to the camera\n[Dialogue]: nhưng chúng ta có thể dụng sức lâu đồng",
+    "image_text": "the monkeys are all looking up to the camera",
+    "dialogue_text": "nhưng chúng ta có thể dụng sức lâu đồng",
+    "matched_transcript_ids": [
+      "t_0227"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7425
+  },
+  {
+    "caption_id": "c_0135",
+    "timestamp": "00:10:07.160",
+    "context_text": "[Image @00:10:07.160]: a cartoon monkey with a big nose and a big nose\n[Dialogue]: vục vụ những ngu cầu đó",
+    "image_text": "a cartoon monkey with a big nose and a big nose",
+    "dialogue_text": "vục vụ những ngu cầu đó",
+    "matched_transcript_ids": [
+      "t_0229"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.6825
+  },
+  {
+    "caption_id": "c_0136",
+    "timestamp": "00:10:13.900",
+    "context_text": "[Image @00:10:13.900]: a cartoon monkey with a big smile\n[Dialogue]: ngày bài chúng ta sẽ chăm chỉ lâu đồng",
+    "image_text": "a cartoon monkey with a big smile",
+    "dialogue_text": "ngày bài chúng ta sẽ chăm chỉ lâu đồng",
+    "matched_transcript_ids": [
+      "t_0232"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.88125
+  },
+  {
+    "caption_id": "c_0137",
+    "timestamp": "00:10:21.160",
+    "context_text": "[Image @00:10:21.160]: the jungle book\n[Dialogue]: chúng ta sẽ cố gắng trọng thêm nhiều chú",
+    "image_text": "the jungle book",
+    "dialogue_text": "chúng ta sẽ cố gắng trọng thêm nhiều chú",
+    "matched_transcript_ids": [
+      "t_0235"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7425
+  },
+  {
+    "caption_id": "c_0138",
+    "timestamp": "00:10:26.940",
+    "context_text": "[Image @00:10:26.940]: ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti\n[Dialogue]: Tắc kè mẹ",
+    "image_text": "ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti",
+    "dialogue_text": "Tắc kè mẹ",
+    "matched_transcript_ids": [
+      "t_0236"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.72375
+  },
+  {
+    "caption_id": "c_0139",
+    "timestamp": "00:10:30.420",
+    "context_text": "[Image @00:10:30.420]: a black background with a white and pink flower\n[Dialogue]: (khong co)",
+    "image_text": "a black background with a white and pink flower",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0140",
+    "timestamp": "00:10:32.120",
+    "context_text": "[Image @00:10:32.120]: the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle\n[Dialogue]: (khong co)",
+    "image_text": "the jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle jungle",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0141",
+    "timestamp": "00:10:34.319",
+    "context_text": "[Image @00:10:34.319]: a cartoon character in the jungle\n[Dialogue]: Hoàng hộ hộ, anh dội quá",
+    "image_text": "a cartoon character in the jungle",
+    "dialogue_text": "Hoàng hộ hộ, anh dội quá",
+    "matched_transcript_ids": [
+      "t_0237"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.322313
+  },
+  {
+    "caption_id": "c_0142",
+    "timestamp": "00:10:39.420",
+    "context_text": "[Image @00:10:39.420]: a cartoon of a dinosaur and a fish\n[Dialogue]: Thế đã là gì?",
+    "image_text": "a cartoon of a dinosaur and a fish",
+    "dialogue_text": "Thế đã là gì?",
+    "matched_transcript_ids": [
+      "t_0239"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.82125
+  },
+  {
+    "caption_id": "c_0143",
+    "timestamp": "00:10:46.980",
+    "context_text": "[Image @00:10:46.980]: the land of the lost dinosaurs\n[Dialogue]: ốc ơi, ốc",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "ốc ơi, ốc",
+    "matched_transcript_ids": [
+      "t_0243"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.89625
+  },
+  {
+    "caption_id": "c_0144",
+    "timestamp": "00:10:52.779",
+    "context_text": "[Image @00:10:52.779]: the land of the lost dinosaurs\n[Dialogue]: ốc đâu hả hai đứa?",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "ốc đâu hả hai đứa?",
+    "matched_transcript_ids": [
+      "t_0246"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.858563
+  },
+  {
+    "caption_id": "c_0145",
+    "timestamp": "00:10:57.019",
+    "context_text": "[Image @00:10:57.019]: a pinkie pony with a purple mane and green eyes\n[Dialogue]: hai con bảo bàn em nha",
+    "image_text": "a pinkie pony with a purple mane and green eyes",
+    "dialogue_text": "hai con bảo bàn em nha",
+    "matched_transcript_ids": [
+      "t_0249"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.896437
+  },
+  {
+    "caption_id": "c_0146",
+    "timestamp": "00:11:00.720",
+    "context_text": "[Image @00:11:00.720]: the land of the lost dinosaurs\n[Dialogue]: Mẹ ơi con về rồi",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "Mẹ ơi con về rồi",
+    "matched_transcript_ids": [
+      "t_0250"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.3975
+  },
+  {
+    "caption_id": "c_0147",
+    "timestamp": "00:11:07.600",
+    "context_text": "[Image @00:11:07.600]: a pinkie hugging her friend in the woods\n[Dialogue]: con đi chơi ngoài bia đơn mẹ ơi",
+    "image_text": "a pinkie hugging her friend in the woods",
+    "dialogue_text": "con đi chơi ngoài bia đơn mẹ ơi",
+    "matched_transcript_ids": [
+      "t_0252"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.6375
+  },
+  {
+    "caption_id": "c_0148",
+    "timestamp": "00:11:15.240",
+    "context_text": "[Image @00:11:15.240]: the lont and the cat from the lont show\n[Dialogue]: Trời, cho em giám đi một mình ra ngoài bia đơn",
+    "image_text": "the lont and the cat from the lont show",
+    "dialogue_text": "Trời, cho em giám đi một mình ra ngoài bia đơn",
+    "matched_transcript_ids": [
+      "t_0255"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7575
+  },
+  {
+    "caption_id": "c_0149",
+    "timestamp": "00:11:19.480",
+    "context_text": "[Image @00:11:19.480]: a cartoon of a dragon and a dragon\n[Dialogue]: em có thể sử lý mọi việc",
+    "image_text": "a cartoon of a dragon and a dragon",
+    "dialogue_text": "em có thể sử lý mọi việc",
+    "matched_transcript_ids": [
+      "t_0258"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.81
+  },
+  {
+    "caption_id": "c_0150",
+    "timestamp": "00:11:26.299",
+    "context_text": "[Image @00:11:26.299]: file filemater - my little pony - twilight - twilight - twilight - twilight - twilight - twilight twilight twilight twilight twilight twilight twilight twilight twilight\n[Dialogue]: đù dây leo thì làm gì?",
+    "image_text": "file filemater - my little pony - twilight - twilight - twilight - twilight - twilight - twilight twilight twilight twilight twilight twilight twilight twilight twilight",
+    "dialogue_text": "đù dây leo thì làm gì?",
+    "matched_transcript_ids": [
+      "t_0262"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.843938
+  },
+  {
+    "caption_id": "c_0151",
+    "timestamp": "00:11:33.480",
+    "context_text": "[Image @00:11:33.480]: the littlestufs are all in a row\n[Dialogue]: nhất là trong những tình hủng nguy hiểm",
+    "image_text": "the littlestufs are all in a row",
+    "dialogue_text": "nhất là trong những tình hủng nguy hiểm",
+    "matched_transcript_ids": [
+      "t_0266"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.81
+  },
+  {
+    "caption_id": "c_0152",
+    "timestamp": "00:11:36.380",
+    "context_text": "[Image @00:11:36.380]: the amazing world of gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum\n[Dialogue]: để trẻ thoát khỏi kết thù",
+    "image_text": "the amazing world of gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum",
+    "dialogue_text": "để trẻ thoát khỏi kết thù",
+    "matched_transcript_ids": [
+      "t_0267"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.78375
+  },
+  {
+    "caption_id": "c_0153",
+    "timestamp": "00:11:39.420",
+    "context_text": "[Image @00:11:39.420]: the littlestufs are in the jungle\n[Dialogue]: nhưng vẫn chưa quan trọng bằng kĩ năng đổi bào đâu",
+    "image_text": "the littlestufs are in the jungle",
+    "dialogue_text": "nhưng vẫn chưa quan trọng bằng kĩ năng đổi bào đâu",
+    "matched_transcript_ids": [
+      "t_0268"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.60375
+  },
+  {
+    "caption_id": "c_0154",
+    "timestamp": "00:11:42.460",
+    "context_text": "[Image @00:11:42.460]: the amazing world of gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum\n[Dialogue]: đổi bào là gì hả mẹ?",
+    "image_text": "the amazing world of gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum gum",
+    "dialogue_text": "đổi bào là gì hả mẹ?",
+    "matched_transcript_ids": [
+      "t_0269"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.79875
+  },
+  {
+    "caption_id": "c_0155",
+    "timestamp": "00:11:48.579",
+    "context_text": "[Image @00:11:48.579]: a cartoon character in a cave\n[Dialogue]: đó là biến đổi bào",
+    "image_text": "a cartoon character in a cave",
+    "dialogue_text": "đó là biến đổi bào",
+    "matched_transcript_ids": [
+      "t_0272"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.821063
+  },
+  {
+    "caption_id": "c_0156",
+    "timestamp": "00:11:56.019",
+    "context_text": "[Image @00:11:56.019]: the sm and sm from the sm show\n[Dialogue]: phải tập luyện chăm chỉ để ứng phó thực nhân",
+    "image_text": "the sm and sm from the sm show",
+    "dialogue_text": "phải tập luyện chăm chỉ để ứng phó thực nhân",
+    "matched_transcript_ids": [
+      "t_0276"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.716063
+  },
+  {
+    "caption_id": "c_0157",
+    "timestamp": "00:12:01.879",
+    "context_text": "[Image @00:12:01.879]: a pinkie looking at a pumpkin in the woods\n[Dialogue]: có mẹ rồi mà",
+    "image_text": "a pinkie looking at a pumpkin in the woods",
+    "dialogue_text": "có mẹ rồi mà",
+    "matched_transcript_ids": [
+      "t_0278"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.735188
+  },
+  {
+    "caption_id": "c_0158",
+    "timestamp": "00:12:09.579",
+    "context_text": "[Image @00:12:09.579]: a cartoon character with a purple hair and green eyes\n[Dialogue]: phải học cách tự bảo vệ bình",
+    "image_text": "a cartoon character with a purple hair and green eyes",
+    "dialogue_text": "phải học cách tự bảo vệ bình",
+    "matched_transcript_ids": [
+      "t_0282"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.791438
+  },
+  {
+    "caption_id": "c_0159",
+    "timestamp": "00:12:16.379",
+    "context_text": "[Image @00:12:16.379]: the land of the lost dinosaurs\n[Dialogue]: đúng con sẽ chăm chỉ luyện tập để bảo vệ mẹ",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "đúng con sẽ chăm chỉ luyện tập để bảo vệ mẹ",
+    "matched_transcript_ids": [
+      "t_0285"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.641437
+  },
+  {
+    "caption_id": "c_0160",
+    "timestamp": "00:12:21.879",
+    "context_text": "[Image @00:12:21.879]: a cartoon character in a cave\n[Dialogue]: sáng nay mẹ sẽ giải bà nèm đổi màu nhé",
+    "image_text": "a cartoon character in a cave",
+    "dialogue_text": "sáng nay mẹ sẽ giải bà nèm đổi màu nhé",
+    "matched_transcript_ids": [
+      "t_0287"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.735188
+  },
+  {
+    "caption_id": "c_0161",
+    "timestamp": "00:12:25.899",
+    "context_text": "[Image @00:12:25.899]: a black background with the words ' snou '\n[Dialogue]: Trong trừng, đưa dễ chú ngủ",
+    "image_text": "a black background with the words ' snou '",
+    "dialogue_text": "Trong trừng, đưa dễ chú ngủ",
+    "matched_transcript_ids": [
+      "t_0288"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.243563
+  },
+  {
+    "caption_id": "c_0162",
+    "timestamp": "00:12:30.379",
+    "context_text": "[Image @00:12:30.379]: the land of the lost dinosaurs\n[Dialogue]: và lẫn trung nhất là gì nào?",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "và lẫn trung nhất là gì nào?",
+    "matched_transcript_ids": [
+      "t_0289"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.828937
+  },
+  {
+    "caption_id": "c_0163",
+    "timestamp": "00:12:37.460",
+    "context_text": "[Image @00:12:37.460]: the jungle book\n[Dialogue]: à ha, có nghĩ ra rồi",
+    "image_text": "the jungle book",
+    "dialogue_text": "à ha, có nghĩ ra rồi",
+    "matched_transcript_ids": [
+      "t_0292"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.79875
+  },
+  {
+    "caption_id": "c_0164",
+    "timestamp": "00:12:43.860",
+    "context_text": "[Image @00:12:43.860]: a cartoon character with a pink and blue face\n[Dialogue]: nhé, con chẳng thấy con kiến nào bảo qua đen mẹ à?",
+    "image_text": "a cartoon character with a pink and blue face",
+    "dialogue_text": "nhé, con chẳng thấy con kiến nào bảo qua đen mẹ à?",
+    "matched_transcript_ids": [
+      "t_0295"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.55125
+  },
+  {
+    "caption_id": "c_0165",
+    "timestamp": "00:12:47.660",
+    "context_text": "[Image @00:12:47.660]: the land of the lost dinosaurs\n[Dialogue]: không bảo qua đậu, con trung bà chứ?",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "không bảo qua đậu, con trung bà chứ?",
+    "matched_transcript_ids": [
+      "t_0296"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.83625
+  },
+  {
+    "caption_id": "c_0166",
+    "timestamp": "00:12:54.600",
+    "context_text": "[Image @00:12:54.600]: a cartoon character holding a wand in front of a tree\n[Dialogue]: bảo sắc phòng phú, lại ở sắc cạnh nhau",
+    "image_text": "a cartoon character holding a wand in front of a tree",
+    "dialogue_text": "bảo sắc phòng phú, lại ở sắc cạnh nhau",
+    "matched_transcript_ids": [
+      "t_0299"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7875
+  },
+  {
+    "caption_id": "c_0167",
+    "timestamp": "00:13:02.160",
+    "context_text": "[Image @00:13:02.160]: the land of the lost dinosaurs\n[Dialogue]: đa lạc thế",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "đa lạc thế",
+    "matched_transcript_ids": [
+      "t_0301"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.42
+  },
+  {
+    "caption_id": "c_0168",
+    "timestamp": "00:13:07.860",
+    "context_text": "[Image @00:13:07.860]: a cartoon picture of a cat and a fish\n[Dialogue]: trời ơi, mẹ bín bất rồi",
+    "image_text": "a cartoon picture of a cat and a fish",
+    "dialogue_text": "trời ơi, mẹ bín bất rồi",
+    "matched_transcript_ids": [
+      "t_0303"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.42375
+  },
+  {
+    "caption_id": "c_0169",
+    "timestamp": "00:13:13.720",
+    "context_text": "[Image @00:13:13.720]: the jungle book\n[Dialogue]: không hạ, mẹ giỏi thật",
+    "image_text": "the jungle book",
+    "dialogue_text": "không hạ, mẹ giỏi thật",
+    "matched_transcript_ids": [
+      "t_0305"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.765
+  },
+  {
+    "caption_id": "c_0170",
+    "timestamp": "00:13:18.559",
+    "context_text": "[Image @00:13:18.559]: a cartoon character is standing in the middle of a tree\n[Dialogue]: trời ơi, trong mẹ như một bông hoa thật vậy",
+    "image_text": "a cartoon character is standing in the middle of a tree",
+    "dialogue_text": "trời ơi, trong mẹ như một bông hoa thật vậy",
+    "matched_transcript_ids": [
+      "t_0306"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.607688
+  },
+  {
+    "caption_id": "c_0171",
+    "timestamp": "00:13:22.579",
+    "context_text": "[Image @00:13:22.579]: the land of the lost dinosaurs\n[Dialogue]: quá, suy quá mẹ ơi",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "quá, suy quá mẹ ơi",
+    "matched_transcript_ids": [
+      "t_0307"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.821063
+  },
+  {
+    "caption_id": "c_0172",
+    "timestamp": "00:13:26.360",
+    "context_text": "[Image @00:13:26.360]: a cartoon character with a red face and green eyes\n[Dialogue]: mẹ, mẹ đâu rồi à?",
+    "image_text": "a cartoon character with a red face and green eyes",
+    "dialogue_text": "mẹ, mẹ đâu rồi à?",
+    "matched_transcript_ids": [
+      "t_0309"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.8325
+  },
+  {
+    "caption_id": "c_0173",
+    "timestamp": "00:13:31.480",
+    "context_text": "[Image @00:13:31.480]: a cartoon lizard is sitting on a tree branch\n[Dialogue]: chăm chỉ luyện tập cùng cắt ăn nhé",
+    "image_text": "a cartoon lizard is sitting on a tree branch",
+    "dialogue_text": "chăm chỉ luyện tập cùng cắt ăn nhé",
+    "matched_transcript_ids": [
+      "t_0311"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.81
+  },
+  {
+    "caption_id": "c_0174",
+    "timestamp": "00:13:37.240",
+    "context_text": "[Image @00:13:37.240]: the land of the lost dinosaurs\n[Dialogue]: ăn, bà nèm tử tập nhé",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "ăn, bà nèm tử tập nhé",
+    "matched_transcript_ids": [
+      "t_0313"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7575
+  },
+  {
+    "caption_id": "c_0175",
+    "timestamp": "00:13:41.779",
+    "context_text": "[Image @00:13:41.779]: the land of the lost dinosaurs\n[Dialogue]: giờ giá vừa có kẻ thù",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "giờ giá vừa có kẻ thù",
+    "matched_transcript_ids": [
+      "t_0315"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.858563
+  },
+  {
+    "caption_id": "c_0176",
+    "timestamp": "00:13:43.580",
+    "context_text": "[Image @00:13:43.580]: a cartoon character with a pink hair and green eyes\n[Dialogue]: ăn điếm 1, 2, 3, tất cả chạy trốn nhé",
+    "image_text": "a cartoon character with a pink hair and green eyes",
+    "dialogue_text": "ăn điếm 1, 2, 3, tất cả chạy trốn nhé",
+    "matched_transcript_ids": [
+      "t_0316"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.63375
+  },
+  {
+    "caption_id": "c_0177",
+    "timestamp": "00:13:45.299",
+    "context_text": "[Image @00:13:45.299]: the land of the lost dinosaurs\n[Dialogue]: nhất đi, em chẳng tập đông, chẳng chứt",
+    "image_text": "the land of the lost dinosaurs",
+    "dialogue_text": "nhất đi, em chẳng tập đông, chẳng chứt",
+    "matched_transcript_ids": [
+      "t_0317"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.843938
+  },
+  {
+    "caption_id": "c_0178",
+    "timestamp": "00:13:48.920",
+    "context_text": "[Image @00:13:48.920]: file file for you pinkie png\n[Dialogue]: em đi chơi đi",
+    "image_text": "file file for you pinkie png",
+    "dialogue_text": "em đi chơi đi",
+    "matched_transcript_ids": [
+      "t_0318"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7275
+  },
+  {
+    "caption_id": "c_0179",
+    "timestamp": "00:13:58.980",
+    "context_text": "[Image @00:13:58.980]: a cartoon dinosaur running through the jungle\n[Dialogue]: tuyệt quá, chúng ta lại được rồi",
+    "image_text": "a cartoon dinosaur running through the jungle",
+    "dialogue_text": "tuyệt quá, chúng ta lại được rồi",
+    "matched_transcript_ids": [
+      "t_0321"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.89625
+  },
+  {
+    "caption_id": "c_0180",
+    "timestamp": "00:14:11.579",
+    "context_text": "[Image @00:14:11.579]: a cartoon character is standing on a tree\n[Dialogue]: đúng tất cả đồng tờ, mì không hoặc đứa đầu",
+    "image_text": "a cartoon character is standing on a tree",
+    "dialogue_text": "đúng tất cả đồng tờ, mì không hoặc đứa đầu",
+    "matched_transcript_ids": [
+      "t_0325"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.183563
+  },
+  {
+    "caption_id": "c_0181",
+    "timestamp": "00:14:19.860",
+    "context_text": "[Image @00:14:19.860]: a cartoon character with a snake on his back\n[Dialogue]: có chẳng đẳng sao?",
+    "image_text": "a cartoon character with a snake on his back",
+    "dialogue_text": "có chẳng đẳng sao?",
+    "matched_transcript_ids": [
+      "t_0326"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.73875
+  },
+  {
+    "caption_id": "c_0182",
+    "timestamp": "00:14:23.820",
+    "context_text": "[Image @00:14:23.820]: a cartoon character is jumping in the air\n[Dialogue]: có chẳng đẳng sao",
+    "image_text": "a cartoon character is jumping in the air",
+    "dialogue_text": "có chẳng đẳng sao",
+    "matched_transcript_ids": [
+      "t_0328"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.41625
+  },
+  {
+    "caption_id": "c_0183",
+    "timestamp": "00:14:25.580",
+    "context_text": "[Image @00:14:25.580]: a cartoon character with a snake on his back\n[Dialogue]: có chẳng đẳng sao",
+    "image_text": "a cartoon character with a snake on his back",
+    "dialogue_text": "có chẳng đẳng sao",
+    "matched_transcript_ids": [
+      "t_0328"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.82125
+  },
+  {
+    "caption_id": "c_0184",
+    "timestamp": "00:14:27.700",
+    "context_text": "[Image @00:14:27.700]: a cartoon of a tiger and a snake in the jungle\n[Dialogue]: mì không hoặc đứa đầu",
+    "image_text": "a cartoon of a tiger and a snake in the jungle",
+    "dialogue_text": "mì không hoặc đứa đầu",
+    "matched_transcript_ids": [
+      "t_0329"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.65625
+  },
+  {
+    "caption_id": "c_0185",
+    "timestamp": "00:14:30.399",
+    "context_text": "[Image @00:14:30.399]: a cartoon character with a big mouth and a big smile\n[Dialogue]: ướcай, đổi màu đi con",
+    "image_text": "a cartoon character with a big mouth and a big smile",
+    "dialogue_text": "ướcай, đổi màu đi con",
+    "matched_transcript_ids": [
+      "t_0330"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.637687
+  },
+  {
+    "caption_id": "c_0186",
+    "timestamp": "00:14:33.799",
+    "context_text": "[Image @00:14:33.799]: a cartoon cat in the jungle\n[Dialogue]: mì không hoặc đứa đầu",
+    "image_text": "a cartoon cat in the jungle",
+    "dialogue_text": "mì không hoặc đứa đầu",
+    "matched_transcript_ids": [
+      "t_0331"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.224813
+  },
+  {
+    "caption_id": "c_0187",
+    "timestamp": "00:14:37.220",
+    "context_text": "[Image @00:14:37.220]: a cartoon character is standing in the jungle\n[Dialogue]: mì không hoặc đứa đầu",
+    "image_text": "a cartoon character is standing in the jungle",
+    "dialogue_text": "mì không hoặc đứa đầu",
+    "matched_transcript_ids": [
+      "t_0331"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.48375
+  },
+  {
+    "caption_id": "c_0188",
+    "timestamp": "00:14:39.700",
+    "context_text": "[Image @00:14:39.700]: a cartoon character is running through the jungle\n[Dialogue]: mì không hoặc đứa đầu",
+    "image_text": "a cartoon character is running through the jungle",
+    "dialogue_text": "mì không hoặc đứa đầu",
+    "matched_transcript_ids": [
+      "t_0331"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.65625
+  },
+  {
+    "caption_id": "c_0189",
+    "timestamp": "00:14:41.600",
+    "context_text": "[Image @00:14:41.600]: a cartoon character is running through the jungle\n[Dialogue]: Mẹ ơi, mẹ. Mẹ vậy đi.",
+    "image_text": "a cartoon character is running through the jungle",
+    "dialogue_text": "Mẹ ơi, mẹ. Mẹ vậy đi.",
+    "matched_transcript_ids": [
+      "t_0332"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7875
+  },
+  {
+    "caption_id": "c_0190",
+    "timestamp": "00:14:43.299",
+    "context_text": "[Image @00:14:43.299]: a cartoon picture of a jungle scene\n[Dialogue]: Tao nghe mẹ giải nhiều máu thế này. Mẹ ơi đừng làm con sợ.",
+    "image_text": "a cartoon picture of a jungle scene",
+    "dialogue_text": "Tao nghe mẹ giải nhiều máu thế này. Mẹ ơi đừng làm con sợ.",
+    "matched_transcript_ids": [
+      "t_0333"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.843938
+  },
+  {
+    "caption_id": "c_0191",
+    "timestamp": "00:14:49.259",
+    "context_text": "[Image @00:14:49.259]: a cartoon character in the jungle with a snake\n[Dialogue]: Úc sao không? Bình dưới là buổi gai. Còn cẩn thận nhé.",
+    "image_text": "a cartoon character in the jungle with a snake",
+    "dialogue_text": "Úc sao không? Bình dưới là buổi gai. Còn cẩn thận nhé.",
+    "matched_transcript_ids": [
+      "t_0334"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.476438
+  },
+  {
+    "caption_id": "c_0192",
+    "timestamp": "00:14:59.539",
+    "context_text": "[Image @00:14:59.539]: a cartoon character in the jungle\n[Dialogue]: Tao nghe mẹ giải nhiều máu thế này. Mẹ ơi đừng làm con sợ.",
+    "image_text": "a cartoon character in the jungle",
+    "dialogue_text": "Tao nghe mẹ giải nhiều máu thế này. Mẹ ơi đừng làm con sợ.",
+    "matched_transcript_ids": [
+      "t_0337"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.798938
+  },
+  {
+    "caption_id": "c_0193",
+    "timestamp": "00:15:06.920",
+    "context_text": "[Image @00:15:06.920]: a cartoon picture of a pinkie and a red dragon\n[Dialogue]: Úc sao không? Bình dưới là buổi gai. Còn cẩn thận nhé.",
+    "image_text": "a cartoon picture of a pinkie and a red dragon",
+    "dialogue_text": "Úc sao không? Bình dưới là buổi gai. Còn cẩn thận nhé.",
+    "matched_transcript_ids": [
+      "t_0338"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.51
+  },
+  {
+    "caption_id": "c_0194",
+    "timestamp": "00:15:13.140",
+    "context_text": "[Image @00:15:13.140]: a cartoon character with a pink and green face\n[Dialogue]: Tao biết lỗi rồi á. Còn hứa sẽ chấp chỉ luyện tập đến từ vầy.",
+    "image_text": "a cartoon character with a pink and green face",
+    "dialogue_text": "Tao biết lỗi rồi á. Còn hứa sẽ chấp chỉ luyện tập đến từ vầy.",
+    "matched_transcript_ids": [
+      "t_0339"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.73875
+  },
+  {
+    "caption_id": "c_0195",
+    "timestamp": "00:15:19.019",
+    "context_text": "[Image @00:15:19.019]: a cartoon character holding a heart in the jungle\n[Dialogue]: Còn cố mẹ dội lắm.",
+    "image_text": "a cartoon character holding a heart in the jungle",
+    "dialogue_text": "Còn cố mẹ dội lắm.",
+    "matched_transcript_ids": [
+      "t_0341"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.528563
+  },
+  {
+    "caption_id": "c_0196",
+    "timestamp": "00:15:23.740",
+    "context_text": "[Image @00:15:23.740]: a cartoon scene with a road and trees\n[Dialogue]: Chỉ cần có mẹ thôi.",
+    "image_text": "a cartoon scene with a road and trees",
+    "dialogue_text": "Chỉ cần có mẹ thôi.",
+    "matched_transcript_ids": [
+      "t_0342"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.57375
+  },
+  {
+    "caption_id": "c_0197",
+    "timestamp": "00:15:30.279",
+    "context_text": "[Image @00:15:30.279]: a cartoon character riding a bike in the street\n[Dialogue]: M Safety!",
+    "image_text": "a cartoon character riding a bike in the street",
+    "dialogue_text": "M Safety!",
+    "matched_transcript_ids": [
+      "t_0344"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.847688
+  },
+  {
+    "caption_id": "c_0198",
+    "timestamp": "00:15:42.899",
+    "context_text": "[Image @00:15:42.899]: a cartoon image of a woman and a child\n[Dialogue]: Bắc, bắc lắm. Còn cây yếu của mẹ giỏi quá!!",
+    "image_text": "a cartoon image of a woman and a child",
+    "dialogue_text": "Bắc, bắc lắm. Còn cây yếu của mẹ giỏi quá!!",
+    "matched_transcript_ids": [
+      "t_0346"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.881063
+  },
+  {
+    "caption_id": "c_0199",
+    "timestamp": "00:15:54.879",
+    "context_text": "[Image @00:15:54.879]: a cartoon scene with a woman and a child\n[Dialogue]: Sao mẹ cứ lôi cái chuyện thấy đã nói dữ bữa cơm mới được hả?",
+    "image_text": "a cartoon scene with a woman and a child",
+    "dialogue_text": "Sao mẹ cứ lôi cái chuyện thấy đã nói dữ bữa cơm mới được hả?",
+    "matched_transcript_ids": [
+      "t_0350"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.720187
+  },
+  {
+    "caption_id": "c_0200",
+    "timestamp": "00:16:01.000",
+    "context_text": "[Image @00:16:01.000]: a cartoon image of a woman and a child sitting on the floor\n[Dialogue]: Tái ba mà mẹ dẫn rồi, con không cho với ba nữa.",
+    "image_text": "a cartoon image of a woman and a child sitting on the floor",
+    "dialogue_text": "Tái ba mà mẹ dẫn rồi, con không cho với ba nữa.",
+    "matched_transcript_ids": [
+      "t_0351"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.66
+  },
+  {
+    "caption_id": "c_0201",
+    "timestamp": "00:16:05.000",
+    "context_text": "[Image @00:16:05.000]: a cartoon character with a sad look on his face\n[Dialogue]: Tái ba mà mẹ dẫn rồi, con không cho với ba nữa.",
+    "image_text": "a cartoon character with a sad look on his face",
+    "dialogue_text": "Tái ba mà mẹ dẫn rồi, con không cho với ba nữa.",
+    "matched_transcript_ids": [
+      "t_0351"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.2475
+  },
+  {
+    "caption_id": "c_0202",
+    "timestamp": "00:16:06.579",
+    "context_text": "[Image @00:16:06.579]: a black background with a red and white flower\n[Dialogue]: (khong co)",
+    "image_text": "a black background with a red and white flower",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0203",
+    "timestamp": "00:16:08.319",
+    "context_text": "[Image @00:16:08.319]: a cartoon scene with a man and woman in the middle of the screen\n[Dialogue]: Chưa ngũ còn làm cái gì đó, con dẫn mẹ à.",
+    "image_text": "a cartoon scene with a man and woman in the middle of the screen",
+    "dialogue_text": "Chưa ngũ còn làm cái gì đó, con dẫn mẹ à.",
+    "matched_transcript_ids": [
+      "t_0352"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.059813
+  },
+  {
+    "caption_id": "c_0204",
+    "timestamp": "00:16:11.840",
+    "context_text": "[Image @00:16:11.840]: a woman sitting at a desk with a man standing behind her\n[Dialogue]: Chưa ngũ còn làm cái gì đó, con dẫn mẹ à.",
+    "image_text": "a woman sitting at a desk with a man standing behind her",
+    "dialogue_text": "Chưa ngũ còn làm cái gì đó, con dẫn mẹ à.",
+    "matched_transcript_ids": [
+      "t_0352"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.63
+  },
+  {
+    "caption_id": "c_0205",
+    "timestamp": "00:16:18.019",
+    "context_text": "[Image @00:16:18.019]: a cartoon character with a purple shirt and black hair\n[Dialogue]: Dù gì cũng tại con mà con bé không có được hành phúc đoạn vẹn từ cá ba và mẹ.",
+    "image_text": "a cartoon character with a purple shirt and black hair",
+    "dialogue_text": "Dù gì cũng tại con mà con bé không có được hành phúc đoạn vẹn từ cá ba và mẹ.",
+    "matched_transcript_ids": [
+      "t_0354"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.686438
+  },
+  {
+    "caption_id": "c_0206",
+    "timestamp": "00:16:23.080",
+    "context_text": "[Image @00:16:23.080]: a cartoon character with a brown hair and a black hair\n[Dialogue]: Còn thấy mình tự quá.",
+    "image_text": "a cartoon character with a brown hair and a black hair",
+    "dialogue_text": "Còn thấy mình tự quá.",
+    "matched_transcript_ids": [
+      "t_0355"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7725
+  },
+  {
+    "caption_id": "c_0207",
+    "timestamp": "00:16:27.440",
+    "context_text": "[Image @00:16:27.440]: a cartoon picture of a woman sitting on a chair\n[Dialogue]: Mẹ, con định sẽ lên thành phố lập nghiệp.",
+    "image_text": "a cartoon picture of a woman sitting on a chair",
+    "dialogue_text": "Mẹ, con định sẽ lên thành phố lập nghiệp.",
+    "matched_transcript_ids": [
+      "t_0356"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.8325
+  },
+  {
+    "caption_id": "c_0208",
+    "timestamp": "00:16:32.139",
+    "context_text": "[Image @00:16:32.139]: a cartoon of two women talking to each other women\n[Dialogue]: Ông kèn con hát hay, lại ươi nhìn.",
+    "image_text": "a cartoon of two women talking to each other women",
+    "dialogue_text": "Ông kèn con hát hay, lại ươi nhìn.",
+    "matched_transcript_ids": [
+      "t_0358"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.686438
+  },
+  {
+    "caption_id": "c_0209",
+    "timestamp": "00:16:34.639",
+    "context_text": "[Image @00:16:34.639]: a cartoon image of a woman sitting on a chair\n[Dialogue]: Ông sẽ giúp con trở thành diễn viên.",
+    "image_text": "a cartoon image of a woman sitting on a chair",
+    "dialogue_text": "Ông sẽ giúp con trở thành diễn viên.",
+    "matched_transcript_ids": [
+      "t_0359"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.720187
+  },
+  {
+    "caption_id": "c_0210",
+    "timestamp": "00:16:37.359",
+    "context_text": "[Image @00:16:37.359]: a cartoon character with a brown hair and a black hair\n[Dialogue]: Ha ha, tưởng lần được TV mà dễ, bảo khóc, rấy khóc, bảo cười, phấy cười, con làm được không.",
+    "image_text": "a cartoon character with a brown hair and a black hair",
+    "dialogue_text": "Ha ha, tưởng lần được TV mà dễ, bảo khóc, rấy khóc, bảo cười, phấy cười, con làm được không.",
+    "matched_transcript_ids": [
+      "t_0360"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.637687
+  },
+  {
+    "caption_id": "c_0211",
+    "timestamp": "00:16:41.559",
+    "context_text": "[Image @00:16:41.559]: a cartoon scene with a woman and a man in a room\n[Dialogue]: Ha ha, tưởng lần được TV mà dễ, bảo khóc, rấy khóc, bảo cười, phấy cười, con làm được không.",
+    "image_text": "a cartoon scene with a woman and a man in a room",
+    "dialogue_text": "Ha ha, tưởng lần được TV mà dễ, bảo khóc, rấy khóc, bảo cười, phấy cười, con làm được không.",
+    "matched_transcript_ids": [
+      "t_0360"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.45
+  },
+  {
+    "caption_id": "c_0212",
+    "timestamp": "00:16:46.080",
+    "context_text": "[Image @00:16:46.080]: a cartoon character with a purple shirt and purple pants\n[Dialogue]: Còn cũng có tốt chất mà mẹ, diễn thì tập là được mà.",
+    "image_text": "a cartoon character with a purple shirt and purple pants",
+    "dialogue_text": "Còn cũng có tốt chất mà mẹ, diễn thì tập là được mà.",
+    "matched_transcript_ids": [
+      "t_0361"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.585
+  },
+  {
+    "caption_id": "c_0213",
+    "timestamp": "00:16:49.120",
+    "context_text": "[Image @00:16:49.120]: a cartoon of two girls talking to each other woman\n[Dialogue]: Còn con đà, đế cho ai, ở nhà với bà chứ sao.",
+    "image_text": "a cartoon of two girls talking to each other woman",
+    "dialogue_text": "Còn con đà, đế cho ai, ở nhà với bà chứ sao.",
+    "matched_transcript_ids": [
+      "t_0362"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.705
+  },
+  {
+    "caption_id": "c_0214",
+    "timestamp": "00:16:51.240",
+    "context_text": "[Image @00:16:51.240]: a cartoon scene with a woman and a man in a room\n[Dialogue]: Còn con đà, đế cho ai, ở nhà với bà chứ sao.",
+    "image_text": "a cartoon scene with a woman and a man in a room",
+    "dialogue_text": "Còn con đà, đế cho ai, ở nhà với bà chứ sao.",
+    "matched_transcript_ids": [
+      "t_0362"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.6825
+  },
+  {
+    "caption_id": "c_0215",
+    "timestamp": "00:16:53.680",
+    "context_text": "[Image @00:16:53.680]: a cartoon character with a purple shirt and purple pants\n[Dialogue]: Người ta cho mình cơ hội mà không nắm lấy là thiệt.",
+    "image_text": "a cartoon character with a purple shirt and purple pants",
+    "dialogue_text": "Người ta cho mình cơ hội mà không nắm lấy là thiệt.",
+    "matched_transcript_ids": [
+      "t_0363"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.66
+  },
+  {
+    "caption_id": "c_0216",
+    "timestamp": "00:17:00.000",
+    "context_text": "[Image @00:17:00.000]: a cartoon character with a big nose and a big nose\n[Dialogue]: Ê, con nghĩ cho kỳ đi, nó còn nhỏ, bà đã không có rồi.",
+    "image_text": "a cartoon character with a big nose and a big nose",
+    "dialogue_text": "Ê, con nghĩ cho kỳ đi, nó còn nhỏ, bà đã không có rồi.",
+    "matched_transcript_ids": [
+      "t_0364"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.525
+  },
+  {
+    "caption_id": "c_0217",
+    "timestamp": "00:17:06.480",
+    "context_text": "[Image @00:17:06.480]: a cartoon character with a purple shirt and purple pants\n[Dialogue]: Mẹ cứ làm như con đi hẳng không về nửa.",
+    "image_text": "a cartoon character with a purple shirt and purple pants",
+    "dialogue_text": "Mẹ cứ làm như con đi hẳng không về nửa.",
+    "matched_transcript_ids": [
+      "t_0366"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.6
+  },
+  {
+    "caption_id": "c_0218",
+    "timestamp": "00:17:13.099",
+    "context_text": "[Image @00:17:13.099]: a cartoon scene with a woman and a man in a room\n[Dialogue]: Mẹ ơi, mẹ thương con thương cháo, mẹ cố gắng trở con đổi đời mẹ nhé.",
+    "image_text": "a cartoon scene with a woman and a man in a room",
+    "dialogue_text": "Mẹ ơi, mẹ thương con thương cháo, mẹ cố gắng trở con đổi đời mẹ nhé.",
+    "matched_transcript_ids": [
+      "t_0368"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.648938
+  },
+  {
+    "caption_id": "c_0219",
+    "timestamp": "00:17:18.400",
+    "context_text": "[Image @00:17:18.400]: a black background with a pink and red flower\n[Dialogue]: Mẹ ơi, mẹ thương con thương cháo, mẹ cố gắng trở con đổi đời mẹ nhé.",
+    "image_text": "a black background with a pink and red flower",
+    "dialogue_text": "Mẹ ơi, mẹ thương con thương cháo, mẹ cố gắng trở con đổi đời mẹ nhé.",
+    "matched_transcript_ids": [
+      "t_0368"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.405
+  },
+  {
+    "caption_id": "c_0220",
+    "timestamp": "00:17:20.000",
+    "context_text": "[Image @00:17:20.000]: a cartoon picture of a city with buildings\n[Dialogue]: Chỉ xem kĩ lại giúp em với, đạo diễn kìa nói sẽ giúp em đang ký vào lớp diễn viên tài năng mà.",
+    "image_text": "a cartoon picture of a city with buildings",
+    "dialogue_text": "Chỉ xem kĩ lại giúp em với, đạo diễn kìa nói sẽ giúp em đang ký vào lớp diễn viên tài năng mà.",
+    "matched_transcript_ids": [
+      "t_0369"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.195
+  },
+  {
+    "caption_id": "c_0221",
+    "timestamp": "00:17:24.199",
+    "context_text": "[Image @00:17:24.199]: a cartoon character sitting at a desk with a woman in front of her\n[Dialogue]: Chỉ xem kĩ lại giúp em với, đạo diễn kìa nói sẽ giúp em đang ký vào lớp diễn viên tài năng mà.",
+    "image_text": "a cartoon character sitting at a desk with a woman in front of her",
+    "dialogue_text": "Chỉ xem kĩ lại giúp em với, đạo diễn kìa nói sẽ giúp em đang ký vào lớp diễn viên tài năng mà.",
+    "matched_transcript_ids": [
+      "t_0369"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.45
+  },
+  {
+    "caption_id": "c_0222",
+    "timestamp": "00:17:29.619",
+    "context_text": "[Image @00:17:29.619]: a cartoon character reading a book in front of a bookshel\n[Dialogue]: Tôi không biết, tôi chỉ tuyển người đóng thú bông trong công viên thôi.",
+    "image_text": "a cartoon character reading a book in front of a bookshel",
+    "dialogue_text": "Tôi không biết, tôi chỉ tuyển người đóng thú bông trong công viên thôi.",
+    "matched_transcript_ids": [
+      "t_0370"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.648563
+  },
+  {
+    "caption_id": "c_0223",
+    "timestamp": "00:17:35.400",
+    "context_text": "[Image @00:17:35.400]: a cartoon image of two women sitting at a table\n[Dialogue]: Đóng thú bông ơi, sau lại thấy được, rõ ràng anh ấy cầm của tôi 10 triệu tiền phí đau tạo rồi mà.",
+    "image_text": "a cartoon image of two women sitting at a table",
+    "dialogue_text": "Đóng thú bông ơi, sau lại thấy được, rõ ràng anh ấy cầm của tôi 10 triệu tiền phí đau tạo rồi mà.",
+    "matched_transcript_ids": [
+      "t_0372"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.45
+  },
+  {
+    "caption_id": "c_0224",
+    "timestamp": "00:17:45.340",
+    "context_text": "[Image @00:17:45.340]: a cartoon character sitting at a table with books\n[Dialogue]: Cô này hay gì? Nói bao nhiêu lần rồi, một là làm, hay là về đi cho tôi làm việc, sáng đà đã lặng nhận.",
+    "image_text": "a cartoon character sitting at a table with books",
+    "dialogue_text": "Cô này hay gì? Nói bao nhiêu lần rồi, một là làm, hay là về đi cho tôi làm việc, sáng đà đã lặng nhận.",
+    "matched_transcript_ids": [
+      "t_0373"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.67125
+  },
+  {
+    "caption_id": "c_0225",
+    "timestamp": "00:17:55.200",
+    "context_text": "[Image @00:17:55.200]: a cartoon image of two children playing in the snow\n[Dialogue]: Mẹ ơi, làm sao bây giờ hả con? Mẹ làm mất hết rồi, mẹ con mất muối nào nhìn bà, nhìn con đửa đi.",
+    "image_text": "a cartoon image of two children playing in the snow",
+    "dialogue_text": "Mẹ ơi, làm sao bây giờ hả con? Mẹ làm mất hết rồi, mẹ con mất muối nào nhìn bà, nhìn con đửa đi.",
+    "matched_transcript_ids": [
+      "t_0374"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.45
+  },
+  {
+    "caption_id": "c_0226",
+    "timestamp": "00:17:59.860",
+    "context_text": "[Image @00:17:59.860]: a woman with a purple shirt and purple shirt\n[Dialogue]: Mẹ ơi, làm sao bây giờ hả con? Mẹ làm mất hết rồi, mẹ con mất muối nào nhìn bà, nhìn con đửa đi.",
+    "image_text": "a woman with a purple shirt and purple shirt",
+    "dialogue_text": "Mẹ ơi, làm sao bây giờ hả con? Mẹ làm mất hết rồi, mẹ con mất muối nào nhìn bà, nhìn con đửa đi.",
+    "matched_transcript_ids": [
+      "t_0374"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.73125
+  },
+  {
+    "caption_id": "c_0227",
+    "timestamp": "00:18:01.740",
+    "context_text": "[Image @00:18:01.740]: a black background with a white and pink flower\n[Dialogue]: Cô việc đâm giảm lắm, quản trò báo làm gì thì làm, thân thiện với tụi trẻ con là nước, nhẹ muốn hoặc náo vào đấy.",
+    "image_text": "a black background with a white and pink flower",
+    "dialogue_text": "Cô việc đâm giảm lắm, quản trò báo làm gì thì làm, thân thiện với tụi trẻ con là nước, nhẹ muốn hoặc náo vào đấy.",
+    "matched_transcript_ids": [
+      "t_0375"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.44625
+  },
+  {
+    "caption_id": "c_0228",
+    "timestamp": "00:18:14.500",
+    "context_text": "[Image @00:18:14.500]: a cartoon bear is surrounded by children\n[Dialogue]: (khong co)",
+    "image_text": "a cartoon bear is surrounded by children",
+    "dialogue_text": "(khong co)",
+    "matched_transcript_ids": [],
+    "fallback_type": "no_match",
+    "confidence": 0.0
+  },
+  {
+    "caption_id": "c_0229",
+    "timestamp": "00:18:27.240",
+    "context_text": "[Image @00:18:27.240]: a black background with a red and yellow flower\n[Dialogue]: Có đoạn học sinh đơn đi, dính giật tốt vào nhé, giác con, chúng mình đến chào bắt gấu đi nào.",
+    "image_text": "a black background with a red and yellow flower",
+    "dialogue_text": "Có đoạn học sinh đơn đi, dính giật tốt vào nhé, giác con, chúng mình đến chào bắt gấu đi nào.",
+    "matched_transcript_ids": [
+      "t_0378"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.4275
+  },
+  {
+    "caption_id": "c_0230",
+    "timestamp": "00:18:29.460",
+    "context_text": "[Image @00:18:29.460]: a cartoon character holding a teddy bear\n[Dialogue]: Có đoạn học sinh đơn đi, dính giật tốt vào nhé, giác con, chúng mình đến chào bắt gấu đi nào.",
+    "image_text": "a cartoon character holding a teddy bear",
+    "dialogue_text": "Có đoạn học sinh đơn đi, dính giật tốt vào nhé, giác con, chúng mình đến chào bắt gấu đi nào.",
+    "matched_transcript_ids": [
+      "t_0378"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.50625
+  },
+  {
+    "caption_id": "c_0231",
+    "timestamp": "00:18:32.819",
+    "context_text": "[Image @00:18:32.819]: a cartoon scene with a circus tent and a small dog\n[Dialogue]: Có đoạn học sinh đơn đi, dính giật tốt vào nhé, giác con, chúng mình đến chào bắt gấu đi nào.",
+    "image_text": "a cartoon scene with a circus tent and a small dog",
+    "dialogue_text": "Có đoạn học sinh đơn đi, dính giật tốt vào nhé, giác con, chúng mình đến chào bắt gấu đi nào.",
+    "matched_transcript_ids": [
+      "t_0378"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.611063
+  },
+  {
+    "caption_id": "c_0232",
+    "timestamp": "00:18:37.019",
+    "context_text": "[Image @00:18:37.019]: a cartoon bear with a big smile\n[Dialogue]: Thôi đường, bên nào là bên nào phải không nhỉ? Không phải để con bé nhận ra mình được.",
+    "image_text": "a cartoon bear with a big smile",
+    "dialogue_text": "Thôi đường, bên nào là bên nào phải không nhỉ? Không phải để con bé nhận ra mình được.",
+    "matched_transcript_ids": [
+      "t_0379"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.588938
+  },
+  {
+    "caption_id": "c_0233",
+    "timestamp": "00:18:40.740",
+    "context_text": "[Image @00:18:40.740]: a cartoon bear is standing in front of a group of people\n[Dialogue]: Thôi đường, bên nào là bên nào phải không nhỉ? Không phải để con bé nhận ra mình được.",
+    "image_text": "a cartoon bear is standing in front of a group of people",
+    "dialogue_text": "Thôi đường, bên nào là bên nào phải không nhỉ? Không phải để con bé nhận ra mình được.",
+    "matched_transcript_ids": [
+      "t_0379"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.78375
+  },
+  {
+    "caption_id": "c_0234",
+    "timestamp": "00:18:45.400",
+    "context_text": "[Image @00:18:45.400]: a cartoon bear is standing on a stage with balloons\n[Dialogue]: Chê ha, bụng bắt gấu em quá, còn em nữa, em như bụng mẹ ấy.",
+    "image_text": "a cartoon bear is standing on a stage with balloons",
+    "dialogue_text": "Chê ha, bụng bắt gấu em quá, còn em nữa, em như bụng mẹ ấy.",
+    "matched_transcript_ids": [
+      "t_0380"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.5175
+  },
+  {
+    "caption_id": "c_0235",
+    "timestamp": "00:18:51.880",
+    "context_text": "[Image @00:18:51.880]: a girl is standing next to a bear\n[Dialogue]: Bắt gấu, bắt làm sao thế, cho bắt gấu?",
+    "image_text": "a girl is standing next to a bear",
+    "dialogue_text": "Bắt gấu, bắt làm sao thế, cho bắt gấu?",
+    "matched_transcript_ids": [
+      "t_0381"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.615
+  },
+  {
+    "caption_id": "c_0236",
+    "timestamp": "00:18:56.940",
+    "context_text": "[Image @00:18:56.940]: a cartoon character is standing next to a little girl\n[Dialogue]: Bắt lờ chung cháo đi, bắt sẽ buồn không? Bắt định không, cháo cũng rất nhớ mẹ, nhưng cháo không bao giờ không?",
+    "image_text": "a cartoon character is standing next to a little girl",
+    "dialogue_text": "Bắt lờ chung cháo đi, bắt sẽ buồn không? Bắt định không, cháo cũng rất nhớ mẹ, nhưng cháo không bao giờ không?",
+    "matched_transcript_ids": [
+      "t_0382"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.60375
+  },
+  {
+    "caption_id": "c_0237",
+    "timestamp": "00:19:05.159",
+    "context_text": "[Image @00:19:05.159]: a bear and two children are standing in front of balloons\n[Dialogue]: Nếu biết cháo không, mẹ cháo sẽ rất buồn. Bắt bắt không, là gấu con buồn đây.",
+    "image_text": "a bear and two children are standing in front of balloons",
+    "dialogue_text": "Nếu biết cháo không, mẹ cháo sẽ rất buồn. Bắt bắt không, là gấu con buồn đây.",
+    "matched_transcript_ids": [
+      "t_0383"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.412313
+  },
+  {
+    "caption_id": "c_0238",
+    "timestamp": "00:19:13.860",
+    "context_text": "[Image @00:19:13.860]: a cartoon character with a balloon in the background\n[Dialogue]: Bên nào, còn nói với bắt gấu đi ước đi, nhìn còn đứng bản tiếp theo.",
+    "image_text": "a cartoon character with a balloon in the background",
+    "dialogue_text": "Bên nào, còn nói với bắt gấu đi ước đi, nhìn còn đứng bản tiếp theo.",
+    "matched_transcript_ids": [
+      "t_0384"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.45
+  },
+  {
+    "caption_id": "c_0239",
+    "timestamp": "00:19:19.900",
+    "context_text": "[Image @00:19:19.900]: a cartoon bear is giving a girl a birthday present\n[Dialogue]: Cháo ước, mẹ cháo về với cháo, bắt định qua đi ước của cháo nhé.",
+    "image_text": "a cartoon bear is giving a girl a birthday present",
+    "dialogue_text": "Cháo ước, mẹ cháo về với cháo, bắt định qua đi ước của cháo nhé.",
+    "matched_transcript_ids": [
+      "t_0385"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.45
+  },
+  {
+    "caption_id": "c_0240",
+    "timestamp": "00:19:30.720",
+    "context_text": "[Image @00:19:30.720]: a cartoon scene with a bear and a girl\n[Dialogue]: Bắt gấu, bắt sao thế hả?",
+    "image_text": "a cartoon scene with a bear and a girl",
+    "dialogue_text": "Bắt gấu, bắt sao thế hả?",
+    "matched_transcript_ids": [
+      "t_0387"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.78
+  },
+  {
+    "caption_id": "c_0241",
+    "timestamp": "00:19:44.780",
+    "context_text": "[Image @00:19:44.780]: a girl is looking at a bear in the woods\n[Dialogue]: Các cô giáo bảo, buồn điện xa lắm, ô tô sẽ không đi qua đó.",
+    "image_text": "a girl is looking at a bear in the woods",
+    "dialogue_text": "Các cô giáo bảo, buồn điện xa lắm, ô tô sẽ không đi qua đó.",
+    "matched_transcript_ids": [
+      "t_0390"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.63375
+  },
+  {
+    "caption_id": "c_0242",
+    "timestamp": "00:20:01.180",
+    "context_text": "[Image @00:20:01.180]: a cartoon character in a bubble ball\n[Dialogue]: Con không cần qua đeo ăn, con không cần bức bê, không cần gặp sát công dưỡng.",
+    "image_text": "a cartoon character in a bubble ball",
+    "dialogue_text": "Con không cần qua đeo ăn, con không cần bức bê, không cần gặp sát công dưỡng.",
+    "matched_transcript_ids": [
+      "t_0394"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.41625
+  },
+  {
+    "caption_id": "c_0243",
+    "timestamp": "00:20:16.220",
+    "context_text": "[Image @00:20:16.220]: a cartoon character with a brown hair and black hair\n[Dialogue]: Còn gái, còn vậy trước với các bạn nhé, sớm bài mẹ sẽ về với con.",
+    "image_text": "a cartoon character with a brown hair and black hair",
+    "dialogue_text": "Còn gái, còn vậy trước với các bạn nhé, sớm bài mẹ sẽ về với con.",
+    "matched_transcript_ids": [
+      "t_0396"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.68625
+  },
+  {
+    "caption_id": "c_0244",
+    "timestamp": "00:20:22.460",
+    "context_text": "[Image @00:20:22.460]: a pink wall with the word thing on it\n[Dialogue]: Thương con.",
+    "image_text": "a pink wall with the word thing on it",
+    "dialogue_text": "Thương con.",
+    "matched_transcript_ids": [
+      "t_0398"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.43125
+  },
+  {
+    "caption_id": "c_0245",
+    "timestamp": "00:20:26.759",
+    "context_text": "[Image @00:20:26.759]: a cartoon scene of a family eating dinner\n[Dialogue]: Chúc mừng sinh nhật minh.",
+    "image_text": "a cartoon scene of a family eating dinner",
+    "dialogue_text": "Chúc mừng sinh nhật minh.",
+    "matched_transcript_ids": [
+      "t_0399"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.787312
+  },
+  {
+    "caption_id": "c_0246",
+    "timestamp": "00:20:34.380",
+    "context_text": "[Image @00:20:34.380]: a cartoon character in a suit and tie\n[Dialogue]: Thì mái phải là con trài huy của bà.",
+    "image_text": "a cartoon character in a suit and tie",
+    "dialogue_text": "Thì mái phải là con trài huy của bà.",
+    "matched_transcript_ids": [
+      "t_0402"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.89625
+  },
+  {
+    "caption_id": "c_0247",
+    "timestamp": "00:20:41.800",
+    "context_text": "[Image @00:20:41.800]: a cartoon character with a city skyline in the background\n[Dialogue]: Cảm ơn bà, con sẽ cuối ngắn tiếp quản tập đồn hiêu hàng của bà.",
+    "image_text": "a cartoon character with a city skyline in the background",
+    "dialogue_text": "Cảm ơn bà, con sẽ cuối ngắn tiếp quản tập đồn hiêu hàng của bà.",
+    "matched_transcript_ids": [
+      "t_0404"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.795
+  },
+  {
+    "caption_id": "c_0248",
+    "timestamp": "00:20:48.940",
+    "context_text": "[Image @00:20:48.940]: the family of the simpsonss\n[Dialogue]: Quà đang trở ngoài kia rồi.",
+    "image_text": "the family of the simpsonss",
+    "dialogue_text": "Quà đang trở ngoài kia rồi.",
+    "matched_transcript_ids": [
+      "t_0407"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.37125
+  },
+  {
+    "caption_id": "c_0249",
+    "timestamp": "00:20:56.340",
+    "context_text": "[Image @00:20:56.340]: a cartoon character with a city skyline in the background\n[Dialogue]: Cà xem luôn bà nha.",
+    "image_text": "a cartoon character with a city skyline in the background",
+    "dialogue_text": "Cà xem luôn bà nha.",
+    "matched_transcript_ids": [
+      "t_0410"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.89625
+  },
+  {
+    "caption_id": "c_0250",
+    "timestamp": "00:21:01.759",
+    "context_text": "[Image @00:21:01.759]: a cartoon car with a man looking at it\n[Dialogue]: Bà, bà không đùa đấy chứ?",
+    "image_text": "a cartoon car with a man looking at it",
+    "dialogue_text": "Bà, bà không đùa đấy chứ?",
+    "matched_transcript_ids": [
+      "t_0412"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.375188
+  },
+  {
+    "caption_id": "c_0251",
+    "timestamp": "00:21:07.259",
+    "context_text": "[Image @00:21:07.259]: a cartoon picture of a man in a suit and tie\n[Dialogue]: Hợp gì, bà có thể thấy thật minh lúc này, bà đi tâm.",
+    "image_text": "a cartoon picture of a man in a suit and tie",
+    "dialogue_text": "Hợp gì, bà có thể thấy thật minh lúc này, bà đi tâm.",
+    "matched_transcript_ids": [
+      "t_0414"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.881063
+  },
+  {
+    "caption_id": "c_0252",
+    "timestamp": "00:21:15.920",
+    "context_text": "[Image @00:21:15.920]: a cartoon character is talking to a group of people\n[Dialogue]: Chúa tình ký nghiệm của tập đồn hiêu hàng, phải tự khoản tráng mới được.",
+    "image_text": "a cartoon character is talking to a group of people",
+    "dialogue_text": "Chúa tình ký nghiệm của tập đồn hiêu hàng, phải tự khoản tráng mới được.",
+    "matched_transcript_ids": [
+      "t_0418"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.3675
+  },
+  {
+    "caption_id": "c_0253",
+    "timestamp": "00:21:22.179",
+    "context_text": "[Image @00:21:22.179]: a cartoon character with a family in the background\n[Dialogue]: Bà ký tình đã con.",
+    "image_text": "a cartoon character with a family in the background",
+    "dialogue_text": "Bà ký tình đã con.",
+    "matched_transcript_ids": [
+      "t_0419"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.866062
+  },
+  {
+    "caption_id": "c_0254",
+    "timestamp": "00:21:28.360",
+    "context_text": "[Image @00:21:28.360]: a cartoon character sitting in a chair in front of a television\n[Dialogue]: Thật cả mày, quá tuyệt, để phần tao một phép nha.",
+    "image_text": "a cartoon character sitting in a chair in front of a television",
+    "dialogue_text": "Thật cả mày, quá tuyệt, để phần tao một phép nha.",
+    "matched_transcript_ids": [
+      "t_0420"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.7125
+  },
+  {
+    "caption_id": "c_0255",
+    "timestamp": "00:21:36.420",
+    "context_text": "[Image @00:21:36.420]: a person holding a calendar on a table\n[Dialogue]: Nhớt hổng rồi, đúng ngày nợp báo khá thực tập.",
+    "image_text": "a person holding a calendar on a table",
+    "dialogue_text": "Nhớt hổng rồi, đúng ngày nợp báo khá thực tập.",
+    "matched_transcript_ids": [
+      "t_0422"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.43875
+  },
+  {
+    "caption_id": "c_0256",
+    "timestamp": "00:21:43.639",
+    "context_text": "[Image @00:21:43.639]: a cartoon character sitting at a desk with a computer\n[Dialogue]: Bà.",
+    "image_text": "a cartoon character sitting at a desk with a computer",
+    "dialogue_text": "Bà.",
+    "matched_transcript_ids": [
+      "t_0426"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.314812
+  },
+  {
+    "caption_id": "c_0257",
+    "timestamp": "00:21:49.960",
+    "context_text": "[Image @00:21:49.960]: a cartoon character with a smile on his face\n[Dialogue]: Còn thức khuya vậy, được sẽ mới xuyên quá không ngũ được hả?",
+    "image_text": "a cartoon character with a smile on his face",
+    "dialogue_text": "Còn thức khuya vậy, được sẽ mới xuyên quá không ngũ được hả?",
+    "matched_transcript_ids": [
+      "t_0428"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.6375
+  },
+  {
+    "caption_id": "c_0258",
+    "timestamp": "00:21:53.259",
+    "context_text": "[Image @00:21:53.259]: a cartoon character looking at a man in a room\n[Dialogue]: Còn đang rầu hết cáo rụt đi bà.",
+    "image_text": "a cartoon character looking at a man in a room",
+    "dialogue_text": "Còn đang rầu hết cáo rụt đi bà.",
+    "matched_transcript_ids": [
+      "t_0429"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.881063
+  },
+  {
+    "caption_id": "c_0259",
+    "timestamp": "00:21:55.940",
+    "context_text": "[Image @00:21:55.940]: a cartoon character with a face and a bar chart\n[Dialogue]: Sao phải con trài, con việc gì à?",
+    "image_text": "a cartoon character with a face and a bar chart",
+    "dialogue_text": "Sao phải con trài, con việc gì à?",
+    "matched_transcript_ids": [
+      "t_0430"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.82125
+  },
+  {
+    "caption_id": "c_0260",
+    "timestamp": "00:22:02.000",
+    "context_text": "[Image @00:22:02.000]: a cartoon of a man in a room\n[Dialogue]: Có cảnh lắm con mới nhờ được bản con.",
+    "image_text": "a cartoon of a man in a room",
+    "dialogue_text": "Có cảnh lắm con mới nhờ được bản con.",
+    "matched_transcript_ids": [
+      "t_0432"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.8325
+  },
+  {
+    "caption_id": "c_0261",
+    "timestamp": "00:22:07.539",
+    "context_text": "[Image @00:22:07.539]: a cartoon of a man in a room with a woman\n[Dialogue]: Thế phải đi thôi.",
+    "image_text": "a cartoon of a man in a room with a woman",
+    "dialogue_text": "Thế phải đi thôi.",
+    "matched_transcript_ids": [
+      "t_0434"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.416438
+  },
+  {
+    "caption_id": "c_0262",
+    "timestamp": "00:22:13.340",
+    "context_text": "[Image @00:22:13.340]: a cartoon character with a surprised look on his face\n[Dialogue]: Tụng sau đó là nợp và chuẩn bị tốt nghiệm rồi.",
+    "image_text": "a cartoon character with a surprised look on his face",
+    "dialogue_text": "Tụng sau đó là nợp và chuẩn bị tốt nghiệm rồi.",
+    "matched_transcript_ids": [
+      "t_0436"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.44625
+  },
+  {
+    "caption_id": "c_0263",
+    "timestamp": "00:22:21.200",
+    "context_text": "[Image @00:22:21.200]: a cartoon character with a big smile\n[Dialogue]: Lò gì? Mấy cái số liệu đấy, đưa cho phòng kinh doanh làm gắn cái là sống.",
+    "image_text": "a cartoon character with a big smile",
+    "dialogue_text": "Lò gì? Mấy cái số liệu đấy, đưa cho phòng kinh doanh làm gắn cái là sống.",
+    "matched_transcript_ids": [
+      "t_0438"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.87
+  },
+  {
+    "caption_id": "c_0264",
+    "timestamp": "00:22:28.519",
+    "context_text": "[Image @00:22:28.519]: a cartoon character with a thumbs up\n[Dialogue]: Bà đúng là người bà lý tưởng trong năm.",
+    "image_text": "a cartoon character with a thumbs up",
+    "dialogue_text": "Bà đúng là người bà lý tưởng trong năm.",
+    "matched_transcript_ids": [
+      "t_0441"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.870188
+  },
+  {
+    "caption_id": "c_0265",
+    "timestamp": "00:22:34.519",
+    "context_text": "[Image @00:22:34.519]: a cartoon character standing in front of a door\n[Dialogue]: Tụi sếp, có phát khẩn của phòng giáo vụ trường tiếng Minh Nạ.",
+    "image_text": "a cartoon character standing in front of a door",
+    "dialogue_text": "Tụi sếp, có phát khẩn của phòng giáo vụ trường tiếng Minh Nạ.",
+    "matched_transcript_ids": [
+      "t_0443"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.742313
+  },
+  {
+    "caption_id": "c_0266",
+    "timestamp": "00:22:38.639",
+    "context_text": "[Image @00:22:38.639]: a cartoon character flying through the sky\n[Dialogue]: Ờ, sau lại thế này, con nhằm lớn gì không vậy?",
+    "image_text": "a cartoon character flying through the sky",
+    "dialogue_text": "Ờ, sau lại thế này, con nhằm lớn gì không vậy?",
+    "matched_transcript_ids": [
+      "t_0444"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.397688
+  },
+  {
+    "caption_id": "c_0267",
+    "timestamp": "00:22:42.880",
+    "context_text": "[Image @00:22:42.880]: a woman in an office with a man sitting at her desk\n[Dialogue]: Mình không đến việc bản sữa khó lượng luôn cuối.",
+    "image_text": "a woman in an office with a man sitting at her desk",
+    "dialogue_text": "Mình không đến việc bản sữa khó lượng luôn cuối.",
+    "matched_transcript_ids": [
+      "t_0446"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.36
+  },
+  {
+    "caption_id": "c_0268",
+    "timestamp": "00:22:46.220",
+    "context_text": "[Image @00:22:46.220]: a cartoon character holding a piece of paper\n[Dialogue]: Mình không đến việc bản sữa khó lượng luôn cuối.",
+    "image_text": "a cartoon character holding a piece of paper",
+    "dialogue_text": "Mình không đến việc bản sữa khó lượng luôn cuối.",
+    "matched_transcript_ids": [
+      "t_0446"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.45
+  },
+  {
+    "caption_id": "c_0269",
+    "timestamp": "00:22:52.679",
+    "context_text": "[Image @00:22:52.679]: a cartoon character with sunglasses on\n[Dialogue]: Mình không đến việc bản sữa khó lượng luôn cuối.",
+    "image_text": "a cartoon character with sunglasses on",
+    "dialogue_text": "Mình không đến việc bản sữa khó lượng luôn cuối.",
+    "matched_transcript_ids": [
+      "t_0446"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.772313
+  },
+  {
+    "caption_id": "c_0270",
+    "timestamp": "00:23:01.440",
+    "context_text": "[Image @00:23:01.440]: a man in a suit and tie looking at a woman in a white shirt\n[Dialogue]: Bà phận phải sữa sang là sao?",
+    "image_text": "a man in a suit and tie looking at a woman in a white shirt",
+    "dialogue_text": "Bà phận phải sữa sang là sao?",
+    "matched_transcript_ids": [
+      "t_0449"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.885
+  },
+  {
+    "caption_id": "c_0271",
+    "timestamp": "00:23:12.460",
+    "context_text": "[Image @00:23:12.460]: a cartoon character with sunglasses on\n[Dialogue]: Nguyên tắc là xin viên phải đất thân có mặt để sữa luận văn.",
+    "image_text": "a cartoon character with sunglasses on",
+    "dialogue_text": "Nguyên tắc là xin viên phải đất thân có mặt để sữa luận văn.",
+    "matched_transcript_ids": [
+      "t_0453"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.43125
+  },
+  {
+    "caption_id": "c_0272",
+    "timestamp": "00:23:21.639",
+    "context_text": "[Image @00:23:21.639]: a cartoon character with a sad look on his face\n[Dialogue]: Cảm ơn điểm mất thôi, làm sao bây giờ?",
+    "image_text": "a cartoon character with a sad look on his face",
+    "dialogue_text": "Cảm ơn điểm mất thôi, làm sao bây giờ?",
+    "matched_transcript_ids": [
+      "t_0456"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.764813
+  },
+  {
+    "caption_id": "c_0273",
+    "timestamp": "00:23:24.000",
+    "context_text": "[Image @00:23:24.000]: a black background with a white and red flower\n[Dialogue]: Cảm ơn điểm mất thôi, làm sao bây giờ?",
+    "image_text": "a black background with a white and red flower",
+    "dialogue_text": "Cảm ơn điểm mất thôi, làm sao bây giờ?",
+    "matched_transcript_ids": [
+      "t_0456"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.1425
+  },
+  {
+    "caption_id": "c_0274",
+    "timestamp": "00:23:29.000",
+    "context_text": "[Image @00:23:29.000]: a cartoon character in a room with a light coming from the ceiling\n[Dialogue]: Chúng thích xem bộ cơ bà.",
+    "image_text": "a cartoon character in a room with a light coming from the ceiling",
+    "dialogue_text": "Chúng thích xem bộ cơ bà.",
+    "matched_transcript_ids": [
+      "t_0458"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.3825
+  },
+  {
+    "caption_id": "c_0275",
+    "timestamp": "00:23:34.680",
+    "context_text": "[Image @00:23:34.680]: a cartoon character is standing in a room\n[Dialogue]: Giờ thà hộ tiên gia.",
+    "image_text": "a cartoon character is standing in a room",
+    "dialogue_text": "Giờ thà hộ tiên gia.",
+    "matched_transcript_ids": [
+      "t_0460"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.39
+  },
+  {
+    "caption_id": "c_0276",
+    "timestamp": "00:23:36.440",
+    "context_text": "[Image @00:23:36.440]: a cartoon character sitting in a chair with a lamp\n[Dialogue]: Bà, con về rồi.",
+    "image_text": "a cartoon character sitting in a chair with a lamp",
+    "dialogue_text": "Bà, con về rồi.",
+    "matched_transcript_ids": [
+      "t_0461"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.435
+  },
+  {
+    "caption_id": "c_0277",
+    "timestamp": "00:23:39.500",
+    "context_text": "[Image @00:23:39.500]: a cartoon picture of a man with a surprised look on his face\n[Dialogue]: Bà, sao bà không bật tèn hết.",
+    "image_text": "a cartoon picture of a man with a surprised look on his face",
+    "dialogue_text": "Bà, sao bà không bật tèn hết.",
+    "matched_transcript_ids": [
+      "t_0462"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.42375
+  },
+  {
+    "caption_id": "c_0278",
+    "timestamp": "00:23:44.139",
+    "context_text": "[Image @00:23:44.139]: a cartoon character talking to another person\n[Dialogue]: Bà nợi con đây, lấy đây.",
+    "image_text": "a cartoon character talking to another person",
+    "dialogue_text": "Bà nợi con đây, lấy đây.",
+    "matched_transcript_ids": [
+      "t_0464"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.303938
+  },
+  {
+    "caption_id": "c_0279",
+    "timestamp": "00:23:50.779",
+    "context_text": "[Image @00:23:50.779]: a cartoon character with a surprised look on his face\n[Dialogue]: Bà không muốn lạc cuộc sống.",
+    "image_text": "a cartoon character with a surprised look on his face",
+    "dialogue_text": "Bà không muốn lạc cuộc sống.",
+    "matched_transcript_ids": [
+      "t_0466"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.821438
+  },
+  {
+    "caption_id": "c_0280",
+    "timestamp": "00:23:56.599",
+    "context_text": "[Image @00:23:56.599]: a cartoon character sitting in a chair with a red wallpaper\n[Dialogue]: Bà đừng làm con sợ chứ?",
+    "image_text": "a cartoon character sitting in a chair with a red wallpaper",
+    "dialogue_text": "Bà đừng làm con sợ chứ?",
+    "matched_transcript_ids": [
+      "t_0469"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.855187
+  },
+  {
+    "caption_id": "c_0281",
+    "timestamp": "00:24:00.739",
+    "context_text": "[Image @00:24:00.739]: a cartoon character with a surprised look on his face\n[Dialogue]: Còn, con không được báo về tôn nghiệp nữa.",
+    "image_text": "a cartoon character with a surprised look on his face",
+    "dialogue_text": "Còn, con không được báo về tôn nghiệp nữa.",
+    "matched_transcript_ids": [
+      "t_0471"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.828937
+  },
+  {
+    "caption_id": "c_0282",
+    "timestamp": "00:24:04.219",
+    "context_text": "[Image @00:24:04.219]: a cartoon character sitting on a couch with a flower in the background\n[Dialogue]: Ừ, sao lại thấy?",
+    "image_text": "a cartoon character sitting on a couch with a flower in the background",
+    "dialogue_text": "Ừ, sao lại thấy?",
+    "matched_transcript_ids": [
+      "t_0472"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.873563
+  },
+  {
+    "caption_id": "c_0283",
+    "timestamp": "00:24:11.240",
+    "context_text": "[Image @00:24:11.240]: a cartoon character with a man in the background\n[Dialogue]: ký sát nhận cuối cùng với đủ tương cách bảo vệ hình.",
+    "image_text": "a cartoon character with a man in the background",
+    "dialogue_text": "ký sát nhận cuối cùng với đủ tương cách bảo vệ hình.",
+    "matched_transcript_ids": [
+      "t_0474"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.735
+  },
+  {
+    "caption_id": "c_0284",
+    "timestamp": "00:24:19.920",
+    "context_text": "[Image @00:24:19.920]: a cartoon character sitting in a chair with a surprised look on his face\n[Dialogue]: Tất cả là tại bà.",
+    "image_text": "a cartoon character sitting in a chair with a surprised look on his face",
+    "dialogue_text": "Tất cả là tại bà.",
+    "matched_transcript_ids": [
+      "t_0477"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.8175
+  },
+  {
+    "caption_id": "c_0285",
+    "timestamp": "00:24:30.880",
+    "context_text": "[Image @00:24:30.880]: a cartoon character with a black hair and a blue shirt\n[Dialogue]: Còn bà kể.",
+    "image_text": "a cartoon character with a black hair and a blue shirt",
+    "dialogue_text": "Còn bà kể.",
+    "matched_transcript_ids": [
+      "t_0483"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.81
+  },
+  {
+    "caption_id": "c_0286",
+    "timestamp": "00:24:43.299",
+    "context_text": "[Image @00:24:43.299]: a cartoon character with a man in the background\n[Dialogue]: Bà cứ nghĩ gánh phát cho con.",
+    "image_text": "a cartoon character with a man in the background",
+    "dialogue_text": "Bà cứ nghĩ gánh phát cho con.",
+    "matched_transcript_ids": [
+      "t_0488"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.888563
+  },
+  {
+    "caption_id": "c_0287",
+    "timestamp": "00:24:50.880",
+    "context_text": "[Image @00:24:50.880]: a cartoon character with a black hair and a blue shirt\n[Dialogue]: Thì nó phải tự tập đi trên chính đôi chân của mình.",
+    "image_text": "a cartoon character with a black hair and a blue shirt",
+    "dialogue_text": "Thì nó phải tự tập đi trên chính đôi chân của mình.",
+    "matched_transcript_ids": [
+      "t_0492"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.8025
+  },
+  {
+    "caption_id": "c_0288",
+    "timestamp": "00:24:57.039",
+    "context_text": "[Image @00:24:57.039]: a man and woman in a room with purple walls\n[Dialogue]: Bà ơi.",
+    "image_text": "a man and woman in a room with purple walls",
+    "dialogue_text": "Bà ơi.",
+    "matched_transcript_ids": [
+      "t_0493"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.839813
+  },
+  {
+    "caption_id": "c_0289",
+    "timestamp": "00:25:01.699",
+    "context_text": "[Image @00:25:01.699]: a cartoon character is being a man in a kitchen\n[Dialogue]: Bà ơi.",
+    "image_text": "a cartoon character is being a man in a kitchen",
+    "dialogue_text": "Bà ơi.",
+    "matched_transcript_ids": [
+      "t_0495"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.386437
+  },
+  {
+    "caption_id": "c_0290",
+    "timestamp": "00:25:06.099",
+    "context_text": "[Image @00:25:06.099]: a cartoon character hugging another person\n[Dialogue]: Bà được tự thích mình nữa.",
+    "image_text": "a cartoon character hugging another person",
+    "dialogue_text": "Bà được tự thích mình nữa.",
+    "matched_transcript_ids": [
+      "t_0497"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.311438
+  },
+  {
+    "caption_id": "c_0291",
+    "timestamp": "00:25:11.360",
+    "context_text": "[Image @00:25:11.360]: a cartoon character with a man in the background\n[Dialogue]: Con không bảo vệ được nữa.",
+    "image_text": "a cartoon character with a man in the background",
+    "dialogue_text": "Con không bảo vệ được nữa.",
+    "matched_transcript_ids": [
+      "t_0499"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.9
+  },
+  {
+    "caption_id": "c_0292",
+    "timestamp": "00:25:20.119",
+    "context_text": "[Image @00:25:20.119]: a cartoon character with a nose piercing\n[Dialogue]: Con sẽ cố gắng.",
+    "image_text": "a cartoon character with a nose piercing",
+    "dialogue_text": "Con sẽ cố gắng.",
+    "matched_transcript_ids": [
+      "t_0503"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.854812
+  },
+  {
+    "caption_id": "c_0293",
+    "timestamp": "00:25:30.639",
+    "context_text": "[Image @00:25:30.639]: a cartoon character with a black hair and a green shirt\n[Dialogue]: Bà con mình nhất định phải kiếm hay trên trời tự hào.",
+    "image_text": "a cartoon character with a black hair and a green shirt",
+    "dialogue_text": "Bà con mình nhất định phải kiếm hay trên trời tự hào.",
+    "matched_transcript_ids": [
+      "t_0507"
+    ],
+    "fallback_type": "containment",
+    "confidence": 0.764813
+  },
+  {
+    "caption_id": "c_0294",
+    "timestamp": "00:25:43.000",
+    "context_text": "[Image @00:25:43.000]: the logo for our new website\n[Dialogue]: Hãy like, comment, subscribe con để xem thêm những video mới nhất nhé.",
+    "image_text": "the logo for our new website",
+    "dialogue_text": "Hãy like, comment, subscribe con để xem thêm những video mới nhất nhé.",
+    "matched_transcript_ids": [
+      "t_0509"
+    ],
+    "fallback_type": "nearest",
+    "confidence": 0.33
+  }
+]

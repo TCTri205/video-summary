@@ -1,7 +1,7 @@
 # Project Overview
 
 Tai lieu tong hop nhanh:
-- `docs/00-project-overview/pipeline-spec-1page.md` (ban chot scope 1 trang)
+- `docs/Overview-Project/pipeline-spec-1page.md` (ban chot scope 1 trang)
 
 ## Muc tieu
 
@@ -12,8 +12,12 @@ Xay dung he thong tom tat video theo 3 module doc lap:
 
 Dau vao toan he thong: `raw_video.mp4`.
 Dau ra cuoi:
+- `deliverables/<run_id>/summary_video.mp4`
+- `deliverables/<run_id>/summary_text.txt`
+
+Artifact ky thuat lien module:
 - `summary_script.json`
-- `summary_video.mp4`
+- `summary_video_manifest.json`
 
 ## Nguyen tac tich hop
 
@@ -30,7 +34,7 @@ Dau ra cuoi:
 - Thanh vien 2: Module 3, nhan 2 file tren va giao ra:
   - `summary_script.json`
   - `summary_video_manifest.json` (de dung `summary_video.mp4`)
-  - `summary_video.mp4`
+  - `summary_video.mp4` (artifact ky thuat trong `artifacts/<run_id>/g7_assemble/`)
 
 ## Muc tieu MVP
 

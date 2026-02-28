@@ -20,5 +20,5 @@ Ban phu trach Module 1 + Module 2 trong mot luong thong nhat.
 ## Rule chat luong
 
 - Timestamp tat ca output theo `HH:MM:SS.mmm`.
-- Output phai pass schema trong `contracts/v1/`.
+- Output phai pass schema trong `contracts/v1/template/`.
 - Neu output khong pass schema thi khong ban giao.

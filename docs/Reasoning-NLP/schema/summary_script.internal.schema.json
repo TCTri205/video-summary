@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://video-summary.local/schemas/summary_script.internal.schema.json",
+  "title": "Summary Script Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "title",
+    "plot_summary",
+    "moral_lesson",
+    "evidence",
+    "quality_flags",
+    "generation_meta",
+    "segments"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.1"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "plot_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "moral_lesson": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim",
+          "timestamps"
+        ],
+        "properties": {
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timestamps": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/$defs/timestamp"
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "quality_flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "generation_meta": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "model",
+        "seed",
+        "temperature",
+        "backend",
+        "retry_count",
+        "latency_ms",
+        "token_count"
+      ],
+      "properties": {
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "temperature": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        },
+        "backend": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retry_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "latency_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "token_count": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/scriptSegment"
+      }
+    }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^\\d{2}:[0-5]\\d:[0-5]\\d\\.\\d{3}$"
+    },
+    "scriptSegment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "segment_id",
+        "source_start",
+        "source_end",
+        "script_text",
+        "confidence",
+        "role"
+      ],
+      "properties": {
+        "segment_id": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "source_start": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "source_end": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "script_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "role": {
+          "type": "string",
+          "enum": [
+            "setup",
+            "development",
+            "resolution"
+          ]
+        }
+      }
+    }
+  }
+}

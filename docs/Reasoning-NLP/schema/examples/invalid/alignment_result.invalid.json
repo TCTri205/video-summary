@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.1",
+  "delta_ms": 0,
+  "blocks": [
+    {
+      "caption_id": "",
+      "timestamp": "99:00:00.000",
+      "image_text": "",
+      "dialogue_text": "",
+      "matched_transcript_ids": [
+        "t_001",
+        "t_001"
+      ],
+      "fallback_type": "unknown",
+      "confidence": 1.2
+    }
+  ]
+}

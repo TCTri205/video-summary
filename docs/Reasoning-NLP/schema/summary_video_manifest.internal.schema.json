@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://video-summary.local/schemas/summary_video_manifest.internal.schema.json",
+  "title": "Summary Video Manifest Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_video_path",
+    "output_video_path",
+    "keep_original_audio",
+    "segments"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.1"
+    },
+    "source_video_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "output_video_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "keep_original_audio": {
+      "type": "boolean",
+      "const": true
+    },
+    "segments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "segment_id",
+          "source_start",
+          "source_end",
+          "script_ref",
+          "transition"
+        ],
+        "properties": {
+          "segment_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "source_start": {
+            "$ref": "#/$defs/timestamp"
+          },
+          "source_end": {
+            "$ref": "#/$defs/timestamp"
+          },
+          "script_ref": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "transition": {
+            "type": "string",
+            "enum": [
+              "cut"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "timestamp": {
+      "type": "string",
+      "pattern": "^\\d{2}:[0-5]\\d:[0-5]\\d\\.\\d{3}$"
+    }
+  }
+}

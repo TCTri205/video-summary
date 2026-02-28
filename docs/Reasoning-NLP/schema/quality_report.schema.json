@@ -1,0 +1,235 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://video-summary.local/schemas/quality_report.schema.json",
+  "title": "Quality Report Schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_id",
+    "input_profile",
+    "overall_status",
+    "stage_results",
+    "metrics",
+    "warnings",
+    "errors"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.1"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "input_profile": {
+      "type": "string",
+      "enum": [
+        "strict_contract_v1",
+        "legacy_member1"
+      ]
+    },
+    "overall_status": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "fail"
+      ]
+    },
+    "stage_results": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "stage",
+          "status",
+          "duration_ms"
+        ],
+        "properties": {
+          "stage": {
+            "type": "string",
+            "enum": [
+              "validate",
+              "align",
+              "context_build",
+              "summarize",
+              "segment_plan",
+              "manifest",
+              "assemble",
+              "qc"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "skipped"
+            ]
+          },
+          "duration_ms": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "error_code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "details": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "parse_validity_rate",
+        "repaired_parse_validity_rate",
+        "timeline_consistency_score",
+        "grounding_score",
+        "compression_ratio",
+        "manifest_consistency_pass",
+        "render_success",
+        "audio_present",
+        "duration_match_score",
+        "black_frame_ratio",
+        "decode_error_count",
+        "no_match_rate",
+        "median_confidence",
+        "high_confidence_ratio"
+        ,"text_sentence_grounded_ratio"
+        ,"text_segment_coverage_ratio"
+        ,"text_temporal_order_score"
+        ,"text_video_keyword_overlap"
+        ,"text_cta_leak_ratio"
+      ],
+      "properties": {
+        "parse_validity_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "repaired_parse_validity_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "timeline_consistency_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "grounding_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "compression_ratio": {
+          "type": "number",
+          "minimum": 0
+        },
+        "manifest_consistency_pass": {
+          "type": "boolean"
+        },
+        "render_success": {
+          "type": "boolean"
+        },
+        "audio_present": {
+          "type": "boolean"
+        },
+        "duration_match_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "black_frame_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "decode_error_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "no_match_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "median_confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "high_confidence_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_sentence_grounded_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_segment_coverage_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_temporal_order_score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_video_keyword_overlap": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "text_cta_leak_ratio": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "stage",
+          "error_code",
+          "message"
+        ],
+        "properties": {
+          "stage": {
+            "type": "string",
+            "minLength": 1
+          },
+          "error_code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

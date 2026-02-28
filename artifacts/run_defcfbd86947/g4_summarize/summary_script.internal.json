@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.1",
+  "title": "Video Summary",
+  "plot_summary": "Noi dung cho thay dien bien theo thu tu thoi gian voi hinh anh chinh la 'a cartoon picture of two men eating food' va hoi thoai noi bat la 'Một tháng, ăn thịt gà'.",
+  "moral_lesson": "Thong diep duoc rut ra tu cac su kien da xuat hien trong video.",
+  "evidence": [
+    {
+      "claim": "Tom tat dua tren cac moc canh/chu thich va hoi thoai da align.",
+      "timestamps": [
+        "00:00:02.500",
+        "00:00:07.299",
+        "00:00:12.320"
+      ]
+    }
+  ],
+  "quality_flags": [
+    "ALIGN_HAS_NO_MATCH",
+    "model_version=Qwen2.5-3B-Instruct",
+    "tokenizer_version=default"
+  ],
+  "generation_meta": {
+    "model": "Qwen2.5-3B-Instruct",
+    "seed": 42,
+    "temperature": 0.1
+  },
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:02.500",
+      "source_end": "00:00:04.000",
+      "script_text": "Một tháng, ăn thịt gà",
+      "confidence": 0.61875,
+      "role": "setup"
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:11:15.240",
+      "source_end": "00:11:16.740",
+      "script_text": "Trời, cho em giám đi một mình ra ngoài bia đơn",
+      "confidence": 0.7575,
+      "role": "development"
+    },
+    {
+      "segment_id": 3,
+      "source_start": "00:25:43.000",
+      "source_end": "00:25:44.500",
+      "script_text": "Hãy like, comment, subscribe con để xem thêm những video mới nhất nhé.",
+      "confidence": 0.33,
+      "role": "resolution"
+    }
+  ]
+}

@@ -1,6 +1,55 @@
 # Summarization Output Spec
 
-## Dinh dang output
+## Muc tieu
+
+Chuan hoa output noi dung va output lap rap video de dam bao parse duoc, doi soat duoc, va replay duoc.
+
+## Nguyen tac contract-first (bat buoc)
+
+- Deliverable I/O cua toan he thong phai theo `contracts/v1/template/`.
+- Cac truong mo rong chi duoc dat trong artifact noi bo, khong chen vao deliverable I/O.
+
+Deliverable machine-checkable (duong dan thuc te trong repo):
+
+- `contracts/v1/template/summary_script.schema.json`
+- `contracts/v1/template/summary_video_manifest.schema.json`
+- `contracts/v1/template/final_summary.schema.json` (neu co xuat)
+
+Artifact noi bo Module 3 (khong phai I/O ban giao lien module):
+
+- `context_blocks.json`
+- `alignment_result.json`
+- `quality_report.json`
+- `summary_script.internal.json`
+- `summary_video_manifest.internal.json` (neu can debug)
+
+## Artifact lanes (de tranh nham)
+
+Contract lane (deliverable lien module):
+
+- `summary_script.json`
+- `summary_video_manifest.json`
+- `summary_video.mp4`
+- `final_summary.json` (optional, strict schema)
+
+Deliverable cuoi publish cho nguoi dung (runtime hien tai):
+
+- `deliverables/<run_id>/summary_video.mp4`
+- `deliverables/<run_id>/summary_text.txt`
+
+Reasoning lane (internal):
+
+- `summary_script.internal.json` (noi luu `evidence`, `quality_flags`, `generation_meta`)
+- `context_blocks.json`
+- `alignment_result.json`
+- `quality_report.json`
+
+## Schema version
+
+- Deliverable I/O theo global schema v1 trong `contracts/v1/template/`.
+- Internal artifacts co `schema_version` rieng (da so `1.1`; `summary_text.internal.json` hien tai la `1.0`).
+
+## Dinh dang output deliverable
 
 `summary_script.json`:
 
@@ -39,15 +88,128 @@
 }
 ```
 
+`final_summary.json` (optional):
+
+```json
+{
+  "plot_summary": "...",
+  "moral_lesson": "...",
+  "full_combined_context_used": "..."
+}
+```
+
+## Dinh dang output internal (khuyen nghi)
+
+`summary_script.internal.json` toi thieu phai co:
+
+- `schema_version`
+- `title`
+- `plot_summary`
+- `moral_lesson`
+- `evidence`
+- `quality_flags`
+- `generation_meta`
+- `segments` (co `confidence`, `role`)
+
+Validate bang `docs/Reasoning-NLP/schema/summary_script.internal.schema.json`.
+
+Luu y stage boundary runtime:
+
+- G4 (`summarize`) sinh internal summary va gan `segments` noi bo (co `confidence`, `role`).
+- G5 (`segment_plan`) map tu internal sang deliverable `summary_script.json` + `summary_video_manifest.json`.
+
+## Mapping tu internal sang deliverable
+
+- `summary_script.internal.plot_summary` -> `summary_script.plot_summary`
+- `summary_script.internal.moral_lesson` -> `summary_script.moral_lesson`
+- `summary_script.internal.segments[].script_text` -> `summary_script.segments[].script_text`
+- `summary_script.internal.segments[].source_start/end` -> script + manifest
+
+Khong map cac field noi bo sau vao deliverable:
+
+- `evidence`
+- `quality_flags`
+- `generation_meta`
+- `confidence`
+- `role`
+
+## Segment planning policy (bat buoc)
+
+- Segment phai sap theo `segment_id` tang dan.
+- Moi segment bat buoc thoa:
+  - `min_segment_duration_ms >= 1200`
+  - `max_segment_duration_ms <= 15000`
+  - `source_end > source_start`
+- Tong do dai summary phai nam trong budget:
+  - Runtime mac dinh: `target_ratio = None`; khi khong set, planner suy ra tong budget tu fallback policy theo do dai video (`~0.035 * source_duration_ms`) roi clamp theo `min_total_duration_ms`/`max_total_duration_ms`.
+  - `min_total_duration_ms` va `max_total_duration_ms` do he thong cau hinh.
+  - Neu bat `target_ratio`, tong duration hop le khi nam trong `target_ratio +- target_ratio_tolerance`.
+- So luong segment la dong theo budget/do dai nguon; khong con hard-cap 3, nhung runtime hien tai van co tran operational `15` segment.
+
+## Summary text lane (runtime hien tai)
+
+- Runtime tao `summary_text.txt` truc tiep tu `summary_script.internal.{plot_summary,moral_lesson}` sau khi loc an toan.
+- Runtime van xay `summary_text.internal.json` tu cac `summary_script.json.segments[]` da duoc chon va loc an toan.
+- Moi cau trong `summary_text.internal.json.sentences[]` phai co:
+  - `text`
+  - `support_segment_ids`
+  - `support_timestamps`
+- `summary_text.internal.json` duoc dung cho provenance/coverage va tinh metric text-video consistency.
+
+## Text-video consistency metrics
+
+- `text_sentence_grounded_ratio`
+- `text_segment_coverage_ratio`
+- `text_temporal_order_score`
+- `text_video_keyword_overlap`
+- `text_cta_leak_ratio`
+
+Trong runtime strict QC, cac nguong enforce hien tai la:
+
+- `text_sentence_grounded_ratio >= 1.0`
+- `text_segment_coverage_ratio >= 0.70`
+- `text_temporal_order_score >= 0.90`
+- `text_video_keyword_overlap >= 0.45`
+- `text_cta_leak_ratio <= 0.0`
+
+## Cross-file consistency checks
+
+- Moi `segment_id` trong script phai unique.
+- Moi `segment_id` trong manifest phai unique.
+- Moi `script_ref` trong manifest phai ton tai trong `summary_script.segments.segment_id`.
+- `source_start/source_end` cua script va manifest phai dong nhat theo tung segment.
+- Tat ca timestamps phai nam trong `[0, source_video_duration]`.
+- Segment timeline trong moi file phai khong overlap va giu thu tu tang dan theo thoi gian.
+
 ## Rule chat luong
 
 - `plot_summary`: dung trinh tu su kien, ngan gon, co lien ket.
 - `moral_lesson`: ro rang, lien quan truc tiep den noi dung.
-- `segments`: duoc sap theo timeline, map duoc vao video goc.
+- `segments`: map duoc vao video goc, khong overlap bat thuong.
 - `summary_video.mp4`: duoc cat/ghep tu video goc va giu audio goc.
 
 ## Rule ky thuat
 
 - File parse JSON hop le.
-- Co du key bat buoc theo schema `summary_script` va `summary_video_manifest`.
-- Gia tri khong rong sau khi trim.
+- Co du key bat buoc theo schema cho tung artifact.
+- Gia tri string khong rong sau trim.
+- Khong cho phep `NaN`, `null` cho cac field bat buoc.
+
+## Input profile va normalize
+
+- Pipeline chap nhan 2 profile transcript:
+  - `strict_contract_v1` (uu tien)
+  - `legacy_member1` (object + float giay)
+- Truoc summarization, bat buoc normalize ve 1 canonical format noi bo.
+- Bat buoc luu `input_profile` da dung trong `quality_report.json`.
+
+## Chi so danh gia de xuat
+
+- `parse_validity_rate`
+- `timeline_consistency_score`
+- `grounding_score`
+- `compression_ratio`
+- `manifest_consistency_pass`
+- `no_match_rate`
+- `median_confidence`
+- `high_confidence_ratio`

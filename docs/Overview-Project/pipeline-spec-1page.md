@@ -6,11 +6,14 @@ Xay dung he thong tom tat video theo pipeline 3 module, tach biet trach nhiem, g
 
 - System input: `raw_video.mp4`
 - System output chinh:
+  - `deliverables/<run_id>/summary_video.mp4`
+  - `deliverables/<run_id>/summary_text.txt`
+- Artifact ky thuat lien module:
   - `summary_script.json`
-  - `summary_video.mp4`
-- Artifact noi bo (optional):
   - `summary_video_manifest.json`
-  - `final_summary.json`
+  - `summary_video.mp4` (trong `artifacts/<run_id>/g7_assemble/`)
+- Optional contract artifact:
+  - `final_summary.json` (neu xuat bo sung)
 
 ## 2) Y tuong tong quat
 
@@ -68,7 +71,8 @@ Xay dung he thong tom tat video theo pipeline 3 module, tach biet trach nhiem, g
 
 ## 4) Data contract va nguyen tac tich hop
 
-- Tat ca JSON phai pass schema trong `contracts/v1/*.schema.json`.
+- Deliverable lien module (`summary_script.json`, `summary_video_manifest.json`) phai pass schema trong `contracts/v1/template/*.schema.json`.
+- Artifact noi bo (`alignment_result.json`, `summary_script.internal.json`, `quality_report.json`) phai pass schema trong `docs/Reasoning-NLP/schema/*.schema.json`.
 - Timestamp chuan bat buoc: `HH:MM:SS.mmm`.
 - Relative path trong JSON dung theo workspace root.
 - Key name theo schema, khong doi tuy y.
@@ -93,5 +97,5 @@ Xay dung he thong tom tat video theo pipeline 3 module, tach biet trach nhiem, g
 2. 100% file giao tiep pass schema v1.
 3. Thay mock data bang data that khong can sua logic merge.
 4. Tao duoc 2 deliverable cuoi:
-   - `summary_script.json`
-   - `summary_video.mp4`
+   - `deliverables/<run_id>/summary_video.mp4`
+   - `deliverables/<run_id>/summary_text.txt`

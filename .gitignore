@@ -38,3 +38,8 @@ huggingface_cache/
 
 # Logs
 *.log
+
+Data/raw/
+Data/processed/video1/
+# Local env files
+.env

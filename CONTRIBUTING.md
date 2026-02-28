@@ -10,9 +10,9 @@
 ## Contract discipline
 
 - Khong doi key name trong JSON neu chua bump version contract.
-- Mọi output phai pass schema trong `contracts/v1/` truoc khi ban giao.
+- Deliverable lien module phai pass schema trong `contracts/v1/template/`; artifact noi bo phai pass schema trong `docs/Reasoning-NLP/schema/`.
 - Timestamp phai dung `HH:MM:SS.mmm`.
-- Deliverable cuoi bat buoc: `summary_script.json` + `summary_video.mp4`.
+- Deliverable publish cuoi bat buoc: `deliverables/<run_id>/summary_video.mp4` + `deliverables/<run_id>/summary_text.txt`.
 - `summary_video.mp4` phai duoc cat/ghep tu video goc va giu audio goc theo manifest.
 
 ## Commit messages

@@ -1,12 +1,16 @@
-[
-  {
-    "start": "00:00:06.000",
-    "end": "00:00:13.200",
-    "text": "Con uoc gi con co du tien de mua chiec dien thoai trong tu kinh."
-  },
-  {
-    "start": "00:00:24.100",
-    "end": "00:00:31.000",
-    "text": "Cha muon con di cung cha den mot noi truoc khi quyet dinh."
-  }
-]
+{
+  "language": "vi",
+  "duration": 1432.42,
+  "segments": [
+    {
+      "start": 0.0,
+      "end": 3.0,
+      "text": "Bà họt đất giá."
+    },
+    {
+      "start": 13.0,
+      "end": 17.0,
+      "text": "Chà hợp bắp nhà mình năm nay mới tư tốt làm sao?"
+    }
+  ]
+}
