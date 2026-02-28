@@ -964,22 +964,43 @@ def _build_summary_text(
     script_payload: dict[str, Any],
     summary_text_internal: dict[str, Any] | None = None,
 ) -> str:
-    del summary_internal_payload
     del script_payload
     internal = summary_text_internal if isinstance(summary_text_internal, dict) else {"sentences": []}
     sentences = internal.get("sentences", [])
     if not isinstance(sentences, list):
         sentences = []
 
-    lines: list[str] = []
+    title = _clean_sentence_fragment(str(summary_internal_payload.get("title", "")).strip())
+    plot = _clean_sentence_fragment(str(summary_internal_payload.get("plot_summary", "")).strip())
+    moral = _clean_sentence_fragment(str(summary_internal_payload.get("moral_lesson", "")).strip())
+
+    support_lines: list[str] = []
     for item in sentences:
         if not isinstance(item, dict):
             continue
-        text = _as_sentence(str(item.get("text", "")).strip())
+        text = _clean_sentence_fragment(str(item.get("text", "")).strip())
         if not text:
             continue
-        lines.append(text)
+        lowered = text.lower()
+        if lowered.startswith("khong du du lieu"):
+            continue
+        if text not in support_lines:
+            support_lines.append(text)
+        if len(support_lines) >= 2:
+            break
 
+    lines: list[str] = []
+    if plot:
+        lines.append(_as_sentence(plot))
+    if support_lines:
+        bridge = " ".join(support_lines)
+        if bridge and bridge not in lines:
+            lines.append(_as_sentence(bridge))
+    if moral:
+        lines.append(_as_sentence(f"Tu cau chuyen nay, bai hoc de lai la {moral}"))
+
+    if not lines and title:
+        lines = [_as_sentence(f"{title} mang thong diep doi song can su lang nghe va thau hieu")]
     if not lines:
         lines = ["Khong du du lieu de tao tom tat ngan cho video."]
 
@@ -1004,15 +1025,15 @@ def _build_group_sentence(group: list[dict[str, Any]], order: int, total_groups:
         return ""
 
     if order == 1:
-        lead = "Mo dau"
+        lead = "Video mo ra voi"
     elif order == total_groups:
-        lead = "Cuoi cung"
+        lead = "Doan ket cho thay"
     else:
-        lead = "Tiep theo"
+        lead = "Mach dien bien tiep tuc voi"
 
     if len(parts) == 1:
-        return _as_sentence(f"{lead}, video cho thay '{parts[0]}'")
-    return _as_sentence(f"{lead}, video lan luot the hien '{parts[0]}' va '{parts[1]}'")
+        return _as_sentence(f"{lead} {parts[0]}")
+    return _as_sentence(f"{lead} {parts[0]}, sau do la {parts[1]}")
 
 
 def _clean_sentence_fragment(text: str) -> str:
