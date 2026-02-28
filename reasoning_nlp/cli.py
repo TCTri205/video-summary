@@ -20,6 +20,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--deliverables-root", default=DEFAULT_RUNTIME["deliverables_root"], help="Final deliverables root directory")
     parser.add_argument("--input-profile", default=DEFAULT_RUNTIME["input_profile"], choices=["strict_contract_v1", "legacy_member1"])
     parser.add_argument("--source-duration-ms", type=int, default=None)
+    parser.add_argument("--model-version", default=DEFAULT_SUMMARIZATION["model_version"])
     parser.add_argument("--summarize-backend", choices=["api", "local"], default=DEFAULT_SUMMARIZATION["backend"])
     parser.add_argument(
         "--summarize-fallback-backend",
@@ -80,6 +81,7 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
         deliverables_root=args.deliverables_root,
         input_profile=args.input_profile,
         source_duration_ms=args.source_duration_ms,
+        model_version=args.model_version,
         summarize_backend=args.summarize_backend,
         summarize_fallback_backend=args.summarize_fallback_backend,
         summarize_timeout_ms=args.summarize_timeout_ms,

@@ -66,6 +66,8 @@ class CLIRoutesTests(unittest.TestCase):
                     str(root / "artifacts"),
                     "--deliverables-root",
                     str(root / "deliverables"),
+                    "--model-version",
+                    "Qwen/Qwen2.5-3B-Instruct",
                     "--summarize-backend",
                     "api",
                     "--summarize-fallback-backend",

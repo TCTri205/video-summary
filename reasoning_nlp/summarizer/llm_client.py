@@ -279,26 +279,46 @@ def _local_transformers_completion(
     del timeout_ms
     started = time.perf_counter()
     generator, tokenizer = _get_local_generator(model_name)
-    prompt_text = (
-        f"{_SYSTEM_PROMPT}\n\n"
-        "Tra ve JSON: {\"title\":...,\"plot_summary\":...,\"moral_lesson\":...,\"evidence\":[],\"quality_flags\":[]}\n\n"
-        f"CONTEXT:\n{prompt}"
-    )
-    out = generator(
-        prompt_text,
-        max_new_tokens=max(64, int(max_new_tokens)),
-        do_sample=bool(do_sample),
-        temperature=float(temperature),
-        return_full_text=False,
-    )
+    prompt_text = _build_local_prompt_text(tokenizer, prompt)
+    generate_kwargs: dict[str, Any] = {
+        "max_new_tokens": max(64, int(max_new_tokens)),
+        "do_sample": bool(do_sample),
+        "return_full_text": False,
+    }
+    if do_sample:
+        generate_kwargs["temperature"] = float(temperature)
+
+    out = generator(prompt_text, **generate_kwargs)
     latency_ms = int((time.perf_counter() - started) * 1000)
     if not isinstance(out, list) or not out:
         raise RuntimeError("local backend produced empty output")
     text = str(out[0].get("generated_text", "")).strip()
     if not text:
         raise RuntimeError("local backend produced blank text")
-    token_count = len(tokenizer.encode(text)) if hasattr(tokenizer, "encode") else 0
+    token_count = len(tokenizer.encode(text, add_special_tokens=False)) if hasattr(tokenizer, "encode") else 0
     return _parse_json_payload(text), latency_ms, token_count
+
+
+def _build_local_prompt_text(tokenizer: Any, prompt: str) -> str:
+    user_prompt = (
+        "Tra ve JSON: {\"title\":...,\"plot_summary\":...,\"moral_lesson\":...,\"evidence\":[],\"quality_flags\":[]}\n\n"
+        f"CONTEXT:\n{prompt}"
+    )
+    messages = [
+        {"role": "system", "content": _SYSTEM_PROMPT},
+        {"role": "user", "content": user_prompt},
+    ]
+
+    apply_chat_template = getattr(tokenizer, "apply_chat_template", None)
+    if callable(apply_chat_template):
+        try:
+            rendered = apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+            if isinstance(rendered, str) and rendered.strip():
+                return rendered
+        except Exception:
+            pass
+
+    return f"{_SYSTEM_PROMPT}\n\n{user_prompt}"
 
 
 def _get_local_generator(model_name: str) -> tuple[Any, Any]:
@@ -311,8 +331,25 @@ def _get_local_generator(model_name: str) -> tuple[Any, Any]:
     except Exception as exc:
         raise RuntimeError(f"transformers backend unavailable: {exc}") from exc
 
+    try:
+        import torch
+    except Exception as exc:
+        raise RuntimeError(f"torch backend unavailable: {exc}") from exc
+
+    model_kwargs: dict[str, Any] = {"low_cpu_mem_usage": True}
+    if torch.cuda.is_available():
+        model_kwargs["device_map"] = "auto"
+        bf16_supported = bool(getattr(torch.cuda, "is_bf16_supported", lambda: False)())
+        model_kwargs["torch_dtype"] = torch.bfloat16 if bf16_supported else torch.float16
+    else:
+        model_kwargs["torch_dtype"] = torch.float32
+
     tokenizer = AutoTokenizer.from_pretrained(model_name)
-    model = AutoModelForCausalLM.from_pretrained(model_name)
+    if getattr(tokenizer, "pad_token_id", None) is None and getattr(tokenizer, "eos_token_id", None) is not None:
+        tokenizer.pad_token = tokenizer.eos_token
+
+    model = AutoModelForCausalLM.from_pretrained(model_name, **model_kwargs)
+    model.eval()
     generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
     pair = (generator, tokenizer)
     _LOCAL_GENERATOR_CACHE[model_name] = pair
