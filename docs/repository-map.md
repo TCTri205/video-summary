@@ -27,25 +27,20 @@ video-summary/
 │               └── scene_metadata.json       # Metadata cảnh
 ├── artifacts/                                # Kết quả trung gian của Module 3 (G1->G8)
 │   └── <run_id>/
-│       ├── g1_validate/
-│       │   └── normalized_input.json         # Dữ liệu đầu vào đã chuẩn hóa
 │       ├── g2_align/
 │       │   └── alignment_result.json         # Kết quả đồng bộ thời gian
-│       ├── g3_context/
-│       │   └── context_blocks.json           # Context tổng hợp
-│       ├── g4_summarize/
-│       │   └── summary_script.internal.json  # Script nội bộ với metadata
 │       ├── g5_segment/
 │       │   ├── summary_script.json          # Script tổng hợp công khai
 │       │   └── summary_video_manifest.json  # Manifest chỉ thị ghép video
-│       ├── g6_manifest/
-│       │   └── manifest_validation.json     # Kiểm tra tính hợp lệ manifest
 │       ├── g7_assemble/
-│       │   ├── render_meta.json             # Metadata quá trình render
 │       │   └── summary_video.mp4            # Video tổng hợp
 │       ├── g8_qc/
 │       │   └── quality_report.json          # Báo cáo chất lượng
-│       └── run_meta.json                    # Metadata chung cho cả run
+│       ├── g1_validate/                      # (debug/replay opt-in)
+│       ├── g3_context/                       # (debug/replay opt-in)
+│       ├── g4_summarize/                     # (debug/replay opt-in)
+│       ├── g6_manifest/                      # (debug/replay opt-in)
+│       └── run_meta.json                     # (debug/replay opt-in)
 ├── contracts/
 │   └── v1/
 │       ├── template/                        # Schema định nghĩa giao thức
@@ -78,8 +73,10 @@ video-summary/
 │   ├── pipeline/                            # Orchestrator va runtime profile cho Module 3
 │   ├── pipeline_runner.py                   # Wrapper tuong thich nguoc cho API import cu
 │   ├── cli.py                               # Giao diện dòng lệnh
+│   ├── config/                              # Defaults + shared config loader
 │   ├── aligner/                             # Đồng bộ hóa audio/visual
 │   ├── summarizer/                          # Tóm tắt bằng LLM
+│   ├── segment_planner/                     # Lập kế hoạch phân đoạn theo budget
 │   ├── assembler/                           # Ghép video
 │   ├── qc/                                  # Kiểm tra chất lượng
 │   ├── validators/                          # Xác thực dữ liệu
@@ -111,8 +108,13 @@ video-summary/
 
 ### `artifacts/`
 - Chứa kết quả trung gian của Module 3 theo từng bước (G1-G8)
-- Mỗi run có riêng thư mục `<run_id>` với các stage từ `g1_validate` đến `g8_qc`
-- Bao gồm cả metadata và file media (ví dụ: `summary_video.mp4`)
+- Mặc định chỉ giữ artifact vận hành: `g5_segment/*`, `g7_assemble/summary_video.mp4`, `g8_qc/quality_report.json`
+- Artifact nội bộ (`g1_validate`, `g3_context`, `g4_summarize`, `g6_manifest`, `run_meta.json`) chỉ ghi khi bật debug artifacts/replay
+
+#### Ma trận artifact theo stage (mặc định)
+- `g3`: `g2_align/alignment_result.json`
+- `g5`: `g5_segment/summary_script.json`, `g5_segment/summary_video_manifest.json`
+- `g8`: `g5_segment/summary_script.json`, `g5_segment/summary_video_manifest.json`, `g7_assemble/summary_video.mp4`, `g8_qc/quality_report.json`
 
 ### `contracts/v1/`
 - Giao thức giao tiếp giữa các module (data contracts)
@@ -135,8 +137,10 @@ video-summary/
 - `pipeline/` - Chua orchestrator va cac thanh phan dieu phoi Module 3
 - `pipeline_runner.py` - Lop wrapper giu tuong thich import cu, uy quyen cho pipeline orchestrator
 - `cli.py` - Giao diện dòng lệnh cho pipeline
+- `config/` - Mặc định runtime + shared config loader cho CLI/root entrypoint
 - `aligner/` - Đồng bộ hóa thời gian audio/visual
 - `summarizer/` - Tóm tắt bằng LLM
+- `segment_planner/` - Lập kế hoạch segment theo budget policy
 - `assembler/` - Ghép video theo manifest
 - `qc/` - Kiểm tra chất lượng đầu ra
 - `validators/` - Kiểm tra dữ liệu đầu vào/output
