@@ -212,3 +212,59 @@ flowchart LR
 
   A8 --> F1
 ```
+
+## 8) Pipeline tổng thể (bản dễ hiểu)
+
+```mermaid
+flowchart TD
+  A[Input: video gốc và cấu hình] --> B{Preflight hợp lệ?}
+  B -- Không --> X[Dừng pipeline: lỗi dependency hoặc input]
+  B -- Có --> C[Module 1: Tách dữ liệu
+  audio, keyframe, metadata]
+
+  C --> D[Module 2: Perception AI
+  transcript và visual caption]
+  D --> E{Đúng contract và timeline?}
+  E -- Không --> X
+  E -- Có --> F[Module 3: Reasoning
+  align, tạo context, lập kế hoạch segment]
+
+  F --> G{Tín hiệu grounding và confidence đạt yêu cầu?}
+  G -- Không --> H[Chế độ bảo thủ
+  tóm tắt trung tính, gắn warning]
+  G -- Có --> I[Kế hoạch segment bình thường]
+
+  H --> J[G6-G7: Validate manifest và lắp ráp video]
+  I --> J
+  J --> K[G8: Tổng hợp chất lượng và báo cáo QC]
+  K --> L{Đạt ngưỡng QC?}
+
+  L -- Không --> Y[Kết luận FAIL
+  xuất quality_report để triage]
+  L -- Có --> Z[Xuất deliverables
+  summary_video.mp4 và summary_text.txt]
+```
+
+- Giai đoạn 1 (Module 1+2) biến video gốc thành dữ liệu có cấu trúc để máy hiểu được.
+- Giai đoạn 2 (Module 3) hợp nhất audio-visual, tạo tóm tắt và quyết định đoạn nào cần cắt ghép.
+- Các nút quyết định giúp fail-fast khi input sai, và fallback bảo thủ khi grounding yếu.
+- Giai đoạn cuối dùng QC gate để ra quyết định GO/NO-GO thay vì chỉ dựa vào cảm tính.
+- Output publish cho người dùng chỉ gồm `summary_video.mp4` và `summary_text.txt`; các JSON còn lại là artifact kỹ thuật.
+
+### Giải thích chi tiết từng node
+
+- `A - Input: video gốc và cấu hình`: hệ thống nhận file video nguồn và toàn bộ runtime config (stage mục tiêu, backend summarize, ngưỡng QC, run id, thư mục output).
+- `B - Preflight hợp lệ?`: kiểm tra điều kiện tối thiểu trước khi chạy GPU/CPU hay model, bao gồm video tồn tại, đọc được, và có `ffmpeg/ffprobe` trong PATH.
+- `X - Dừng pipeline: lỗi dependency hoặc input`: nhánh fail-fast khi preflight không đạt; không chạy tiếp để tránh tạo artifact sai và tốn chi phí runtime.
+- `C - Module 1: Tách dữ liệu`: trích xuất audio 16k mono, keyframes theo scene, và `scene_metadata.json` để tạo nền dữ liệu thô theo timeline.
+- `D - Module 2: Perception AI`: chuyển audio thành transcript và keyframe thành caption, tạo 2 JSON chính để Module 3 sử dụng.
+- `E - Đúng contract và timeline?`: gate xác nhận 2 JSON đầu vào đúng schema, đúng format timestamp `HH:MM:SS.mmm`, có thứ tự thời gian hợp lệ, và text không rỗng.
+- `F - Module 3: Reasoning`: căn chỉnh transcript-caption trên cùng trục thời gian, tạo context tổng hợp, sinh summary internal, và lập kế hoạch segment cho script/manifest.
+- `G - Tín hiệu grounding và confidence đạt yêu cầu?`: đánh giá mức độ bám sát bằng chứng timeline-context; nếu tín hiệu yếu thì hệ thống không nên tạo nội dung quá mạnh.
+- `H - Chế độ bảo thủ`: fallback an toàn khi grounding yếu, ưu tiên cách diễn đạt trung tính, hạn chế suy đoán, và gắn warning để QC nhận diện rủi ro.
+- `I - Kế hoạch segment bình thường`: nếu grounding tốt, planner chọn các đoạn đại diện (mở đầu, diễn biến, kết), cân bằng budget độ dài và độ phủ nội dung.
+- `J - G6-G7 Validate manifest và lắp ráp video`: cross-check script-manifest trước render, sau đó cắt/ghép từ video gốc theo segment và giữ audio gốc (`keep_original_audio=true`).
+- `K - G8 Tổng hợp chất lượng và báo cáo QC`: tính metric parse/timeline/grounding/render/text-video consistency, tổng hợp warning và error code vào `quality_report.json`.
+- `L - Đạt ngưỡng QC?`: nút quyết định cuối theo threshold release; dữ liệu pass mới được publish, fail thì dừng ở mức báo cáo.
+- `Y - Kết luận FAIL`: run được đánh dấu không đạt, giữ artifact và `quality_report.json` để triage theo nhóm lỗi (`SCHEMA_*`, `TIME_*`, `QC_*`, ...).
+- `Z - Publish deliverables`: copy/ghi output cho người dùng cuối gồm `summary_video.mp4` và `summary_text.txt` vào `deliverables/<run_id>/`.
