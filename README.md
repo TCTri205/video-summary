@@ -25,6 +25,7 @@ Mac dinh se:
 - Output extraction/perception: `Data/processed/<video_name>/extraction/...`
 - Stage reasoning: `g8` (full)
 - Summarize backend: `local` (khong can API key)
+- Runtime profile: `full` (giu replay + QC day du)
 
 Artifact cuoi (G8):
 
@@ -39,6 +40,12 @@ Vi du CLI:
 
 ```bash
 python main.py --video-path Data/raw/video2.mp4 --run-id run_local_002 --stage g8
+```
+
+Profile toi gian (opt-in, khong thay doi default):
+
+```bash
+python main.py --runtime-profile simple
 ```
 
 Vi du ENV:

@@ -6,7 +6,7 @@ from argparse import SUPPRESS
 
 from reasoning_nlp.common.errors import PipelineError
 from reasoning_nlp.config.defaults import DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SUMMARIZATION
-from reasoning_nlp.pipeline_runner import PipelineConfig, run_pipeline_g1_g3, run_pipeline_g1_g5, run_pipeline_g1_g8
+from reasoning_nlp.pipeline import PipelineConfig, run_pipeline_g1_g3, run_pipeline_g1_g5, run_pipeline_g1_g8
 
 
 def parse_args() -> argparse.Namespace:
@@ -68,10 +68,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--emit-internal-artifacts", action="store_true", default=True)
     parser.add_argument("--no-emit-internal-artifacts", action="store_false", dest="emit_internal_artifacts")
     parser.add_argument("--strict-replay-hash", action="store_true", default=DEFAULT_RUNTIME["strict_replay_hash"])
+    parser.add_argument("--runtime-profile", choices=["full", "simple"], default="full")
     return parser.parse_args()
 
 
 def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
+    runtime_profile = getattr(args, "runtime_profile", "full")
     return PipelineConfig(
         audio_transcripts_path=args.audio_transcripts,
         visual_captions_path=args.visual_captions,
@@ -103,6 +105,7 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
         emit_internal_artifacts=args.emit_internal_artifacts,
         strict_replay_hash=args.strict_replay_hash,
         replay_mode=bool(args.replay),
+        runtime_profile=runtime_profile,
     )
 
 

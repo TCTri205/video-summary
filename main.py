@@ -92,6 +92,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--qc-enforce-thresholds", action="store_true", default=None)
     parser.add_argument("--replay", action="store_true", default=None)
     parser.add_argument("--strict-replay-hash", action="store_true", default=None)
+    parser.add_argument("--runtime-profile", choices=["full", "simple"], default=None)
     return parser.parse_args()
 
 
@@ -225,7 +226,7 @@ def run_caption(metadata_path: str, output_path: str, model_name: str, batch_siz
 
 
 def _run_reasoning_stage(config: Any, stage: str) -> dict[str, Any]:
-    from reasoning_nlp.pipeline_runner import run_pipeline_g1_g3, run_pipeline_g1_g5, run_pipeline_g1_g8
+    from reasoning_nlp.pipeline import run_pipeline_g1_g3, run_pipeline_g1_g5, run_pipeline_g1_g8
 
     if stage == "g3":
         return run_pipeline_g1_g3(config)
@@ -381,6 +382,15 @@ def main() -> int:
             False,
         )
     )
+    runtime_profile = str(
+        _resolve_value(
+            args.runtime_profile,
+            "VIDEO_SUMMARY_RUNTIME_PROFILE",
+            file_config,
+            "runtime_profile",
+            "full",
+        )
+    )
 
     if "VIDEO_SUMMARY_QC_ENFORCE_THRESHOLDS" in os.environ:
         qc_enforce_thresholds = _env_bool("VIDEO_SUMMARY_QC_ENFORCE_THRESHOLDS", qc_enforce_thresholds)
@@ -388,6 +398,10 @@ def main() -> int:
         replay = _env_bool("VIDEO_SUMMARY_REPLAY", replay)
     if "VIDEO_SUMMARY_STRICT_REPLAY_HASH" in os.environ:
         strict_replay_hash = _env_bool("VIDEO_SUMMARY_STRICT_REPLAY_HASH", strict_replay_hash)
+
+    runtime_profile = runtime_profile.strip().lower()
+    if runtime_profile not in {"full", "simple"}:
+        raise RuntimeError(f"INVALID_RUNTIME_PROFILE: {runtime_profile}. Use full or simple")
 
     if stage not in {"g3", "g5", "g8"}:
         raise RuntimeError(f"INVALID_STAGE: {stage}. Use g3, g5, or g8")
@@ -432,7 +446,7 @@ def main() -> int:
 
         print(f"=== Module 3: Reasoning ({stage}) ===")
         from reasoning_nlp.common.errors import PipelineError
-        from reasoning_nlp.pipeline_runner import PipelineConfig
+        from reasoning_nlp.pipeline import PipelineConfig
 
         pipeline_cfg = PipelineConfig(
             audio_transcripts_path=str(transcripts_path),
@@ -453,6 +467,7 @@ def main() -> int:
             qc_enforce_thresholds=qc_enforce_thresholds,
             strict_replay_hash=strict_replay_hash,
             replay_mode=replay,
+            runtime_profile=runtime_profile,
         )
 
         result = _run_reasoning_stage(pipeline_cfg, stage)
