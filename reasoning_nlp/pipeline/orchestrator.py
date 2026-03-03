@@ -26,6 +26,14 @@ from reasoning_nlp.common.logging import get_logger
 from reasoning_nlp.common.text_safety import looks_like_cta
 from reasoning_nlp.common.types import AlignmentBlock, CanonicalCaption, CanonicalTranscript
 from reasoning_nlp.config.defaults import DEFAULT_ALIGNMENT, DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SEGMENT_BUDGET, DEFAULT_SUMMARIZATION
+from reasoning_nlp.pipeline.stages.g1_validate import run_g1_validate
+from reasoning_nlp.pipeline.stages.g2_align import run_g2_align
+from reasoning_nlp.pipeline.stages.g3_context import run_g3_context
+from reasoning_nlp.pipeline.stages.g4_summarize import run_g4_summarize
+from reasoning_nlp.pipeline.stages.g5_segment import run_g5_segment_plan
+from reasoning_nlp.pipeline.stages.g6_manifest import run_g6_manifest
+from reasoning_nlp.pipeline.stages.g7_assemble import run_g7_assemble
+from reasoning_nlp.pipeline.stages.stage_utils import append_stage_result, append_stage_skipped, is_simple_runtime
 from reasoning_nlp.qc.metrics import (
     compute_alignment_metrics,
     compute_black_frame_ratio_with_status,
@@ -108,9 +116,9 @@ def run_pipeline_g1_g3(config: PipelineConfig) -> dict[str, Any]:
     stage_results: list[dict[str, Any]] = []
 
     try:
-        validated, _ = _run_g1_validate(config, base, stage_results, logger)
-        alignment_payload, alignment_blocks = _run_g2_align(config, validated, base, stage_results, logger)
-        context_payload = _run_g3_context(alignment_blocks, base, stage_results, logger)
+        validated, _ = run_g1_validate(config, base, stage_results, logger)
+        alignment_payload, alignment_blocks = run_g2_align(config, validated, base, stage_results, logger)
+        context_payload = run_g3_context(alignment_blocks, base, stage_results, logger)
     except PipelineError:
         raise
     except Exception as exc:
@@ -135,10 +143,10 @@ def run_pipeline_g1_g5(config: PipelineConfig) -> dict[str, Any]:
     stage_results: list[dict[str, Any]] = []
 
     try:
-        validated, source_duration_ms = _run_g1_validate(config, base, stage_results, logger)
-        alignment_payload, alignment_blocks = _run_g2_align(config, validated, base, stage_results, logger)
-        context_payload = _run_g3_context(alignment_blocks, base, stage_results, logger)
-        summary_internal_payload = _run_g4_summarize(
+        validated, source_duration_ms = run_g1_validate(config, base, stage_results, logger)
+        alignment_payload, alignment_blocks = run_g2_align(config, validated, base, stage_results, logger)
+        context_payload = run_g3_context(alignment_blocks, base, stage_results, logger)
+        summary_internal_payload = run_g4_summarize(
             config,
             context_payload,
             source_duration_ms,
@@ -146,7 +154,7 @@ def run_pipeline_g1_g5(config: PipelineConfig) -> dict[str, Any]:
             stage_results,
             logger,
         )
-        script_payload, manifest_payload = _run_g5_segment_plan(config, context_payload, summary_internal_payload, base, stage_results, logger)
+        script_payload, manifest_payload = run_g5_segment_plan(config, context_payload, summary_internal_payload, base, stage_results, logger)
     except PipelineError:
         raise
     except Exception as exc:
@@ -175,7 +183,7 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
     run_id = config.run_id or _new_run_id()
     base = Path(config.artifacts_root) / run_id
     stage_results: list[dict[str, Any]] = []
-    replay_enabled = bool(config.replay_mode) and not _is_simple_runtime(config)
+    replay_enabled = bool(config.replay_mode) and not is_simple_runtime(config)
     run_meta = _build_run_meta(config)
     stage_hashes = cast(dict[str, str], run_meta.get("stage_hashes", {}))
 
@@ -261,7 +269,7 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
             summary_internal_payload=summary_internal_payload,
             script_payload=script_payload,
         )
-        if not _is_simple_runtime(config):
+        if not is_simple_runtime(config):
             _write_run_meta(base, run_meta)
     except PipelineError:
         raise
@@ -295,37 +303,7 @@ def _run_g1_validate(
     stage_results: list[dict[str, Any]],
     logger,
 ):
-    started = time.perf_counter()
-    stage = "validate"
-    try:
-        validated = validate_and_normalize_inputs(
-            audio_transcripts_path=Path(config.audio_transcripts_path),
-            visual_captions_path=Path(config.visual_captions_path),
-            raw_video_path=Path(config.raw_video_path),
-            profile=config.input_profile,
-        )
-        source_duration_ms = int(config.source_duration_ms) if config.source_duration_ms is not None else probe_source_duration_ms(
-            validated.raw_video_path
-        )
-        if config.emit_internal_artifacts and not _is_simple_runtime(config):
-            out_path = base / "g1_validate" / "normalized_input.json"
-            write_json(
-                out_path,
-                {
-                    "input_profile": validated.input_profile,
-                    "transcripts": [asdict(x) for x in validated.transcripts],
-                    "captions": [asdict(x) for x in validated.captions],
-                    "raw_video_path": validated.raw_video_path,
-                    "source_duration_ms": source_duration_ms,
-                },
-            )
-        _append_stage_result(stage_results, stage, "pass", started)
-        logger.info("run stage=%s status=pass", stage)
-        return validated, source_duration_ms
-    except PipelineError as err:
-        _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
-        logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
-        raise
+    return run_g1_validate(config, base, stage_results, logger)
 
 
 def _run_g2_align(
@@ -335,56 +313,7 @@ def _run_g2_align(
     stage_results: list[dict[str, Any]],
     logger,
 ) -> tuple[dict[str, Any], list[AlignmentBlock]]:
-    started = time.perf_counter()
-    stage = "align"
-    try:
-        transcripts, captions = normalize_for_alignment(validated.transcripts, validated.captions)
-        delta_ms = compute_adaptive_delta_ms(
-            transcripts=transcripts,
-            k=config.align_k,
-            min_delta_ms=config.align_min_delta_ms,
-            max_delta_ms=config.align_max_delta_ms,
-        )
-        match_results = match_captions(
-            transcripts=transcripts,
-            captions=captions,
-            delta_ms=delta_ms,
-            assume_sorted=True,
-        )
-
-        blocks: list[AlignmentBlock] = []
-        for caption, matched in zip(captions, match_results):
-            confidence = compute_confidence(matched.fallback_type, matched.distance_ms, delta_ms)
-            block = AlignmentBlock(
-                caption_id=caption.caption_id,
-                timestamp=caption.timestamp,
-                image_text=caption.caption,
-                dialogue_text=matched.dialogue_text,
-                matched_transcript_ids=matched.transcript_ids,
-                fallback_type=matched.fallback_type,
-                confidence=confidence,
-            )
-            blocks.append(block)
-
-        alignment_payload: dict[str, Any] = {
-            "schema_version": "1.1",
-            "delta_ms": delta_ms,
-            "blocks": [asdict(b) for b in blocks],
-        }
-
-        schema_path = Path("docs/Reasoning-NLP/schema/alignment_result.schema.json")
-        validate_alignment_artifact(alignment_payload, schema_path=schema_path)
-
-        out_path = base / "g2_align" / "alignment_result.json"
-        write_json(out_path, alignment_payload)
-
-        _append_stage_result(stage_results, stage, "pass", started)
-        logger.info("run stage=%s status=pass", stage)
-        return alignment_payload, blocks
-    except PipelineError as err:
-        _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
-        logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
-        raise
+    return run_g2_align(config, validated, base, stage_results, logger)
 
 
 def _run_g3_context(
@@ -393,19 +322,7 @@ def _run_g3_context(
     stage_results: list[dict[str, Any]],
     logger,
 ) -> list[dict[str, Any]]:
-    started = time.perf_counter()
-    stage = "context_build"
-    try:
-        context_payload = build_context_blocks(blocks)
-        out_path = base / "g3_context" / "context_blocks.json"
-        write_json(out_path, context_payload)
-        _append_stage_result(stage_results, stage, "pass", started)
-        logger.info("run stage=%s status=pass", stage)
-        return context_payload
-    except PipelineError as err:
-        _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
-        logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
-        raise
+    return run_g3_context(blocks, base, stage_results, logger)
 
 
 def _run_g4_summarize(
@@ -416,78 +333,7 @@ def _run_g4_summarize(
     stage_results: list[dict[str, Any]],
     logger,
 ) -> dict[str, Any]:
-    started = time.perf_counter()
-    stage = "summarize"
-    try:
-        raw = generate_internal_summary(
-            context_blocks=context_payload,
-            run_seed=config.summarize_seed,
-            model_version=config.model_version,
-            tokenizer_version=config.tokenizer_version,
-            temperature=config.summarize_temperature,
-            backend=config.summarize_backend,
-            fallback_backend=config.summarize_fallback_backend,
-            timeout_ms=config.summarize_timeout_ms,
-            max_retries=config.summarize_max_retries,
-            max_new_tokens=config.summarize_max_new_tokens,
-            do_sample=config.summarize_do_sample,
-            prompt_max_chars=config.summarize_prompt_max_chars,
-            production_strict=config.summarize_production_strict,
-            allow_heuristic_for_tests=config.allow_heuristic_for_tests,
-        )
-        raw_parse_validity_rate = compute_parse_validity_rate(raw)
-        repaired = repair_internal_summary(raw)
-        repaired_parse_validity_rate = compute_parse_validity_rate(repaired)
-        write_json(
-            base / "g4_summarize" / "parse_meta.json",
-            {
-                "raw_parse_validity_rate": max(0.0, min(1.0, float(raw_parse_validity_rate))),
-                "repaired_parse_validity_rate": max(0.0, min(1.0, float(repaired_parse_validity_rate))),
-            },
-        )
-        repaired.setdefault("quality_flags", [])
-        repaired["quality_flags"] = list(repaired["quality_flags"])
-        repaired["quality_flags"].append(f"model_version={config.model_version}")
-        repaired["quality_flags"].append(f"tokenizer_version={config.tokenizer_version}")
-        grounding_errors = check_grounding(repaired, context_payload)
-        if grounding_errors:
-            repaired["quality_flags"] = list(sorted(set(list(repaired["quality_flags"]) + grounding_errors)))
-        else:
-            repaired["quality_flags"] = list(sorted(set(repaired["quality_flags"])))
-
-        budget = BudgetConfig(
-            min_segment_duration_ms=config.min_segment_duration_ms,
-            max_segment_duration_ms=config.max_segment_duration_ms,
-            min_total_duration_ms=config.min_total_duration_ms,
-            max_total_duration_ms=config.max_total_duration_ms,
-            target_ratio=config.target_ratio,
-            target_ratio_tolerance=config.target_ratio_tolerance,
-        )
-        planned = plan_segments_from_context(
-            context_blocks=context_payload,
-            summary_plot=str(repaired.get("plot_summary", "")),
-            budget=budget,
-            source_duration_ms=source_duration_ms,
-        )
-        repaired["segments"] = [asdict(s) for s in planned]
-
-        schema_path = Path("docs/Reasoning-NLP/schema/summary_script.internal.schema.json")
-        validate_summary_internal_artifact(repaired, schema_path=schema_path)
-
-        out_path = base / "g4_summarize" / "summary_script.internal.json"
-        write_json(out_path, repaired)
-
-        _append_stage_result(stage_results, stage, "pass", started)
-        logger.info("run stage=%s status=pass", stage)
-        return repaired
-    except PipelineError as err:
-        _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
-        logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
-        raise
-    except Exception as exc:
-        _append_stage_result(stage_results, stage, "fail", started, error_code="LLM_BACKEND_ALL_FAILED")
-        logger.error("run stage=%s status=fail error_code=LLM_BACKEND_ALL_FAILED", stage)
-        raise fail(stage, "LLM_BACKEND_ALL_FAILED", str(exc)) from exc
+    return run_g4_summarize(config, context_payload, source_duration_ms, base, stage_results, logger)
 
 
 def _run_g5_segment_plan(
@@ -498,62 +344,7 @@ def _run_g5_segment_plan(
     stage_results: list[dict[str, Any]],
     logger,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
-    started = time.perf_counter()
-    stage = "segment_plan"
-    try:
-        internal_segments = summary_internal_payload.get("segments", [])
-        if not isinstance(internal_segments, list) or not internal_segments:
-            raise fail(stage, "BUDGET_SEGMENTS_EMPTY", "No internal segments generated")
-
-        script_payload = {
-            "title": str(summary_internal_payload.get("title", "Video Summary")).strip() or "Video Summary",
-            "plot_summary": str(summary_internal_payload.get("plot_summary", "")).strip(),
-            "moral_lesson": str(summary_internal_payload.get("moral_lesson", "")).strip(),
-            "segments": [
-                {
-                    "segment_id": int(seg["segment_id"]),
-                    "source_start": str(seg["source_start"]),
-                    "source_end": str(seg["source_end"]),
-                    "script_text": str(seg["script_text"]),
-                }
-                for seg in internal_segments
-            ],
-        }
-
-        manifest_payload = {
-            "source_video_path": str(config.raw_video_path),
-            "output_video_path": "summary_video.mp4",
-            "keep_original_audio": True,
-            "segments": [
-                {
-                    "segment_id": int(seg["segment_id"]),
-                    "source_start": str(seg["source_start"]),
-                    "source_end": str(seg["source_end"]),
-                    "script_ref": int(seg["segment_id"]),
-                    "transition": "cut",
-                }
-                for seg in internal_segments
-            ],
-        }
-
-        validate_deliverable_artifacts(
-            script_payload=script_payload,
-            manifest_payload=manifest_payload,
-            script_schema_path=Path("contracts/v1/template/summary_script.schema.json"),
-            manifest_schema_path=Path("contracts/v1/template/summary_video_manifest.schema.json"),
-        )
-
-        out_dir = base / "g5_segment"
-        write_json(out_dir / "summary_script.json", script_payload)
-        write_json(out_dir / "summary_video_manifest.json", manifest_payload)
-
-        _append_stage_result(stage_results, stage, "pass", started)
-        logger.info("run stage=%s status=pass", stage)
-        return script_payload, manifest_payload
-    except PipelineError as err:
-        _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
-        logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
-        raise
+    return run_g5_segment_plan(config, context_payload, summary_internal_payload, base, stage_results, logger)
 
 
 def _run_g6_manifest(
@@ -565,22 +356,7 @@ def _run_g6_manifest(
     stage_results: list[dict[str, Any]],
     logger,
 ) -> None:
-    started = time.perf_counter()
-    stage = "manifest"
-    try:
-        validate_manifest_stage(
-            script_payload=script_payload,
-            manifest_payload=manifest_payload,
-            source_duration_ms=source_duration_ms,
-        )
-        out_path = base / "g6_manifest" / "manifest_validation.json"
-        write_json(out_path, {"status": "pass", "stage": stage})
-        _append_stage_result(stage_results, stage, "pass", started)
-        logger.info("run stage=%s status=pass", stage)
-    except PipelineError as err:
-        _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
-        logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
-        raise
+    run_g6_manifest(config, script_payload, manifest_payload, source_duration_ms, base, stage_results, logger)
 
 
 def _run_g7_assemble(
@@ -590,27 +366,7 @@ def _run_g7_assemble(
     stage_results: list[dict[str, Any]],
     logger,
 ) -> dict[str, Any]:
-    started = time.perf_counter()
-    stage = "assemble"
-    try:
-        ensure_keep_original_audio(manifest_payload)
-        output_path = str(base / "g7_assemble" / "summary_video.mp4")
-        segments = manifest_payload.get("segments", [])
-        if not isinstance(segments, list) or not segments:
-            raise fail(stage, "RENDER_SEGMENTS_EMPTY", "Manifest must contain at least one segment")
-        render_payload = render_summary_video(
-            source_video_path=str(config.raw_video_path),
-            output_video_path=output_path,
-            segments=segments,
-        )
-        write_json(base / "g7_assemble" / "render_meta.json", render_payload)
-        _append_stage_result(stage_results, stage, "pass", started)
-        logger.info("run stage=%s status=pass", stage)
-        return render_payload
-    except PipelineError as err:
-        _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
-        logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
-        raise
+    return run_g7_assemble(config, manifest_payload, base, stage_results, logger)
 
 
 def _run_g8_qc(
@@ -646,10 +402,10 @@ def _run_g8_qc(
                 repaired_parse_validity_rate = max(0.0, min(1.0, float(repaired_metric)))
         output_video_path = str(base / "g7_assemble" / "summary_video.mp4")
         blackdetect_mode = str(config.qc_blackdetect_mode).strip().lower()
-        if _is_simple_runtime(config):
+        if is_simple_runtime(config):
             blackdetect_mode = "off"
         if blackdetect_mode == "auto":
-            blackdetect_mode = "full" if bool(config.qc_enforce_thresholds) and not _is_simple_runtime(config) else "sampled"
+            blackdetect_mode = "full" if bool(config.qc_enforce_thresholds) and not is_simple_runtime(config) else "sampled"
         blackdetect_result = compute_black_frame_ratio_with_status(
             output_video_path,
             duration_ms=int(assemble_payload.get("duration_ms", 0)),
@@ -716,7 +472,7 @@ def _run_g8_qc(
                 }
             )
 
-        if bool(config.qc_enforce_thresholds) and not _is_simple_runtime(config):
+        if bool(config.qc_enforce_thresholds) and not is_simple_runtime(config):
             checks = [
                 ("QC_PARSE_VALIDITY_LOW", metrics["parse_validity_rate"] >= config.qc_min_parse_validity_rate, f"parse_validity_rate < {config.qc_min_parse_validity_rate}"),
                 (
@@ -802,11 +558,11 @@ def _run_g8_qc(
         write_json(out_path, report)
 
         qc_status = "fail" if threshold_errors else "pass"
-        _append_stage_result(stage_results, stage, qc_status, started)
+        append_stage_result(stage_results, stage, qc_status, started)
         logger.info("run stage=%s status=%s", stage, qc_status)
         return report
     except PipelineError as err:
-        _append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
+        append_stage_result(stage_results, stage, "fail", started, error_code=err.code)
         logger.error("run stage=%s status=fail error_code=%s", stage, err.code)
         raise
 
@@ -1148,34 +904,8 @@ def _has_soft_prompt_leakage(summary_internal_payload: dict[str, Any]) -> bool:
     return False
 
 
-def _append_stage_result(
-    stage_results: list[dict[str, Any]],
-    stage: str,
-    status: str,
-    started: float,
-    error_code: str | None = None,
-) -> None:
-    duration_ms = int((time.perf_counter() - started) * 1000)
-    payload: dict[str, Any] = {
-        "stage": stage,
-        "status": status,
-        "duration_ms": max(0, duration_ms),
-    }
-    if error_code:
-        payload["error_code"] = error_code
-    stage_results.append(payload)
-
-
-def _is_simple_runtime(config: PipelineConfig) -> bool:
-    return str(getattr(config, "runtime_profile", "full")).strip().lower() == "simple"
-
-
 def _new_run_id() -> str:
     return f"run_{uuid.uuid4().hex[:12]}"
-
-
-def _append_stage_skipped(stage_results: list[dict[str, Any]], stage: str) -> None:
-    stage_results.append({"stage": stage, "status": "skipped", "duration_ms": 0})
 
 
 def _replay_or_run_g1(
@@ -1191,12 +921,12 @@ def _replay_or_run_g1(
         if isinstance(payload, dict):
             try:
                 validated, source_duration_ms = _validated_input_from_payload(cast(dict[str, Any], payload))
-                _append_stage_skipped(stage_results, "validate")
+                append_stage_skipped(stage_results, "validate")
                 logger.info("run stage=validate status=skipped")
                 return validated, source_duration_ms
             except Exception:
                 pass
-    return _run_g1_validate(config, base, stage_results, logger)
+    return run_g1_validate(config, base, stage_results, logger)
 
 
 def _replay_or_run_g2(
@@ -1214,12 +944,12 @@ def _replay_or_run_g2(
             try:
                 validate_alignment_artifact(payload, Path("docs/Reasoning-NLP/schema/alignment_result.schema.json"))
                 blocks = [AlignmentBlock(**b) for b in payload.get("blocks", [])]
-                _append_stage_skipped(stage_results, "align")
+                append_stage_skipped(stage_results, "align")
                 logger.info("run stage=align status=skipped")
                 return payload, blocks
             except Exception:
                 pass
-    return _run_g2_align(config, validated, base, stage_results, logger)
+    return run_g2_align(config, validated, base, stage_results, logger)
 
 
 def _replay_or_run_g3(
@@ -1233,10 +963,10 @@ def _replay_or_run_g3(
     if replay_enabled and _is_stage_replayable(base, "context_build", stage_hashes):
         payload = _load_json_if_exists(base / "g3_context" / "context_blocks.json")
         if isinstance(payload, list) and payload:
-            _append_stage_skipped(stage_results, "context_build")
+            append_stage_skipped(stage_results, "context_build")
             logger.info("run stage=context_build status=skipped")
             return payload
-    return _run_g3_context(alignment_blocks, base, stage_results, logger)
+    return run_g3_context(alignment_blocks, base, stage_results, logger)
 
 
 def _replay_or_run_g4(
@@ -1256,12 +986,12 @@ def _replay_or_run_g4(
                 validate_summary_internal_artifact(payload, Path("docs/Reasoning-NLP/schema/summary_script.internal.schema.json"))
                 if _collect_prompt_leakage_errors(payload):
                     raise ValueError("replayed summarize artifact contains prompt leakage markers")
-                _append_stage_skipped(stage_results, "summarize")
+                append_stage_skipped(stage_results, "summarize")
                 logger.info("run stage=summarize status=skipped")
                 return payload
             except Exception:
                 pass
-    return _run_g4_summarize(config, context_payload, source_duration_ms, base, stage_results, logger)
+    return run_g4_summarize(config, context_payload, source_duration_ms, base, stage_results, logger)
 
 
 def _replay_or_run_g5(
@@ -1285,12 +1015,12 @@ def _replay_or_run_g5(
                     script_schema_path=Path("contracts/v1/template/summary_script.schema.json"),
                     manifest_schema_path=Path("contracts/v1/template/summary_video_manifest.schema.json"),
                 )
-                _append_stage_skipped(stage_results, "segment_plan")
+                append_stage_skipped(stage_results, "segment_plan")
                 logger.info("run stage=segment_plan status=skipped")
                 return script_payload, manifest_payload
             except Exception:
                 pass
-    return _run_g5_segment_plan(config, context_payload, summary_internal_payload, base, stage_results, logger)
+    return run_g5_segment_plan(config, context_payload, summary_internal_payload, base, stage_results, logger)
 
 
 def _replay_or_run_g6(
@@ -1307,10 +1037,10 @@ def _replay_or_run_g6(
     if replay_enabled and _is_stage_replayable(base, "manifest", stage_hashes):
         payload = _load_json_if_exists(base / "g6_manifest" / "manifest_validation.json")
         if isinstance(payload, dict) and payload.get("status") == "pass":
-            _append_stage_skipped(stage_results, "manifest")
+            append_stage_skipped(stage_results, "manifest")
             logger.info("run stage=manifest status=skipped")
             return
-    _run_g6_manifest(config, script_payload, manifest_payload, source_duration_ms, base, stage_results, logger)
+    run_g6_manifest(config, script_payload, manifest_payload, source_duration_ms, base, stage_results, logger)
 
 
 def _replay_or_run_g7(
@@ -1326,10 +1056,10 @@ def _replay_or_run_g7(
         render_meta = _load_json_if_exists(base / "g7_assemble" / "render_meta.json")
         video_path = base / "g7_assemble" / "summary_video.mp4"
         if isinstance(render_meta, dict) and video_path.exists() and video_path.stat().st_size > 0:
-            _append_stage_skipped(stage_results, "assemble")
+            append_stage_skipped(stage_results, "assemble")
             logger.info("run stage=assemble status=skipped")
             return render_meta
-    return _run_g7_assemble(config, manifest_payload, base, stage_results, logger)
+    return run_g7_assemble(config, manifest_payload, base, stage_results, logger)
 
 
 def _validated_input_from_payload(payload: dict[str, Any]):
