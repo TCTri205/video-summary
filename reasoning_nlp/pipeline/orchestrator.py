@@ -290,79 +290,6 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
     }
 
 
-def _run_g1_validate(
-    config: PipelineConfig,
-    base: Path,
-    stage_results: list[dict[str, Any]],
-    logger,
-):
-    return run_g1_validate(config, base, stage_results, logger)
-
-
-def _run_g2_align(
-    config: PipelineConfig,
-    validated,
-    base: Path,
-    stage_results: list[dict[str, Any]],
-    logger,
-) -> tuple[dict[str, Any], list[AlignmentBlock]]:
-    return run_g2_align(config, validated, base, stage_results, logger)
-
-
-def _run_g3_context(
-    config: PipelineConfig,
-    blocks: list[AlignmentBlock],
-    base: Path,
-    stage_results: list[dict[str, Any]],
-    logger,
-) -> list[dict[str, Any]]:
-    return run_g3_context(config, blocks, base, stage_results, logger)
-
-
-def _run_g4_summarize(
-    config: PipelineConfig,
-    context_payload: list[dict[str, Any]],
-    source_duration_ms: int | None,
-    base: Path,
-    stage_results: list[dict[str, Any]],
-    logger,
-) -> dict[str, Any]:
-    return run_g4_summarize(config, context_payload, source_duration_ms, base, stage_results, logger)
-
-
-def _run_g5_segment_plan(
-    config: PipelineConfig,
-    context_payload: list[dict[str, Any]],
-    summary_internal_payload: dict[str, Any],
-    base: Path,
-    stage_results: list[dict[str, Any]],
-    logger,
-) -> tuple[dict[str, Any], dict[str, Any]]:
-    return run_g5_segment_plan(config, context_payload, summary_internal_payload, base, stage_results, logger)
-
-
-def _run_g6_manifest(
-    config: PipelineConfig,
-    script_payload: dict[str, Any],
-    manifest_payload: dict[str, Any],
-    source_duration_ms: int | None,
-    base: Path,
-    stage_results: list[dict[str, Any]],
-    logger,
-) -> None:
-    run_g6_manifest(config, script_payload, manifest_payload, source_duration_ms, base, stage_results, logger)
-
-
-def _run_g7_assemble(
-    config: PipelineConfig,
-    manifest_payload: dict[str, Any],
-    base: Path,
-    stage_results: list[dict[str, Any]],
-    logger,
-) -> dict[str, Any]:
-    return run_g7_assemble(config, manifest_payload, base, stage_results, logger)
-
-
 def _run_g8_qc(
     config: PipelineConfig,
     run_id: str,
@@ -1051,7 +978,7 @@ def _replay_or_run_g7(
     if replay_enabled and _is_stage_replayable(base, "assemble", stage_hashes):
         video_path = base / "g7_assemble" / "summary_video.mp4"
         if video_path.exists() and video_path.stat().st_size > 0:
-            duration_ms = probe_source_duration_ms(video_path)
+            duration_ms = probe_source_duration_ms(str(video_path))
             append_stage_skipped(stage_results, "assemble")
             logger.info("run stage=assemble status=skipped")
             return {
@@ -1077,7 +1004,7 @@ def _validated_input_from_payload(payload: dict[str, Any]):
     )
     source_duration_ms = payload.get("source_duration_ms")
     if not isinstance(source_duration_ms, int) or source_duration_ms <= 0:
-        source_duration_ms = probe_source_duration_ms(validated.raw_video_path)
+        source_duration_ms = probe_source_duration_ms(str(validated.raw_video_path))
     return validated, source_duration_ms
 
 

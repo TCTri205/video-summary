@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from reasoning_nlp.pipeline_runner import _build_summary_text, _build_summary_text_internal
+from reasoning_nlp.pipeline.orchestrator import _build_summary_text, _build_summary_text_internal
 from reasoning_nlp.segment_planner.budget_policy import BudgetConfig
 from reasoning_nlp.segment_planner.planner import plan_segments_from_context
 

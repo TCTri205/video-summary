@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import unittest
 
-from reasoning_nlp.pipeline_runner import PipelineConfig, _build_run_meta
+from reasoning_nlp.pipeline import PipelineConfig
+from reasoning_nlp.pipeline.orchestrator import _build_run_meta
 
 
 class ReplayMetaTests(unittest.TestCase):

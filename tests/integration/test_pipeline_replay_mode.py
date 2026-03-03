@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from reasoning_nlp.pipeline_runner import PipelineConfig, run_pipeline_g1_g8
+from reasoning_nlp.pipeline import PipelineConfig, run_pipeline_g1_g8
 
 
 class PipelineReplayModeTests(unittest.TestCase):
