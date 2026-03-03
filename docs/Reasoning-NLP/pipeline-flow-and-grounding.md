@@ -86,7 +86,7 @@ Nhung metric nay dung de bat mismatch giua video summary va summary text.
 ```mermaid
 sequenceDiagram
     participant CLI as reasoning_nlp.cli
-    participant Runner as pipeline_runner
+    participant Runner as reasoning_nlp.pipeline.orchestrator
     participant Align as aligner/*
     participant Summ as summarizer/*
     participant Planner as segment_planner/planner.py
@@ -104,7 +104,7 @@ sequenceDiagram
     Runner->>Planner: G5 plan_segments_from_context
     Planner-->>Runner: summary_script.json + manifest
     Runner->>Asm: G7 render_summary_video(ffmpeg)
-    Asm-->>Runner: summary_video.mp4 + render_meta
+    Asm-->>Runner: summary_video.mp4 (+ render_meta khi debug/replay)
     Runner->>Runner: build summary_text.internal.json from selected segments
     Runner->>Runner: build summary_text.txt from plot_summary + moral_lesson
     Runner->>QC: G8 compute metrics + enforce thresholds

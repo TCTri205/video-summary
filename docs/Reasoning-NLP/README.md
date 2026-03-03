@@ -161,15 +161,24 @@ QC threshold enforcement:
   - `text_video_keyword_overlap >= 0.45`
   - `text_cta_leak_ratio <= 0.0`
 
-Artifacts se duoc ghi vao:
+Artifacts mac dinh (`minimal`) se duoc ghi vao:
 
 - `artifacts/<run_id>/g2_align/alignment_result.json`
-- `artifacts/<run_id>/g3_context/context_blocks.json`
-- `artifacts/<run_id>/g4_summarize/summary_script.internal.json`
 - `artifacts/<run_id>/g5_segment/summary_script.json`
 - `artifacts/<run_id>/g5_segment/summary_video_manifest.json`
 - `artifacts/<run_id>/g7_assemble/summary_video.mp4`
 - `artifacts/<run_id>/g8_qc/quality_report.json`
+
+Artifacts noi bo (chi ghi khi bat `--debug-artifacts` hoac `--replay`):
+
+- `artifacts/<run_id>/g1_validate/normalized_input.json`
+- `artifacts/<run_id>/g3_context/context_blocks.json`
+- `artifacts/<run_id>/g4_summarize/parse_meta.json`
+- `artifacts/<run_id>/g4_summarize/summary_script.internal.json`
+- `artifacts/<run_id>/g6_manifest/manifest_validation.json`
+- `artifacts/<run_id>/g7_assemble/render_meta.json`
+- `artifacts/<run_id>/run_meta.json`
+- `artifacts/<run_id>/g8_qc/summary_text.internal.json`
 
 ### 2) Chay den stage cu the
 

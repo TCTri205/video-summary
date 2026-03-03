@@ -25,6 +25,8 @@ Mac dinh se:
 - Output extraction/perception: `Data/processed/<video_name>/extraction/...`
 - Stage reasoning: `g8` (full)
 - Summarize backend: `local` (khong can API key)
+- Runtime profile: `full` (QC day du; replay chi bat khi truyen `--replay`)
+- Artifact mode: `minimal` (chi luu artifact can cho van hanh)
 
 Artifact cuoi (G8):
 
@@ -32,6 +34,27 @@ Artifact cuoi (G8):
 - `artifacts/<run_id>/g5_segment/summary_video_manifest.json`
 - `artifacts/<run_id>/g7_assemble/summary_video.mp4`
 - `artifacts/<run_id>/g8_qc/quality_report.json`
+
+Artifact noi bo (debug/replay) la opt-in voi `--debug-artifacts`.
+
+## Artifact matrix theo stage
+
+Mac dinh (`minimal`):
+
+- `g3`: `g2_align/alignment_result.json`
+- `g5`: `g5_segment/summary_script.json`, `g5_segment/summary_video_manifest.json`
+- `g8`: `g5_segment/summary_script.json`, `g5_segment/summary_video_manifest.json`, `g7_assemble/summary_video.mp4`, `g8_qc/quality_report.json`
+
+Khi bat debug artifacts (`--debug-artifacts`) hoac replay (`--replay`), he thong luu them artifact noi bo de dieu tra/replay an toan:
+
+- `g1_validate/normalized_input.json`
+- `g3_context/context_blocks.json`
+- `g4_summarize/parse_meta.json`
+- `g4_summarize/summary_script.internal.json`
+- `g6_manifest/manifest_validation.json`
+- `g7_assemble/render_meta.json`
+- `run_meta.json`
+- `g8_qc/summary_text.internal.json`
 
 Co the override linh hoat qua CLI/env/config JSON.
 
@@ -41,11 +64,24 @@ Vi du CLI:
 python main.py --video-path Data/raw/video2.mp4 --run-id run_local_002 --stage g8
 ```
 
+Profile toi gian (opt-in, khong thay doi default):
+
+```bash
+python main.py --runtime-profile simple
+```
+
+Bat artifact noi bo (debug/replay):
+
+```bash
+python main.py --debug-artifacts
+```
+
 Vi du ENV:
 
 ```bash
 set VIDEO_SUMMARY_VIDEO_PATH=Data/raw/video2.mp4
 set VIDEO_SUMMARY_SUMMARIZE_BACKEND=local
+set VIDEO_SUMMARY_DEBUG_ARTIFACTS=1
 python main.py
 ```
 
@@ -83,6 +119,8 @@ Thu tu uu tien config: `CLI > ENV > config file > default`.
 - `deliverables/<run_id>/summary_text.txt` (van ban tom tat de doc cho nguoi dung)
 
 Ghi chu: `summary_script.json`, `summary_video_manifest.json`, `quality_report.json` la artifact ky thuat trong `artifacts/<run_id>/` de debug va nghiem thu.
+
+Mac dinh he thong khong ghi `g1_validate/normalized_input.json`, `g4_summarize/summary_script.internal.json`, `g4_summarize/parse_meta.json`, `run_meta.json`; cac file nay chi ghi khi bat `--debug-artifacts` (hoac khi replay duoc bat).
 
 ## Contract-first integration
 

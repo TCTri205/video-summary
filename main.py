@@ -9,6 +9,8 @@ import uuid
 from pathlib import Path
 from typing import Any
 
+from reasoning_nlp.config.runtime_loader import build_pipeline_config, coerce_bool, load_json_config, resolve_value
+
 TIMESTAMP_RE = re.compile(r"^\d{2}:[0-5]\d:[0-5]\d\.\d{3}$")
 
 
@@ -18,44 +20,6 @@ def _env_bool(name: str, default: bool) -> bool:
         return default
     value = raw.strip().lower()
     return value in {"1", "true", "yes", "y", "on"}
-
-
-def _coerce_bool(value: Any, default: bool = False) -> bool:
-    if value is None:
-        return default
-    if isinstance(value, bool):
-        return value
-    if isinstance(value, str):
-        raw = value.strip().lower()
-        if raw in {"1", "true", "yes", "y", "on"}:
-            return True
-        if raw in {"0", "false", "no", "n", "off"}:
-            return False
-    return bool(value)
-
-
-def _load_json_config(path: str | None) -> dict[str, Any]:
-    if not path:
-        return {}
-    cfg_path = Path(path)
-    if not cfg_path.exists():
-        raise RuntimeError(f"CONFIG_FILE_NOT_FOUND: {cfg_path}")
-    with cfg_path.open("r", encoding="utf-8") as handle:
-        payload = json.load(handle)
-    if not isinstance(payload, dict):
-        raise RuntimeError("CONFIG_FILE_INVALID: root must be a JSON object")
-    return payload
-
-
-def _resolve_value(cli_value: Any, env_name: str, config: dict[str, Any], config_key: str, default: Any) -> Any:
-    if cli_value is not None:
-        return cli_value
-    env_value = os.getenv(env_name)
-    if env_value is not None:
-        return env_value
-    if config_key in config:
-        return config[config_key]
-    return default
 
 
 def parse_args() -> argparse.Namespace:
@@ -92,6 +56,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--qc-enforce-thresholds", action="store_true", default=None)
     parser.add_argument("--replay", action="store_true", default=None)
     parser.add_argument("--strict-replay-hash", action="store_true", default=None)
+    parser.add_argument("--debug-artifacts", action="store_true", default=None, help="Emit internal debug artifacts")
+    parser.add_argument("--runtime-profile", choices=["full", "simple"], default=None)
     return parser.parse_args()
 
 
@@ -225,7 +191,7 @@ def run_caption(metadata_path: str, output_path: str, model_name: str, batch_siz
 
 
 def _run_reasoning_stage(config: Any, stage: str) -> dict[str, Any]:
-    from reasoning_nlp.pipeline_runner import run_pipeline_g1_g3, run_pipeline_g1_g5, run_pipeline_g1_g8
+    from reasoning_nlp.pipeline import run_pipeline_g1_g3, run_pipeline_g1_g5, run_pipeline_g1_g8
 
     if stage == "g3":
         return run_pipeline_g1_g3(config)
@@ -236,24 +202,24 @@ def _run_reasoning_stage(config: Any, stage: str) -> dict[str, Any]:
 
 def main() -> int:
     args = parse_args()
-    file_config = _load_json_config(args.config)
+    file_config = load_json_config(args.config)
 
-    video_path = Path(_resolve_value(args.video_path, "VIDEO_SUMMARY_VIDEO_PATH", file_config, "video_path", "Data/raw/video1.mp4"))
-    output_root = Path(_resolve_value(args.output_root, "VIDEO_SUMMARY_OUTPUT_ROOT", file_config, "output_root", "Data/processed"))
-    artifacts_root = str(_resolve_value(args.artifacts_root, "VIDEO_SUMMARY_ARTIFACTS_ROOT", file_config, "artifacts_root", "artifacts"))
+    video_path = Path(resolve_value(args.video_path, "VIDEO_SUMMARY_VIDEO_PATH", file_config, "video_path", "Data/raw/video1.mp4"))
+    output_root = Path(resolve_value(args.output_root, "VIDEO_SUMMARY_OUTPUT_ROOT", file_config, "output_root", "Data/processed"))
+    artifacts_root = str(resolve_value(args.artifacts_root, "VIDEO_SUMMARY_ARTIFACTS_ROOT", file_config, "artifacts_root", "artifacts"))
     deliverables_root = str(
-        _resolve_value(args.deliverables_root, "VIDEO_SUMMARY_DELIVERABLES_ROOT", file_config, "deliverables_root", "deliverables")
+        resolve_value(args.deliverables_root, "VIDEO_SUMMARY_DELIVERABLES_ROOT", file_config, "deliverables_root", "deliverables")
     )
-    stage = str(_resolve_value(args.stage, "VIDEO_SUMMARY_STAGE", file_config, "stage", "g8"))
+    stage = str(resolve_value(args.stage, "VIDEO_SUMMARY_STAGE", file_config, "stage", "g8"))
 
-    scene_threshold = float(_resolve_value(args.scene_threshold, "VIDEO_SUMMARY_SCENE_THRESHOLD", file_config, "scene_threshold", 27.0))
-    keyframe_resize = int(_resolve_value(args.keyframe_resize, "VIDEO_SUMMARY_KEYFRAME_RESIZE", file_config, "keyframe_resize", 448))
-    asr_model_size = str(_resolve_value(args.asr_model_size, "VIDEO_SUMMARY_ASR_MODEL_SIZE", file_config, "asr_model_size", "base"))
-    asr_device = str(_resolve_value(args.asr_device, "VIDEO_SUMMARY_ASR_DEVICE", file_config, "asr_device", "cpu"))
-    asr_compute_type = str(_resolve_value(args.asr_compute_type, "VIDEO_SUMMARY_ASR_COMPUTE_TYPE", file_config, "asr_compute_type", "int8"))
-    asr_language = str(_resolve_value(args.asr_language, "VIDEO_SUMMARY_ASR_LANGUAGE", file_config, "asr_language", "vi"))
+    scene_threshold = float(resolve_value(args.scene_threshold, "VIDEO_SUMMARY_SCENE_THRESHOLD", file_config, "scene_threshold", 27.0))
+    keyframe_resize = int(resolve_value(args.keyframe_resize, "VIDEO_SUMMARY_KEYFRAME_RESIZE", file_config, "keyframe_resize", 448))
+    asr_model_size = str(resolve_value(args.asr_model_size, "VIDEO_SUMMARY_ASR_MODEL_SIZE", file_config, "asr_model_size", "base"))
+    asr_device = str(resolve_value(args.asr_device, "VIDEO_SUMMARY_ASR_DEVICE", file_config, "asr_device", "cpu"))
+    asr_compute_type = str(resolve_value(args.asr_compute_type, "VIDEO_SUMMARY_ASR_COMPUTE_TYPE", file_config, "asr_compute_type", "int8"))
+    asr_language = str(resolve_value(args.asr_language, "VIDEO_SUMMARY_ASR_LANGUAGE", file_config, "asr_language", "vi"))
     caption_model = str(
-        _resolve_value(
+        resolve_value(
             args.caption_model,
             "VIDEO_SUMMARY_CAPTION_MODEL",
             file_config,
@@ -261,7 +227,7 @@ def main() -> int:
             "Salesforce/blip-image-captioning-base",
         )
     )
-    caption_batch_size_raw = _resolve_value(
+    caption_batch_size_raw = resolve_value(
         args.caption_batch_size,
         "VIDEO_SUMMARY_CAPTION_BATCH_SIZE",
         file_config,
@@ -271,7 +237,7 @@ def main() -> int:
     caption_batch_size = int(caption_batch_size_raw) if caption_batch_size_raw is not None else None
 
     input_profile = str(
-        _resolve_value(
+        resolve_value(
             args.input_profile,
             "VIDEO_SUMMARY_INPUT_PROFILE",
             file_config,
@@ -279,7 +245,7 @@ def main() -> int:
             "strict_contract_v1",
         )
     )
-    source_duration_ms_raw = _resolve_value(
+    source_duration_ms_raw = resolve_value(
         args.source_duration_ms,
         "VIDEO_SUMMARY_SOURCE_DURATION_MS",
         file_config,
@@ -289,7 +255,7 @@ def main() -> int:
     source_duration_ms = int(source_duration_ms_raw) if source_duration_ms_raw is not None else None
 
     summarize_backend = str(
-        _resolve_value(
+        resolve_value(
             args.summarize_backend,
             "VIDEO_SUMMARY_SUMMARIZE_BACKEND",
             file_config,
@@ -298,7 +264,7 @@ def main() -> int:
         )
     )
     summarize_fallback_backend = str(
-        _resolve_value(
+        resolve_value(
             args.summarize_fallback_backend,
             "VIDEO_SUMMARY_SUMMARIZE_FALLBACK_BACKEND",
             file_config,
@@ -307,7 +273,7 @@ def main() -> int:
         )
     )
     summarize_timeout_ms = int(
-        _resolve_value(
+        resolve_value(
             args.summarize_timeout_ms,
             "VIDEO_SUMMARY_SUMMARIZE_TIMEOUT_MS",
             file_config,
@@ -316,7 +282,7 @@ def main() -> int:
         )
     )
     summarize_max_retries = int(
-        _resolve_value(
+        resolve_value(
             args.summarize_max_retries,
             "VIDEO_SUMMARY_SUMMARIZE_MAX_RETRIES",
             file_config,
@@ -325,7 +291,7 @@ def main() -> int:
         )
     )
     summarize_max_new_tokens = int(
-        _resolve_value(
+        resolve_value(
             args.summarize_max_new_tokens,
             "VIDEO_SUMMARY_SUMMARIZE_MAX_NEW_TOKENS",
             file_config,
@@ -333,7 +299,7 @@ def main() -> int:
             512,
         )
     )
-    summarize_prompt_max_chars_raw = _resolve_value(
+    summarize_prompt_max_chars_raw = resolve_value(
         args.summarize_prompt_max_chars,
         "VIDEO_SUMMARY_SUMMARIZE_PROMPT_MAX_CHARS",
         file_config,
@@ -341,8 +307,8 @@ def main() -> int:
         12000,
     )
     summarize_prompt_max_chars = int(summarize_prompt_max_chars_raw) if summarize_prompt_max_chars_raw is not None else None
-    summarize_production_strict = _coerce_bool(
-        _resolve_value(
+    summarize_production_strict = coerce_bool(
+        resolve_value(
             args.summarize_production_strict,
             "VIDEO_SUMMARY_SUMMARIZE_PRODUCTION_STRICT",
             file_config,
@@ -353,7 +319,7 @@ def main() -> int:
     )
 
     run_id = str(
-        _resolve_value(
+        resolve_value(
             args.run_id,
             "VIDEO_SUMMARY_RUN_ID",
             file_config,
@@ -362,8 +328,8 @@ def main() -> int:
         )
     )
 
-    qc_enforce_thresholds = _coerce_bool(
-        _resolve_value(
+    qc_enforce_thresholds = coerce_bool(
+        resolve_value(
             args.qc_enforce_thresholds,
             "VIDEO_SUMMARY_QC_ENFORCE_THRESHOLDS",
             file_config,
@@ -371,14 +337,32 @@ def main() -> int:
             False,
         )
     )
-    replay = _coerce_bool(_resolve_value(args.replay, "VIDEO_SUMMARY_REPLAY", file_config, "replay", False))
-    strict_replay_hash = _coerce_bool(
-        _resolve_value(
+    replay = coerce_bool(resolve_value(args.replay, "VIDEO_SUMMARY_REPLAY", file_config, "replay", False))
+    strict_replay_hash = coerce_bool(
+        resolve_value(
             args.strict_replay_hash,
             "VIDEO_SUMMARY_STRICT_REPLAY_HASH",
             file_config,
             "strict_replay_hash",
             False,
+        )
+    )
+    debug_artifacts = coerce_bool(
+        resolve_value(
+            args.debug_artifacts,
+            "VIDEO_SUMMARY_DEBUG_ARTIFACTS",
+            file_config,
+            "debug_artifacts",
+            file_config.get("emit_internal_artifacts", False),
+        )
+    )
+    runtime_profile = str(
+        resolve_value(
+            args.runtime_profile,
+            "VIDEO_SUMMARY_RUNTIME_PROFILE",
+            file_config,
+            "runtime_profile",
+            "full",
         )
     )
 
@@ -388,6 +372,12 @@ def main() -> int:
         replay = _env_bool("VIDEO_SUMMARY_REPLAY", replay)
     if "VIDEO_SUMMARY_STRICT_REPLAY_HASH" in os.environ:
         strict_replay_hash = _env_bool("VIDEO_SUMMARY_STRICT_REPLAY_HASH", strict_replay_hash)
+    if "VIDEO_SUMMARY_DEBUG_ARTIFACTS" in os.environ:
+        debug_artifacts = _env_bool("VIDEO_SUMMARY_DEBUG_ARTIFACTS", debug_artifacts)
+
+    runtime_profile = runtime_profile.strip().lower()
+    if runtime_profile not in {"full", "simple"}:
+        raise RuntimeError(f"INVALID_RUNTIME_PROFILE: {runtime_profile}. Use full or simple")
 
     if stage not in {"g3", "g5", "g8"}:
         raise RuntimeError(f"INVALID_STAGE: {stage}. Use g3, g5, or g8")
@@ -431,28 +421,29 @@ def main() -> int:
         print("(Handoff validation passed)")
 
         print(f"=== Module 3: Reasoning ({stage}) ===")
-        from reasoning_nlp.common.errors import PipelineError
-        from reasoning_nlp.pipeline_runner import PipelineConfig
-
-        pipeline_cfg = PipelineConfig(
-            audio_transcripts_path=str(transcripts_path),
-            visual_captions_path=str(captions_path),
-            raw_video_path=str(video_path),
-            run_id=run_id,
-            artifacts_root=artifacts_root,
-            deliverables_root=deliverables_root,
-            input_profile=input_profile,
-            source_duration_ms=source_duration_ms,
-            summarize_backend=summarize_backend,
-            summarize_fallback_backend=summarize_fallback_backend,
-            summarize_timeout_ms=summarize_timeout_ms,
-            summarize_max_retries=summarize_max_retries,
-            summarize_max_new_tokens=summarize_max_new_tokens,
-            summarize_prompt_max_chars=summarize_prompt_max_chars,
-            summarize_production_strict=summarize_production_strict,
-            qc_enforce_thresholds=qc_enforce_thresholds,
-            strict_replay_hash=strict_replay_hash,
-            replay_mode=replay,
+        pipeline_cfg = build_pipeline_config(
+            {
+                "audio_transcripts_path": str(transcripts_path),
+                "visual_captions_path": str(captions_path),
+                "raw_video_path": str(video_path),
+                "run_id": run_id,
+                "artifacts_root": artifacts_root,
+                "deliverables_root": deliverables_root,
+                "input_profile": input_profile,
+                "source_duration_ms": source_duration_ms,
+                "summarize_backend": summarize_backend,
+                "summarize_fallback_backend": summarize_fallback_backend,
+                "summarize_timeout_ms": summarize_timeout_ms,
+                "summarize_max_retries": summarize_max_retries,
+                "summarize_max_new_tokens": summarize_max_new_tokens,
+                "summarize_prompt_max_chars": summarize_prompt_max_chars,
+                "summarize_production_strict": summarize_production_strict,
+                "qc_enforce_thresholds": qc_enforce_thresholds,
+                "strict_replay_hash": strict_replay_hash,
+                "replay_mode": replay,
+                "debug_artifacts": debug_artifacts,
+                "runtime_profile": runtime_profile,
+            }
         )
 
         result = _run_reasoning_stage(pipeline_cfg, stage)

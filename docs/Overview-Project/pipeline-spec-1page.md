@@ -172,6 +172,9 @@ flowchart LR
     F2[(deliverables/RUN_ID/summary_text.txt)]
   end
 
+  %% NOTE
+  N1[[Mac dinh runtime chi ghi artifacts: A2, A5, A6, A8, A9.\nA1, A3, A4, A7, A10 chi ghi khi bat --debug-artifacts hoac --replay.]]
+
   %% ORCHESTRATOR <-> MODULES
   O3 --> M1A
   O4 --> M2A
@@ -211,6 +214,7 @@ flowchart LR
   G8 --> A10
 
   A8 --> F1
+  N1 -.-> L5
 ```
 
 ## 8) Pipeline tổng thể (bản dễ hiểu)
