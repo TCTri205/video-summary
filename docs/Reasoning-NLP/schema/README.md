@@ -62,7 +62,7 @@ Muc dich: debug reasoning lane voi artifact mo rong.
 ## Single source of truth
 
 - Contracts deliverable: `contracts/v1/template/*.schema.json`.
-- Internal schemas: `docs/Reasoning-NLP/schema/*.schema.json` chi danh cho debug artifact khi bat `--debug-artifacts`.
+- Internal schemas: `docs/Reasoning-NLP/schema/*.schema.json` chi danh cho debug artifact khi bat `--debug-artifacts` hoac `--replay`.
 - QA policy: `docs/Reasoning-NLP/qa-acceptance-checklist.md`.
 - Integration policy: `docs/Reasoning-NLP/compatibility-matrix.md`.
 

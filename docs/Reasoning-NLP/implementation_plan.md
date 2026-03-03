@@ -22,7 +22,8 @@
 Artifacts lane:
 
 - Deliverable lien module: `summary_script.json`, `summary_video_manifest.json`, `summary_video.mp4`.
-- Internal artifacts: `alignment_result.json`, `context_blocks.json`, `summary_script.internal.json`, `quality_report.json`, `run_meta.json`.
+- Runtime mac dinh (`minimal`): `alignment_result.json`, `summary_script.json`, `summary_video_manifest.json`, `summary_video.mp4`, `quality_report.json`.
+- Internal artifacts (`context_blocks.json`, `summary_script.internal.json`, `parse_meta.json`, `manifest_validation.json`, `render_meta.json`, `summary_text.internal.json`, `run_meta.json`) chi ghi khi bat `--debug-artifacts` hoac `--replay`.
 - Publish deliverables cho nguoi dung (runtime mac dinh): `deliverables/<run_id>/summary_video.mp4`, `deliverables/<run_id>/summary_text.txt`.
 - `final_summary.json` la contract optional artifact, khong phai output publish mac dinh cua runtime hien tai.
 

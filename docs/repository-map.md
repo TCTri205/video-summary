@@ -71,7 +71,6 @@ video-summary/
 │   └── full_pipeline_m1_m2_m3_colab.ipynb
 ├── reasoning_nlp/                           # Mã nguồn Module 3
 │   ├── pipeline/                            # Orchestrator va runtime profile cho Module 3
-│   ├── pipeline_runner.py                   # Wrapper tuong thich nguoc cho API import cu
 │   ├── cli.py                               # Giao diện dòng lệnh
 │   ├── config/                              # Defaults + shared config loader
 │   ├── aligner/                             # Đồng bộ hóa audio/visual
@@ -108,8 +107,8 @@ video-summary/
 
 ### `artifacts/`
 - Chứa kết quả trung gian của Module 3 theo từng bước (G1-G8)
-- Mặc định chỉ giữ artifact vận hành: `g5_segment/*`, `g7_assemble/summary_video.mp4`, `g8_qc/quality_report.json`
-- Artifact nội bộ (`g1_validate`, `g3_context`, `g4_summarize`, `g6_manifest`, `run_meta.json`) chỉ ghi khi bật debug artifacts/replay
+- Mặc định giữ artifact vận hành: `g2_align/alignment_result.json`, `g5_segment/*`, `g7_assemble/summary_video.mp4`, `g8_qc/quality_report.json`
+- Artifact nội bộ (`g1_validate`, `g3_context`, `g4_summarize`, `g6_manifest`, `g7_assemble/render_meta.json`, `g8_qc/summary_text.internal.json`, `run_meta.json`) chỉ ghi khi bật debug artifacts/replay
 
 #### Ma trận artifact theo stage (mặc định)
 - `g3`: `g2_align/alignment_result.json`
@@ -135,7 +134,6 @@ video-summary/
 ### `reasoning_nlp/`
 - **Module 3**: Hợp nhất, suy luận, và ghép video
 - `pipeline/` - Chua orchestrator va cac thanh phan dieu phoi Module 3
-- `pipeline_runner.py` - Lop wrapper giu tuong thich import cu, uy quyen cho pipeline orchestrator
 - `cli.py` - Giao diện dòng lệnh cho pipeline
 - `config/` - Mặc định runtime + shared config loader cho CLI/root entrypoint
 - `aligner/` - Đồng bộ hóa thời gian audio/visual
