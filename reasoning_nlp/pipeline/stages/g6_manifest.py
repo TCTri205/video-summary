@@ -18,7 +18,6 @@ def run_g6_manifest(
     stage_results: list[dict[str, Any]],
     logger,
 ) -> None:
-    del config
     import time
 
     started = time.perf_counter()
@@ -29,8 +28,9 @@ def run_g6_manifest(
             manifest_payload=manifest_payload,
             source_duration_ms=source_duration_ms,
         )
-        out_path = base / "g6_manifest" / "manifest_validation.json"
-        write_json(out_path, {"status": "pass", "stage": stage})
+        if bool(config.emit_internal_artifacts):
+            out_path = base / "g6_manifest" / "manifest_validation.json"
+            write_json(out_path, {"status": "pass", "stage": stage})
         append_stage_result(stage_results, stage, "pass", started)
         logger.info("run stage=%s status=pass", stage)
     except PipelineError as err:

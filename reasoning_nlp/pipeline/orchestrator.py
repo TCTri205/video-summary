@@ -118,7 +118,7 @@ def run_pipeline_g1_g3(config: PipelineConfig) -> dict[str, Any]:
     try:
         validated, _ = run_g1_validate(config, base, stage_results, logger)
         alignment_payload, alignment_blocks = run_g2_align(config, validated, base, stage_results, logger)
-        context_payload = run_g3_context(alignment_blocks, base, stage_results, logger)
+        context_payload = run_g3_context(config, alignment_blocks, base, stage_results, logger)
     except PipelineError:
         raise
     except Exception as exc:
@@ -129,7 +129,6 @@ def run_pipeline_g1_g3(config: PipelineConfig) -> dict[str, Any]:
         "stage_results": stage_results,
         "artifacts": {
             "alignment_result": str(base / "g2_align" / "alignment_result.json"),
-            "context_blocks": str(base / "g3_context" / "context_blocks.json"),
         },
         "alignment_result": alignment_payload,
         "context_blocks": context_payload,
@@ -145,7 +144,7 @@ def run_pipeline_g1_g5(config: PipelineConfig) -> dict[str, Any]:
     try:
         validated, source_duration_ms = run_g1_validate(config, base, stage_results, logger)
         alignment_payload, alignment_blocks = run_g2_align(config, validated, base, stage_results, logger)
-        context_payload = run_g3_context(alignment_blocks, base, stage_results, logger)
+        context_payload = run_g3_context(config, alignment_blocks, base, stage_results, logger)
         summary_internal_payload = run_g4_summarize(
             config,
             context_payload,
@@ -164,9 +163,6 @@ def run_pipeline_g1_g5(config: PipelineConfig) -> dict[str, Any]:
         "run_id": run_id,
         "stage_results": stage_results,
         "artifacts": {
-            "alignment_result": str(base / "g2_align" / "alignment_result.json"),
-            "context_blocks": str(base / "g3_context" / "context_blocks.json"),
-            "summary_script_internal": str(base / "g4_summarize" / "summary_script.internal.json"),
             "summary_script": str(base / "g5_segment" / "summary_script.json"),
             "summary_video_manifest": str(base / "g5_segment" / "summary_video_manifest.json"),
         },
@@ -205,7 +201,7 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
             replay_enabled,
             stage_hashes,
         )
-        context_payload = _replay_or_run_g3(base, stage_results, logger, replay_enabled, alignment_blocks, stage_hashes)
+        context_payload = _replay_or_run_g3(config, base, stage_results, logger, replay_enabled, alignment_blocks, stage_hashes)
         summary_internal_payload = _replay_or_run_g4(
             config,
             context_payload,
@@ -269,7 +265,7 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
             summary_internal_payload=summary_internal_payload,
             script_payload=script_payload,
         )
-        if not is_simple_runtime(config):
+        if bool(config.emit_internal_artifacts) and not is_simple_runtime(config):
             _write_run_meta(base, run_meta)
     except PipelineError:
         raise
@@ -280,9 +276,6 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
         "run_id": run_id,
         "stage_results": stage_results,
         "artifacts": {
-            "alignment_result": str(base / "g2_align" / "alignment_result.json"),
-            "context_blocks": str(base / "g3_context" / "context_blocks.json"),
-            "summary_script_internal": str(base / "g4_summarize" / "summary_script.internal.json"),
             "summary_script": str(base / "g5_segment" / "summary_script.json"),
             "summary_video_manifest": str(base / "g5_segment" / "summary_video_manifest.json"),
             "summary_video": str(base / "g7_assemble" / "summary_video.mp4"),
@@ -317,12 +310,13 @@ def _run_g2_align(
 
 
 def _run_g3_context(
+    config: PipelineConfig,
     blocks: list[AlignmentBlock],
     base: Path,
     stage_results: list[dict[str, Any]],
     logger,
 ) -> list[dict[str, Any]]:
-    return run_g3_context(blocks, base, stage_results, logger)
+    return run_g3_context(config, blocks, base, stage_results, logger)
 
 
 def _run_g4_summarize(
@@ -586,7 +580,8 @@ def _publish_final_deliverables(
     shutil.copy2(src_video, dst_video)
 
     summary_text_internal = _build_summary_text_internal(script_payload)
-    write_json(base / "g8_qc" / "summary_text.internal.json", summary_text_internal)
+    if bool(config.emit_internal_artifacts):
+        write_json(base / "g8_qc" / "summary_text.internal.json", summary_text_internal)
     text_output = _build_summary_text(summary_internal_payload, script_payload, summary_text_internal)
     dst_text = deliverable_dir / "summary_text.txt"
     dst_text.write_text(text_output, encoding="utf-8")
@@ -953,6 +948,7 @@ def _replay_or_run_g2(
 
 
 def _replay_or_run_g3(
+    config: PipelineConfig,
     base: Path,
     stage_results: list[dict[str, Any]],
     logger,
@@ -966,7 +962,7 @@ def _replay_or_run_g3(
             append_stage_skipped(stage_results, "context_build")
             logger.info("run stage=context_build status=skipped")
             return payload
-    return run_g3_context(alignment_blocks, base, stage_results, logger)
+    return run_g3_context(config, alignment_blocks, base, stage_results, logger)
 
 
 def _replay_or_run_g4(
@@ -1053,12 +1049,18 @@ def _replay_or_run_g7(
     stage_hashes: dict[str, str],
 ) -> dict[str, Any]:
     if replay_enabled and _is_stage_replayable(base, "assemble", stage_hashes):
-        render_meta = _load_json_if_exists(base / "g7_assemble" / "render_meta.json")
         video_path = base / "g7_assemble" / "summary_video.mp4"
-        if isinstance(render_meta, dict) and video_path.exists() and video_path.stat().st_size > 0:
+        if video_path.exists() and video_path.stat().st_size > 0:
+            duration_ms = probe_source_duration_ms(video_path)
             append_stage_skipped(stage_results, "assemble")
             logger.info("run stage=assemble status=skipped")
-            return render_meta
+            return {
+                "render_success": True,
+                "audio_present": _probe_has_audio_stream(video_path),
+                "duration_ms": duration_ms,
+                "duration_match_score": 1.0,
+                "decode_error_count": 0,
+            }
     return run_g7_assemble(config, manifest_payload, base, stage_results, logger)
 
 

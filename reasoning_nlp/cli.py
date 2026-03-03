@@ -3,9 +3,11 @@ from __future__ import annotations
 import argparse
 import json
 from argparse import SUPPRESS
+from typing import Any
 
 from reasoning_nlp.common.errors import PipelineError
 from reasoning_nlp.config.defaults import DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SUMMARIZATION
+from reasoning_nlp.config.runtime_loader import build_pipeline_config
 from reasoning_nlp.pipeline import PipelineConfig, run_pipeline_g1_g3, run_pipeline_g1_g5, run_pipeline_g1_g8
 
 
@@ -65,48 +67,55 @@ def parse_args() -> argparse.Namespace:
         default=DEFAULT_QC["min_high_confidence_ratio"],
     )
     parser.add_argument("--replay", action="store_true", help="Replay valid existing stage artifacts")
-    parser.add_argument("--emit-internal-artifacts", action="store_true", default=True)
-    parser.add_argument("--no-emit-internal-artifacts", action="store_false", dest="emit_internal_artifacts")
+    parser.add_argument("--debug-artifacts", action="store_true", default=None, help="Emit internal debug artifacts")
+    parser.add_argument("--emit-internal-artifacts", action="store_true", default=None, help=SUPPRESS)
+    parser.add_argument("--no-emit-internal-artifacts", action="store_false", dest="emit_internal_artifacts", default=None)
     parser.add_argument("--strict-replay-hash", action="store_true", default=DEFAULT_RUNTIME["strict_replay_hash"])
     parser.add_argument("--runtime-profile", choices=["full", "simple"], default="full")
     return parser.parse_args()
 
 
 def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
-    runtime_profile = getattr(args, "runtime_profile", "full")
-    return PipelineConfig(
-        audio_transcripts_path=args.audio_transcripts,
-        visual_captions_path=args.visual_captions,
-        raw_video_path=args.raw_video,
-        run_id=args.run_id,
-        artifacts_root=args.artifacts_root,
-        deliverables_root=args.deliverables_root,
-        input_profile=args.input_profile,
-        source_duration_ms=args.source_duration_ms,
-        model_version=args.model_version,
-        summarize_backend=args.summarize_backend,
-        summarize_fallback_backend=args.summarize_fallback_backend,
-        summarize_timeout_ms=args.summarize_timeout_ms,
-        summarize_max_retries=args.summarize_max_retries,
-        summarize_max_new_tokens=args.summarize_max_new_tokens,
-        summarize_do_sample=args.summarize_do_sample,
-        summarize_prompt_max_chars=args.summarize_prompt_max_chars,
-        summarize_production_strict=args.summarize_production_strict,
-        allow_heuristic_for_tests=bool(args.allow_heuristic_for_tests),
-        qc_enforce_thresholds=args.qc_enforce_thresholds,
-        qc_blackdetect_mode=args.qc_blackdetect_mode,
-        qc_min_parse_validity_rate=args.qc_min_parse_validity_rate,
-        qc_min_timeline_consistency_score=args.qc_min_timeline_consistency_score,
-        qc_min_grounding_score=args.qc_min_grounding_score,
-        qc_max_black_frame_ratio=args.qc_max_black_frame_ratio,
-        qc_max_no_match_rate=args.qc_max_no_match_rate,
-        qc_min_median_confidence=args.qc_min_median_confidence,
-        qc_min_high_confidence_ratio=args.qc_min_high_confidence_ratio,
-        emit_internal_artifacts=args.emit_internal_artifacts,
-        strict_replay_hash=args.strict_replay_hash,
-        replay_mode=bool(args.replay),
-        runtime_profile=runtime_profile,
-    )
+    def pick(name: str, default: Any = None) -> Any:
+        return getattr(args, name, default)
+
+    debug_artifacts = pick("debug_artifacts")
+    if debug_artifacts is None:
+        debug_artifacts = pick("emit_internal_artifacts")
+    payload: dict[str, Any] = {
+        "audio_transcripts_path": pick("audio_transcripts"),
+        "visual_captions_path": pick("visual_captions"),
+        "raw_video_path": pick("raw_video"),
+        "run_id": pick("run_id"),
+        "artifacts_root": pick("artifacts_root"),
+        "deliverables_root": pick("deliverables_root"),
+        "input_profile": pick("input_profile"),
+        "source_duration_ms": pick("source_duration_ms"),
+        "model_version": pick("model_version"),
+        "summarize_backend": pick("summarize_backend"),
+        "summarize_fallback_backend": pick("summarize_fallback_backend"),
+        "summarize_timeout_ms": pick("summarize_timeout_ms"),
+        "summarize_max_retries": pick("summarize_max_retries"),
+        "summarize_max_new_tokens": pick("summarize_max_new_tokens"),
+        "summarize_do_sample": pick("summarize_do_sample"),
+        "summarize_prompt_max_chars": pick("summarize_prompt_max_chars"),
+        "summarize_production_strict": pick("summarize_production_strict"),
+        "allow_heuristic_for_tests": pick("allow_heuristic_for_tests"),
+        "qc_enforce_thresholds": pick("qc_enforce_thresholds"),
+        "qc_blackdetect_mode": pick("qc_blackdetect_mode"),
+        "qc_min_parse_validity_rate": pick("qc_min_parse_validity_rate"),
+        "qc_min_timeline_consistency_score": pick("qc_min_timeline_consistency_score"),
+        "qc_min_grounding_score": pick("qc_min_grounding_score"),
+        "qc_max_black_frame_ratio": pick("qc_max_black_frame_ratio"),
+        "qc_max_no_match_rate": pick("qc_max_no_match_rate"),
+        "qc_min_median_confidence": pick("qc_min_median_confidence"),
+        "qc_min_high_confidence_ratio": pick("qc_min_high_confidence_ratio"),
+        "debug_artifacts": debug_artifacts,
+        "strict_replay_hash": pick("strict_replay_hash"),
+        "replay_mode": pick("replay"),
+        "runtime_profile": pick("runtime_profile", "full"),
+    }
+    return build_pipeline_config(payload)
 
 
 def main() -> int:

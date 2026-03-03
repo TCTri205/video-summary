@@ -10,7 +10,7 @@ DEFAULT_RUNTIME = {
     "input_profile": "strict_contract_v1",
     "artifacts_root": "artifacts",
     "deliverables_root": "deliverables",
-    "emit_internal_artifacts": True,
+    "emit_internal_artifacts": False,
     "strict_replay_hash": False,
 }
 

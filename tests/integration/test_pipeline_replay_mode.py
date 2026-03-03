@@ -58,6 +58,7 @@ class PipelineReplayModeTests(unittest.TestCase):
                 summarize_fallback_backend="heuristic",
                 summarize_production_strict=False,
                 allow_heuristic_for_tests=True,
+                emit_internal_artifacts=True,
                 replay_mode=False,
             )
             first = run_pipeline_g1_g8(cfg)
@@ -73,6 +74,7 @@ class PipelineReplayModeTests(unittest.TestCase):
                 summarize_fallback_backend="heuristic",
                 summarize_production_strict=False,
                 allow_heuristic_for_tests=True,
+                emit_internal_artifacts=True,
                 replay_mode=True,
             )
             second = run_pipeline_g1_g8(replay_cfg)
@@ -136,6 +138,7 @@ class PipelineReplayModeTests(unittest.TestCase):
                 summarize_production_strict=False,
                 allow_heuristic_for_tests=True,
                 model_version="model_a",
+                emit_internal_artifacts=True,
                 replay_mode=False,
             )
             run_pipeline_g1_g8(first_cfg)
@@ -151,6 +154,7 @@ class PipelineReplayModeTests(unittest.TestCase):
                 summarize_production_strict=False,
                 allow_heuristic_for_tests=True,
                 model_version="model_b",
+                emit_internal_artifacts=True,
                 replay_mode=True,
             )
             second = run_pipeline_g1_g8(replay_changed_cfg)

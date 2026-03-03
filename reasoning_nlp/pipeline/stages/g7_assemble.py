@@ -32,7 +32,8 @@ def run_g7_assemble(
             output_video_path=output_path,
             segments=segments,
         )
-        write_json(base / "g7_assemble" / "render_meta.json", render_payload)
+        if bool(config.emit_internal_artifacts):
+            write_json(base / "g7_assemble" / "render_meta.json", render_payload)
         append_stage_result(stage_results, stage, "pass", started)
         logger.info("run stage=%s status=pass", stage)
         return render_payload

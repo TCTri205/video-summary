@@ -48,13 +48,14 @@ def run_g4_summarize(
         raw_parse_validity_rate = compute_parse_validity_rate(raw)
         repaired = repair_internal_summary(raw)
         repaired_parse_validity_rate = compute_parse_validity_rate(repaired)
-        write_json(
-            base / "g4_summarize" / "parse_meta.json",
-            {
-                "raw_parse_validity_rate": max(0.0, min(1.0, float(raw_parse_validity_rate))),
-                "repaired_parse_validity_rate": max(0.0, min(1.0, float(repaired_parse_validity_rate))),
-            },
-        )
+        if bool(config.emit_internal_artifacts):
+            write_json(
+                base / "g4_summarize" / "parse_meta.json",
+                {
+                    "raw_parse_validity_rate": max(0.0, min(1.0, float(raw_parse_validity_rate))),
+                    "repaired_parse_validity_rate": max(0.0, min(1.0, float(repaired_parse_validity_rate))),
+                },
+            )
         repaired.setdefault("quality_flags", [])
         repaired["quality_flags"] = list(repaired["quality_flags"])
         repaired["quality_flags"].append(f"model_version={config.model_version}")
@@ -84,8 +85,9 @@ def run_g4_summarize(
         schema_path = Path("docs/Reasoning-NLP/schema/summary_script.internal.schema.json")
         validate_summary_internal_artifact(repaired, schema_path=schema_path)
 
-        out_path = base / "g4_summarize" / "summary_script.internal.json"
-        write_json(out_path, repaired)
+        if bool(config.emit_internal_artifacts):
+            out_path = base / "g4_summarize" / "summary_script.internal.json"
+            write_json(out_path, repaired)
 
         append_stage_result(stage_results, stage, "pass", started)
         logger.info("run stage=%s status=pass", stage)
