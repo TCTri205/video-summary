@@ -28,6 +28,10 @@ def validate_total_duration(total_ms: int, source_duration_ms: int | None, confi
             errors.append("BUDGET_TARGET_RATIO")
         else:
             expected = source_duration_ms * config.target_ratio
+            if config.min_total_duration_ms is not None:
+                expected = max(expected, float(config.min_total_duration_ms))
+            if config.max_total_duration_ms is not None:
+                expected = min(expected, float(config.max_total_duration_ms))
             delta = expected * config.target_ratio_tolerance
             if total_ms < expected - delta:
                 errors.append("BUDGET_UNDERFLOW")

@@ -17,6 +17,12 @@ class CLIConfigTests(unittest.TestCase):
             deliverables_root="deliverables",
             input_profile="strict_contract_v1",
             source_duration_ms=None,
+            min_segment_duration_ms=1400,
+            max_segment_duration_ms=12000,
+            min_total_duration_ms=5000,
+            max_total_duration_ms=160000,
+            target_ratio=0.10,
+            target_ratio_tolerance=0.15,
             model_version="Qwen/Qwen2.5-1.5B-Instruct",
             summarize_backend="local",
             summarize_fallback_backend="api",
@@ -59,6 +65,12 @@ class CLIConfigTests(unittest.TestCase):
         self.assertEqual(config.planner_lexical_min_token_len, 3)
         self.assertFalse(config.planner_lexical_use_idf)
         self.assertEqual(config.planner_lexical_stopwords_profile, "vi")
+        self.assertEqual(config.min_segment_duration_ms, 1400)
+        self.assertEqual(config.max_segment_duration_ms, 12000)
+        self.assertEqual(config.min_total_duration_ms, 5000)
+        self.assertEqual(config.max_total_duration_ms, 160000)
+        self.assertEqual(config.target_ratio, 0.10)
+        self.assertEqual(config.target_ratio_tolerance, 0.15)
         self.assertFalse(config.emit_internal_artifacts)
 
 

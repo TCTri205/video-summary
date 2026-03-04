@@ -5,7 +5,13 @@ import os
 from pathlib import Path
 from typing import Any, Mapping
 
-from reasoning_nlp.config.defaults import DEFAULT_PLANNER_SCORING, DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SUMMARIZATION
+from reasoning_nlp.config.defaults import (
+    DEFAULT_PLANNER_SCORING,
+    DEFAULT_QC,
+    DEFAULT_RUNTIME,
+    DEFAULT_SEGMENT_BUDGET,
+    DEFAULT_SUMMARIZATION,
+)
 from reasoning_nlp.pipeline import PipelineConfig
 
 
@@ -66,6 +72,24 @@ def build_pipeline_config(values: Mapping[str, Any]) -> PipelineConfig:
         deliverables_root=str(values.get("deliverables_root", DEFAULT_RUNTIME["deliverables_root"])),
         input_profile=str(values.get("input_profile", DEFAULT_RUNTIME["input_profile"])),
         source_duration_ms=values.get("source_duration_ms"),
+        min_segment_duration_ms=int(values.get("min_segment_duration_ms", DEFAULT_SEGMENT_BUDGET["min_segment_duration_ms"])),
+        max_segment_duration_ms=int(values.get("max_segment_duration_ms", DEFAULT_SEGMENT_BUDGET["max_segment_duration_ms"])),
+        min_total_duration_ms=(
+            int(values["min_total_duration_ms"])
+            if values.get("min_total_duration_ms", DEFAULT_SEGMENT_BUDGET["min_total_duration_ms"]) is not None
+            else None
+        ),
+        max_total_duration_ms=(
+            int(values["max_total_duration_ms"])
+            if values.get("max_total_duration_ms", DEFAULT_SEGMENT_BUDGET["max_total_duration_ms"]) is not None
+            else None
+        ),
+        target_ratio=(
+            float(values["target_ratio"])
+            if values.get("target_ratio", DEFAULT_SEGMENT_BUDGET["target_ratio"]) is not None
+            else None
+        ),
+        target_ratio_tolerance=float(values.get("target_ratio_tolerance", DEFAULT_SEGMENT_BUDGET["target_ratio_tolerance"])),
         model_version=str(values.get("model_version", DEFAULT_SUMMARIZATION["model_version"])),
         summarize_backend=str(values.get("summarize_backend", DEFAULT_SUMMARIZATION["backend"])),
         summarize_fallback_backend=str(values.get("summarize_fallback_backend", DEFAULT_SUMMARIZATION["fallback_backend"])),

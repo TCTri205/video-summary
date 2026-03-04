@@ -70,6 +70,43 @@ class SegmentPlannerTests(unittest.TestCase):
         self.assertEqual(segments[0].role, "setup")
         self.assertEqual(segments[-1].role, "resolution")
 
+    def test_default_ten_percent_ratio_can_expand_beyond_old_45s_cap(self) -> None:
+        context_blocks = []
+        for idx in range(24):
+            total_sec = idx * 15
+            mm = total_sec // 60
+            ss = total_sec % 60
+            context_blocks.append(
+                {
+                    "timestamp": f"00:{mm:02d}:{ss:02d}.000",
+                    "dialogue_text": f"noi dung {idx}",
+                    "image_text": f"canh {idx}",
+                    "confidence": 0.85,
+                    "fallback_type": "containment",
+                }
+            )
+
+        budget = BudgetConfig(
+            min_segment_duration_ms=2000,
+            max_segment_duration_ms=8000,
+            min_total_duration_ms=3000,
+            max_total_duration_ms=180000,
+            target_ratio=0.10,
+            target_ratio_tolerance=0.20,
+        )
+
+        segments = plan_segments_from_context(
+            context_blocks=context_blocks,
+            summary_plot="plot",
+            budget=budget,
+            source_duration_ms=15 * 60 * 1000,
+        )
+
+        total_duration_ms = sum(to_ms(seg.source_end) - to_ms(seg.source_start) for seg in segments)
+        self.assertGreater(total_duration_ms, 45000)
+        self.assertGreaterEqual(total_duration_ms, 72000)
+        self.assertLessEqual(total_duration_ms, 108000)
+
     def test_dynamic_planner_avoids_cta_when_alternatives_exist(self) -> None:
         context_blocks = [
             {

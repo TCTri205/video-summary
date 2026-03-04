@@ -33,8 +33,8 @@ DEFAULT_SEGMENT_BUDGET = {
     "min_segment_duration_ms": 1200,
     "max_segment_duration_ms": 15000,
     "min_total_duration_ms": 3000,
-    "max_total_duration_ms": 45000,
-    "target_ratio": None,
+    "max_total_duration_ms": 180000,
+    "target_ratio": 0.10,
     "target_ratio_tolerance": 0.20,
 }
 

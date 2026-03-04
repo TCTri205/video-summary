@@ -141,14 +141,16 @@ Khong map cac field noi bo sau vao deliverable:
   - `max_segment_duration_ms <= 15000`
   - `source_end > source_start`
 - Tong do dai summary phai nam trong budget:
-  - Runtime mac dinh: `target_ratio = None`; khi khong set, planner suy ra tong budget tu fallback policy theo do dai video (`~0.035 * source_duration_ms`) roi clamp theo `min_total_duration_ms`/`max_total_duration_ms`.
-  - `min_total_duration_ms` va `max_total_duration_ms` do he thong cau hinh.
-  - Neu bat `target_ratio`, tong duration hop le khi nam trong `target_ratio +- target_ratio_tolerance`.
+- Runtime mac dinh: `target_ratio = 0.10`; planner nham tong budget xap xi 10% `source_duration_ms`, sau do clamp theo `min_total_duration_ms`/`max_total_duration_ms`.
+- Runtime mac dinh hien tai dat `min_total_duration_ms = 3000` va `max_total_duration_ms = 180000`.
+- `min_total_duration_ms` va `max_total_duration_ms` do he thong cau hinh.
+- Neu `target_ratio` bi unset thu cong, planner fallback ve heuristic `~0.035 * source_duration_ms`.
+- Neu bat `target_ratio`, tong duration hop le khi nam trong `target_ratio +- target_ratio_tolerance`.
 - So luong segment la dong theo budget/do dai nguon; khong con hard-cap 3, nhung runtime hien tai van co tran operational `15` segment.
 
 ## Summary text lane (runtime hien tai)
 
-- Runtime xay `summary_text.internal.json` tu cac `summary_script.json.segments[]` da duoc chon va loc an toan.
+- Runtime xay `summary_text.internal.json` tu cac `summary_script.json.segments[]` da duoc chon va loc an toan; file nay chi duoc ghi ra khi `--debug-artifacts` hoac `emit_internal_artifacts` duoc bat de luu provenance/coverage.
 - Moi cau trong `summary_text.internal.json.sentences[]` phai co:
   - `text`
   - `support_segment_ids`

@@ -6,7 +6,13 @@ from argparse import SUPPRESS
 from typing import Any
 
 from reasoning_nlp.common.errors import PipelineError
-from reasoning_nlp.config.defaults import DEFAULT_PLANNER_SCORING, DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SUMMARIZATION
+from reasoning_nlp.config.defaults import (
+    DEFAULT_PLANNER_SCORING,
+    DEFAULT_QC,
+    DEFAULT_RUNTIME,
+    DEFAULT_SEGMENT_BUDGET,
+    DEFAULT_SUMMARIZATION,
+)
 from reasoning_nlp.config.runtime_loader import build_pipeline_config
 from reasoning_nlp.pipeline import PipelineConfig, run_pipeline_g1_g3, run_pipeline_g1_g5, run_pipeline_g1_g8
 
@@ -22,6 +28,16 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--deliverables-root", default=DEFAULT_RUNTIME["deliverables_root"], help="Final deliverables root directory")
     parser.add_argument("--input-profile", default=DEFAULT_RUNTIME["input_profile"], choices=["strict_contract_v1", "legacy_member1"])
     parser.add_argument("--source-duration-ms", type=int, default=None)
+    parser.add_argument("--min-segment-duration-ms", type=int, default=DEFAULT_SEGMENT_BUDGET["min_segment_duration_ms"])
+    parser.add_argument("--max-segment-duration-ms", type=int, default=DEFAULT_SEGMENT_BUDGET["max_segment_duration_ms"])
+    parser.add_argument("--min-total-duration-ms", type=int, default=DEFAULT_SEGMENT_BUDGET["min_total_duration_ms"])
+    parser.add_argument("--max-total-duration-ms", type=int, default=DEFAULT_SEGMENT_BUDGET["max_total_duration_ms"])
+    parser.add_argument("--target-ratio", type=float, default=DEFAULT_SEGMENT_BUDGET["target_ratio"])
+    parser.add_argument(
+        "--target-ratio-tolerance",
+        type=float,
+        default=DEFAULT_SEGMENT_BUDGET["target_ratio_tolerance"],
+    )
     parser.add_argument("--model-version", default=DEFAULT_SUMMARIZATION["model_version"])
     parser.add_argument("--summarize-backend", choices=["api", "local"], default=DEFAULT_SUMMARIZATION["backend"])
     parser.add_argument(
@@ -123,6 +139,12 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
         "deliverables_root": pick("deliverables_root"),
         "input_profile": pick("input_profile"),
         "source_duration_ms": pick("source_duration_ms"),
+        "min_segment_duration_ms": pick("min_segment_duration_ms"),
+        "max_segment_duration_ms": pick("max_segment_duration_ms"),
+        "min_total_duration_ms": pick("min_total_duration_ms"),
+        "max_total_duration_ms": pick("max_total_duration_ms"),
+        "target_ratio": pick("target_ratio"),
+        "target_ratio_tolerance": pick("target_ratio_tolerance"),
         "model_version": pick("model_version"),
         "summarize_backend": pick("summarize_backend"),
         "summarize_fallback_backend": pick("summarize_fallback_backend"),

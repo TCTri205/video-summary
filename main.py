@@ -45,6 +45,12 @@ def parse_args() -> argparse.Namespace:
 
     parser.add_argument("--input-profile", default=None, choices=["strict_contract_v1", "legacy_member1"])
     parser.add_argument("--source-duration-ms", type=int, default=None)
+    parser.add_argument("--min-segment-duration-ms", type=int, default=None)
+    parser.add_argument("--max-segment-duration-ms", type=int, default=None)
+    parser.add_argument("--min-total-duration-ms", type=int, default=None)
+    parser.add_argument("--max-total-duration-ms", type=int, default=None)
+    parser.add_argument("--target-ratio", type=float, default=None)
+    parser.add_argument("--target-ratio-tolerance", type=float, default=None)
     parser.add_argument("--summarize-backend", choices=["api", "local"], default=None)
     parser.add_argument("--summarize-fallback-backend", choices=["api", "local"], default=None)
     parser.add_argument("--summarize-timeout-ms", type=int, default=None)
@@ -253,6 +259,54 @@ def main() -> int:
         None,
     )
     source_duration_ms = int(source_duration_ms_raw) if source_duration_ms_raw is not None else None
+    min_segment_duration_ms_raw = resolve_value(
+        args.min_segment_duration_ms,
+        "VIDEO_SUMMARY_MIN_SEGMENT_DURATION_MS",
+        file_config,
+        "min_segment_duration_ms",
+        1200,
+    )
+    min_segment_duration_ms = int(min_segment_duration_ms_raw) if min_segment_duration_ms_raw is not None else None
+    max_segment_duration_ms_raw = resolve_value(
+        args.max_segment_duration_ms,
+        "VIDEO_SUMMARY_MAX_SEGMENT_DURATION_MS",
+        file_config,
+        "max_segment_duration_ms",
+        15000,
+    )
+    max_segment_duration_ms = int(max_segment_duration_ms_raw) if max_segment_duration_ms_raw is not None else None
+    min_total_duration_ms_raw = resolve_value(
+        args.min_total_duration_ms,
+        "VIDEO_SUMMARY_MIN_TOTAL_DURATION_MS",
+        file_config,
+        "min_total_duration_ms",
+        3000,
+    )
+    min_total_duration_ms = int(min_total_duration_ms_raw) if min_total_duration_ms_raw is not None else None
+    max_total_duration_ms_raw = resolve_value(
+        args.max_total_duration_ms,
+        "VIDEO_SUMMARY_MAX_TOTAL_DURATION_MS",
+        file_config,
+        "max_total_duration_ms",
+        180000,
+    )
+    max_total_duration_ms = int(max_total_duration_ms_raw) if max_total_duration_ms_raw is not None else None
+    target_ratio_raw = resolve_value(
+        args.target_ratio,
+        "VIDEO_SUMMARY_TARGET_RATIO",
+        file_config,
+        "target_ratio",
+        0.10,
+    )
+    target_ratio = float(target_ratio_raw) if target_ratio_raw is not None else None
+    target_ratio_tolerance_raw = resolve_value(
+        args.target_ratio_tolerance,
+        "VIDEO_SUMMARY_TARGET_RATIO_TOLERANCE",
+        file_config,
+        "target_ratio_tolerance",
+        0.20,
+    )
+    target_ratio_tolerance = float(target_ratio_tolerance_raw) if target_ratio_tolerance_raw is not None else 0.20
 
     summarize_backend = str(
         resolve_value(
@@ -431,6 +485,12 @@ def main() -> int:
                 "deliverables_root": deliverables_root,
                 "input_profile": input_profile,
                 "source_duration_ms": source_duration_ms,
+                "min_segment_duration_ms": min_segment_duration_ms,
+                "max_segment_duration_ms": max_segment_duration_ms,
+                "min_total_duration_ms": min_total_duration_ms,
+                "max_total_duration_ms": max_total_duration_ms,
+                "target_ratio": target_ratio,
+                "target_ratio_tolerance": target_ratio_tolerance,
                 "summarize_backend": summarize_backend,
                 "summarize_fallback_backend": summarize_fallback_backend,
                 "summarize_timeout_ms": summarize_timeout_ms,
