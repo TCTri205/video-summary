@@ -25,7 +25,14 @@ from reasoning_nlp.common.io_json import read_json, write_json
 from reasoning_nlp.common.logging import get_logger
 from reasoning_nlp.common.text_safety import looks_like_cta
 from reasoning_nlp.common.types import AlignmentBlock, CanonicalCaption, CanonicalTranscript
-from reasoning_nlp.config.defaults import DEFAULT_ALIGNMENT, DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SEGMENT_BUDGET, DEFAULT_SUMMARIZATION
+from reasoning_nlp.config.defaults import (
+    DEFAULT_ALIGNMENT,
+    DEFAULT_PLANNER_SCORING,
+    DEFAULT_QC,
+    DEFAULT_RUNTIME,
+    DEFAULT_SEGMENT_BUDGET,
+    DEFAULT_SUMMARIZATION,
+)
 from reasoning_nlp.pipeline.stages.g1_validate import run_g1_validate
 from reasoning_nlp.pipeline.stages.g2_align import run_g2_align
 from reasoning_nlp.pipeline.stages.g3_context import run_g3_context
@@ -94,6 +101,12 @@ class PipelineConfig:
     max_total_duration_ms: int | None = int(DEFAULT_SEGMENT_BUDGET["max_total_duration_ms"])
     target_ratio: float | None = DEFAULT_SEGMENT_BUDGET["target_ratio"]
     target_ratio_tolerance: float = float(DEFAULT_SEGMENT_BUDGET["target_ratio_tolerance"])
+    planner_lexical_enabled: bool = bool(DEFAULT_PLANNER_SCORING["lexical_enabled"])
+    planner_lexical_weight: float = float(DEFAULT_PLANNER_SCORING["lexical_weight"])
+    planner_lexical_min_df: int = int(DEFAULT_PLANNER_SCORING["lexical_min_df"])
+    planner_lexical_min_token_len: int = int(DEFAULT_PLANNER_SCORING["lexical_min_token_len"])
+    planner_lexical_use_idf: bool = bool(DEFAULT_PLANNER_SCORING["lexical_use_idf"])
+    planner_lexical_stopwords_profile: str = str(DEFAULT_PLANNER_SCORING["lexical_stopwords_profile"])
     qc_enforce_thresholds: bool = bool(DEFAULT_QC["enforce_thresholds"])
     qc_blackdetect_mode: str = str(DEFAULT_QC["blackdetect_mode"])
     qc_min_parse_validity_rate: float = float(DEFAULT_QC["min_parse_validity_rate"])

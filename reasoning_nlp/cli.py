@@ -6,7 +6,7 @@ from argparse import SUPPRESS
 from typing import Any
 
 from reasoning_nlp.common.errors import PipelineError
-from reasoning_nlp.config.defaults import DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SUMMARIZATION
+from reasoning_nlp.config.defaults import DEFAULT_PLANNER_SCORING, DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SUMMARIZATION
 from reasoning_nlp.config.runtime_loader import build_pipeline_config
 from reasoning_nlp.pipeline import PipelineConfig, run_pipeline_g1_g3, run_pipeline_g1_g5, run_pipeline_g1_g8
 
@@ -45,6 +45,38 @@ def parse_args() -> argparse.Namespace:
         dest="summarize_production_strict",
     )
     parser.add_argument("--allow-heuristic-for-tests", action="store_true", default=False, help=SUPPRESS)
+    parser.add_argument(
+        "--planner-lexical-enabled",
+        action="store_true",
+        default=DEFAULT_PLANNER_SCORING["lexical_enabled"],
+    )
+    parser.add_argument(
+        "--no-planner-lexical-enabled",
+        action="store_false",
+        dest="planner_lexical_enabled",
+    )
+    parser.add_argument("--planner-lexical-weight", type=float, default=DEFAULT_PLANNER_SCORING["lexical_weight"])
+    parser.add_argument("--planner-lexical-min-df", type=int, default=DEFAULT_PLANNER_SCORING["lexical_min_df"])
+    parser.add_argument(
+        "--planner-lexical-min-token-len",
+        type=int,
+        default=DEFAULT_PLANNER_SCORING["lexical_min_token_len"],
+    )
+    parser.add_argument(
+        "--planner-lexical-use-idf",
+        action="store_true",
+        default=DEFAULT_PLANNER_SCORING["lexical_use_idf"],
+    )
+    parser.add_argument(
+        "--no-planner-lexical-use-idf",
+        action="store_false",
+        dest="planner_lexical_use_idf",
+    )
+    parser.add_argument(
+        "--planner-lexical-stopwords-profile",
+        choices=["vi"],
+        default=DEFAULT_PLANNER_SCORING["lexical_stopwords_profile"],
+    )
     parser.add_argument("--qc-enforce-thresholds", action="store_true", default=DEFAULT_QC["enforce_thresholds"])
     parser.add_argument(
         "--qc-blackdetect-mode",
@@ -101,6 +133,12 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
         "summarize_prompt_max_chars": pick("summarize_prompt_max_chars"),
         "summarize_production_strict": pick("summarize_production_strict"),
         "allow_heuristic_for_tests": pick("allow_heuristic_for_tests"),
+        "planner_lexical_enabled": pick("planner_lexical_enabled"),
+        "planner_lexical_weight": pick("planner_lexical_weight"),
+        "planner_lexical_min_df": pick("planner_lexical_min_df"),
+        "planner_lexical_min_token_len": pick("planner_lexical_min_token_len"),
+        "planner_lexical_use_idf": pick("planner_lexical_use_idf"),
+        "planner_lexical_stopwords_profile": pick("planner_lexical_stopwords_profile"),
         "qc_enforce_thresholds": pick("qc_enforce_thresholds"),
         "qc_blackdetect_mode": pick("qc_blackdetect_mode"),
         "qc_min_parse_validity_rate": pick("qc_min_parse_validity_rate"),
