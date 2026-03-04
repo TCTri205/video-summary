@@ -148,12 +148,12 @@ Khong map cac field noi bo sau vao deliverable:
 
 ## Summary text lane (runtime hien tai)
 
-- Runtime tao `summary_text.txt` truc tiep tu `summary_script.internal.{plot_summary,moral_lesson}` sau khi loc an toan.
-- Runtime van xay `summary_text.internal.json` tu cac `summary_script.json.segments[]` da duoc chon va loc an toan.
+- Runtime xay `summary_text.internal.json` tu cac `summary_script.json.segments[]` da duoc chon va loc an toan.
 - Moi cau trong `summary_text.internal.json.sentences[]` phai co:
   - `text`
   - `support_segment_ids`
   - `support_timestamps`
+- Runtime tao `summary_text.txt` bang cach ghep cac cau tu `summary_text.internal.json`, sau do them `plot_summary` va `moral_lesson` tu internal payload.
 - `summary_text.internal.json` duoc dung cho provenance/coverage va tinh metric text-video consistency.
 
 ## Text-video consistency metrics

@@ -92,9 +92,9 @@ Khong duoc dua cac field noi bo sau vao deliverable:
 
 ## Retry va parse-repair policy
 
-1. Lan 1: infer binh thuong (`temperature` thap hoac `do_sample=false`).
-2. Lan 2: neu parse fail, goi prompt "JSON repair" voi output loi.
-3. Lan 3: neu van fail, fallback output trung tinh hop internal schema va gan `quality_flags` canh bao.
+1. Lan 1: infer binh thuong (`temperature` thap hoac `do_sample=false`), thu backend `api`, fallback `local`.
+2. Lan 2: neu infer tra ve payload khong hop le, `parse_repair` se scrub text/cai chinh sai toan bo (khong goi backend moi). Quality flag `PROMPT_LEAKAGE_REPAIRED` duoc them neu can.
+3. Neu cac backend va parse_repair van fail (hoac LLM neutral fallback), runtime tra `neutral summary` hoac heuristic fallback va gan `quality_flags` thong tin (e.g. `LLM_NEUTRAL_FALLBACK`, `LLM_BACKEND_FAILED`).
 
 ## Inference defaults de xuat (MVP deterministic)
 

@@ -5,7 +5,7 @@ Tai lieu nay la checklist nghiem thu theo tung gate cho pipeline trong `docs/Rea
 ## Huong dan su dung
 
 - QA chay theo thu tu gate tu G1 den G8.
-- Gate fail thi dung pipeline, ghi `error_code`, khong bo qua.
+- Gate fail thi dung stage va ghi `error_code`; neu la QC gate, pipeline ghi `quality_report.overall_status=fail` va co the fail-hard neu config strict (moi gate khong bat buoc stop-run tren QC normal).
 - Moi gate can luu bang chung (artifact, log, screenshot neu can).
 
 ## Gate map
@@ -92,7 +92,7 @@ Checklist:
 - [ ] `evidence.timestamps` ton tai trong context.
 - [ ] Retry/repair policy duoc ap dung neu parse fail.
 - [ ] Internal artifact (`summary_script.internal.json` neu xuat) pass `docs/Reasoning-NLP/schema/summary_script.internal.schema.json` (bao gom required fields va kieu du lieu).
-- [ ] Neu co `LLM_NEUTRAL_FALLBACK` trong `quality_flags` thi gate phai duoc danh dau blocker (run fail).
+- [ ] Neu co `LLM_NEUTRAL_FALLBACK` trong `quality_flags` thi quality report phai ghi `QC_LLM_NEUTRAL_FALLBACK` va overall_status=fail; runtime co the throw exception neu bat `--summarize-production-strict` hoac QC gate se duoc fail after G8.
 
 Pass criteria:
 
@@ -153,7 +153,7 @@ Pass criteria:
 
 - `render_success = true`.
 - `audio_present = true`.
-- `decode_error_count = 0` (hoac <= nguong he thong).
+- `decode_error_count = 0` (runtime hien tai luon tra 0, khong co phep `decode_error_count > 0`).
 
 ## G8 - Final quality report
 

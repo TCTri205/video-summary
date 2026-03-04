@@ -4,21 +4,48 @@ Tai lieu nay mo ta luong du lieu thuc te trong runtime G1->G8, cach he thong tom
 
 ## 1) End-to-end flow
 
+
 ```mermaid
 flowchart TD
     A[audio_transcripts.json\nvisual_captions.json\nraw_video.mp4] --> B[G1 validate]
     B --> C[G2 align\nmatch caption-transcript\nconfidence+fallback]
     C --> D[G3 context_build\ncontext_blocks.json]
     D --> E[G4 summarize\nsummary_script.internal.json]
-    D --> F[G5 segment_plan\nmap internal -> deliverable\nsummary_script.json\nsummary_video_manifest.json]
-    E --> F
-    F --> G[G7 assemble\nsummary_video.mp4]
+    E --> F[G5 segment_plan\nmap internal -> deliverable\nsummary_script.json\nsummary_video_manifest.json]
+    F --> M[G6 manifest
+    validate cross-file consistency]
+    M --> G[G7 assemble
+    summary_video.mp4]
     F --> H[Build summary_text.internal.json\nfrom selected segments]
-    H --> I[Build summary_text.txt\nfrom plot_summary + moral_lesson]
+    H --> I[Build summary_text.txt\nfrom sentences + plot + moral]
     G --> J[G8 QC\nquality_report.json]
     I --> J
     J --> K[deliverables/<run_id>/\nsummary_video.mp4\nsummary_text.txt]
 ```
+
+
+## 1.1) Focused G2->G8 flow
+
+```mermaid
+flowchart LR
+  G2[G2 Align
+inputs: `audio_transcripts.json`, `visual_captions.json`
+outputs: `alignment_result.json`] --> G4[G4 Summarize
+inputs: `context_blocks.json`, alignment blocks
+outputs: `summary_script.internal.json` + plot/moral] --> G5[G5 Segment Plan
+map internal segments -> `summary_script.json` + `summary_video_manifest.json`] --> G6[G6 Manifest
+validate cross-file consistency] --> G7[G7 Assemble
+ffmpeg cut/concat (keep_original_audio=true)
+outputs: `summary_video.mp4`] --> G8[G8 QC
+metrics + thresholds -> `quality_report.json`]
+```
+
+Trong luồng này, `g2_align` tạo alignment block có timestamp/confidence; `g3_context` hợp nhất context gửi sang `g4_summarize`, ở đó LLM sinh script nội bộ + các segment, rồi `g5_segment` map dữ liệu nội bộ ra deliverable manifest/script, `g6_manifest` kiểm tra cross-file consistency trước khi `g7_assemble` cắt/ghép video giữ nguyên audio gốc; `g8_qc` đo metric parse/timeline/grounding/text-video rồi đưa ra pass/fail.
+
+## 1.2) Summary text build detail
+
+- `summary_text.internal.json` được nhóm thành câu theo `summary_script.json.segments`, mỗi câu gắn `support_segment_ids`/`support_timestamps`.
+- `summary_text.txt` ghép các câu này rồi thêm `plot_summary` và `moral_lesson` từ internal payload (với các câu trùng lặp/từ rác bị lọc).
 
 ## 2) Logic view (video vs text)
 
@@ -43,7 +70,7 @@ TEXT SUMMARY LANE (runtime hien tai)
   |    |- sentences[].text
   |    |- sentences[].support_segment_ids
   |    |- sentences[].support_timestamps
-  |- build summary_text.txt from plot_summary + moral_lesson
+  |- build summary_text.txt from sentences + plot_summary + moral_lesson
 
 QC LANE
   |- classic metrics: parse/timeline/grounding/compression/audio/render
@@ -57,7 +84,7 @@ QC LANE
 - Moi cau trong `summary_text.internal.json` phai co provenance:
   - `support_segment_ids`
   - `support_timestamps`
-- Runtime hien tai tao `summary_text.txt` truc tiep tu `summary_script.internal.{plot_summary,moral_lesson}` sau khi loc an toan.
+- Runtime hien tai tao `summary_text.txt` tu `summary_text.internal.json` (cau truc sentences[] + provenance), sau do them `plot_summary` va `moral_lesson` da duoc loc an toan.
 - `summary_text.internal.json` duoc ghi de truy vet provenance/coverage va tinh metric text-video consistency.
 
 ## 4) Dynamic segment planning (runtime behavior)
@@ -101,12 +128,14 @@ sequenceDiagram
     Align-->>Runner: context_blocks
     Runner->>Summ: G4 generate_internal_summary
     Summ-->>Runner: summary_script.internal.json
-    Runner->>Planner: G5 plan_segments_from_context
-    Planner-->>Runner: summary_script.json + manifest
+    Runner->>Planner: (G4) plan_segments_from_context (internal segments)
+    Planner-->>Runner: internal segments
+    Runner->>Runner: G5 map internal -> summary_script.json + manifest
+    Runner->>Runner: G6 validate cross-file manifest consistency
     Runner->>Asm: G7 render_summary_video(ffmpeg)
     Asm-->>Runner: summary_video.mp4 (+ render_meta khi debug/replay)
     Runner->>Runner: build summary_text.internal.json from selected segments
-    Runner->>Runner: build summary_text.txt from plot_summary + moral_lesson
+    Runner->>Runner: build summary_text.txt from sentences + plot_summary + moral_lesson
     Runner->>QC: G8 compute metrics + enforce thresholds
     QC-->>Runner: quality_report.json
     Runner-->>CLI: deliverables + artifact paths

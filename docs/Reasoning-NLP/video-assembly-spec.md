@@ -44,13 +44,13 @@ Luu y: `schema_version` chi ap dung cho artifact noi bo, khong bat buoc trong de
 ## Output
 
 - `summary_video.mp4`
-- Render metadata ky thuat (`artifacts/<run_id>/g7_assemble/render_meta.json`) chi duoc ghi khi bat `--debug-artifacts` hoac `--replay` (vi du: `duration_ms`, `expected_duration_ms`, `duration_match_score`, `retry_count`, `output_video_path`)
+- Render metadata ky thuat (`artifacts/<run_id>/g7_assemble/render_meta.json`) chi duoc ghi khi bat `--debug-artifacts` hoac `--replay`, gom truong runtime: `render_success`, `audio_present`, `decode_error_count`, `duration_ms`, `expected_duration_ms`, `duration_match_score`, `retry_count`, `output_video_path`
 - `quality_report.json` chi tong hop cac metric QC lien quan den render nhu `render_success`, `audio_present`, `duration_match_score`, `black_frame_ratio`, `decode_error_count`
 
 ## Post-assembly QC (bat buoc)
 
 - Video playable, khong vo codec.
-- Co am thanh va am thanh la am thanh goc tu video nguon.
+- Co audio stream va runtime giu audio goc theo co che cut/concat; khong co step fingerprint chat am thanh cu the.
 - Noi dung video khop voi script segment theo timeline.
 - Khong co spike frame den/dong bang bat thuong vuot nguong he thong.
 

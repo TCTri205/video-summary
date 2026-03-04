@@ -22,7 +22,7 @@
 Artifacts lane:
 
 - Deliverable lien module: `summary_script.json`, `summary_video_manifest.json`, `summary_video.mp4`.
-- Runtime mac dinh (`minimal`): `alignment_result.json`, `summary_script.json`, `summary_video_manifest.json`, `summary_video.mp4`, `quality_report.json`.
+- Runtime mac dinh (emit_internal_artifacts=false): `alignment_result.json`, `summary_script.json`, `summary_video_manifest.json`, `summary_video.mp4`, `quality_report.json`.
 - Internal artifacts (`context_blocks.json`, `summary_script.internal.json`, `parse_meta.json`, `manifest_validation.json`, `render_meta.json`, `summary_text.internal.json`, `run_meta.json`) chi ghi khi bat `--debug-artifacts` hoac `--replay`.
 - Publish deliverables cho nguoi dung (runtime mac dinh): `deliverables/<run_id>/summary_video.mp4`, `deliverables/<run_id>/summary_text.txt`.
 - `final_summary.json` la contract optional artifact, khong phai output publish mac dinh cua runtime hien tai.
@@ -38,7 +38,7 @@ Artifacts lane:
 ### 2.3 Cac rang buoc runtime can ghi ro
 
 - Fallback assemble hien tai la retry safe render profile; khong co auto-merge segment o stage G7.
-- Neu `LLM_NEUTRAL_FALLBACK` xuat hien trong quality flags, run bi fail o gate QC.
+- Neu `LLM_NEUTRAL_FALLBACK` xuat hien trong quality flags, quality report se fail o gate QC; runtime co the fail-hard neu summarize_production_strict bat.
 - Backend summarize runtime ho tro: `api`, `local` (main va fallback).
 - `heuristic` chi dung cho test/integration khi bat co test-only, khong phai runtime production option.
 

@@ -61,6 +61,7 @@ Khong chen cac field tren vao deliverable neu schema global v1 khong cho phep.
   - `alignment_result.json`, `quality_report.json` validate theo internal schema local.
 - Internal profile (tu chon):
   - Dung `--use-internal-summary-schemas` de validate summary/manifest theo schema internal (`*.internal.json`).
+    (Luu y: flag nay thuoc script `docs/Reasoning-NLP/schema/validate_artifacts.py`, khong phai option cua CLI runtime.)
 
 ## Runtime publish note
 

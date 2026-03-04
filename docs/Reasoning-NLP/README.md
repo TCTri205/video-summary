@@ -61,9 +61,9 @@ Luu y quan trong:
 
 ## Runtime guarantees
 
-- Deterministic voi cung input + cung config + cung seed.
+- Deterministic o cac stage rule-based (G1-G5) voi cung config/cac tham so; LLM infer phu thuoc backend/model/seed va co the khac nhau neu backend hoac model version khac nhau.
 - Fail-fast cho cac stage G1-G7 khi gap `PipelineError`.
-- O G8, threshold fail duoc ghi vao `quality_report` voi `overall_status=fail`; process chi dung ngay khi co exception.
+- O G8, threshold fail duoc ghi vao `quality_report` voi `overall_status=fail`; mot so error (vd. `QC_LLM_NEUTRAL_FALLBACK`/strict mode) co the lac qua report va throw exception neu config `--summarize-production-strict` hoac QC fail-hard.
 - Co the replay tung stage bang artifacts trung gian.
 
 ## Rule tich hop
@@ -120,7 +120,7 @@ KPI hieu nang (nen theo doi them):
 - Moi stage phai ghi log: `run_id`, `stage`, `status`, `error_code` (neu co), `duration_ms`.
 - Khong cho phep output parse duoc nhung rong/noi dung vo nghia.
 - Khong chen voice-over moi trong MVP.
-- Neu phat hien `LLM_NEUTRAL_FALLBACK` trong quality flags, QC se ghi `QC_LLM_NEUTRAL_FALLBACK` va danh dau run fail.
+- Neu phat hien `LLM_NEUTRAL_FALLBACK` trong quality flags, QC se ghi `QC_LLM_NEUTRAL_FALLBACK` va danh dau run fail; runtime co the fail-hard neu strict gate bat.
 
 ## Huong dan chay pipeline
 
@@ -161,7 +161,7 @@ QC threshold enforcement:
   - `text_video_keyword_overlap >= 0.45`
   - `text_cta_leak_ratio <= 0.0`
 
-Artifacts mac dinh (`minimal`) se duoc ghi vao:
+Artifacts mac dinh (emit_internal_artifacts=false) se duoc ghi vao:
 
 - `artifacts/<run_id>/g2_align/alignment_result.json`
 - `artifacts/<run_id>/g5_segment/summary_script.json`

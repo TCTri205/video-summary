@@ -128,7 +128,7 @@ Tao `alignment_result.json` theo schema toi thieu:
 
 ## Quality triggers sau alignment
 
-- Neu `no_match_rate > 0.30`: gan warning `ALIGN_LOW_MATCH_COVERAGE`, kich hoat summarize mode bao thu (neutral style + confidence-aware context truncation).
+- Neu `no_match_rate > 0.30`: gan warning `ALIGN_LOW_MATCH_COVERAGE` trong quality report de ghi nhan flag QC; runtime hien tai khong tu dong chuyen sang "neutral" mode duoc mo ta.
 - Neu `median_confidence < 0.60`: gan warning `ALIGN_LOW_CONFIDENCE`.
 - Neu `high_confidence_ratio < 0.50`: gan warning `ALIGN_WEAK_GROUNDING_SIGNAL`.
 
@@ -141,7 +141,7 @@ Tao `alignment_result.json` theo schema toi thieu:
 
 ## Edge cases
 
-- Nhieu transcript cung phu hop 1 caption: ap dung tie-break rule; neu can noi, gioi han toi da 240 ky tu, uu tien cau hoan chinh.
+- Nhieu transcript cung phu hop 1 caption: ap dung tie-break rule de chon candidate duy nhat (containment > nearest); runtime hien tai khong ghep nhieu transcript lien tiep.
 - Timestamp trung nhau: giu thu tu xuat hien trong file (stable).
 - Caption rong text: van tao block, `image_text = "(khong co)"`, confidence giam.
-- Transcript overlap bat thuong: ghi `ALIGN_OVERLAP_WARNING` trong quality report.
+- Transcript overlap bat thuong: ghi nhan qua QC (khong co ma loi `ALIGN_OVERLAP_WARNING` rieng).

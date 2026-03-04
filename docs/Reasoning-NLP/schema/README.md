@@ -38,7 +38,7 @@ Muc dich: debug reasoning lane voi artifact mo rong.
 
 - `summary_script.internal.json` -> `summary_script.internal.schema.json`
 - `summary_video_manifest.internal.json` -> `summary_video_manifest.internal.schema.json`
-- Dung flag `--use-internal-summary-schemas`
+- Dung flag `--use-internal-summary-schemas` (option nay thuoc script `docs/Reasoning-NLP/schema/validate_artifacts.py`, khong phai CLI runtime).
 
 ## Cach dung
 
