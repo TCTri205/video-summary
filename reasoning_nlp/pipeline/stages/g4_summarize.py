@@ -79,6 +79,12 @@ def run_g4_summarize(
             summary_plot=str(repaired.get("plot_summary", "")),
             budget=budget,
             source_duration_ms=source_duration_ms,
+            lexical_enabled=config.planner_lexical_enabled,
+            lexical_weight=config.planner_lexical_weight,
+            lexical_min_df=config.planner_lexical_min_df,
+            lexical_min_token_len=config.planner_lexical_min_token_len,
+            lexical_use_idf=config.planner_lexical_use_idf,
+            lexical_stopwords_profile=config.planner_lexical_stopwords_profile,
         )
         repaired["segments"] = [asdict(s) for s in planned]
 

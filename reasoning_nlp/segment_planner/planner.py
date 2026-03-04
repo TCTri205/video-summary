@@ -3,9 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass
 import re
 
+from reasoning_nlp.config.defaults import DEFAULT_PLANNER_SCORING
 from reasoning_nlp.common.errors import fail
 from reasoning_nlp.common.timecode import to_ms
 from reasoning_nlp.segment_planner.budget_policy import BudgetConfig, validate_segment_duration, validate_total_duration
+from reasoning_nlp.segment_planner.content_scoring import compute_lexical_salience_scores
 from reasoning_nlp.segment_planner.role_coverage import assign_role, ensure_role_coverage
 from reasoning_nlp.summarizer.leakage_guard import is_raw_text_unsafe_for_script
 
@@ -25,6 +27,13 @@ def plan_segments_from_context(
     summary_plot: str,
     budget: BudgetConfig,
     source_duration_ms: int | None,
+    *,
+    lexical_enabled: bool = bool(DEFAULT_PLANNER_SCORING["lexical_enabled"]),
+    lexical_weight: float = float(DEFAULT_PLANNER_SCORING["lexical_weight"]),
+    lexical_min_df: int = int(DEFAULT_PLANNER_SCORING["lexical_min_df"]),
+    lexical_min_token_len: int = int(DEFAULT_PLANNER_SCORING["lexical_min_token_len"]),
+    lexical_use_idf: bool = bool(DEFAULT_PLANNER_SCORING["lexical_use_idf"]),
+    lexical_stopwords_profile: str = str(DEFAULT_PLANNER_SCORING["lexical_stopwords_profile"]),
 ) -> list[PlannedSegment]:
     if not context_blocks:
         raise fail("segment_plan", "BUDGET_NO_CONTEXT", "No context blocks to plan segments")
@@ -37,7 +46,16 @@ def plan_segments_from_context(
         target_total_ms=target_total_ms,
         preferred_segment_ms=preferred_segment_ms,
     )
-    picks = _pick_block_indexes(context_blocks, target_count)
+    picks = _pick_block_indexes(
+        context_blocks,
+        target_count,
+        lexical_enabled=lexical_enabled,
+        lexical_weight=lexical_weight,
+        lexical_min_df=lexical_min_df,
+        lexical_min_token_len=lexical_min_token_len,
+        lexical_use_idf=lexical_use_idf,
+        lexical_stopwords_profile=lexical_stopwords_profile,
+    )
 
     segments: list[PlannedSegment] = []
     total_duration_ms = 0
@@ -113,12 +131,35 @@ def plan_segments_from_context(
     return segments
 
 
-def _pick_block_indexes(context_blocks: list[dict[str, object]], target_count: int) -> list[int]:
+def _pick_block_indexes(
+    context_blocks: list[dict[str, object]],
+    target_count: int,
+    *,
+    lexical_enabled: bool,
+    lexical_weight: float,
+    lexical_min_df: int,
+    lexical_min_token_len: int,
+    lexical_use_idf: bool,
+    lexical_stopwords_profile: str,
+) -> list[int]:
     total_blocks = len(context_blocks)
     if total_blocks == 0:
         return []
 
-    scores = [_score_block(x) for x in context_blocks]
+    base_scores = [_score_block(x) for x in context_blocks]
+    lexical_scores = compute_lexical_salience_scores(
+        context_blocks,
+        enabled=lexical_enabled,
+        weight=lexical_weight,
+        min_df=lexical_min_df,
+        min_token_len=lexical_min_token_len,
+        use_idf=lexical_use_idf,
+        stopwords_profile=lexical_stopwords_profile,
+    )
+    scores = [
+        _composite_score(context_blocks[idx], base_scores[idx], lexical_scores[idx], lexical_weight)
+        for idx in range(total_blocks)
+    ]
     target = max(1, min(target_count, total_blocks))
 
     picks: list[int] = []
@@ -297,6 +338,40 @@ def _score_block(block: dict[str, object]) -> float:
         score -= 0.20
 
     return score
+
+
+def _composite_score(block: dict[str, object], base_score: float, lexical_score: float, lexical_weight: float) -> float:
+    weight = _effective_lexical_weight(block, lexical_weight)
+    if weight <= 0.0:
+        return float(base_score)
+    bounded = max(0.0, min(1.0, float(lexical_score)))
+    return float(base_score) + (weight * bounded)
+
+
+def _effective_lexical_weight(block: dict[str, object], lexical_weight: float) -> float:
+    weight = max(0.0, min(1.0, float(lexical_weight)))
+    if weight <= 0.0:
+        return 0.0
+
+    fallback_type = str(block.get("fallback_type", "")).strip().lower()
+    text = " ".join(
+        [
+            str(block.get("dialogue_text", "")).strip(),
+            str(block.get("image_text", "")).strip(),
+        ]
+    ).strip()
+
+    if not text or text == "(khong co)":
+        return 0.0
+    if is_raw_text_unsafe_for_script(text):
+        return 0.0
+    if _looks_like_cta(text):
+        return 0.0
+    if fallback_type == "no_match":
+        return 0.0
+    if fallback_type == "nearest":
+        return weight * 0.25
+    return weight
 
 
 def _looks_like_cta(text: str) -> bool:
