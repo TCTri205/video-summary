@@ -27,6 +27,12 @@ class CLIConfigTests(unittest.TestCase):
             summarize_prompt_max_chars=12000,
             summarize_production_strict=True,
             allow_heuristic_for_tests=False,
+            planner_lexical_enabled=False,
+            planner_lexical_weight=0.33,
+            planner_lexical_min_df=2,
+            planner_lexical_min_token_len=3,
+            planner_lexical_use_idf=False,
+            planner_lexical_stopwords_profile="vi",
             qc_enforce_thresholds=False,
             qc_blackdetect_mode="auto",
             qc_min_parse_validity_rate=0.995,
@@ -47,6 +53,12 @@ class CLIConfigTests(unittest.TestCase):
         self.assertEqual(config.model_version, "Qwen/Qwen2.5-1.5B-Instruct")
         self.assertEqual(config.summarize_backend, "local")
         self.assertEqual(config.summarize_fallback_backend, "api")
+        self.assertFalse(config.planner_lexical_enabled)
+        self.assertAlmostEqual(config.planner_lexical_weight, 0.33)
+        self.assertEqual(config.planner_lexical_min_df, 2)
+        self.assertEqual(config.planner_lexical_min_token_len, 3)
+        self.assertFalse(config.planner_lexical_use_idf)
+        self.assertEqual(config.planner_lexical_stopwords_profile, "vi")
         self.assertFalse(config.emit_internal_artifacts)
 
 

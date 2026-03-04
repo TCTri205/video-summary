@@ -215,6 +215,67 @@ python docs/Reasoning-NLP/schema/validate_artifacts.py \
   --source-duration-ms 1900000
 ```
 
+### 5) Benchmark tuning lexical planner (A/B)
+
+Co che planner lexical da duoc expose qua CLI de benchmark nhanh:
+
+- `--planner-lexical-enabled` / `--no-planner-lexical-enabled`
+- `--planner-lexical-weight` (goi y dai benchmark: `0.0`, `0.10`, `0.18`, `0.25`)
+- `--planner-lexical-min-df`
+- `--planner-lexical-min-token-len`
+- `--planner-lexical-use-idf` / `--no-planner-lexical-use-idf`
+- `--planner-lexical-stopwords-profile` (hien tai: `vi`)
+
+Mau run baseline (tat lexical):
+
+```bash
+python -m reasoning_nlp.cli \
+  --audio-transcripts Data/processed/video1/extraction/audio_transcripts.json \
+  --visual-captions Data/processed/video1/extraction/visual_captions.json \
+  --raw-video Data/raw/video1.mp4 \
+  --stage g8 \
+  --run-id run_ab_base_001 \
+  --no-planner-lexical-enabled
+```
+
+Mau run variant (bat lexical + weight trung binh):
+
+```bash
+python -m reasoning_nlp.cli \
+  --audio-transcripts Data/processed/video1/extraction/audio_transcripts.json \
+  --visual-captions Data/processed/video1/extraction/visual_captions.json \
+  --raw-video Data/raw/video1.mp4 \
+  --stage g8 \
+  --run-id run_ab_lex_001 \
+  --planner-lexical-enabled \
+  --planner-lexical-weight 0.18 \
+  --planner-lexical-min-df 1 \
+  --planner-lexical-min-token-len 2 \
+  --planner-lexical-use-idf \
+  --planner-lexical-stopwords-profile vi
+```
+
+Tieu chi danh gia A/B (uu tien):
+
+- Khong duoc regression `timeline_consistency_score` va `grounding_score`.
+- Khong tang `text_cta_leak_ratio`.
+- Uu tien cai thien `text_video_keyword_overlap` va `text_segment_coverage_ratio`.
+- Neu metric xau di, giam `--planner-lexical-weight` hoac tat lexical de rollback an toan.
+
+So sanh nhanh baseline/variant tu 2 `quality_report.json`:
+
+```bash
+python scripts/compare_quality_reports.py \
+  --baseline artifacts/run_ab_base_001/g8_qc/quality_report.json \
+  --variant artifacts/run_ab_lex_001/g8_qc/quality_report.json \
+  --out artifacts/ab_compare_run_ab_base_001_vs_run_ab_lex_001.json
+```
+
+Script se check cac metric trong rollout policy va tra `recommendation`:
+
+- `accept_variant` khi status + metric deu dat.
+- `keep_baseline` neu co regression.
+
 ## Tai lieu bo sung
 
 - Deliverable schema (single source): `contracts/v1/template/*.schema.json`.

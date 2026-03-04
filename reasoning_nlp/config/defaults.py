@@ -38,6 +38,15 @@ DEFAULT_SEGMENT_BUDGET = {
     "target_ratio_tolerance": 0.20,
 }
 
+DEFAULT_PLANNER_SCORING = {
+    "lexical_enabled": True,
+    "lexical_weight": 0.18,
+    "lexical_min_df": 1,
+    "lexical_min_token_len": 2,
+    "lexical_use_idf": True,
+    "lexical_stopwords_profile": "vi",
+}
+
 DEFAULT_QC = {
     "enforce_thresholds": False,
     "blackdetect_mode": "auto",

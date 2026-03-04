@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 from typing import Any, Mapping
 
-from reasoning_nlp.config.defaults import DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SUMMARIZATION
+from reasoning_nlp.config.defaults import DEFAULT_PLANNER_SCORING, DEFAULT_QC, DEFAULT_RUNTIME, DEFAULT_SUMMARIZATION
 from reasoning_nlp.pipeline import PipelineConfig
 
 
@@ -83,6 +83,22 @@ def build_pipeline_config(values: Mapping[str, Any]) -> PipelineConfig:
             default=bool(DEFAULT_SUMMARIZATION["production_strict"]),
         ),
         allow_heuristic_for_tests=coerce_bool(values.get("allow_heuristic_for_tests", False), default=False),
+        planner_lexical_enabled=coerce_bool(
+            values.get("planner_lexical_enabled", DEFAULT_PLANNER_SCORING["lexical_enabled"]),
+            default=bool(DEFAULT_PLANNER_SCORING["lexical_enabled"]),
+        ),
+        planner_lexical_weight=float(values.get("planner_lexical_weight", DEFAULT_PLANNER_SCORING["lexical_weight"])),
+        planner_lexical_min_df=int(values.get("planner_lexical_min_df", DEFAULT_PLANNER_SCORING["lexical_min_df"])),
+        planner_lexical_min_token_len=int(
+            values.get("planner_lexical_min_token_len", DEFAULT_PLANNER_SCORING["lexical_min_token_len"])
+        ),
+        planner_lexical_use_idf=coerce_bool(
+            values.get("planner_lexical_use_idf", DEFAULT_PLANNER_SCORING["lexical_use_idf"]),
+            default=bool(DEFAULT_PLANNER_SCORING["lexical_use_idf"]),
+        ),
+        planner_lexical_stopwords_profile=str(
+            values.get("planner_lexical_stopwords_profile", DEFAULT_PLANNER_SCORING["lexical_stopwords_profile"])
+        ),
         qc_enforce_thresholds=coerce_bool(values.get("qc_enforce_thresholds", DEFAULT_QC["enforce_thresholds"]), default=False),
         qc_blackdetect_mode=str(values.get("qc_blackdetect_mode", DEFAULT_QC["blackdetect_mode"])),
         qc_min_parse_validity_rate=float(values.get("qc_min_parse_validity_rate", DEFAULT_QC["min_parse_validity_rate"])),
