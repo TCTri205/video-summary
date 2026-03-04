@@ -92,7 +92,7 @@ def run_video_pipeline(video_path: str, output_root: str, scene_threshold: float
     )
 
     print("(Detecting scenes)")
-    timestamps = processor.detect_scenes(threshold=scene_threshold)
+    timestamps = processor.detect_voice_pauses()
     print(f"(Found {len(timestamps)} scenes)")
 
     print("(Extracting audio)")
