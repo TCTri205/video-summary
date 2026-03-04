@@ -50,6 +50,40 @@ class VideoPreprocessor:
 
         return timestamps
 
+    def detect_voice_pauses(self, silence_db=-35, silence_duration=0.8):
+        command = [
+            "ffmpeg",
+            "-i", self.video_path,
+            "-af", f"silencedetect=noise={silence_db}dB:d={silence_duration}",
+            "-f", "null",
+            "-"
+        ]
+
+        result = subprocess.run(
+            command,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True
+        )
+
+        lines = result.stderr.split("\n")
+
+        silence_starts = []
+        silence_ends = []
+
+        for line in lines:
+            if "silence_start" in line:
+                silence_starts.append(float(line.split("silence_start:")[1].strip()))
+            if "silence_end" in line:
+                silence_ends.append(float(line.split("silence_end:")[1].split("|")[0].strip()))
+
+        timestamps = []
+        for start, end in zip(silence_starts, silence_ends):
+            midpoint = (start + end) / 2
+            timestamps.append(midpoint)
+
+        return timestamps
+
     def extract_audio(self):
         command = [
             "ffmpeg",
