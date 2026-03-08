@@ -51,8 +51,6 @@ from reasoning_nlp.qc.metrics import (
     compute_timeline_consistency,
 )
 from reasoning_nlp.qc.report_builder import build_quality_report
-from reasoning_nlp.segment_planner.budget_policy import BudgetConfig
-from reasoning_nlp.segment_planner.planner import plan_segments_from_context
 from reasoning_nlp.summarizer.grounding_checks import check_grounding
 from reasoning_nlp.summarizer.leakage_guard import contains_hard_prompt_leakage, contains_soft_prompt_leakage
 from reasoning_nlp.summarizer.llm_client import generate_internal_summary
@@ -74,6 +72,7 @@ class PipelineConfig:
     audio_transcripts_path: str
     visual_captions_path: str
     raw_video_path: str
+    scene_metadata_path: str = ""
     run_id: str | None = None
     artifacts_root: str = DEFAULT_RUNTIME["artifacts_root"]
     deliverables_root: str = DEFAULT_RUNTIME["deliverables_root"]
@@ -101,6 +100,8 @@ class PipelineConfig:
     max_total_duration_ms: int | None = int(DEFAULT_SEGMENT_BUDGET["max_total_duration_ms"])
     target_ratio: float | None = DEFAULT_SEGMENT_BUDGET["target_ratio"]
     target_ratio_tolerance: float = float(DEFAULT_SEGMENT_BUDGET["target_ratio_tolerance"])
+    min_candidate_segment_ms: int = int(DEFAULT_SEGMENT_BUDGET["min_candidate_segment_ms"])
+    max_selected_segments: int = int(DEFAULT_SEGMENT_BUDGET["max_selected_segments"])
     planner_lexical_enabled: bool = bool(DEFAULT_PLANNER_SCORING["lexical_enabled"])
     planner_lexical_weight: float = float(DEFAULT_PLANNER_SCORING["lexical_weight"])
     planner_lexical_min_df: int = int(DEFAULT_PLANNER_SCORING["lexical_min_df"])
@@ -166,7 +167,16 @@ def run_pipeline_g1_g5(config: PipelineConfig) -> dict[str, Any]:
             stage_results,
             logger,
         )
-        script_payload, manifest_payload = run_g5_segment_plan(config, context_payload, summary_internal_payload, base, stage_results, logger)
+        script_payload, manifest_payload = run_g5_segment_plan(
+            config,
+            context_payload,
+            summary_internal_payload,
+            validated.scene_timestamps_ms,
+            source_duration_ms,
+            base,
+            stage_results,
+            logger,
+        )
     except PipelineError:
         raise
     except Exception as exc:
@@ -229,6 +239,8 @@ def run_pipeline_g1_g8(config: PipelineConfig) -> dict[str, Any]:
             config,
             context_payload,
             summary_internal_payload,
+            validated.scene_timestamps_ms,
+            source_duration_ms,
             base,
             stage_results,
             logger,
@@ -934,6 +946,8 @@ def _replay_or_run_g5(
     config: PipelineConfig,
     context_payload: list[dict[str, Any]],
     summary_internal_payload: dict[str, Any],
+    scene_timestamps_ms: list[int],
+    source_duration_ms: int,
     base: Path,
     stage_results: list[dict[str, Any]],
     logger,
@@ -956,7 +970,16 @@ def _replay_or_run_g5(
                 return script_payload, manifest_payload
             except Exception:
                 pass
-    return run_g5_segment_plan(config, context_payload, summary_internal_payload, base, stage_results, logger)
+    return run_g5_segment_plan(
+        config,
+        context_payload,
+        summary_internal_payload,
+        scene_timestamps_ms,
+        source_duration_ms,
+        base,
+        stage_results,
+        logger,
+    )
 
 
 def _replay_or_run_g6(
@@ -1013,6 +1036,7 @@ def _validated_input_from_payload(payload: dict[str, Any]):
         input_profile=str(payload.get("input_profile", "strict_contract_v1")),
         transcripts=transcripts,
         captions=captions,
+        scene_timestamps_ms=[int(x) for x in payload.get("scene_timestamps_ms", []) if isinstance(x, int)],
         raw_video_path=str(payload.get("raw_video_path", "")),
     )
     source_duration_ms = payload.get("source_duration_ms")
@@ -1033,6 +1057,7 @@ def _load_json_if_exists(path: Path) -> dict[str, Any] | list[dict[str, Any]] | 
 def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
     audio_fp = _file_fingerprint(Path(config.audio_transcripts_path), strict_hash=True)
     caption_fp = _file_fingerprint(Path(config.visual_captions_path), strict_hash=True)
+    scene_fp = _file_fingerprint(Path(config.scene_metadata_path), strict_hash=True)
     video_fp = _file_fingerprint(Path(config.raw_video_path), strict_hash=bool(config.strict_replay_hash))
     runtime = _collect_runtime_fingerprints()
     schema_checksums = _collect_schema_checksums()
@@ -1040,6 +1065,7 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
     input_checksums = {
         "audio_transcripts_sha256": audio_fp["sha256"],
         "visual_captions_sha256": caption_fp["sha256"],
+        "scene_metadata_sha256": scene_fp["sha256"],
         "raw_video_sha256": video_fp["sha256"],
     }
     tracked = {
@@ -1083,6 +1109,7 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
         "schema_checksums": schema_checksums,
         "audio_transcripts_quick": audio_fp["quick"],
         "visual_captions_quick": caption_fp["quick"],
+        "scene_metadata_quick": scene_fp["quick"],
         "raw_video_quick": video_fp["quick"],
         **input_checksums,
     }
@@ -1094,9 +1121,11 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
             "pipeline_version": runtime["pipeline_version"],
             "audio_transcripts_sha256": input_checksums["audio_transcripts_sha256"],
             "visual_captions_sha256": input_checksums["visual_captions_sha256"],
+            "scene_metadata_sha256": input_checksums["scene_metadata_sha256"],
             "raw_video_sha256": input_checksums["raw_video_sha256"],
             "audio_transcripts_quick": audio_fp["quick"],
             "visual_captions_quick": caption_fp["quick"],
+            "scene_metadata_quick": scene_fp["quick"],
             "raw_video_quick": video_fp["quick"],
             "source_duration_ms": config.source_duration_ms,
         },
@@ -1123,8 +1152,10 @@ def _build_run_meta(config: PipelineConfig) -> dict[str, Any]:
             "schema_summary_internal_sha256": schema_checksums.get("summary_script.internal.schema.json", "missing"),
         },
         "segment_plan": {
-            "min_segment_duration_ms": config.min_segment_duration_ms,
-            "max_segment_duration_ms": config.max_segment_duration_ms,
+            "scene_metadata_sha256": input_checksums["scene_metadata_sha256"],
+            "scene_metadata_quick": scene_fp["quick"],
+            "min_candidate_segment_ms": config.min_candidate_segment_ms,
+            "max_selected_segments": config.max_selected_segments,
             "min_total_duration_ms": config.min_total_duration_ms,
             "max_total_duration_ms": config.max_total_duration_ms,
             "target_ratio": config.target_ratio,

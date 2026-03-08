@@ -21,6 +21,7 @@ class PipelinePromptLeakageTests(unittest.TestCase):
 
             transcripts = data_dir / "audio_transcripts.json"
             captions = data_dir / "visual_captions.json"
+            scene_metadata = data_dir / "scene_metadata.json"
             transcripts.write_text(
                 json.dumps(
                     [
@@ -51,11 +52,28 @@ class PipelinePromptLeakageTests(unittest.TestCase):
                 + "\n",
                 encoding="utf-8",
             )
+            scene_metadata.write_text(
+                json.dumps(
+                    {
+                        "total_keyframes": 3,
+                        "frames": [
+                            {"frame_id": 1, "timestamp": "00:00:01.000", "file_path": "keyframes/f1.jpg"},
+                            {"frame_id": 2, "timestamp": "00:00:03.000", "file_path": "keyframes/f2.jpg"},
+                            {"frame_id": 3, "timestamp": "00:00:05.000", "file_path": "keyframes/f3.jpg"},
+                        ],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
 
             result = run_pipeline_g1_g8(
                 PipelineConfig(
                     audio_transcripts_path=str(transcripts),
                     visual_captions_path=str(captions),
+                    scene_metadata_path=str(scene_metadata),
                     raw_video_path=str(source_video),
                     artifacts_root=str(root / "artifacts"),
                     deliverables_root=str(root / "deliverables"),

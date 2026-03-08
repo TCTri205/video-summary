@@ -36,6 +36,8 @@ DEFAULT_SEGMENT_BUDGET = {
     "max_total_duration_ms": 180000,
     "target_ratio": 0.10,
     "target_ratio_tolerance": 0.20,
+    "min_candidate_segment_ms": 500,
+    "max_selected_segments": 15,
 }
 
 DEFAULT_PLANNER_SCORING = {

@@ -1,14 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
 from reasoning_nlp.common.errors import PipelineError, fail
 from reasoning_nlp.common.io_json import write_json
 from reasoning_nlp.pipeline.stages.stage_utils import append_stage_result
-from reasoning_nlp.segment_planner.budget_policy import BudgetConfig
-from reasoning_nlp.segment_planner.planner import plan_segments_from_context
 from reasoning_nlp.summarizer.grounding_checks import check_grounding
 from reasoning_nlp.summarizer.llm_client import generate_internal_summary
 from reasoning_nlp.summarizer.parse_repair import repair_internal_summary
@@ -66,27 +63,8 @@ def run_g4_summarize(
         else:
             repaired["quality_flags"] = list(sorted(set(repaired["quality_flags"])))
 
-        budget = BudgetConfig(
-            min_segment_duration_ms=config.min_segment_duration_ms,
-            max_segment_duration_ms=config.max_segment_duration_ms,
-            min_total_duration_ms=config.min_total_duration_ms,
-            max_total_duration_ms=config.max_total_duration_ms,
-            target_ratio=config.target_ratio,
-            target_ratio_tolerance=config.target_ratio_tolerance,
-        )
-        planned = plan_segments_from_context(
-            context_blocks=context_payload,
-            summary_plot=str(repaired.get("plot_summary", "")),
-            budget=budget,
-            source_duration_ms=source_duration_ms,
-            lexical_enabled=config.planner_lexical_enabled,
-            lexical_weight=config.planner_lexical_weight,
-            lexical_min_df=config.planner_lexical_min_df,
-            lexical_min_token_len=config.planner_lexical_min_token_len,
-            lexical_use_idf=config.planner_lexical_use_idf,
-            lexical_stopwords_profile=config.planner_lexical_stopwords_profile,
-        )
-        repaired["segments"] = [asdict(s) for s in planned]
+        del source_duration_ms
+        repaired["segments"] = []
 
         schema_path = Path("docs/Reasoning-NLP/schema/summary_script.internal.schema.json")
         validate_summary_internal_artifact(repaired, schema_path=schema_path)

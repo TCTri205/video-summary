@@ -15,12 +15,14 @@ class ValidatedInput:
     input_profile: str
     transcripts: list[CanonicalTranscript]
     captions: list[CanonicalCaption]
+    scene_timestamps_ms: list[int]
     raw_video_path: str
 
 
 def validate_and_normalize_inputs(
     audio_transcripts_path: Path,
     visual_captions_path: Path,
+    scene_metadata_path: Path,
     raw_video_path: Path,
     profile: str,
 ) -> ValidatedInput:
@@ -30,11 +32,14 @@ def validate_and_normalize_inputs(
         raise fail("validate", "SCHEMA_INPUT_MISSING_FILE", f"Missing file: {visual_captions_path}")
     if not raw_video_path.exists():
         raise fail("validate", "SCHEMA_INPUT_MISSING_FILE", f"Missing file: {raw_video_path}")
+    if not scene_metadata_path.exists():
+        raise fail("validate", "SCHEMA_INPUT_MISSING_FILE", f"Missing file: {scene_metadata_path}")
     if raw_video_path.stat().st_size <= 0:
         raise fail("validate", "TIME_SOURCE_VIDEO_INVALID", "raw_video.mp4 must have size > 0")
 
     transcripts_payload = read_json(audio_transcripts_path)
     captions_payload = read_json(visual_captions_path)
+    scene_metadata_payload = read_json(scene_metadata_path)
 
     if profile not in {"strict_contract_v1", "legacy_member1"}:
         raise fail("validate", "SCHEMA_INPUT_PROFILE_UNSUPPORTED", f"Unsupported profile: {profile}")
@@ -44,13 +49,46 @@ def validate_and_normalize_inputs(
     else:
         transcripts = _normalize_legacy_transcripts(transcripts_payload)
     captions = _normalize_captions(captions_payload)
+    scene_timestamps_ms = _normalize_scene_metadata(scene_metadata_payload)
 
     return ValidatedInput(
         input_profile=profile,
         transcripts=transcripts,
         captions=captions,
+        scene_timestamps_ms=scene_timestamps_ms,
         raw_video_path=str(raw_video_path),
     )
+
+
+def _normalize_scene_metadata(payload: Any) -> list[int]:
+    if not isinstance(payload, dict):
+        raise fail("validate", "SCHEMA_INPUT_SCENE_METADATA_TYPE", "scene_metadata must be an object")
+
+    frames = payload.get("frames")
+    if not isinstance(frames, list):
+        raise fail("validate", "SCHEMA_INPUT_SCENE_METADATA_FRAMES", "scene_metadata.frames must be an array")
+
+    timestamps: list[int] = []
+    for idx, frame in enumerate(frames, start=1):
+        if not isinstance(frame, dict):
+            raise fail("validate", "SCHEMA_INPUT_SCENE_ITEM_TYPE", f"scene_metadata.frames[{idx}] must be an object")
+        timestamp = frame.get("timestamp")
+        if not isinstance(timestamp, str):
+            raise fail(
+                "validate",
+                "SCHEMA_INPUT_SCENE_FIELD_TYPE",
+                f"scene_metadata.frames[{idx}].timestamp must be string",
+            )
+        try:
+            ts_ms = to_ms(timestamp)
+        except Exception as exc:
+            raise fail("validate", "TIME_PARSE_SCENE_TIMESTAMP", f"scene_metadata.frames[{idx}]: {exc}") from exc
+        if ts_ms < 0:
+            raise fail("validate", "TIME_NEGATIVE_VALUE", f"scene_metadata.frames[{idx}] must be >= 0")
+        timestamps.append(ts_ms)
+
+    dedup_sorted = sorted(set(timestamps))
+    return dedup_sorted
 
 
 def _normalize_strict_transcripts(payload: Any) -> list[CanonicalTranscript]:

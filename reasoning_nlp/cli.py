@@ -21,6 +21,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Run Reasoning-NLP pipeline")
     parser.add_argument("--audio-transcripts", required=True, help="Path to audio_transcripts.json")
     parser.add_argument("--visual-captions", required=True, help="Path to visual_captions.json")
+    parser.add_argument("--scene-metadata", required=True, help="Path to scene_metadata.json")
     parser.add_argument("--raw-video", required=True, help="Path to raw_video.mp4")
     parser.add_argument("--stage", choices=["g3", "g5", "g8"], default="g8", help="Pipeline target stage")
     parser.add_argument("--run-id", default=None, help="Run id; required for replay")
@@ -133,6 +134,7 @@ def build_config_from_args(args: argparse.Namespace) -> PipelineConfig:
     payload: dict[str, Any] = {
         "audio_transcripts_path": pick("audio_transcripts"),
         "visual_captions_path": pick("visual_captions"),
+        "scene_metadata_path": pick("scene_metadata"),
         "raw_video_path": pick("raw_video"),
         "run_id": pick("run_id"),
         "artifacts_root": pick("artifacts_root"),

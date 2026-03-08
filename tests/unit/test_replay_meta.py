@@ -11,6 +11,7 @@ class ReplayMetaTests(unittest.TestCase):
         cfg = PipelineConfig(
             audio_transcripts_path="missing_audio.json",
             visual_captions_path="missing_caption.json",
+            scene_metadata_path="missing_scene_metadata.json",
             raw_video_path="missing_video.mp4",
         )
         meta = _build_run_meta(cfg)
@@ -18,6 +19,7 @@ class ReplayMetaTests(unittest.TestCase):
         self.assertIn("pipeline_version", tracked)
         self.assertIn("ffmpeg_version", tracked)
         self.assertIn("schema_checksums", tracked)
+        self.assertIn("scene_metadata_sha256", tracked)
 
 
 if __name__ == "__main__":

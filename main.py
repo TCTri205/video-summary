@@ -479,6 +479,7 @@ def main() -> int:
             {
                 "audio_transcripts_path": str(transcripts_path),
                 "visual_captions_path": str(captions_path),
+                "scene_metadata_path": str(metadata_path),
                 "raw_video_path": str(video_path),
                 "run_id": run_id,
                 "artifacts_root": artifacts_root,

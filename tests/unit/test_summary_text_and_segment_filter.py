@@ -3,8 +3,7 @@ from __future__ import annotations
 import unittest
 
 from reasoning_nlp.pipeline.orchestrator import _build_summary_text, _build_summary_text_internal
-from reasoning_nlp.segment_planner.budget_policy import BudgetConfig
-from reasoning_nlp.segment_planner.planner import plan_segments_from_context
+from reasoning_nlp.segment_planner.extraction_selector import select_segments_from_extraction_boundaries
 
 
 class SummaryTextAndSegmentFilterTests(unittest.TestCase):
@@ -78,7 +77,7 @@ class SummaryTextAndSegmentFilterTests(unittest.TestCase):
         self.assertIn("Mo dau", text)
         self.assertIn("Cuoi cung", text)
 
-    def test_planner_avoids_cta_when_possible(self) -> None:
+    def test_extraction_selector_avoids_cta_when_possible(self) -> None:
         context_blocks = [
             {
                 "timestamp": "00:00:00.500",
@@ -109,24 +108,21 @@ class SummaryTextAndSegmentFilterTests(unittest.TestCase):
                 "fallback_type": "containment",
             },
         ]
-        budget = BudgetConfig(
-            min_segment_duration_ms=1200,
-            max_segment_duration_ms=5000,
+        segments = select_segments_from_extraction_boundaries(
+            context_blocks=context_blocks,
+            scene_timestamps_ms=[2000, 5000, 8000],
+            source_duration_ms=12000,
+            summary_plot="plot",
+            min_candidate_segment_ms=500,
+            max_selected_segments=3,
             min_total_duration_ms=None,
             max_total_duration_ms=None,
-        )
-
-        segments = plan_segments_from_context(
-            context_blocks=context_blocks,
-            summary_plot="plot",
-            budget=budget,
-            source_duration_ms=12000,
         )
 
         joined = " ".join(seg.script_text.lower() for seg in segments)
         self.assertNotIn("subscribe", joined)
 
-    def test_planner_skips_prompt_leakage_source_text(self) -> None:
+    def test_extraction_selector_skips_prompt_leakage_source_text(self) -> None:
         context_blocks = [
             {
                 "timestamp": "00:00:00.500",
@@ -143,18 +139,15 @@ class SummaryTextAndSegmentFilterTests(unittest.TestCase):
                 "fallback_type": "containment",
             },
         ]
-        budget = BudgetConfig(
-            min_segment_duration_ms=1200,
-            max_segment_duration_ms=5000,
+        segments = select_segments_from_extraction_boundaries(
+            context_blocks=context_blocks,
+            scene_timestamps_ms=[2000, 6000],
+            source_duration_ms=9000,
+            summary_plot="Tom tat an toan",
+            min_candidate_segment_ms=500,
+            max_selected_segments=2,
             min_total_duration_ms=None,
             max_total_duration_ms=None,
-        )
-
-        segments = plan_segments_from_context(
-            context_blocks=context_blocks,
-            summary_plot="Tom tat an toan",
-            budget=budget,
-            source_duration_ms=9000,
         )
 
         joined = " ".join(seg.script_text.lower() for seg in segments)

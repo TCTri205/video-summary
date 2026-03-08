@@ -25,6 +25,7 @@ def run_g1_validate(
         validated = validate_and_normalize_inputs(
             audio_transcripts_path=Path(config.audio_transcripts_path),
             visual_captions_path=Path(config.visual_captions_path),
+            scene_metadata_path=Path(config.scene_metadata_path),
             raw_video_path=Path(config.raw_video_path),
             profile=config.input_profile,
         )
@@ -39,6 +40,7 @@ def run_g1_validate(
                     "input_profile": validated.input_profile,
                     "transcripts": [asdict(x) for x in validated.transcripts],
                     "captions": [asdict(x) for x in validated.captions],
+                    "scene_timestamps_ms": list(validated.scene_timestamps_ms),
                     "raw_video_path": validated.raw_video_path,
                     "source_duration_ms": source_duration_ms,
                 },

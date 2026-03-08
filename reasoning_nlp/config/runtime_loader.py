@@ -66,6 +66,7 @@ def build_pipeline_config(values: Mapping[str, Any]) -> PipelineConfig:
     return PipelineConfig(
         audio_transcripts_path=str(values["audio_transcripts_path"]),
         visual_captions_path=str(values["visual_captions_path"]),
+        scene_metadata_path=str(values["scene_metadata_path"]),
         raw_video_path=str(values["raw_video_path"]),
         run_id=values.get("run_id"),
         artifacts_root=str(values.get("artifacts_root", DEFAULT_RUNTIME["artifacts_root"])),
@@ -90,6 +91,10 @@ def build_pipeline_config(values: Mapping[str, Any]) -> PipelineConfig:
             else None
         ),
         target_ratio_tolerance=float(values.get("target_ratio_tolerance", DEFAULT_SEGMENT_BUDGET["target_ratio_tolerance"])),
+        min_candidate_segment_ms=int(
+            values.get("min_candidate_segment_ms", DEFAULT_SEGMENT_BUDGET["min_candidate_segment_ms"])
+        ),
+        max_selected_segments=int(values.get("max_selected_segments", DEFAULT_SEGMENT_BUDGET["max_selected_segments"])),
         model_version=str(values.get("model_version", DEFAULT_SUMMARIZATION["model_version"])),
         summarize_backend=str(values.get("summarize_backend", DEFAULT_SUMMARIZATION["backend"])),
         summarize_fallback_backend=str(values.get("summarize_fallback_backend", DEFAULT_SUMMARIZATION["fallback_backend"])),

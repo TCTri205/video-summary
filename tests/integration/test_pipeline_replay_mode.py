@@ -21,6 +21,7 @@ class PipelineReplayModeTests(unittest.TestCase):
 
             transcripts = data_dir / "audio_transcripts.json"
             captions = data_dir / "visual_captions.json"
+            scene_metadata = data_dir / "scene_metadata.json"
             transcripts.write_text(
                 json.dumps(
                     [
@@ -47,10 +48,27 @@ class PipelineReplayModeTests(unittest.TestCase):
                 + "\n",
                 encoding="utf-8",
             )
+            scene_metadata.write_text(
+                json.dumps(
+                    {
+                        "total_keyframes": 3,
+                        "frames": [
+                            {"frame_id": 1, "timestamp": "00:00:01.000", "file_path": "keyframes/f1.jpg"},
+                            {"frame_id": 2, "timestamp": "00:00:03.000", "file_path": "keyframes/f2.jpg"},
+                            {"frame_id": 3, "timestamp": "00:00:05.000", "file_path": "keyframes/f3.jpg"},
+                        ],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
 
             cfg = PipelineConfig(
                 audio_transcripts_path=str(transcripts),
                 visual_captions_path=str(captions),
+                scene_metadata_path=str(scene_metadata),
                 raw_video_path=str(source_video),
                 artifacts_root=str(root / "artifacts"),
                 run_id="replay_case",
@@ -67,6 +85,7 @@ class PipelineReplayModeTests(unittest.TestCase):
             replay_cfg = PipelineConfig(
                 audio_transcripts_path=str(transcripts),
                 visual_captions_path=str(captions),
+                scene_metadata_path=str(scene_metadata),
                 raw_video_path=str(source_video),
                 artifacts_root=str(root / "artifacts"),
                 run_id="replay_case",
@@ -100,6 +119,7 @@ class PipelineReplayModeTests(unittest.TestCase):
 
             transcripts = data_dir / "audio_transcripts.json"
             captions = data_dir / "visual_captions.json"
+            scene_metadata = data_dir / "scene_metadata.json"
             transcripts.write_text(
                 json.dumps(
                     [
@@ -126,10 +146,27 @@ class PipelineReplayModeTests(unittest.TestCase):
                 + "\n",
                 encoding="utf-8",
             )
+            scene_metadata.write_text(
+                json.dumps(
+                    {
+                        "total_keyframes": 3,
+                        "frames": [
+                            {"frame_id": 1, "timestamp": "00:00:01.000", "file_path": "keyframes/f1.jpg"},
+                            {"frame_id": 2, "timestamp": "00:00:03.000", "file_path": "keyframes/f2.jpg"},
+                            {"frame_id": 3, "timestamp": "00:00:05.000", "file_path": "keyframes/f3.jpg"},
+                        ],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
 
             first_cfg = PipelineConfig(
                 audio_transcripts_path=str(transcripts),
                 visual_captions_path=str(captions),
+                scene_metadata_path=str(scene_metadata),
                 raw_video_path=str(source_video),
                 artifacts_root=str(root / "artifacts"),
                 run_id="replay_invalidate_case",
@@ -146,6 +183,7 @@ class PipelineReplayModeTests(unittest.TestCase):
             replay_changed_cfg = PipelineConfig(
                 audio_transcripts_path=str(transcripts),
                 visual_captions_path=str(captions),
+                scene_metadata_path=str(scene_metadata),
                 raw_video_path=str(source_video),
                 artifacts_root=str(root / "artifacts"),
                 run_id="replay_invalidate_case",
@@ -163,6 +201,119 @@ class PipelineReplayModeTests(unittest.TestCase):
             self.assertEqual(statuses["validate"], "skipped")
             self.assertEqual(statuses["align"], "skipped")
             self.assertEqual(statuses["context_build"], "skipped")
+            self.assertEqual(statuses["summarize"], "pass")
+            self.assertEqual(statuses["segment_plan"], "pass")
+            self.assertEqual(statuses["manifest"], "pass")
+            self.assertEqual(statuses["assemble"], "pass")
+            self.assertEqual(statuses["qc"], "pass")
+
+    def test_replay_invalidation_on_scene_metadata_change(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            data_dir = root / "data"
+            data_dir.mkdir(parents=True, exist_ok=True)
+
+            source_video = data_dir / "raw_video.mp4"
+            self._make_test_video(source_video)
+
+            transcripts = data_dir / "audio_transcripts.json"
+            captions = data_dir / "visual_captions.json"
+            scene_metadata = data_dir / "scene_metadata.json"
+            transcripts.write_text(
+                json.dumps(
+                    [
+                        {"start": "00:00:00.000", "end": "00:00:02.000", "text": "a"},
+                        {"start": "00:00:02.000", "end": "00:00:04.000", "text": "b"},
+                        {"start": "00:00:04.000", "end": "00:00:06.000", "text": "c"},
+                    ],
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            captions.write_text(
+                json.dumps(
+                    [
+                        {"timestamp": "00:00:00.500", "caption": "x"},
+                        {"timestamp": "00:00:02.500", "caption": "y"},
+                        {"timestamp": "00:00:04.500", "caption": "z"},
+                    ],
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            scene_metadata.write_text(
+                json.dumps(
+                    {
+                        "total_keyframes": 2,
+                        "frames": [
+                            {"frame_id": 1, "timestamp": "00:00:01.000", "file_path": "keyframes/f1.jpg"},
+                            {"frame_id": 2, "timestamp": "00:00:03.000", "file_path": "keyframes/f2.jpg"},
+                        ],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            first_cfg = PipelineConfig(
+                audio_transcripts_path=str(transcripts),
+                visual_captions_path=str(captions),
+                scene_metadata_path=str(scene_metadata),
+                raw_video_path=str(source_video),
+                artifacts_root=str(root / "artifacts"),
+                run_id="replay_scene_invalidate_case",
+                summarize_backend="heuristic",
+                summarize_fallback_backend="heuristic",
+                summarize_production_strict=False,
+                allow_heuristic_for_tests=True,
+                emit_internal_artifacts=True,
+                replay_mode=False,
+            )
+            run_pipeline_g1_g8(first_cfg)
+
+            scene_metadata.write_text(
+                json.dumps(
+                    {
+                        "total_keyframes": 3,
+                        "frames": [
+                            {"frame_id": 1, "timestamp": "00:00:01.000", "file_path": "keyframes/f1.jpg"},
+                            {"frame_id": 2, "timestamp": "00:00:03.000", "file_path": "keyframes/f2.jpg"},
+                            {"frame_id": 3, "timestamp": "00:00:05.000", "file_path": "keyframes/f3.jpg"},
+                        ],
+                    },
+                    ensure_ascii=False,
+                    indent=2,
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+
+            replay_changed_cfg = PipelineConfig(
+                audio_transcripts_path=str(transcripts),
+                visual_captions_path=str(captions),
+                scene_metadata_path=str(scene_metadata),
+                raw_video_path=str(source_video),
+                artifacts_root=str(root / "artifacts"),
+                run_id="replay_scene_invalidate_case",
+                summarize_backend="heuristic",
+                summarize_fallback_backend="heuristic",
+                summarize_production_strict=False,
+                allow_heuristic_for_tests=True,
+                emit_internal_artifacts=True,
+                replay_mode=True,
+            )
+            second = run_pipeline_g1_g8(replay_changed_cfg)
+
+            statuses = {x["stage"]: x["status"] for x in second["stage_results"]}
+            self.assertEqual(statuses["validate"], "pass")
+            self.assertEqual(statuses["align"], "pass")
+            self.assertEqual(statuses["context_build"], "pass")
             self.assertEqual(statuses["summarize"], "pass")
             self.assertEqual(statuses["segment_plan"], "pass")
             self.assertEqual(statuses["manifest"], "pass")
