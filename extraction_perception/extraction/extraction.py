@@ -5,8 +5,13 @@ from datetime import timedelta
 from pathlib import Path
 
 import cv2
-from scenedetect import open_video, SceneManager
-from scenedetect.detectors import ContentDetector
+try:
+    from scenedetect import open_video, SceneManager
+    from scenedetect.detectors import ContentDetector
+except Exception:
+    open_video = None
+    SceneManager = None
+    ContentDetector = None
 
 class VideoPreprocessor:
     def __init__(self, video_path: str, output_root: str, resize: int = 448):
@@ -27,6 +32,8 @@ class VideoPreprocessor:
         os.makedirs(self.audio_dir, exist_ok=True)
 
     def detect_scenes(self, threshold: float = 27.0):
+        if open_video is None or SceneManager is None or ContentDetector is None:
+            raise RuntimeError("SCENEDETECT_MISSING: install scenedetect to use detect_scenes")
         # Mở video theo API mới
         video = open_video(self.video_path)
 
