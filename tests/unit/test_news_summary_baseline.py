@@ -1,20 +1,55 @@
 from __future__ import annotations
 
+import os
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import pandas as pd
 
 from reasoning_nlp.eval.news_summary_baseline import (
     analyze_prediction_text,
     auto_resolve_split,
+    download_dataset_if_needed,
+    ensure_kaggle_credentials,
     prepare_eval_df,
     select_spotcheck_samples,
 )
 
 
 class NewsSummaryBaselineTests(unittest.TestCase):
+    def test_ensure_kaggle_credentials_materializes_env_credentials(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            home_dir = Path(tmp_dir) / "home"
+            drive_path = Path(tmp_dir) / "drive" / "kaggle.json"
+            with patch.dict(os.environ, {"KAGGLE_USERNAME": "demo_user", "KAGGLE_KEY": "demo_key"}, clear=False):
+                with patch("reasoning_nlp.eval.news_summary_baseline.Path.home", return_value=home_dir):
+                    source = ensure_kaggle_credentials(drive_path)
+                    self.assertEqual(os.environ.get("KAGGLE_CONFIG_DIR"), str(home_dir / ".kaggle"))
+
+            self.assertEqual(source, "env")
+            saved_path = home_dir / ".kaggle" / "kaggle.json"
+            self.assertTrue(saved_path.exists())
+
+    def test_download_dataset_if_needed_raises_runtime_error_with_kaggle_details(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            with patch.dict(os.environ, {"KAGGLE_CONFIG_DIR": "/tmp/kaggle"}, clear=False):
+                with patch(
+                    "reasoning_nlp.eval.news_summary_baseline.subprocess.run",
+                    side_effect=subprocess.CalledProcessError(
+                        1,
+                        ["python", "-m", "kaggle"],
+                        stderr="403 Forbidden: credentials invalid",
+                    ),
+                ):
+                    with self.assertRaises(RuntimeError) as ctx:
+                        download_dataset_if_needed("owner/news-summary", Path(tmp_dir), force_redownload=True)
+
+        self.assertIn("403 Forbidden", str(ctx.exception))
+        self.assertIn("Credential source", str(ctx.exception))
+
     def test_auto_resolve_split_prefers_test_like_values(self) -> None:
         df = pd.DataFrame({"split": ["train", "validation", "test"]})
         split_col, target_split = auto_resolve_split(df, use_fixed_split=True)

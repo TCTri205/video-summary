@@ -89,17 +89,18 @@ class PromptProfile:
 def ensure_kaggle_credentials(kaggle_json_drive_path: Path) -> str:
     username = _safe_env("KAGGLE_USERNAME")
     key = _safe_env("KAGGLE_KEY")
+    target_dir = Path.home() / ".kaggle"
+    target_path = target_dir / "kaggle.json"
     if username and key:
+        _write_kaggle_json(target_path, {"username": username, "key": key})
+        os.environ["KAGGLE_CONFIG_DIR"] = str(target_dir)
         return "env"
     if kaggle_json_drive_path.exists():
-        target_dir = Path.home() / ".kaggle"
-        target_dir.mkdir(parents=True, exist_ok=True)
-        target_path = target_dir / "kaggle.json"
-        shutil.copy2(kaggle_json_drive_path, target_path)
-        try:
-            target_path.chmod(0o600)
-        except Exception:
-            pass
+        payload = json.loads(kaggle_json_drive_path.read_text(encoding="utf-8"))
+        if not str(payload.get("username", "")).strip() or not str(payload.get("key", "")).strip():
+            raise ValueError(f"Invalid Kaggle credential file: {kaggle_json_drive_path}")
+        _write_kaggle_json(target_path, payload)
+        os.environ["KAGGLE_CONFIG_DIR"] = str(target_dir)
         return str(target_path)
     raise FileNotFoundError(
         "Missing Kaggle credentials. "
@@ -109,12 +110,45 @@ def ensure_kaggle_credentials(kaggle_json_drive_path: Path) -> str:
     )
 
 
+def _write_kaggle_json(target_path: Path, payload: dict[str, Any]) -> None:
+    target_path.parent.mkdir(parents=True, exist_ok=True)
+    target_path.write_text(json.dumps(payload), encoding="utf-8")
+    try:
+        target_path.chmod(0o600)
+    except Exception:
+        pass
+
+
+def _run_kaggle_command(command: list[str], *, credential_path_hint: str) -> None:
+    try:
+        completed = subprocess.run(
+            command,
+            check=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+    except subprocess.CalledProcessError as exc:
+        stderr = normalize_text(exc.stderr or "")
+        stdout = normalize_text(exc.stdout or "")
+        detail = stderr or stdout or "Kaggle CLI returned a non-zero exit code without diagnostic output."
+        raise RuntimeError(
+            "Kaggle dataset download failed. "
+            f"Details: {detail} "
+            f"Credential source: {credential_path_hint}. "
+            "Verify the dataset slug, Kaggle account access, and the kaggle.json credentials."
+        ) from exc
+    if completed.stderr and normalize_text(completed.stderr):
+        print(completed.stderr)
+
+
 def download_dataset_if_needed(dataset_slug: str, cache_dir: Path, force_redownload: bool = False) -> Path:
     dataset_dir = cache_dir / dataset_slug.replace("/", "__")
     dataset_dir.mkdir(parents=True, exist_ok=True)
     if any(dataset_dir.glob("*.csv")) and not force_redownload:
         return dataset_dir
-    subprocess.check_call(
+    credential_hint = _safe_env("KAGGLE_CONFIG_DIR") or str((Path.home() / ".kaggle" / "kaggle.json"))
+    _run_kaggle_command(
         [
             sys.executable,
             "-m",
@@ -127,8 +161,8 @@ def download_dataset_if_needed(dataset_slug: str, cache_dir: Path, force_redownl
             str(dataset_dir),
             "--unzip",
             "--force",
-            "--quiet",
-        ]
+        ],
+        credential_path_hint=credential_hint,
     )
     if not any(dataset_dir.glob("*.csv")):
         raise FileNotFoundError(f"No CSV files found after download in {dataset_dir}")
