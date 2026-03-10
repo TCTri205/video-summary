@@ -306,7 +306,7 @@ def build_sft_config_kwargs(
     eval_accumulation_steps: int = 1,
 ) -> dict[str, Any]:
     params = inspect.signature(sft_config_cls.__init__).parameters
-    kwargs: dict[str, Any] = {
+    candidate_kwargs: dict[str, Any] = {
         "output_dir": output_dir,
         "overwrite_output_dir": False,
         "num_train_epochs": num_train_epochs,
@@ -330,23 +330,24 @@ def build_sft_config_kwargs(
         "packing": False,
     }
     if "bf16" in params:
-        kwargs["bf16"] = bf16
+        candidate_kwargs["bf16"] = bf16
     if "fp16" in params:
-        kwargs["fp16"] = fp16
+        candidate_kwargs["fp16"] = fp16
     if "eval_accumulation_steps" in params:
-        kwargs["eval_accumulation_steps"] = eval_accumulation_steps
+        candidate_kwargs["eval_accumulation_steps"] = eval_accumulation_steps
     if "save_strategy" in params:
-        kwargs["save_strategy"] = "steps"
+        candidate_kwargs["save_strategy"] = "steps"
     if "evaluation_strategy" in params:
-        kwargs["evaluation_strategy"] = "steps"
+        candidate_kwargs["evaluation_strategy"] = "steps"
     elif "eval_strategy" in params:
-        kwargs["eval_strategy"] = "steps"
+        candidate_kwargs["eval_strategy"] = "steps"
     if "max_length" in params:
-        kwargs["max_length"] = max_seq_length
+        candidate_kwargs["max_length"] = max_seq_length
     elif "max_seq_length" in params:
-        kwargs["max_seq_length"] = max_seq_length
+        candidate_kwargs["max_seq_length"] = max_seq_length
     if "dataset_text_field" in params:
-        kwargs["dataset_text_field"] = "text"
+        candidate_kwargs["dataset_text_field"] = "text"
+    kwargs = {key: value for key, value in candidate_kwargs.items() if key in params}
     return kwargs
 
 
