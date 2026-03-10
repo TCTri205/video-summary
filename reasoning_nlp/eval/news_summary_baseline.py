@@ -102,7 +102,10 @@ def ensure_kaggle_credentials(kaggle_json_drive_path: Path) -> str:
             pass
         return str(target_path)
     raise FileNotFoundError(
-        f"Missing Kaggle credentials. Set KAGGLE_USERNAME/KAGGLE_KEY or place kaggle.json at {kaggle_json_drive_path}"
+        "Missing Kaggle credentials. "
+        "Provide KAGGLE_USERNAME/KAGGLE_KEY in the environment, "
+        f"or place kaggle.json at {kaggle_json_drive_path}. "
+        "In Colab, a common location is /content/drive/MyDrive/.kaggle/kaggle.json after mounting Drive."
     )
 
 
