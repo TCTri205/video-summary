@@ -141,11 +141,11 @@ Khong map cac field noi bo sau vao deliverable:
   - `max_segment_duration_ms <= 15000`
   - `source_end > source_start`
 - Tong do dai summary phai nam trong budget:
-- Runtime mac dinh: `target_ratio = 0.10`; planner nham tong budget xap xi 10% `source_duration_ms`, sau do clamp theo `min_total_duration_ms`/`max_total_duration_ms`.
+- Runtime mac dinh: `target_ratio = 0.10`; selector hien tai tinh `effective_target_total_ms ~= source_duration_ms * target_ratio`, sau do clamp theo `min_total_duration_ms`/`max_total_duration_ms`.
 - Runtime mac dinh hien tai dat `min_total_duration_ms = 3000` va `max_total_duration_ms = 180000`.
 - `min_total_duration_ms` va `max_total_duration_ms` do he thong cau hinh.
-- Neu `target_ratio` bi unset thu cong, planner fallback ve heuristic `~0.035 * source_duration_ms`.
-- Neu bat `target_ratio`, tong duration hop le khi nam trong `target_ratio +- target_ratio_tolerance`.
+- Neu `target_ratio` bi unset thu cong, selector fallback ve `min_total_duration_ms` (neu co) thay vi ratio.
+- Neu bat `target_ratio`, tong duration hop le khi nam trong `target_ratio +- target_ratio_tolerance`; neu khong dat do scene metadata qua tho/qua it, QC phai phat `QC_TARGET_RATIO_MISSED`.
 - So luong segment la dong theo budget/do dai nguon; khong con hard-cap 3, nhung runtime hien tai van co tran operational `15` segment.
 
 ## Summary text lane (runtime hien tai)

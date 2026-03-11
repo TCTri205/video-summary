@@ -7,6 +7,7 @@ from reasoning_nlp.qc.metrics import (
     compute_black_frame_ratio_with_status,
     compute_grounding_score,
     compute_parse_validity_rate,
+    compute_target_ratio_metrics,
     compute_text_video_consistency_metrics,
 )
 
@@ -95,6 +96,63 @@ class QCMetricsTests(unittest.TestCase):
         self.assertEqual(metrics["text_temporal_order_score"], 1.0)
         self.assertGreater(metrics["text_video_keyword_overlap"], 0.4)
         self.assertEqual(metrics["text_cta_leak_ratio"], 0.0)
+
+    def test_target_ratio_metrics_report_budget_window(self) -> None:
+        script = {
+            "segments": [
+                {
+                    "segment_id": 1,
+                    "source_start": "00:00:00.000",
+                    "source_end": "00:00:12.000",
+                    "script_text": "a",
+                },
+                {
+                    "segment_id": 2,
+                    "source_start": "00:00:20.000",
+                    "source_end": "00:00:32.000",
+                    "script_text": "b",
+                },
+            ]
+        }
+
+        metrics = compute_target_ratio_metrics(
+            script,
+            source_duration_ms=240000,
+            min_total_duration_ms=3000,
+            max_total_duration_ms=180000,
+            target_ratio=0.10,
+            target_ratio_tolerance=0.20,
+        )
+        self.assertEqual(metrics["actual_total_duration_ms"], 24000)
+        self.assertEqual(metrics["effective_target_total_ms"], 24000)
+        self.assertEqual(metrics["target_ratio_lower_bound_ms"], 19200)
+        self.assertEqual(metrics["target_ratio_upper_bound_ms"], 28800)
+        self.assertEqual(metrics["target_ratio_delta_ms"], 0)
+        self.assertTrue(metrics["target_ratio_enabled"])
+        self.assertTrue(metrics["target_ratio_match"])
+
+    def test_target_ratio_metrics_disable_ratio_flag_when_unset(self) -> None:
+        script = {
+            "segments": [
+                {
+                    "segment_id": 1,
+                    "source_start": "00:00:00.000",
+                    "source_end": "00:00:04.000",
+                    "script_text": "a",
+                }
+            ]
+        }
+
+        metrics = compute_target_ratio_metrics(
+            script,
+            source_duration_ms=120000,
+            min_total_duration_ms=3000,
+            max_total_duration_ms=180000,
+            target_ratio=None,
+            target_ratio_tolerance=0.20,
+        )
+        self.assertFalse(metrics["target_ratio_enabled"])
+        self.assertTrue(metrics["target_ratio_match"])
 
 
 if __name__ == "__main__":

@@ -29,9 +29,20 @@ def run_g1_validate(
             raw_video_path=Path(config.raw_video_path),
             profile=config.input_profile,
         )
-        source_duration_ms = int(config.source_duration_ms) if config.source_duration_ms is not None else probe_source_duration_ms(
-            validated.raw_video_path
-        )
+        actual_duration_ms = probe_source_duration_ms(validated.raw_video_path)
+        if config.source_duration_ms is not None:
+            source_duration_ms = int(config.source_duration_ms)
+            if abs(source_duration_ms - actual_duration_ms) > 1000:
+                raise PipelineError(
+                    stage=stage,
+                    code="TIME_SOURCE_DURATION_OVERRIDE_MISMATCH",
+                    message=(
+                        f"Configured source_duration_ms={source_duration_ms} does not match probed video duration "
+                        f"{actual_duration_ms}"
+                    ),
+                )
+        else:
+            source_duration_ms = actual_duration_ms
         if config.emit_internal_artifacts and not is_simple_runtime(config):
             out_path = base / "g1_validate" / "normalized_input.json"
             write_json(

@@ -34,6 +34,8 @@ def run_g5_segment_plan(
             max_selected_segments=int(config.max_selected_segments),
             min_total_duration_ms=config.min_total_duration_ms,
             max_total_duration_ms=config.max_total_duration_ms,
+            target_ratio=config.target_ratio,
+            target_ratio_tolerance=config.target_ratio_tolerance,
         )
         if not selected_segments:
             raise fail(stage, "BUDGET_SEGMENTS_EMPTY", "No extraction-based segments selected")

@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from reasoning_nlp.common.timecode import to_ms
+from reasoning_nlp.segment_planner.budget_policy import BudgetConfig, compute_budget_window_ms
 
 
 def compute_alignment_metrics(alignment_payload: dict) -> dict[str, float]:
@@ -57,6 +58,56 @@ def compute_compression_ratio(script_payload: dict, source_duration_ms: int | No
         except Exception:
             continue
     return max(0.0, float(total) / float(source_duration_ms))
+
+
+def compute_total_selected_duration_ms(script_payload: dict) -> int:
+    segments = script_payload.get("segments", [])
+    if not isinstance(segments, list):
+        return 0
+    total = 0
+    for seg in segments:
+        try:
+            total += to_ms(str(seg.get("source_end"))) - to_ms(str(seg.get("source_start")))
+        except Exception:
+            continue
+    return max(0, int(total))
+
+
+def compute_target_ratio_metrics(
+    script_payload: dict,
+    *,
+    source_duration_ms: int | None,
+    min_total_duration_ms: int | None,
+    max_total_duration_ms: int | None,
+    target_ratio: float | None,
+    target_ratio_tolerance: float,
+) -> dict[str, Any]:
+    total_ms = compute_total_selected_duration_ms(script_payload)
+    enabled = target_ratio is not None
+    budget = BudgetConfig(
+        min_segment_duration_ms=1,
+        max_segment_duration_ms=max(1, int(source_duration_ms or 1)),
+        min_total_duration_ms=min_total_duration_ms,
+        max_total_duration_ms=max_total_duration_ms,
+        target_ratio=target_ratio,
+        target_ratio_tolerance=target_ratio_tolerance,
+    )
+    target_ms, lower_ms, upper_ms = compute_budget_window_ms(source_duration_ms, budget)
+    in_window = True
+    if lower_ms is not None and total_ms < lower_ms:
+        in_window = False
+    if upper_ms is not None and total_ms > upper_ms:
+        in_window = False
+    delta_ms = abs(total_ms - target_ms) if target_ms is not None else 0
+    return {
+        "target_ratio_enabled": enabled,
+        "actual_total_duration_ms": total_ms,
+        "effective_target_total_ms": target_ms if target_ms is not None else 0,
+        "target_ratio_lower_bound_ms": lower_ms if lower_ms is not None else 0,
+        "target_ratio_upper_bound_ms": upper_ms if upper_ms is not None else 0,
+        "target_ratio_delta_ms": delta_ms,
+        "target_ratio_match": bool(in_window) if enabled else True,
+    }
 
 
 def compute_grounding_score(summary_payload: dict[str, Any], context_payload: list[dict[str, Any]]) -> float:

@@ -107,6 +107,13 @@
         ,"text_temporal_order_score"
         ,"text_video_keyword_overlap"
         ,"text_cta_leak_ratio"
+        ,"actual_total_duration_ms"
+        ,"effective_target_total_ms"
+        ,"target_ratio_lower_bound_ms"
+        ,"target_ratio_upper_bound_ms"
+        ,"target_ratio_delta_ms"
+        ,"target_ratio_enabled"
+        ,"target_ratio_match"
       ],
       "properties": {
         "parse_validity_rate": {
@@ -195,6 +202,32 @@
           "type": "number",
           "minimum": 0,
           "maximum": 1
+        },
+        "actual_total_duration_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "effective_target_total_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "target_ratio_lower_bound_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "target_ratio_upper_bound_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "target_ratio_delta_ms": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "target_ratio_enabled": {
+          "type": "boolean"
+        },
+        "target_ratio_match": {
+          "type": "boolean"
         }
       }
     },

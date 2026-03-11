@@ -117,6 +117,8 @@ class SummaryTextAndSegmentFilterTests(unittest.TestCase):
             max_selected_segments=3,
             min_total_duration_ms=None,
             max_total_duration_ms=None,
+            target_ratio=None,
+            target_ratio_tolerance=0.20,
         )
 
         joined = " ".join(seg.script_text.lower() for seg in segments)
@@ -148,6 +150,8 @@ class SummaryTextAndSegmentFilterTests(unittest.TestCase):
             max_selected_segments=2,
             min_total_duration_ms=None,
             max_total_duration_ms=None,
+            target_ratio=None,
+            target_ratio_tolerance=0.20,
         )
 
         joined = " ".join(seg.script_text.lower() for seg in segments)

@@ -47,6 +47,7 @@ from reasoning_nlp.qc.metrics import (
     compute_compression_ratio,
     compute_grounding_score,
     compute_parse_validity_rate,
+    compute_target_ratio_metrics,
     compute_text_video_consistency_metrics,
     compute_timeline_consistency,
 )
@@ -365,6 +366,14 @@ def _run_g8_qc(
             summary_text_internal=summary_text_internal,
             script_payload=script_payload,
         )
+        target_ratio_metrics = compute_target_ratio_metrics(
+            script_payload,
+            source_duration_ms=source_duration_ms,
+            min_total_duration_ms=config.min_total_duration_ms,
+            max_total_duration_ms=config.max_total_duration_ms,
+            target_ratio=config.target_ratio,
+            target_ratio_tolerance=config.target_ratio_tolerance,
+        )
         metrics = {
             "parse_validity_rate": parse_validity_rate,
             "repaired_parse_validity_rate": repaired_parse_validity_rate,
@@ -385,6 +394,13 @@ def _run_g8_qc(
             "text_temporal_order_score": text_video_consistency["text_temporal_order_score"],
             "text_video_keyword_overlap": text_video_consistency["text_video_keyword_overlap"],
             "text_cta_leak_ratio": text_video_consistency["text_cta_leak_ratio"],
+            "actual_total_duration_ms": target_ratio_metrics["actual_total_duration_ms"],
+            "effective_target_total_ms": target_ratio_metrics["effective_target_total_ms"],
+            "target_ratio_lower_bound_ms": target_ratio_metrics["target_ratio_lower_bound_ms"],
+            "target_ratio_upper_bound_ms": target_ratio_metrics["target_ratio_upper_bound_ms"],
+            "target_ratio_delta_ms": target_ratio_metrics["target_ratio_delta_ms"],
+            "target_ratio_enabled": target_ratio_metrics["target_ratio_enabled"],
+            "target_ratio_match": target_ratio_metrics["target_ratio_match"],
         }
 
         warnings: list[str] = []
@@ -400,6 +416,8 @@ def _run_g8_qc(
             warnings.append("QC_TEXT_SEGMENT_COVERAGE_LOW")
         if metrics["text_video_keyword_overlap"] < 0.55:
             warnings.append("QC_TEXT_VIDEO_OVERLAP_LOW")
+        if target_ratio_metrics["target_ratio_enabled"] and not metrics["target_ratio_match"]:
+            warnings.append("QC_TARGET_RATIO_MISSED")
 
         threshold_errors: list[dict[str, str]] = []
 
@@ -476,6 +494,14 @@ def _run_g8_qc(
                     "text_cta_leak_ratio > 0.0",
                 ),
             ]
+            if target_ratio_metrics["target_ratio_enabled"]:
+                checks.append(
+                    (
+                        "QC_TARGET_RATIO_MISSED",
+                        metrics["target_ratio_match"] is True,
+                        "summary duration is outside target_ratio budget window",
+                    )
+                )
             for code, ok, message in checks:
                 if not ok:
                     threshold_errors.append({"stage": "qc", "error_code": code, "message": message})
