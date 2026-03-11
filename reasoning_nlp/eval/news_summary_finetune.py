@@ -528,11 +528,12 @@ def build_post_train_baseline_config(
     results_dir: Path,
     frozen_eval_ids_path: Path,
     kaggle_json_drive_path: Path,
+    cache_dir: Path,
 ) -> NewsSummaryBaselineConfig:
     return NewsSummaryBaselineConfig(
         protocol_version=str(baseline_manifest.get("protocol_version", "news-summary-baseline-v1")),
         dataset_slug=str(baseline_manifest.get("dataset_slug", "sunnysai12345/news-summary")),
-        cache_dir=results_dir.parent / "cache",
+        cache_dir=cache_dir,
         results_dir=results_dir,
         kaggle_json_drive_path=kaggle_json_drive_path,
         csv_filename=str(baseline_manifest.get("selected_csv", "news_summary.csv")),

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib.util
 import json
 import math
 import os
@@ -119,6 +120,18 @@ def _write_kaggle_json(target_path: Path, payload: dict[str, Any]) -> None:
         pass
 
 
+
+def resolve_kaggle_cli_command() -> list[str]:
+    kaggle_executable = shutil.which("kaggle")
+    if kaggle_executable:
+        return [kaggle_executable]
+    if importlib.util.find_spec("kaggle") is not None:
+        return [sys.executable, "-m", "kaggle.cli"]
+    raise RuntimeError(
+        "Kaggle CLI is not available. Install the `kaggle` package or ensure the `kaggle` executable is on PATH."
+    )
+
+
 def _run_kaggle_command(command: list[str], *, credential_path_hint: str) -> None:
     try:
         completed = subprocess.run(
@@ -148,11 +161,10 @@ def download_dataset_if_needed(dataset_slug: str, cache_dir: Path, force_redownl
     if any(dataset_dir.glob("*.csv")) and not force_redownload:
         return dataset_dir
     credential_hint = _safe_env("KAGGLE_CONFIG_DIR") or str((Path.home() / ".kaggle" / "kaggle.json"))
+    kaggle_command = resolve_kaggle_cli_command()
     _run_kaggle_command(
         [
-            sys.executable,
-            "-m",
-            "kaggle",
+            *kaggle_command,
             "datasets",
             "download",
             "-d",

@@ -14,6 +14,7 @@ from reasoning_nlp.eval.news_summary_baseline import (
     auto_resolve_split,
     download_dataset_if_needed,
     ensure_kaggle_credentials,
+    resolve_kaggle_cli_command,
     prepare_eval_df,
     select_spotcheck_samples,
 )
@@ -33,19 +34,36 @@ class NewsSummaryBaselineTests(unittest.TestCase):
             saved_path = home_dir / ".kaggle" / "kaggle.json"
             self.assertTrue(saved_path.exists())
 
+    def test_resolve_kaggle_cli_command_prefers_path_executable(self) -> None:
+        with patch("reasoning_nlp.eval.news_summary_baseline.shutil.which", return_value="/usr/bin/kaggle"):
+            command = resolve_kaggle_cli_command()
+
+        self.assertEqual(command, ["/usr/bin/kaggle"])
+
+    def test_resolve_kaggle_cli_command_falls_back_to_python_module(self) -> None:
+        with patch("reasoning_nlp.eval.news_summary_baseline.shutil.which", return_value=None):
+            with patch("reasoning_nlp.eval.news_summary_baseline.importlib.util.find_spec", return_value=object()):
+                command = resolve_kaggle_cli_command()
+
+        self.assertEqual(command, [os.sys.executable, "-m", "kaggle.cli"])
+
     def test_download_dataset_if_needed_raises_runtime_error_with_kaggle_details(self) -> None:
         with tempfile.TemporaryDirectory() as tmp_dir:
             with patch.dict(os.environ, {"KAGGLE_CONFIG_DIR": "/tmp/kaggle"}, clear=False):
                 with patch(
-                    "reasoning_nlp.eval.news_summary_baseline.subprocess.run",
-                    side_effect=subprocess.CalledProcessError(
-                        1,
-                        ["python", "-m", "kaggle"],
-                        stderr="403 Forbidden: credentials invalid",
-                    ),
+                    "reasoning_nlp.eval.news_summary_baseline.resolve_kaggle_cli_command",
+                    return_value=["/usr/bin/kaggle"],
                 ):
-                    with self.assertRaises(RuntimeError) as ctx:
-                        download_dataset_if_needed("owner/news-summary", Path(tmp_dir), force_redownload=True)
+                    with patch(
+                        "reasoning_nlp.eval.news_summary_baseline.subprocess.run",
+                        side_effect=subprocess.CalledProcessError(
+                            1,
+                            ["/usr/bin/kaggle"],
+                            stderr="403 Forbidden: credentials invalid",
+                        ),
+                    ):
+                        with self.assertRaises(RuntimeError) as ctx:
+                            download_dataset_if_needed("owner/news-summary", Path(tmp_dir), force_redownload=True)
 
         self.assertIn("403 Forbidden", str(ctx.exception))
         self.assertIn("Credential source", str(ctx.exception))

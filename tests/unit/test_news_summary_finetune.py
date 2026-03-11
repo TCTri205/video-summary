@@ -9,7 +9,9 @@ import pandas as pd
 
 from reasoning_nlp.eval.news_summary_finetune import (
     ColabGpuProfile,
+    NewsSummaryFineTuneConfig,
     build_before_after_comparison,
+    build_post_train_baseline_config,
     build_sft_config_kwargs,
     prepare_clean_corpus,
     refresh_checkpoint_index,
@@ -19,7 +21,6 @@ from reasoning_nlp.eval.news_summary_finetune import (
     resolve_training_split_config,
     split_train_eval_by_frozen_ids,
     validate_baseline_protocol_compatibility,
-    NewsSummaryFineTuneConfig,
 )
 
 
@@ -99,6 +100,26 @@ class NewsSummaryFineTuneTests(unittest.TestCase):
         payload = {row["metric"]: row for row in frame.to_dict(orient="records")}
         self.assertAlmostEqual(payload["rougeL"]["delta"], 0.05, places=6)
         self.assertAlmostEqual(payload["bertscore_f1"]["delta"], 0.02, places=6)
+
+    def test_build_post_train_baseline_config_reuses_supplied_cache_dir(self) -> None:
+        cache_dir = Path('shared-cache')
+        config = build_post_train_baseline_config(
+            baseline_manifest={
+                'protocol_version': 'news-summary-baseline-v1',
+                'dataset_slug': 'sunnysai12345/news-summary',
+                'selected_csv': 'news_summary.csv',
+                'split_column': 'split',
+                'target_split': 'test',
+            },
+            model_path=Path('runs/run_1/adapter_model'),
+            results_dir=Path('runs/run_1/post_eval'),
+            frozen_eval_ids_path=Path('shared/frozen_eval_ids.csv'),
+            kaggle_json_drive_path=Path('kaggle.json'),
+            cache_dir=cache_dir,
+        )
+
+        self.assertEqual(config.cache_dir, cache_dir)
+        self.assertEqual(config.model_name, str(Path('runs/run_1/adapter_model')))
 
     def test_require_baseline_manifest_fails_fast_when_enabled(self) -> None:
         with self.assertRaises(ValueError):
