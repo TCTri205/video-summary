@@ -16,6 +16,7 @@ from reasoning_nlp.eval.news_summary_baseline import (
     ensure_kaggle_credentials,
     resolve_kaggle_cli_command,
     prepare_eval_df,
+    resolve_latest_finetuned_adapter,
     select_spotcheck_samples,
 )
 
@@ -158,6 +159,76 @@ class NewsSummaryBaselineTests(unittest.TestCase):
         self.assertIn("b", sampled["example_id"].tolist())
         self.assertIn("c", sampled["example_id"].tolist())
 
+
+    def test_resolve_latest_finetuned_adapter_supports_legacy_layout(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_root = Path(tmp_dir)
+            run_dir = output_root / "legacy_run"
+            adapter_dir = run_dir / "adapter_model"
+            adapter_dir.mkdir(parents=True)
+            (run_dir / "training_manifest.json").write_text("{}", encoding="utf-8")
+            (adapter_dir / "adapter_config.json").write_text("{}", encoding="utf-8")
+
+            resolved_dir, note = resolve_latest_finetuned_adapter(output_root)
+
+            self.assertEqual(resolved_dir, adapter_dir.resolve())
+            self.assertIn("legacy_run", note)
+            self.assertIn(str(output_root), note)
+
+    def test_resolve_latest_finetuned_adapter_supports_runs_layout(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_root = Path(tmp_dir)
+            runs_root = output_root / "runs"
+            run_dir = runs_root / "current_run"
+            adapter_dir = run_dir / "adapter_model"
+            adapter_dir.mkdir(parents=True)
+            (run_dir / "training_manifest.json").write_text("{}", encoding="utf-8")
+            (adapter_dir / "adapter_config.json").write_text("{}", encoding="utf-8")
+
+            resolved_dir, note = resolve_latest_finetuned_adapter(output_root)
+
+            self.assertEqual(resolved_dir, adapter_dir.resolve())
+            self.assertIn("current_run", note)
+            self.assertIn(str(runs_root), note)
+
+    def test_resolve_latest_finetuned_adapter_prefers_explicit_runs_root(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_root = Path(tmp_dir)
+            legacy_run_dir = output_root / "legacy_newer"
+            legacy_adapter_dir = legacy_run_dir / "adapter_model"
+            legacy_adapter_dir.mkdir(parents=True)
+            (legacy_run_dir / "training_manifest.json").write_text("{}", encoding="utf-8")
+            (legacy_adapter_dir / "adapter_config.json").write_text("{}", encoding="utf-8")
+
+            runs_root = output_root / "runs"
+            current_run_dir = runs_root / "preferred_run"
+            current_adapter_dir = current_run_dir / "adapter_model"
+            current_adapter_dir.mkdir(parents=True)
+            (current_run_dir / "training_manifest.json").write_text("{}", encoding="utf-8")
+            (current_adapter_dir / "adapter_config.json").write_text("{}", encoding="utf-8")
+
+            os.utime(legacy_run_dir / "training_manifest.json", (2000000000, 2000000000))
+            os.utime(current_run_dir / "training_manifest.json", (1000000000, 1000000000))
+
+            resolved_dir, note = resolve_latest_finetuned_adapter(output_root, finetune_runs_root=runs_root)
+
+            self.assertEqual(resolved_dir, current_adapter_dir.resolve())
+            self.assertIn("preferred_run", note)
+            self.assertIn(str(runs_root), note)
+
+    def test_resolve_latest_finetuned_adapter_raises_with_checked_roots(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            output_root = Path(tmp_dir)
+            explicit_runs_root = output_root / "custom_runs"
+            explicit_runs_root.mkdir(parents=True)
+
+            with self.assertRaises(FileNotFoundError) as ctx:
+                resolve_latest_finetuned_adapter(output_root, finetune_runs_root=explicit_runs_root)
+
+            message = str(ctx.exception)
+            self.assertIn(str(explicit_runs_root), message)
+            self.assertIn(str(output_root / "runs"), message)
+            self.assertIn(str(output_root), message)
 
 if __name__ == "__main__":
     unittest.main()

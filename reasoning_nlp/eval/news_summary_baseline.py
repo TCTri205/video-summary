@@ -215,6 +215,68 @@ def clean_generated_summary(text: str) -> str:
     return cleaned
 
 
+def resolve_latest_finetuned_adapter(
+    finetune_output_root: Path,
+    finetune_runs_root: Path | None = None,
+) -> tuple[Path, str]:
+    search_roots: list[tuple[int, Path]] = []
+    seen_roots: set[str] = set()
+    for priority, root in (
+        (2, finetune_runs_root),
+        (1, finetune_output_root / "runs"),
+        (0, finetune_output_root),
+    ):
+        if root is None:
+            continue
+        candidate = root.expanduser()
+        key = str(candidate)
+        if key in seen_roots:
+            continue
+        seen_roots.add(key)
+        search_roots.append((priority, candidate))
+
+    existing_roots = [(priority, root) for priority, root in search_roots if root.exists()]
+    if not existing_roots:
+        checked = ", ".join(str(root) for _, root in search_roots)
+        raise FileNotFoundError(
+            "Fine-tune output root not found. "
+            f"Checked: {checked}. "
+            "Run notebooks/model_finetune_news_summary_colab.ipynb first, "
+            "or set NEWS_SUMMARY_FINETUNE_CHECKPOINT_ROOT / NEWS_SUMMARY_FINETUNED_MODEL_PATH."
+        )
+
+    candidates: list[tuple[int, float, str, Path, Path, Path]] = []
+    for priority, search_root in existing_roots:
+        for run_dir in search_root.iterdir():
+            if not run_dir.is_dir():
+                continue
+            manifest_path = run_dir / "training_manifest.json"
+            adapter_dir = run_dir / "adapter_model"
+            adapter_config_path = adapter_dir / "adapter_config.json"
+            if manifest_path.exists() and adapter_config_path.exists():
+                candidates.append(
+                    (
+                        priority,
+                        manifest_path.stat().st_mtime,
+                        run_dir.name,
+                        run_dir,
+                        adapter_dir,
+                        search_root,
+                    )
+                )
+
+    if not candidates:
+        checked = ", ".join(str(root) for _, root in existing_roots)
+        raise FileNotFoundError(
+            "No fine-tuned adapter found. "
+            f"Checked: {checked}. "
+            "Expected a run directory containing training_manifest.json and adapter_model/adapter_config.json "
+            "under either <finetune_output_root>/<run_name> or <finetune_output_root>/runs/<run_name>."
+        )
+
+    _, _, _, run_dir, adapter_dir, search_root = max(candidates)
+    return adapter_dir.resolve(), f"latest fine-tune run: {run_dir.name} (from {search_root})"
+
 def parse_json_summary(text: str) -> tuple[str, bool]:
     stripped = str(text or "").strip()
     if not stripped:
