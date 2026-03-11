@@ -10,6 +10,7 @@ import subprocess
 import sys
 import time
 import urllib.request
+import gc
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
@@ -22,6 +23,29 @@ from reasoning_nlp.summarizer.leakage_guard import contains_soft_prompt_leakage,
 
 
 _LOCAL_MODEL_CACHE: dict[str, tuple[Any, Any]] = {}
+
+
+def clear_local_model_cache(model_name: str = "") -> None:
+    keys = [model_name] if model_name else list(_LOCAL_MODEL_CACHE.keys())
+    released = False
+    for key in keys:
+        cached = _LOCAL_MODEL_CACHE.pop(key, None)
+        if cached is None:
+            continue
+        released = True
+        tokenizer, model = cached
+        del tokenizer
+        del model
+    if released:
+        gc.collect()
+        try:
+            import torch
+
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+        except Exception:
+            pass
+
 _INSTRUCTION_MARKERS = (
     "return valid json",
     "content requirements",
@@ -726,6 +750,26 @@ def assemble_per_example_scores(
     config: NewsSummaryBaselineConfig,
 ) -> tuple[pd.DataFrame, dict[str, Any]]:
     scoring_df = predictions_df.copy()
+    for metric_name in ["rouge1", "rouge2", "rougeL"]:
+        if metric_name not in scoring_df.columns:
+            scoring_df[metric_name] = np.nan
+    for metric_name in ["bertscore_precision", "bertscore_recall", "bertscore_f1"]:
+        if metric_name not in scoring_df.columns:
+            scoring_df[metric_name] = np.nan
+    default_columns: dict[str, Any] = {
+        "output_char_len": 0,
+        "compression_ratio": 0.0,
+        "unsupported_number_flag": 0,
+        "unsupported_numbers": "",
+        "named_entity_mismatch_flag": 0,
+        "named_entity_mismatches": "",
+        "instruction_leakage_flag": 0,
+        "instruction_leakage_hits": "",
+        "hallucination_proxy_flag": 0,
+    }
+    for column_name, default_value in default_columns.items():
+        if column_name not in scoring_df.columns:
+            scoring_df[column_name] = default_value
     valid_mask = scoring_df["status"].eq("ok") & scoring_df["predicted_summary"].map(bool)
     valid_df = scoring_df.loc[valid_mask].copy()
     if valid_df.empty:
@@ -764,19 +808,6 @@ def assemble_per_example_scores(
         valid_df["reference_summary"].tolist(),
         config=config,
     )
-    for metric_name in ["rouge1", "rouge2", "rougeL"]:
-        scoring_df[metric_name] = np.nan
-    for metric_name in ["bertscore_precision", "bertscore_recall", "bertscore_f1"]:
-        scoring_df[metric_name] = np.nan
-    scoring_df["output_char_len"] = 0
-    scoring_df["compression_ratio"] = 0.0
-    scoring_df["unsupported_number_flag"] = 0
-    scoring_df["unsupported_numbers"] = ""
-    scoring_df["named_entity_mismatch_flag"] = 0
-    scoring_df["named_entity_mismatches"] = ""
-    scoring_df["instruction_leakage_flag"] = 0
-    scoring_df["instruction_leakage_hits"] = ""
-    scoring_df["hallucination_proxy_flag"] = 0
     valid_index = valid_df.index.tolist()
     for idx, rouge_row, bert_row in zip(valid_index, rouge_rows, bert_rows):
         for key, value in rouge_row.items():
@@ -815,8 +846,26 @@ def assemble_per_example_scores(
     return scoring_df, metrics
 
 
+
+
+def _ensure_analysis_columns(frame: pd.DataFrame) -> pd.DataFrame:
+    working = frame.copy()
+    defaults: dict[str, Any] = {
+        "status": "error",
+        "rougeL": np.nan,
+        "hallucination_proxy_flag": 0,
+        "instruction_leakage_flag": 0,
+        "unsupported_number_flag": 0,
+        "named_entity_mismatch_flag": 0,
+        "example_id": "",
+    }
+    for column_name, default_value in defaults.items():
+        if column_name not in working.columns:
+            working[column_name] = default_value
+    return working
+
 def build_error_analysis(per_example_df: pd.DataFrame, top_k: int = 10) -> pd.DataFrame:
-    working = per_example_df.copy()
+    working = _ensure_analysis_columns(per_example_df)
     working["error_bucket"] = "ok"
     working.loc[working["status"].eq("error"), "error_bucket"] = "runtime_error"
     working.loc[working["status"].eq("blank"), "error_bucket"] = "blank_prediction"
@@ -848,7 +897,7 @@ def build_spotcheck_samples(
 ) -> pd.DataFrame:
     if per_example_df.empty or sample_size <= 0:
         return per_example_df.head(0).copy()
-    working = per_example_df.copy()
+    working = _ensure_analysis_columns(per_example_df)
     priority = working.loc[
         working["status"].ne("ok")
         | working["hallucination_proxy_flag"].eq(1)
@@ -1074,6 +1123,8 @@ def run_baseline_evaluation(
     *,
     force_redownload: bool = False,
     human_eval_path: Path | None = None,
+    return_dataframes: bool = True,
+    release_model_from_cache: bool = False,
 ) -> dict[str, Any]:
     prompt_profile = prompt_profile or build_production_adapted_prompt_profile()
     credential_source = ensure_kaggle_credentials(config.kaggle_json_drive_path)
@@ -1100,12 +1151,16 @@ def run_baseline_evaluation(
         config.random_seed,
         config.frozen_eval_ids_path,
     )
+    raw_columns = list(raw_df.columns)
+    raw_rows = int(len(raw_df))
+    del raw_df
+    gc.collect()
     dataset_profile = {
         "dataset_slug": config.dataset_slug,
         "dataset_dir": str(dataset_dir),
         "selected_csv": csv_path.name,
-        "columns": list(raw_df.columns),
-        "raw_rows": int(len(raw_df)),
+        "columns": raw_columns,
+        "raw_rows": raw_rows,
         "eval_rows": int(len(eval_df)),
         "article_column": config.article_column,
         "summary_column": config.summary_column,
@@ -1213,20 +1268,37 @@ def run_baseline_evaluation(
         ]
     )
     summary_df.to_csv(run_dir / "comparison.csv", index=False)
-    return {
+    if release_model_from_cache and config.backend == "local":
+        clear_local_model_cache(config.model_name)
+    result = {
         "run_name": run_name,
         "run_dir": run_dir,
         "dataset_profile": dataset_profile,
         "metrics": metrics,
-        "eval_df": eval_df,
-        "predictions_df": predictions_df,
-        "per_example_df": per_example_df,
-        "error_analysis_df": error_analysis_df,
-        "spotcheck_df": spotcheck_df,
         "comparison_df": summary_df,
         "baseline_report": baseline_report,
         "baseline_manifest": baseline_manifest,
+        "artifact_paths": {
+            "predictions_path": run_dir / "predictions.csv",
+            "per_example_scores_path": run_dir / "per_example_scores.csv",
+            "error_analysis_path": run_dir / "error_analysis.csv",
+            "spotcheck_samples_path": run_dir / "spotcheck_samples.csv",
+            "spotcheck_template_path": run_dir / "spotcheck_template.csv",
+            "comparison_path": run_dir / "comparison.csv",
+            "metrics_path": run_dir / "metrics.json",
+        },
     }
+    if return_dataframes:
+        result.update(
+            {
+                "eval_df": eval_df,
+                "predictions_df": predictions_df,
+                "per_example_df": per_example_df,
+                "error_analysis_df": error_analysis_df,
+                "spotcheck_df": spotcheck_df,
+            }
+        )
+    return result
 
 
 def _extract_numbers(text: str) -> list[str]:
