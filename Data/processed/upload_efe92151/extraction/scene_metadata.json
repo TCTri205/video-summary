@@ -1,0 +1,45 @@
+{
+    "total_keyframes": 8,
+    "frames": [
+        {
+            "frame_id": 1,
+            "timestamp": "00:00:01.866",
+            "file_path": "keyframes/frame_00_00_01_866.jpg"
+        },
+        {
+            "frame_id": 2,
+            "timestamp": "00:00:05.364",
+            "file_path": "keyframes/frame_00_00_05_364.jpg"
+        },
+        {
+            "frame_id": 3,
+            "timestamp": "00:00:54.137",
+            "file_path": "keyframes/frame_00_00_54_137.jpg"
+        },
+        {
+            "frame_id": 4,
+            "timestamp": "00:01:02.145",
+            "file_path": "keyframes/frame_00_01_02_145.jpg"
+        },
+        {
+            "frame_id": 5,
+            "timestamp": "00:01:04.182",
+            "file_path": "keyframes/frame_00_01_04_182.jpg"
+        },
+        {
+            "frame_id": 6,
+            "timestamp": "00:01:24.116",
+            "file_path": "keyframes/frame_00_01_24_116.jpg"
+        },
+        {
+            "frame_id": 7,
+            "timestamp": "00:03:22.539",
+            "file_path": "keyframes/frame_00_03_22_539.jpg"
+        },
+        {
+            "frame_id": 8,
+            "timestamp": "00:04:31.421",
+            "file_path": "keyframes/frame_00_04_31_421.jpg"
+        }
+    ]
+}

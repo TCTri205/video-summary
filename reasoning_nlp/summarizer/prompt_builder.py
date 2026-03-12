@@ -35,14 +35,14 @@ def _render_context_block(block: dict[str, object], idx: int) -> str:
         context_text = _normalize_text(str(block.get("context_text", "")).strip())
         return context_text
 
-    lines = [f"[Block {idx + 1}]"]
+    lines = [f"[Cảnh {idx + 1}]"]
     if timestamp:
-        lines.append(f"timestamp={timestamp}")
+        lines.append(f"Mốc thời gian: {timestamp}")
     if image_text:
-        lines.append(f"image_text={image_text}")
+        lines.append(f"Hình ảnh: {image_text}")
     if dialogue_text:
-        lines.append(f"dialogue_text={dialogue_text}")
-    lines.append(f"confidence={confidence:.3f}")
+        lines.append(f"Lời thoại: {dialogue_text}")
+    lines.append(f"Độ tin cậy: {confidence:.3f}")
     return "\n".join(lines).strip()
 
 

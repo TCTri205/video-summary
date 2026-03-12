@@ -1,0 +1,25 @@
+{
+  "title": "Tom tat video theo phong cach doi thuong",
+  "plot_summary": "Video này nói về việc một cô bé muốn rời bỏ mẹ để đi lập nghiệp ở thành phố. Cô bé nói rằng chỉ cần có mẹ thôi, còn thấy mình tự quá. Cô bé còn nói rằng mẹ sẽ giúp cô bé. Video này được tạo ra để làm rõ rằng chúng ta không nên rời bỏ mẹ vì chúng ta còn trẻ và cần sự chăm sóc của mẹ.",
+  "moral_lesson": "Chúng ta không nên rời bỏ mẹ vì chúng ta còn trẻ và cần sự chăm sóc của mẹ.",
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:54.137",
+      "source_end": "00:01:02.145",
+      "script_text": "Còn dẫn mẹ. a cartoon character with a sad look on her face"
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:01:02.145",
+      "source_end": "00:01:04.182",
+      "script_text": "Còn thấy mình tự quá. a cartoon character with a brown hair and a black hair"
+    },
+    {
+      "segment_id": 3,
+      "source_start": "00:01:04.182",
+      "source_end": "00:01:24.116",
+      "script_text": "Mẹ, con định sẽ lên thành phố lập nghiệp. a cartoon of a woman and a man in a room"
+    }
+  ]
+}

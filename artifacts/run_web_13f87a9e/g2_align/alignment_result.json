@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.1",
+  "delta_ms": 2400,
+  "blocks": [
+    {
+      "caption_id": "c_0001",
+      "timestamp": "00:00:01.866",
+      "image_text": "a cartoon scene with a road and trees",
+      "dialogue_text": "Chỉ cần có mẹ thôi.",
+      "matched_transcript_ids": [
+        "t_0001"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.550125
+    },
+    {
+      "caption_id": "c_0002",
+      "timestamp": "00:00:05.364",
+      "image_text": "a cartoon picture with the words ' chio me noi '",
+      "dialogue_text": "Chỉ cần có mẹ thôi.",
+      "matched_transcript_ids": [
+        "t_0001"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.38175
+    },
+    {
+      "caption_id": "c_0003",
+      "timestamp": "00:00:54.137",
+      "image_text": "a cartoon character with a sad look on her face",
+      "dialogue_text": "Còn dẫn mẹ.",
+      "matched_transcript_ids": [
+        "t_0012"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.738187
+    },
+    {
+      "caption_id": "c_0004",
+      "timestamp": "00:01:02.145",
+      "image_text": "a cartoon character with a brown hair and a black hair",
+      "dialogue_text": "Còn thấy mình tự quá.",
+      "matched_transcript_ids": [
+        "t_0015"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.872812
+    },
+    {
+      "caption_id": "c_0005",
+      "timestamp": "00:01:04.182",
+      "image_text": "a cartoon of a woman and a man in a room",
+      "dialogue_text": "Mẹ, con định sẽ lên thành phố lập nghiệp.",
+      "matched_transcript_ids": [
+        "t_0016"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.865875
+    },
+    {
+      "caption_id": "c_0006",
+      "timestamp": "00:01:24.116",
+      "image_text": "a cartoon scene with a woman and a man in a room",
+      "dialogue_text": "Còn cũng có tốt chức mà mẹ.",
+      "matched_transcript_ids": [
+        "t_0023"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.87825
+    },
+    {
+      "caption_id": "c_0007",
+      "timestamp": "00:03:22.539",
+      "image_text": "a cartoon bear is standing on a stage with balloons",
+      "dialogue_text": "Chê ha.",
+      "matched_transcript_ids": [
+        "t_0069"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.363563
+    },
+    {
+      "caption_id": "c_0008",
+      "timestamp": "00:04:31.421",
+      "image_text": "a cartoon bear and a girl in a circus",
+      "dialogue_text": "Được. Bắt nhất định sẽ chuyện giúp cháo.",
+      "matched_transcript_ids": [
+        "t_0099"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.371063
+    }
+  ]
+}

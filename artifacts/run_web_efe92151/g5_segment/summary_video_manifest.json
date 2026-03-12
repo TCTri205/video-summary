@@ -1,0 +1,28 @@
+{
+  "source_video_path": "Data\\raw\\upload_efe92151.mp4",
+  "output_video_path": "summary_video.mp4",
+  "keep_original_audio": true,
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:00:54.137",
+      "source_end": "00:01:02.145",
+      "script_ref": 1,
+      "transition": "cut"
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:01:02.145",
+      "source_end": "00:01:04.182",
+      "script_ref": 2,
+      "transition": "cut"
+    },
+    {
+      "segment_id": 3,
+      "source_start": "00:01:04.182",
+      "source_end": "00:01:24.116",
+      "script_ref": 3,
+      "transition": "cut"
+    }
+  ]
+}

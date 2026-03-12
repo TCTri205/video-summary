@@ -1,0 +1,25 @@
+{
+  "title": "Tom tat video theo phong cach doi thuong",
+  "plot_summary": "Tom tat video theo phong cach doi thuong, gan gui cho series bai hoc cuoc song. Tom tat chi tra ve dung 1 JSON object hop le voi cac key: title, plot_summary, moral_lesson, evidence, quality_flags.",
+  "moral_lesson": "Tom tat chi tra ve dung 1 JSON object hop le voi cac key: title, plot_summary, moral_lesson, evidence, quality_flags.",
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:01:55.227",
+      "source_end": "00:01:59.066",
+      "script_text": "Tôi muốn hỏi anh xem liệu anh có biết không a parrot perched on a branch with fruit in the background"
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:01:59.066",
+      "source_end": "00:02:25.580",
+      "script_text": "Quả đỏ mộng, dài dài à a cartoon monkey with a big nose and a big nose"
+    },
+    {
+      "segment_id": 3,
+      "source_start": "00:03:17.155",
+      "source_end": "00:03:19.956",
+      "script_text": "Chú tắc kè hoa a cartoon character with a cat on his back"
+    }
+  ]
+}

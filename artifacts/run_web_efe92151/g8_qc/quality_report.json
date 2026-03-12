@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.1",
+  "run_id": "run_web_efe92151",
+  "input_profile": "strict_contract_v1",
+  "overall_status": "pass",
+  "stage_results": [
+    {
+      "stage": "validate",
+      "status": "pass",
+      "duration_ms": 31
+    },
+    {
+      "stage": "align",
+      "status": "pass",
+      "duration_ms": 3
+    },
+    {
+      "stage": "context_build",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "stage": "summarize",
+      "status": "pass",
+      "duration_ms": 26021
+    },
+    {
+      "stage": "segment_plan",
+      "status": "pass",
+      "duration_ms": 4
+    },
+    {
+      "stage": "manifest",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "stage": "assemble",
+      "status": "pass",
+      "duration_ms": 1306
+    },
+    {
+      "stage": "qc",
+      "status": "pass",
+      "duration_ms": 0
+    }
+  ],
+  "metrics": {
+    "parse_validity_rate": 1.0,
+    "repaired_parse_validity_rate": 1.0,
+    "timeline_consistency_score": 1.0,
+    "grounding_score": 0.0,
+    "compression_ratio": 0.09922878326492784,
+    "manifest_consistency_pass": true,
+    "render_success": true,
+    "audio_present": true,
+    "duration_match_score": 0.9998999299509657,
+    "black_frame_ratio": 0.0,
+    "decode_error_count": 0,
+    "no_match_rate": 0.0,
+    "median_confidence": 0.644156,
+    "high_confidence_ratio": 0.375,
+    "text_sentence_grounded_ratio": 1.0,
+    "text_segment_coverage_ratio": 1.0,
+    "text_temporal_order_score": 1.0,
+    "text_video_keyword_overlap": 0.39285714285714285,
+    "text_cta_leak_ratio": 0.0,
+    "actual_total_duration_ms": 29979,
+    "effective_target_total_ms": 30212,
+    "target_ratio_lower_bound_ms": 24170,
+    "target_ratio_upper_bound_ms": 36254,
+    "target_ratio_delta_ms": 233,
+    "target_ratio_enabled": true,
+    "target_ratio_match": true
+  },
+  "warnings": [
+    "ALIGN_WEAK_GROUNDING_SIGNAL",
+    "QC_TEXT_VIDEO_OVERLAP_LOW"
+  ],
+  "errors": []
+}

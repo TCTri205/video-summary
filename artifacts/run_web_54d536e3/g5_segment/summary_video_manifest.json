@@ -1,0 +1,28 @@
+{
+  "source_video_path": "Data\\raw\\upload_54d536e3.mp4",
+  "output_video_path": "summary_video.mp4",
+  "keep_original_audio": true,
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:01:02.965",
+      "source_end": "00:01:12.140",
+      "script_ref": 1,
+      "transition": "cut"
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:01:17.020",
+      "source_end": "00:01:21.631",
+      "script_ref": 2,
+      "transition": "cut"
+    },
+    {
+      "segment_id": 3,
+      "source_start": "00:01:53.537",
+      "source_end": "00:02:12.648",
+      "script_ref": 3,
+      "transition": "cut"
+    }
+  ]
+}

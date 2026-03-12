@@ -1,0 +1,25 @@
+{
+  "title": "Tom tat video theo phong cach doi thuong",
+  "plot_summary": "Tom tat video theo phong cach doi thuong, gan gui cho series bai hoc cuoc song. Tom tat chi tra ve dung 1 JSON object hop le voi cac key: title, plot_summary, moral_lesson, evidence, quality_flags.",
+  "moral_lesson": "Mỗi người đều có những ưu điểm riêng, nên không nên so sánh bản thân với người khác.",
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:01:02.965",
+      "source_end": "00:01:12.140",
+      "script_text": "Thật khá mạy quá tuyệt để phần ta một phép nha a house with a blue fence and a white fence"
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:01:17.020",
+      "source_end": "00:01:21.631",
+      "script_text": "Ừ, tao đây a person holding a calendar on a table"
+    },
+    {
+      "segment_id": 3,
+      "source_start": "00:01:53.537",
+      "source_end": "00:02:12.648",
+      "script_text": "Tụi sao đó là nợp và chuẩn bị tốt nghiệp rồi a cartoon character in a room with a tv screen"
+    }
+  ]
+}

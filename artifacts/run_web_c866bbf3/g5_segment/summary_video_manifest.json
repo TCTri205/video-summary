@@ -1,0 +1,21 @@
+{
+  "source_video_path": "Data\\raw\\upload_c866bbf3.mp4",
+  "output_video_path": "summary_video.mp4",
+  "keep_original_audio": true,
+  "segments": [
+    {
+      "segment_id": 1,
+      "source_start": "00:02:15.527",
+      "source_end": "00:02:36.846",
+      "script_ref": 1,
+      "transition": "cut"
+    },
+    {
+      "segment_id": 2,
+      "source_start": "00:03:49.602",
+      "source_end": "00:03:56.724",
+      "script_ref": 2,
+      "transition": "cut"
+    }
+  ]
+}

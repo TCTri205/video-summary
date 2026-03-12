@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Summarizer</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Video Summarizer AI</h1>
+            <p>Tải video lên để nhận bản tóm tắt tự động</p>
+        </header>
+        
+        <main>
+            <div class="upload-section" id="upload-section">
+                <form id="upload-form">
+                    <div class="file-input-wrapper">
+                        <input type="file" id="video-file" name="video" accept="video/mp4,video/x-m4v,video/*" required>
+                        <label for="video-file" id="file-label">Chọn Video (Click hoặc Kéo Thả)</label>
+                    </div>
+                    <button type="submit" id="submit-btn" disabled>Bắt đầu Tóm tắt</button>
+                </form>
+            </div>
+
+            <div class="loading-section hidden" id="loading-section">
+                <div class="spinner"></div>
+                <p>Đang xử lý video... Quá trình này có thể mất vài phút.</p>
+            </div>
+
+            <div class="result-section hidden" id="result-section">
+                <h2>Kết Quả Tóm Tắt</h2>
+                
+                <div class="results-grid">
+                    <div class="video-container">
+                        <h3>Video Tóm Tắt</h3>
+                        <video id="result-video" controls>
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="text-container">
+                        <h3>Nội Dung Tóm Tắt</h3>
+                        <div id="result-text" class="summary-text"></div>
+                    </div>
+                </div>
+                
+                <button id="reset-btn">Tóm tắt video khác</button>
+            </div>
+        </main>
+    </div>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html>

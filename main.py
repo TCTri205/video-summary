@@ -9,6 +9,12 @@ import uuid
 from pathlib import Path
 from typing import Any
 
+# Import torch first on Windows to avoid cuDNN DLL hell with ctranslate2 (faster-whisper)
+try:
+    import torch
+except ImportError:
+    pass
+
 from reasoning_nlp.config.runtime_loader import build_pipeline_config, coerce_bool, load_json_config, resolve_value
 
 TIMESTAMP_RE = re.compile(r"^\d{2}:[0-5]\d:[0-5]\d\.\d{3}$")
@@ -53,6 +59,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--target-ratio-tolerance", type=float, default=None)
     parser.add_argument("--summarize-backend", choices=["api", "local"], default=None)
     parser.add_argument("--summarize-fallback-backend", choices=["api", "local"], default=None)
+    parser.add_argument("--summarize-model", default=None, help="Force a specific model ID or local path for summarization")
     parser.add_argument("--summarize-timeout-ms", type=int, default=None)
     parser.add_argument("--summarize-max-retries", type=int, default=None)
     parser.add_argument("--summarize-max-new-tokens", type=int, default=None)
@@ -317,6 +324,15 @@ def main() -> int:
             "local",
         )
     )
+    summarize_model = str(
+        resolve_value(
+            args.summarize_model,
+            "VIDEO_SUMMARY_SUMMARIZE_MODEL",
+            file_config,
+            "summarize_model",
+            "Qwen/Qwen2.5-3B-Instruct",
+        )
+    )
     summarize_fallback_backend = str(
         resolve_value(
             args.summarize_fallback_backend,
@@ -492,6 +508,7 @@ def main() -> int:
                 "max_total_duration_ms": max_total_duration_ms,
                 "target_ratio": target_ratio,
                 "target_ratio_tolerance": target_ratio_tolerance,
+                "model_version": summarize_model,
                 "summarize_backend": summarize_backend,
                 "summarize_fallback_backend": summarize_fallback_backend,
                 "summarize_timeout_ms": summarize_timeout_ms,

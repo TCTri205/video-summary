@@ -1,0 +1,138 @@
+{
+  "schema_version": "1.1",
+  "delta_ms": 2400,
+  "blocks": [
+    {
+      "caption_id": "c_0001",
+      "timestamp": "00:00:02.462",
+      "image_text": "a cartoon picture of a mountain with a sign that says, ' bah do '",
+      "dialogue_text": "Chơi xa, giả lắng bệnh",
+      "matched_transcript_ids": [
+        "t_0001"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.363375
+    },
+    {
+      "caption_id": "c_0002",
+      "timestamp": "00:00:05.764",
+      "image_text": "a cartoon picture of a mountain with a tree and a sign that says, ' i ' m '",
+      "dialogue_text": "Bày học trốn rừng xanh",
+      "matched_transcript_ids": [
+        "t_0002"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.34425
+    },
+    {
+      "caption_id": "c_0003",
+      "timestamp": "00:00:54.734",
+      "image_text": "a monkey is sitting on a tree branch",
+      "dialogue_text": "Này, con vạch kia, ai cho phép nơi ăn táo của ta, hả?",
+      "matched_transcript_ids": [
+        "t_0007"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.400125
+    },
+    {
+      "caption_id": "c_0004",
+      "timestamp": "00:01:55.227",
+      "image_text": "a parrot perched on a branch with fruit in the background",
+      "dialogue_text": "Tôi muốn hỏi anh xem liệu anh có biết không",
+      "matched_transcript_ids": [
+        "t_0028"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.407438
+    },
+    {
+      "caption_id": "c_0005",
+      "timestamp": "00:01:59.066",
+      "image_text": "a cartoon monkey with a big nose and a big nose",
+      "dialogue_text": "Quả đỏ mộng, dài dài à",
+      "matched_transcript_ids": [
+        "t_0030"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.437625
+    },
+    {
+      "caption_id": "c_0006",
+      "timestamp": "00:02:25.580",
+      "image_text": "a bird sitting on top of a tree branch",
+      "dialogue_text": "Đây, anh đi thêm chút nữa là tới thôi",
+      "matched_transcript_ids": [
+        "t_0040"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.37125
+    },
+    {
+      "caption_id": "c_0007",
+      "timestamp": "00:02:47.021",
+      "image_text": "a bird sitting on top of a tree",
+      "dialogue_text": "Không, không được, ta phải là người thử các loại quả ngon đầu tiên",
+      "matched_transcript_ids": [
+        "t_0043"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.896062
+    },
+    {
+      "caption_id": "c_0008",
+      "timestamp": "00:02:56.411",
+      "image_text": "a bird sitting on top of a tree",
+      "dialogue_text": "Mời anh ăn trước",
+      "matched_transcript_ids": [
+        "t_0045"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.372937
+    },
+    {
+      "caption_id": "c_0009",
+      "timestamp": "00:02:57.544",
+      "image_text": "a cartoon monkey with a big smile on his face",
+      "dialogue_text": "Mời anh ăn trước",
+      "matched_transcript_ids": [
+        "t_0045"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.1605
+    },
+    {
+      "caption_id": "c_0010",
+      "timestamp": "00:03:17.155",
+      "image_text": "a cartoon character with a cat on his back",
+      "dialogue_text": "Chú tắc kè hoa",
+      "matched_transcript_ids": [
+        "t_0049"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.291563
+    },
+    {
+      "caption_id": "c_0011",
+      "timestamp": "00:03:19.956",
+      "image_text": "a cartoon picture of a man and a dog",
+      "dialogue_text": "Chú tắc kè hoa",
+      "matched_transcript_ids": [
+        "t_0049"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.27075
+    },
+    {
+      "caption_id": "c_0012",
+      "timestamp": "00:03:57.648",
+      "image_text": "a cartoon character is talking to another character",
+      "dialogue_text": "Còn không sao chứ? Còn nhất định phải bắt được con mũi đó",
+      "matched_transcript_ids": [
+        "t_0050"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.3285
+    }
+  ]
+}

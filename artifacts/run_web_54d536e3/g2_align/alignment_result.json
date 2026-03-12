@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.1",
+  "delta_ms": 2400,
+  "blocks": [
+    {
+      "caption_id": "c_0001",
+      "timestamp": "00:01:02.965",
+      "image_text": "a house with a blue fence and a white fence",
+      "dialogue_text": "Thật khá mạy quá tuyệt để phần ta một phép nha",
+      "matched_transcript_ids": [
+        "t_0009"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.105938
+    },
+    {
+      "caption_id": "c_0002",
+      "timestamp": "00:01:12.140",
+      "image_text": "a person holding a calendar on a table",
+      "dialogue_text": "Nhớt hổng rồi, đúng ngày nợp báo cáo từ tập",
+      "matched_transcript_ids": [
+        "t_0011"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.83625
+    },
+    {
+      "caption_id": "c_0003",
+      "timestamp": "00:01:17.020",
+      "image_text": "a person holding a calendar on a table",
+      "dialogue_text": "Ừ, tao đây",
+      "matched_transcript_ids": [
+        "t_0014"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.85875
+    },
+    {
+      "caption_id": "c_0004",
+      "timestamp": "00:01:21.631",
+      "image_text": "a cartoon character sitting at a desk with a computer",
+      "dialogue_text": "Cứ lên lật đi, ta nhớt định đi cùng anh em",
+      "matched_transcript_ids": [
+        "t_0015"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.868313
+    },
+    {
+      "caption_id": "c_0005",
+      "timestamp": "00:01:29.907",
+      "image_text": "a cartoon character with a computer screen",
+      "dialogue_text": "Còn đang rầu hết cáo rụp để bà",
+      "matched_transcript_ids": [
+        "t_0019"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.879938
+    },
+    {
+      "caption_id": "c_0006",
+      "timestamp": "00:01:44.327",
+      "image_text": "a cartoon character in a room with a green ceiling",
+      "dialogue_text": "Thế phải đi thôi",
+      "matched_transcript_ids": [
+        "t_0024"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.801187
+    },
+    {
+      "caption_id": "c_0007",
+      "timestamp": "00:01:46.065",
+      "image_text": "a cartoon of a man and a woman talking",
+      "dialogue_text": "Nhưng mà chẳng nói ra đúng vào đợt cuối kỳ thực tập ở công ty bà",
+      "matched_transcript_ids": [
+        "t_0025"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.850313
+    },
+    {
+      "caption_id": "c_0008",
+      "timestamp": "00:01:53.537",
+      "image_text": "a cartoon character in a room with a tv screen",
+      "dialogue_text": "Tụi sao đó là nợp và chuẩn bị tốt nghiệp rồi",
+      "matched_transcript_ids": [
+        "t_0026"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.850688
+    },
+    {
+      "caption_id": "c_0009",
+      "timestamp": "00:02:12.648",
+      "image_text": "a cartoon character standing in front of a door",
+      "dialogue_text": "Bà của ngon hả?",
+      "matched_transcript_ids": [
+        "t_0034"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.1035
+    }
+  ]
+}

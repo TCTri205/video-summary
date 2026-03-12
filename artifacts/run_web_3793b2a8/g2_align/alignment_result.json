@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.1",
+  "delta_ms": 3600,
+  "blocks": [
+    {
+      "caption_id": "c_0001",
+      "timestamp": "00:00:02.461",
+      "image_text": "a cartoon scene with a forest scene and a cartoon character",
+      "dialogue_text": "Tắc kè mẹ",
+      "matched_transcript_ids": [
+        "t_0001"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.592375
+    },
+    {
+      "caption_id": "c_0002",
+      "timestamp": "00:00:06.335",
+      "image_text": "ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti ti",
+      "dialogue_text": "Tắc kè mẹ",
+      "matched_transcript_ids": [
+        "t_0001"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.283125
+    },
+    {
+      "caption_id": "c_0003",
+      "timestamp": "00:00:39.774",
+      "image_text": "a pinkie hugging a red heart",
+      "dialogue_text": "Còn đi đâu cả ngày mà không nói với hay ăn thế?",
+      "matched_transcript_ids": [
+        "t_0010"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.42175
+    },
+    {
+      "caption_id": "c_0004",
+      "timestamp": "00:00:42.933",
+      "image_text": "a pinkie hugging her friend in the woods",
+      "dialogue_text": "Còn đi chơi ngoài bì đơn mẹ ơi",
+      "matched_transcript_ids": [
+        "t_0011"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.441625
+    },
+    {
+      "caption_id": "c_0005",
+      "timestamp": "00:00:45.432",
+      "image_text": "a cartoon picture of a pinkie and a purpleie",
+      "dialogue_text": "Có nhiều cái hay lắm mẹ nhé, con gặp bao nhiêu bàn mới",
+      "matched_transcript_ids": [
+        "t_0012"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.846
+    },
+    {
+      "caption_id": "c_0006",
+      "timestamp": "00:00:49.674",
+      "image_text": "the lont and the lont",
+      "dialogue_text": "Trời, cho em giám đi một mình ra ngoài bì đơn, đúng đấy, liều lẫn quá",
+      "matched_transcript_ids": [
+        "t_0013"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.40925
+    },
+    {
+      "caption_id": "c_0007",
+      "timestamp": "00:01:08.159",
+      "image_text": "file file for you | my little pony | image tagged | image tagged | image tagged | image tagged | image tagged | image tagged |",
+      "dialogue_text": "Em giẳng cần",
+      "matched_transcript_ids": [
+        "t_0018"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.430125
+    },
+    {
+      "caption_id": "c_0008",
+      "timestamp": "00:02:02.856",
+      "image_text": "a black background with the words ' snou '",
+      "dialogue_text": "Trong trừng, đưa dễ chú ngủ và lớn trung nhất là gì nào?",
+      "matched_transcript_ids": [
+        "t_0034"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.307
+    },
+    {
+      "caption_id": "c_0009",
+      "timestamp": "00:03:17.507",
+      "image_text": "the land of the lost dinosaurs",
+      "dialogue_text": "Lác về mẹ sẽ có thưởng, vâng hạ",
+      "matched_transcript_ids": [
+        "t_0055"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.838375
+    }
+  ]
+}

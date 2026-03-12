@@ -1,0 +1,116 @@
+{
+  "schema_version": "1.1",
+  "delta_ms": 2400,
+  "blocks": [
+    {
+      "caption_id": "c_0001",
+      "timestamp": "00:00:00.547",
+      "image_text": "a cartoon picture of two people sitting at a table",
+      "dialogue_text": "Một tháng, ăn thịt gà",
+      "matched_transcript_ids": [
+        "t_0001"
+      ],
+      "fallback_type": "containment",
+      "confidence": 0.797438
+    },
+    {
+      "caption_id": "c_0002",
+      "timestamp": "00:00:04.151",
+      "image_text": "a cartoon picture of two people eating food",
+      "dialogue_text": "Một tháng, ăn thịt gà",
+      "matched_transcript_ids": [
+        "t_0001"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.421688
+    },
+    {
+      "caption_id": "c_0003",
+      "timestamp": "00:00:46.349",
+      "image_text": "a cartoon character holding a blue and white object",
+      "dialogue_text": "Cái gì?",
+      "matched_transcript_ids": [
+        "t_0015"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.384563
+    },
+    {
+      "caption_id": "c_0004",
+      "timestamp": "00:01:41.491",
+      "image_text": "a black background with a white and pink flower",
+      "dialogue_text": "Chú nằm mà chú cũng là kiếm đường mà làm ăn đi",
+      "matched_transcript_ids": [
+        "t_0038"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.354563
+    },
+    {
+      "caption_id": "c_0005",
+      "timestamp": "00:02:15.527",
+      "image_text": "a cartoon character and a woman in a room",
+      "dialogue_text": "Tuyền bà cá thì anh chỉ cũng không có như giả gì",
+      "matched_transcript_ids": [
+        "t_0054"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.361313
+    },
+    {
+      "caption_id": "c_0006",
+      "timestamp": "00:02:36.846",
+      "image_text": "a cartoon character with a finger up",
+      "dialogue_text": "Tất cả là thật không phải mơ",
+      "matched_transcript_ids": [
+        "t_0065"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.421125
+    },
+    {
+      "caption_id": "c_0007",
+      "timestamp": "00:03:28.741",
+      "image_text": "a black panther is running through the jungle",
+      "dialogue_text": "Không biết có sao không nữa",
+      "matched_transcript_ids": [
+        "t_0082"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.311062
+    },
+    {
+      "caption_id": "c_0008",
+      "timestamp": "00:03:38.720",
+      "image_text": "a black background with the words vasa",
+      "dialogue_text": "Xem vước phát được đồng nào",
+      "matched_transcript_ids": [
+        "t_0086"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.1275
+    },
+    {
+      "caption_id": "c_0009",
+      "timestamp": "00:03:49.602",
+      "image_text": "a cartoon character sitting on the ground",
+      "dialogue_text": "Đôi chả có gì bỏ vụng làm sao",
+      "matched_transcript_ids": [
+        "t_0092"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.375375
+    },
+    {
+      "caption_id": "c_0010",
+      "timestamp": "00:03:56.724",
+      "image_text": "a black background with a white and pink flower",
+      "dialogue_text": "Thế là sao",
+      "matched_transcript_ids": [
+        "t_0095"
+      ],
+      "fallback_type": "nearest",
+      "confidence": 0.21075
+    }
+  ]
+}

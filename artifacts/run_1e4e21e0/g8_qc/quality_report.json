@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.1",
+  "run_id": "run_1e4e21e0",
+  "input_profile": "strict_contract_v1",
+  "overall_status": "pass",
+  "stage_results": [
+    {
+      "stage": "validate",
+      "status": "pass",
+      "duration_ms": 27
+    },
+    {
+      "stage": "align",
+      "status": "pass",
+      "duration_ms": 2
+    },
+    {
+      "stage": "context_build",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "stage": "summarize",
+      "status": "pass",
+      "duration_ms": 23571
+    },
+    {
+      "stage": "segment_plan",
+      "status": "pass",
+      "duration_ms": 2
+    },
+    {
+      "stage": "manifest",
+      "status": "pass",
+      "duration_ms": 0
+    },
+    {
+      "stage": "assemble",
+      "status": "pass",
+      "duration_ms": 1448
+    },
+    {
+      "stage": "qc",
+      "status": "pass",
+      "duration_ms": 0
+    }
+  ],
+  "metrics": {
+    "parse_validity_rate": 1.0,
+    "repaired_parse_validity_rate": 1.0,
+    "timeline_consistency_score": 1.0,
+    "grounding_score": 0.0,
+    "compression_ratio": 0.10048403052572075,
+    "manifest_consistency_pass": true,
+    "render_success": true,
+    "audio_present": true,
+    "duration_match_score": 0.9999648394922823,
+    "black_frame_ratio": 0.0,
+    "decode_error_count": 0,
+    "no_match_rate": 0.0,
+    "median_confidence": 0.368344,
+    "high_confidence_ratio": 0.1,
+    "text_sentence_grounded_ratio": 1.0,
+    "text_segment_coverage_ratio": 1.0,
+    "text_temporal_order_score": 1.0,
+    "text_video_keyword_overlap": 0.32222222222222224,
+    "text_cta_leak_ratio": 0.0,
+    "actual_total_duration_ms": 28441,
+    "effective_target_total_ms": 28304,
+    "target_ratio_lower_bound_ms": 22643,
+    "target_ratio_upper_bound_ms": 33965,
+    "target_ratio_delta_ms": 137,
+    "target_ratio_enabled": true,
+    "target_ratio_match": true
+  },
+  "warnings": [
+    "ALIGN_LOW_CONFIDENCE",
+    "ALIGN_WEAK_GROUNDING_SIGNAL",
+    "QC_TEXT_VIDEO_OVERLAP_LOW"
+  ],
+  "errors": []
+}
